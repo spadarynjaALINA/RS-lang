@@ -196,6 +196,11 @@ i {
   overflow: hidden;
   transition: all 0.3s;
 }
+.text__book_word-details {
+  width: 40%;
+  height: 700px;
+  background-color: rgb(128, 178, 243);
+}
 .ant-pagination-options-size-changer.ant-select {
   display: none;
   width: auto;
@@ -207,21 +212,10 @@ i {
 }
 .ant-pagination-item-active {
   background-color: #f9e000;
-}
-.ant-pagination-item {
-  margin-right: 5%;
-  border: none;
-  padding: 3px;
-  width: 40px;
+  border-radius: 35px;
 }
 .ant-pagination-item-active a {
   color: black;
-}
-
-.text__book_word-details {
-  width: 40%;
-  height: 700px;
-  background-color: rgb(128, 178, 243);
 }
 .ant-pagination-prev .ant-pagination-item-link,
 .ant-pagination-next .ant-pagination-item-link {
@@ -229,10 +223,25 @@ i {
   width: 116%;
   font-size: 26px;
   text-align: center;
-  background-color: #6f98f1ee;
+
   border: none;
   border-radius: 2px;
   outline: none;
   transition: all 0.3s;
   padding: 3px;
+}
+
+.ant-pagination-item {
+  border: none;
+  padding: 3px;
+  width: 3%;
+}
+.ant-pagination-jump-prev
+  .ant-pagination-item-container
+  .ant-pagination-item-ellipsis,
+.ant-pagination-jump-next
+  .ant-pagination-item-container
+  .ant-pagination-item-ellipsis {
+  position: absolute;
+  top: 29%;
 }
