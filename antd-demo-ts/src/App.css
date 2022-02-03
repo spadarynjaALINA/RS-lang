@@ -63,28 +63,28 @@
 .icon-text {
   width: 100%;
   display: flex;
-  color: white;
-  font-size: 3.4em;
+  color: #f9c600;
+  font-size: 4.4em;
   font-family: 'Inconsolata', monospace;
   align-items: center;
 }
 .menu-burger {
   width: 7%;
   height: 7%;
-  margin-right: 2%;
+  margin-right: 4%;
 }
 .ant-btn-circle {
   border-radius: 20px;
   background-color: #5c8aec;
-  border: 2px solid #eeb332;
+  border: none;
   width: 42%;
   height: 7em;
   padding: 7px;
   font-family: 'Inconsolata', monospace;
 }
 i {
-  font-size: 45px;
-  color: white;
+  font-size: 55px;
+  color: #f9c600;
   padding: 2%;
 }
 .svg_main {
