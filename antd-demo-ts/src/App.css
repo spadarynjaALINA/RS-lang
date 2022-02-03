@@ -202,9 +202,37 @@ i {
 }
 .ant-pagination {
   margin-top: 26%;
+  font-family: 'Inconsolata', monospace;
+  font-size: 25px;
 }
+.ant-pagination-item-active {
+  background-color: #f9e000;
+}
+.ant-pagination-item {
+  margin-right: 5%;
+  border: none;
+  padding: 3px;
+  width: 40px;
+}
+.ant-pagination-item-active a {
+  color: black;
+}
+
 .text__book_word-details {
   width: 40%;
   height: 700px;
   background-color: rgb(128, 178, 243);
+}
+.ant-pagination-prev .ant-pagination-item-link,
+.ant-pagination-next .ant-pagination-item-link {
+  display: block;
+  width: 116%;
+  font-size: 26px;
+  text-align: center;
+  background-color: #6f98f1ee;
+  border: none;
+  border-radius: 2px;
+  outline: none;
+  transition: all 0.3s;
+  padding: 3px;
 }

@@ -29,6 +29,12 @@ function AppTextBook() {
       ></TextBookTitle>
       <TextBookWordsContainer></TextBookWordsContainer>
       <TextBookPagination></TextBookPagination>
+      <TextBookTitle
+        title='Игры'
+        subtitle=''
+        text='Закрепи новые знания с помощью увлекательных игр'
+        nameClass=''
+      ></TextBookTitle>
     </div>
   );
 }
