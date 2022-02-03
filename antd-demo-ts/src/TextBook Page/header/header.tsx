@@ -12,7 +12,8 @@ function TextBookHeader() {
           <div>SpaceEng.</div>
         </div>
         <Button type='primary' shape='circle'>
-          Вход
+          <i className='fas fa-user-check'></i>
+          <i className='fas fa-sign-out-alt'></i>
         </Button>
       </div>
     </div>
