@@ -1,3 +1,5 @@
+@import '~antd/dist/antd.css';
+
 .App {
   text-align: center;
 }
@@ -49,7 +51,7 @@
   /*top: 0; */
   left: 0;
   width: 100%;
-  height: 15%;
+  height: 90%;
   z-index: 1000;
   display: flex;
   justify-content: space-between;
@@ -57,14 +59,19 @@
   padding: 20px 0;
   background-color: #1a61faab;
 }
+.text_book__header_wrapper {
+  position: relative;
+  height: 20vh;
+}
 .hidden {
   display: none;
 }
 .icon-text {
   width: 100%;
   display: flex;
-  color: #f9e800;
+  color: #f9e000;
   font-size: 4.4em;
+  font-weight: 700;
   font-family: 'Inconsolata', monospace;
   align-items: center;
 }
@@ -84,7 +91,7 @@
 }
 i {
   font-size: 55px;
-  color: #f9e800;
+  color: #f9e000;
   padding: 2%;
 }
 .svg_main {
@@ -93,4 +100,87 @@ i {
   bottom: 0%;
   width: 100%;
   height: 30%;
+}
+.text_book__title_wrapper {
+  height: 16vh;
+}
+.text_book__title {
+  font-family: 'Inconsolata', monospace;
+  font-weight: 900;
+  font-size: 3em;
+  margin-top: 5%;
+}
+.text_book__subtitle {
+  font-family: 'Inconsolata', monospace;
+  font-size: 1.5em;
+  font-weight: 300;
+}
+
+.text_book__levels {
+  width: 90%;
+  max-width: 1700px;
+  padding: 0 20px;
+  height: 15vh;
+  background-color: #f9e000;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  justify-content: space-between;
+  align-items: center;
+}
+.text_book__level_card {
+  height: 25%;
+  width: 15%;
+  background-color: #f3f4f8;
+  display: flex;
+  border-radius: 0.5rem;
+  color: #2c2647;
+  font-size: 1rem;
+  font-family: 'Gilroy-Heavy';
+  justify-content: space-between;
+  padding: 0.5rem;
+  padding-left: 1rem;
+  padding-right: 1.2rem;
+  position: relative;
+  align-items: center;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+  font-family: 'Inconsolata', monospace;
+  font-size: 25px;
+}
+.square-part {
+  height: 120%;
+  width: 100%;
+  position: absolute;
+  top: -1rem;
+  right: -5.5rem;
+  overflow: hidden;
+  background-color: #6f98f1ee;
+  transform: rotate(45deg);
+}
+.right-part {
+  z-index: 1;
+  color: #f9e000;
+  font-size: 35px;
+  font-weight: 800;
+}
+.text_book__header_icons {
+  width: 35%;
+}
+.text__book_word-container {
+  display: flex;
+  margin-top: 1rem;
+  justify-content: space-between;
+}
+.text__book_word-greed {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.text__book_word {
+  width: 100px;
+  height: 100px;
+  background-color: red;
 }
