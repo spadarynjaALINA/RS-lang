@@ -1,9 +1,9 @@
 import React from 'react';
-import TextBookHeader from './header/header';
-import TextBookTitle from './main/title';
-import TextBookLevels from './main/levels';
-import TextBookPagination from './main/pagination';
-import TextBookWordsContainer from './main/wordContainer';
+import TextBookHeader from './components/header';
+import TextBookTitle from './components/main/title';
+import TextBookLevels from './components/main/levels';
+import TextBookPagination from './components/main/pagination';
+import TextBookWordsContainer from './components/main/words';
 
 function AppTextBook() {
   const mainWrapper = document.getElementById('app-header') as HTMLElement;
@@ -34,7 +34,7 @@ function AppTextBook() {
         subtitle=''
         text='Закрепи новые знания с помощью увлекательных игр'
         nameClass=''
-      ></TextBookTitle>
+      />
     </div>
   );
 }

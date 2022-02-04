@@ -1,7 +1,7 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import AppTextBook from './TextBook Page/AppTextBook';
+import AppTextBook from './pages/TextBook';
 
 function App() {
   return (

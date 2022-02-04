@@ -1,5 +1,4 @@
-import logo from '../../img/logo.png';
-import { Button } from 'antd';
+import logo from '../../../../img/logo.png';
 import TextBookHeaderSvg from './headerSVG';
 
 function TextBookHeader() {
@@ -8,7 +7,7 @@ function TextBookHeader() {
       <div className='text_book__header'>
         <TextBookHeaderSvg></TextBookHeaderSvg>
         <div className='icon-text'>
-          <img className='menu-burger' src={logo}></img>
+          <img className='menu-burger' src={logo} alt='logo'></img>
           <div>SpaceEng.</div>
         </div>
         <div className='text_book__header_icons'>
