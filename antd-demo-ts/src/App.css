@@ -29,6 +29,7 @@
 }
 
 .App-link {
+  margin-top: 100px;
   background: #fff4f4;
   border-radius: 5px;
   display: flex;
