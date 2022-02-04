@@ -1,4 +1,15 @@
 import TextBookWordList from './wordList';
+import { getWordsGroup } from '../../../../../services/APIService';
+import { addWords } from './utils';
+
+export const getWords = async () => {
+  const response = await getWordsGroup();
+  for (const words of response) {
+    console.log(words.word);
+    // addWords(words.word);
+  }
+};
+getWords();
 
 function TextBookWordsContainer() {
   return (

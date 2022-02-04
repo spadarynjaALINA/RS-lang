@@ -1,4 +1,3 @@
-import React from 'react';
 import TextBookHeader from './components/header';
 import TextBookTitle from './components/main/title';
 import TextBookLevels from './components/main/levels';
@@ -27,7 +26,7 @@ function AppTextBook() {
         text=''
         nameClass=''
       ></TextBookTitle>
-      <TextBookWordsContainer></TextBookWordsContainer>
+      <TextBookWordsContainer />
       <TextBookPagination></TextBookPagination>
       <TextBookTitle
         title='Игры'
