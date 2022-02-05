@@ -1,4 +1,3 @@
-/* eslint-disable array-callback-return */
 import React, { useState, useEffect } from 'react';
 
 import { getWords } from '../../../../../handlers';
@@ -21,7 +20,7 @@ function TextBookWordsContainer() {
     <div className='text__book_word-container'>
       <div className='text__book_word-greed'>
         {words.map((word: Word) => (
-          <span className='text__book_word'>{word.word}</span>
+          <TextBookWordList word={word.word} />
         ))}
       </div>
       <div className='text__book_word-details'></div>
