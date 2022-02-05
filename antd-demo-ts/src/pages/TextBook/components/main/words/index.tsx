@@ -3,7 +3,11 @@ import React, { useState, useEffect } from 'react';
 import { getWords } from '../../../../../handlers';
 import TextBookWordList from './wordList';
 
-import { Word } from '../../../../../interfaces';
+export interface Word {
+  word: string;
+  id: string;
+  wordTranslate: string;
+}
 export interface StandardComponentProps {
   page: number;
   group: number;
