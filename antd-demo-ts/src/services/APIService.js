@@ -64,9 +64,9 @@ createUserWord({
   },
 });
 
-export const getWordsGroup = async () => {
+export const getWordsGroup = async (group, page) => {
   const response = await fetch(
-    'https://react-learnwords-example.herokuapp.com/words?group=0&page=1',
+    `https://react-learnwords-example.herokuapp.com/words?group=${group}&page=${page}`,
     {
       method: 'GET',
       headers: {

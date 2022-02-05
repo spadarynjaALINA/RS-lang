@@ -130,8 +130,8 @@ i {
   align-items: center;
 }
 .text_book__level_card {
-  height: 25%;
-  width: 15%;
+  height: 37%;
+  width: 25%;
   background-color: #f3f4f8;
   display: flex;
   border-radius: 0.5rem;
@@ -148,14 +148,14 @@ i {
   border: none;
   cursor: pointer;
   font-family: 'Inconsolata', monospace;
-  font-size: 25px;
+  font-size: 35px;
 }
 .square-part {
-  height: 120%;
+  height: 150%;
   width: 100%;
   position: absolute;
   top: -1rem;
-  right: -5.5rem;
+  right: -10.5rem;
   overflow: hidden;
   background-color: #6f98f1ee;
   transform: rotate(45deg);
@@ -163,7 +163,7 @@ i {
 .right-part {
   z-index: 1;
   color: #f9e000;
-  font-size: 35px;
+  font-size: 50px;
   font-weight: 800;
 }
 .text_book__header_icons {
@@ -198,7 +198,7 @@ i {
 }
 .text__book_word-details {
   width: 40%;
-  height: 700px;
+  height: 800px;
   background-color: rgb(128, 178, 243);
 }
 .ant-pagination-options-size-changer.ant-select {
@@ -245,11 +245,20 @@ i {
   position: absolute;
   top: 29%;
 }
-.text__book_word_one {
-  z-index: 10;
-  color: black;
-  font-size: 20px;
+.text__book_word {
+  font-family: 'Inconsolata', monospace;
+  font-size: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 900;
 }
-.active {
+.active,
+.text__book_word:hover {
   background: #f9e000;
+  cursor: pointer;
+}
+.text__book_word_translate {
+  font-size: 23px;
+  font-weight: 400;
 }

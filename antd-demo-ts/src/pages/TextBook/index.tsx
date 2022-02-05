@@ -3,12 +3,16 @@ import TextBookTitle from './components/main/title';
 import TextBookLevels from './components/main/levels';
 import TextBookPagination from './components/main/pagination';
 import TextBookWordsContainer from './components/main/words';
+import { useState } from 'react';
 
 function AppTextBook() {
   const mainWrapper = document.getElementById('app-header') as HTMLElement;
   if (mainWrapper !== null && !mainWrapper.classList.contains('hidden')) {
     mainWrapper.classList.add('hidden');
   }
+  const [page, setPage] = useState(0);
+  const [group, setGroup] = useState(0);
+  console.log(group);
 
   return (
     <div className='text_book' id='text_book'>
@@ -19,15 +23,15 @@ function AppTextBook() {
         text='Уровни сложности слов'
         nameClass='fas fa-brain'
       ></TextBookTitle>
-      <TextBookLevels></TextBookLevels>
+      <TextBookLevels onClick={setGroup}></TextBookLevels>
       <TextBookTitle
         title='Слова'
         subtitle=''
         text=''
         nameClass=''
       ></TextBookTitle>
-      <TextBookWordsContainer />
-      <TextBookPagination></TextBookPagination>
+      <TextBookWordsContainer page={page} group={group} />
+      <TextBookPagination onClick={setPage} />
       <TextBookTitle
         title='Игры'
         subtitle=''

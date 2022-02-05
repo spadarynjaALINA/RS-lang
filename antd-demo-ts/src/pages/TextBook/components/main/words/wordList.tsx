@@ -1,5 +1,7 @@
 export interface StandardComponentProps {
-  word?: string;
+  word: string;
+  id: string;
+  translate: string;
 }
 let arrActiveBtn: Array<HTMLElement> = [];
 const onClick = (e: React.MouseEvent) => {
@@ -13,8 +15,9 @@ const onClick = (e: React.MouseEvent) => {
 };
 function TextBookWordList(props: StandardComponentProps) {
   return (
-    <div className='text__book_word' onClick={onClick}>
-      {props.word}
+    <div className='text__book_word' id={props.id} onClick={onClick}>
+      <p>{props.word}</p>{' '}
+      <p className='text__book_word_translate'>{props.translate}</p>
     </div>
   );
 }

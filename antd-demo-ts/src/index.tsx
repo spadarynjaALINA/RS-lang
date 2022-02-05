@@ -6,7 +6,6 @@ import App from './App';
 import { loginUser } from './services/APIService';
 import { createUser } from './services/APIService';
 import { createUserWord } from './services/APIService';
-import { getWordsGroup } from './services/APIService';
 
 import reportWebVitals from './reportWebVitals';
 
