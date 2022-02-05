@@ -20,12 +20,9 @@ function TextBookWordsContainer() {
   return (
     <div className='text__book_word-container'>
       <div className='text__book_word-greed'>
-        {[...Array(20)].map((_, i) => (
-          <TextBookWordList key={i} />
+        {words.map((word: Word) => (
+          <span className='text__book_word'>{word.word}</span>
         ))}
-        {words.map((word: Word) => {
-          <div className='text__book_word_one'>{word.word}</div>;
-        })}
       </div>
       <div className='text__book_word-details'></div>
     </div>
@@ -33,3 +30,7 @@ function TextBookWordsContainer() {
 }
 
 export default TextBookWordsContainer;
+
+/*{[...Array(20)].map((_, i) => (
+          <TextBookWordList key={i} />
+        ))}*/
