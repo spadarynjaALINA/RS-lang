@@ -1,5 +1,5 @@
 import TextBookLevelsCard from './level-card';
-function TextBookLevels() {
+function TextBookLevels(props: any) {
   return (
     <div className='text_book__levels'>
       <TextBookLevelsCard level='A1' description='Easy'></TextBookLevelsCard>
