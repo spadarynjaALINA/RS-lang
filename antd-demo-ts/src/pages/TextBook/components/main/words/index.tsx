@@ -1,43 +1,38 @@
-/* eslint-disable array-callback-return */
 import React, { useState, useEffect } from 'react';
 
+import { getWords } from '../../../../../handlers';
 import TextBookWordList from './wordList';
-import { getWordsGroup } from '../../../../../services/APIService';
 
-interface Word {
+export interface Word {
   word: string;
+  id: string;
+  wordTranslate: string;
 }
-export const getWords = async () => {
-  const data = await getWordsGroup();
+export interface StandardComponentProps {
+  page: number;
+  group: number;
+}
 
-  return data;
-};
-getWords();
-
-function TextBookWordsContainer() {
+function TextBookWordsContainer(props: StandardComponentProps) {
+  console.log(props.group);
   const [words, setWords] = useState([]);
 
   useEffect(() => {
-    getWords().then((data) => {
-      console.log(data[1]);
+    getWords(props.group, props.page).then((data) => {
       setWords(data);
     });
-  }, []);
-
-  console.log(words);
+  }, [props.page]);
 
   return (
     <div className='text__book_word-container'>
       <div className='text__book_word-greed'>
-        {[...Array(20)].map((_, i) => (
-          <TextBookWordList key={i} />
+        {words.map((word: Word) => (
+          <TextBookWordList
+            word={word.word}
+            id={word.id}
+            translate={word.wordTranslate}
+          />
         ))}
-        {words.map((word: Word) => {
-          {
-            console.log(word.word);
-          }
-          <b className='text__book_word_one'>{word.word}</b>;
-        })}
       </div>
       <div className='text__book_word-details'></div>
     </div>
@@ -45,3 +40,7 @@ function TextBookWordsContainer() {
 }
 
 export default TextBookWordsContainer;
+
+/*{[...Array(20)].map((_, i) => (
+          <TextBookWordList key={i} />
+        ))}*/
