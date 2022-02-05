@@ -14,14 +14,13 @@ export interface StandardComponentProps {
 }
 
 function TextBookWordsContainer(props: StandardComponentProps) {
-  console.log(props.group);
   const [words, setWords] = useState([]);
 
   useEffect(() => {
     getWords(props.group, props.page).then((data) => {
       setWords(data);
     });
-  }, [props.page]);
+  }, [props.page, props.group]);
 
   return (
     <div className='text__book_word-container'>

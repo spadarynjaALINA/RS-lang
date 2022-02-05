@@ -12,7 +12,6 @@ function AppTextBook() {
   }
   const [page, setPage] = useState(0);
   const [group, setGroup] = useState(0);
-  console.log(group);
 
   return (
     <div className='text_book' id='text_book'>

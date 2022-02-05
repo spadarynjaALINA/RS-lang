@@ -3,9 +3,9 @@ export interface StandardComponentProps {
   description: string;
 }
 
-function TextBookLevelsCard(props: StandardComponentProps) {
+function TextBookLevelsCard(props: any) {
   return (
-    <button className='text_book__level_card'>
+    <button className='text_book__level_card' onClick={props.onClick}>
       <div className='left-part'>{props.description}</div>
       <div className='square-part'></div>
       <div className='right-part'>{props.level}</div>
