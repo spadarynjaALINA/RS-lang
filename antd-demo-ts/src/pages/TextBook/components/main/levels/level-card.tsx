@@ -1,7 +1,5 @@
-export interface StandardComponentProps {
-  level?: string;
-  description: string;
-}
+import { StandardComponentProps } from '../../../../../interfaces';
+
 function TextBookLevelsCard(props: StandardComponentProps) {
   return (
     <button className='text_book__level_card'>

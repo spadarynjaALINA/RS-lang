@@ -1,17 +1,11 @@
 /* eslint-disable array-callback-return */
 import React, { useState, useEffect } from 'react';
 
+import { getWords } from '../../../../../handlers';
 import TextBookWordList from './wordList';
-import { getWordsGroup } from '../../../../../services/APIService';
 
-interface Word {
-  word: string;
-}
-export const getWords = async () => {
-  const data = await getWordsGroup();
+import { Word } from '../../../../../interfaces';
 
-  return data;
-};
 getWords();
 
 function TextBookWordsContainer() {
@@ -19,12 +13,9 @@ function TextBookWordsContainer() {
 
   useEffect(() => {
     getWords().then((data) => {
-      console.log(data[1]);
       setWords(data);
     });
   }, []);
-
-  console.log(words);
 
   return (
     <div className='text__book_word-container'>
@@ -33,10 +24,7 @@ function TextBookWordsContainer() {
           <TextBookWordList key={i} />
         ))}
         {words.map((word: Word) => {
-          {
-            console.log(word.word);
-          }
-          <b className='text__book_word_one'>{word.word}</b>;
+          <div className='text__book_word_one'>{word.word}</div>;
         })}
       </div>
       <div className='text__book_word-details'></div>
