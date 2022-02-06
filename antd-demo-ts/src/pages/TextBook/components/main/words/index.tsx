@@ -25,8 +25,9 @@ function TextBookWordsContainer(props: StandardComponentProps) {
   return (
     <div className='text__book_word-container'>
       <div className='text__book_word-greed'>
-        {words.map((word: Word) => (
+        {words.map((word: Word, i) => (
           <TextBookWordList
+            key={i}
             word={word.word}
             id={word.id}
             translate={word.wordTranslate}

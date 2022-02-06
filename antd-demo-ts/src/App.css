@@ -121,7 +121,6 @@ i {
   max-width: 1700px;
   padding: 0 20px;
   height: 15vh;
-
   margin: 0 auto;
   display: flex;
   flex-wrap: wrap;
@@ -157,7 +156,6 @@ i {
   top: -1rem;
   right: -10.5rem;
   overflow: hidden;
-  background-color: #6f98f1ee;
   transform: rotate(45deg);
 }
 .right-part {
@@ -253,7 +251,7 @@ i {
   justify-content: center;
   font-weight: 900;
 }
-.active,
+.active-word,
 .text__book_word:hover {
   background: #f9e000;
   cursor: pointer;
@@ -261,4 +259,36 @@ i {
 .text__book_word_translate {
   font-size: 23px;
   font-weight: 400;
+}
+.text_book__level_card:hover .green,
+.text_book__level_card:active .green,
+.text_book__level_card .green .active {
+  background: rgb(34, 202, 90);
+}
+.text_book__level_card:hover .pink,
+.text_book__level_card:active .pink,
+.text_book__level_card .pink .active {
+  background: rgb(243, 106, 129);
+}
+
+.text_book__level_card:hover .violet,
+.text_book__level_card:active .violet,
+.text_book__level_card .violet .active {
+  background: rgb(188, 106, 243);
+}
+.text_book__level_card:hover .blue,
+.text_book__level_card:active .blue,
+.active {
+  background: rgb(106, 115, 243);
+}
+.text_book__level_card:hover .yellow,
+.text_book__level_card:active .yellow,
+.active {
+  background: rgb(252, 166, 68);
+}
+
+.text_book__level_card:hover .aqua,
+.text_book__level_card:active .aqua,
+.text_book__level_card .aqua .active {
+  background: rgb(106, 222, 243);
 }

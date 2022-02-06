@@ -1,5 +1,5 @@
 const token =
-  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxZmNjNWQ1YjZiZDJmMDAxNmZhZmY5MSIsImlhdCI6MTY0Mzk1NTk1MywiZXhwIjoxNjQzOTcwMzUzfQ.IldRXDNsHwlwHueBASw9Ef5Sxw-0FqkyqwCTWglwqzs';
+  'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxZmNjNWQ1YjZiZDJmMDAxNmZhZmY5MSIsImlhdCI6MTY0NDEzNzY1NiwiZXhwIjoxNjQ0MTUyMDU2fQ.ASgzh_27j-JCSZI8aDr2fSRbA9hrqE7VPjlkc1OM_xA';
 
 export const createUser = async (user) => {
   const rawResponse = await fetch(
@@ -66,7 +66,9 @@ createUserWord({
 
 export const getWordsGroup = async (group, page) => {
   const response = await fetch(
-    `https://react-learnwords-example.herokuapp.com/words?group=${group}&page=${page}`,
+    `https://react-learnwords-example.herokuapp.com/words?group=${group}&page=${
+      page - 1
+    }`,
     {
       method: 'GET',
       headers: {

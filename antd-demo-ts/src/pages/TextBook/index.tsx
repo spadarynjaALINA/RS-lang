@@ -10,7 +10,7 @@ function AppTextBook() {
   if (mainWrapper !== null && !mainWrapper.classList.contains('hidden')) {
     mainWrapper.classList.add('hidden');
   }
-  const [page, setPage] = useState(0);
+  const [page, setPage] = useState(1);
   const [group, setGroup] = useState(0);
 
   return (
@@ -30,7 +30,7 @@ function AppTextBook() {
         nameClass=''
       ></TextBookTitle>
       <TextBookWordsContainer page={page} group={group} />
-      <TextBookPagination onClick={setPage} />
+      <TextBookPagination onClick={setPage} page={page} />
       <TextBookTitle
         title='Игры'
         subtitle=''
