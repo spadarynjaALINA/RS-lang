@@ -1,3 +1,9 @@
+:root {
+  --font1: 16px;
+  --font2: 18px;
+  --font3: 24px;
+}
+
 * {
   box-sizing: border-box;
 }

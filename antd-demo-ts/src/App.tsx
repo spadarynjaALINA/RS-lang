@@ -1,27 +1,60 @@
 import React from 'react';
-import logo from './logo.svg';
+
 import './App.css';
-import Authorization from './pages/Header/Authorization/Authorization';
-import Main from './pages/Main';
+import {
+  BrowserRouter as Router,
+  
+  Route,
+  Switch
+
+} from "react-router-dom";
+
 import Header from './pages/Header/Header';
+import StartPage from './pages/Start-page/Start-page';
+;
 
 function App() {
   return (
-    <div className="App App-main">
+    <Router>
+    <div className="App">
       <Header/>
-      <header className="App-header">
-        <div className="App-link"><p >
-          Our app will be here soon
-        </p><img src={logo} className="App-logo" alt="logo" />
-          <Main/>
+      <main className="App-main">
        
-         
-        </div>
+          <Switch>
+          <Route  path="/Учебник">
+            <TextBook />
+          </Route>
+          <Route path="/Миниигры">
+            <Games />
+          </Route>
+          <Route path="/Статистика">
+            <Statistic />
+          </Route>
+           <Route  path="/">
+            <StartPage/>
+          </Route>
+        </Switch>       
+            
+      </main>
+      </div>
        
-      
-      </header>
-    </div>
+    </Router>
   );
 }
 
 export default App;
+function TextBook() {
+  return (
+   <div className='TextBookWrap'> тут будет учебник</div>
+  );
+}
+function Games() {
+  return (
+   <div className='GamesWrap'> тут будут игры</div>
+  );
+}
+function Statistic() {
+  return (
+    <div className='StatisticWrap'> тут будет статистика</div>
+  );
+}

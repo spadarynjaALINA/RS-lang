@@ -1,11 +1,12 @@
 .logo-rs-lang {
   background: none;
-  background-image: url(./../../assets/logo-rs-lang.svg);
+  background-image: url(./../../assets/svg/logo-rs-lang.svg);
   height: 50px;
   width: 50px;
   background-size: contain;
 }
 .Header {
+  font-size: var(--font3);
   position: fixed;
   top: 0;
   left: 0;
@@ -16,4 +17,7 @@
   width: 100%;
   background: rgba(251, 248, 248, 0.8);
   box-shadow: 2px 0 20px 1px rgba(0, 0, 0, 0.4);
+}
+.link-logo {
+  display: block;
 }
