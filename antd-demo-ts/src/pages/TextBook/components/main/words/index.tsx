@@ -35,7 +35,7 @@ function TextBookWordsContainer(props: StandardComponentProps) {
       </div>
       <div className='text__book_word-details'>
         <TextBookWord
-          word={words[11]}
+          word={words[0]}
         />
       </div>
     </div>
