@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import TextBookWord from './word-card';
 import { getWords } from '../../../../../handlers';
 import TextBookWordList from './wordList';
 
@@ -22,7 +22,7 @@ function TextBookWordsContainer(props: StandardComponentProps) {
       setWords(data);
     });
   }, [props.page]);
-
+  console.log('WORDS', words);
   return (
     <div className='text__book_word-container'>
       <div className='text__book_word-greed'>
@@ -30,11 +30,14 @@ function TextBookWordsContainer(props: StandardComponentProps) {
           <TextBookWordList
             word={word.word}
             id={word.id}
-            translate={word.wordTranslate}
-          />
+            translate={word.wordTranslate}/>
         ))}
       </div>
-      <div className='text__book_word-details'></div>
+      <div className='text__book_word-details'>
+        <TextBookWord
+          word={words[11]}
+        />
+      </div>
     </div>
   );
 }
