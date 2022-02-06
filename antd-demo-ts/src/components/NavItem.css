@@ -1,0 +1,20 @@
+@import '~antd/dist/antd.css';
+.Nav-btn {
+  margin: 0 10px;
+  border: none;
+  font-size: var(--font2);
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #4f4f4f;
+}
+.Nav-btn::after {
+  display: block;
+  content: '';
+  width: 0%;
+  height: 1px;
+  background-color: rgb(68, 67, 67);
+  transition: 0.5s;
+}
+.Nav-btn:hover::after {
+  width: 100%;
+}

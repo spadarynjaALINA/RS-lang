@@ -1,0 +1,13 @@
+.App-start {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.App-start__about,
+.App-start__team {
+  display: flex;
+  flex-direction: column;
+  margin-top: 100px;
+  background: #fff4f4;
+  border-radius: 10px;
+}

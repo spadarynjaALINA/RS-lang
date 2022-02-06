@@ -1,0 +1,9 @@
+.nav-list {
+  display: flex;
+  margin: auto 0;
+  list-style: none;
+}
+.Navigation {
+  display: flex;
+  align-items: baseline;
+}
