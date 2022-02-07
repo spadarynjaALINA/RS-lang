@@ -57,11 +57,17 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 0;
-  background-color: #1a61faab;
+  background-size: cover;
+  background-image: url('./img/2.jpeg');
+}
+.logo-text {
+  background-color: rgba(22, 141, 82, 0.589);
+  border-radius: 0px 50px 50px 0px;
+  padding: 15px 30px;
 }
 .text_book__header_wrapper {
   position: relative;
-  height: 20vh;
+  height: 25vh;
 }
 .hidden {
   display: none;
@@ -69,9 +75,9 @@
 .icon-text {
   width: 100%;
   display: flex;
-  color: #f9e000;
-  font-size: 4.4em;
-  font-weight: 700;
+  color: white;
+  font-size: 4.7em;
+  font-weight: 900;
   font-family: 'Inconsolata', monospace;
   align-items: center;
 }
@@ -91,7 +97,7 @@
 }
 i {
   font-size: 55px;
-  color: #f9e000;
+  color: #13e069;
   padding: 2%;
 }
 .svg_main {
@@ -108,7 +114,7 @@ i {
   font-family: 'Inconsolata', monospace;
   font-weight: 900;
   font-size: 3em;
-  margin-top: 5%;
+  margin-top: 1%;
 }
 .text_book__subtitle {
   font-family: 'Inconsolata', monospace;
@@ -160,18 +166,27 @@ i {
 }
 .right-part {
   z-index: 1;
-  color: #f9e000;
+  color: #ffc53d;
   font-size: 50px;
   font-weight: 800;
 }
 .text_book__header_icons {
-  width: 35%;
+  width: 12%;
+  height: 25%;
+  background-color: rgba(22, 141, 82, 0.589);
+  border-radius: 20px;
+  position: absolute;
+  right: 11%;
+  font-size: 25px;
+}
+.text_book__header_icons * {
+  color: white;
 }
 .text__book_word-container {
   display: flex;
   margin-top: 1rem;
   justify-content: space-between;
-  width: 85%;
+  width: 65%;
   margin: auto;
 }
 .text__book_word-greed {
@@ -195,21 +210,23 @@ i {
   transition: all 0.3s;
 }
 .text__book_word-details {
-  width: 40%;
-  height: 800px;
-  background-color: rgb(128, 178, 243);
+  color: #2c2647;
+  background-color: #f3f4f8;
+  width: 35%;
+  box-shadow: none;
+  border-top-left-radius: 11rem;
 }
 .ant-pagination-options-size-changer.ant-select {
   display: none;
   width: auto;
 }
 .ant-pagination {
-  margin-top: 26%;
+  margin-top: 10%;
   font-family: 'Inconsolata', monospace;
   font-size: 25px;
 }
 .ant-pagination-item-active {
-  background-color: #f9e000;
+  background-color: #ffc53d;
   border-radius: 35px;
 }
 .ant-pagination-item-active a {
@@ -253,7 +270,7 @@ i {
 }
 .active-word,
 .text__book_word:hover {
-  background: #f9e000;
+  background: #ffc53d;
   cursor: pointer;
 }
 .text__book_word_translate {

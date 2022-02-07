@@ -4,6 +4,7 @@ import TextBookLevels from './components/main/levels';
 import TextBookPagination from './components/main/pagination';
 import TextBookWordsContainer from './components/main/words';
 import { useState } from 'react';
+import TextBookGameCards, { TextBookGameArea } from './components/main/game';
 
 function AppTextBook() {
   const mainWrapper = document.getElementById('app-header') as HTMLElement;
@@ -15,20 +16,15 @@ function AppTextBook() {
 
   return (
     <div className='text_book' id='text_book'>
-      <TextBookHeader></TextBookHeader>
+      <TextBookHeader />
       <TextBookTitle
         title='Учебник'
         subtitle='Словарь'
         text='Уровни сложности слов'
         nameClass='fas fa-brain'
-      ></TextBookTitle>
-      <TextBookLevels onClick={setGroup}></TextBookLevels>
-      <TextBookTitle
-        title='Слова'
-        subtitle=''
-        text=''
-        nameClass=''
-      ></TextBookTitle>
+      />
+      <TextBookLevels onClick={setGroup} />
+      <TextBookTitle title='Слова' subtitle='' text='' nameClass='' />
       <TextBookWordsContainer page={page} group={group} />
       <TextBookPagination onClick={setPage} page={page} />
       <TextBookTitle
@@ -37,6 +33,7 @@ function AppTextBook() {
         text='Закрепи новые знания с помощью увлекательных игр'
         nameClass=''
       />
+      <TextBookGameArea />
     </div>
   );
 }
