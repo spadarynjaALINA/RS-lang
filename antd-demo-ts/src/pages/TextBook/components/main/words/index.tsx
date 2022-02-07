@@ -21,7 +21,7 @@ function TextBookWordsContainer(props: StandardComponentProps) {
       setWords(data);
     });
   }, [props.page, props.group]);
-
+  console.log('WORDS', words);
   return (
     <div className='text__book_word-container'>
       <div className='text__book_word-greed'>
@@ -34,7 +34,9 @@ function TextBookWordsContainer(props: StandardComponentProps) {
           />
         ))}
       </div>
-      <div className='text__book_word-details'></div>
+      <div className='text__book_word-details'>
+        <TextBookWord word={words[0]} />
+      </div>
     </div>
   );
 }
