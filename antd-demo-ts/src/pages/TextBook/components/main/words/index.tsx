@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
+import TextBookWord from './word-card';
 import { getWords } from '../../../../../handlers';
 import TextBookWordList from './wordList';
 
