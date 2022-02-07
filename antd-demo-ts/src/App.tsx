@@ -24,7 +24,7 @@ function App() {
           <Route  path="/Учебник">
             <TextBook />
           </Route>
-          <Route path="/Миниигры">
+          <Route path="/Мини-игры">
             <Games />
           </Route>
           <Route path="/Статистика">

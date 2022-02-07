@@ -22,3 +22,72 @@
 .ant-btn-ghost:focus {
   color: #4f4f4f;
 }
+.ant-btn-ghost:active {
+  box-shadow: none;
+  transform: scale(0.9);
+}
+.ant-menu-submenu-arrow::after,
+.ant-menu-submenu-arrow::before {
+  opacity: 0;
+}
+
+.ant-menu-vertical .ant-menu-submenu-selected,
+.ant-menu-vertical-left .ant-menu-submenu-selected,
+.ant-menu-vertical-right .ant-menu-submenu-selected {
+  color: #4f4f4f;
+}
+
+.ant-menu-light .ant-menu-submenu-active,
+.ant-menu-vertical .ant-menu-submenu-selected,
+.ant-menu-submenu-selected,
+.ant-menu-submenu-open {
+  color: #4f4f4f;
+}
+
+.ant-menu:not(.ant-menu-horizontal) .ant-menu-item-selected {
+  background-color: #fbf8f8;
+}
+
+.ant-menu-item-selected {
+  color: #4f4f4f;
+}
+.ant-menu-item:active,
+.ant-menu-submenu-title:active {
+  background: #fbf8f8;
+}
+
+.ant-menu-item:focus-visible,
+.ant-menu-submenu-title:focus-visible {
+  box-shadow: 0 0 0 2px #fbf8f8;
+}
+.ant-menu-submenu > .ant-menu {
+  font-size: var(--font2);
+  margin-top: 50px;
+  margin-right: -55px;
+  background: #fbf8f8;
+  width: 300px;
+}
+.sub1,
+.sub2,
+.sub3 {
+  background-image: url(./../../../assets/svg/user-received-fill.svg);
+  background-repeat: no-repeat;
+  background-position: 8px 8px;
+  transition: 0.3s;
+}
+.sub2 {
+  background-image: url(./../../../assets/svg/user-add-fill.svg);
+}
+.sub3 {
+  background-image: url(./../../../assets/svg/user-shared-2-fill.svg);
+}
+
+.ant-menu-vertical .ant-menu-item {
+  padding-left: 45px;
+}
+.sub1:hover,
+.sub2:hover,
+.sub3:hover {
+  color: #262ac1;
+  transition: 0.3s;
+}
