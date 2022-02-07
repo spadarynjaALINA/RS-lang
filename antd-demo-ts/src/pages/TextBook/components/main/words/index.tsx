@@ -1,6 +1,6 @@
 /* eslint-disable array-callback-return */
 import React, { useState, useEffect } from 'react';
-
+import TextBookWord from './word-card';
 import TextBookWordList from './wordList';
 import { getWordsGroup } from '../../../../../services/APIService';
 
