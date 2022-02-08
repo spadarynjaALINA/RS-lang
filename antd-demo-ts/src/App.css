@@ -2,6 +2,12 @@
 
 .App {
   text-align: center;
+  min-height: 100vh;
+  padding-top: 80px;
+  background-image: url(./assets/bg.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 .App-logo {
@@ -15,19 +21,27 @@
   }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.App-main {
+  margin: 0 auto;
+  width: 1000px;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
-  color: white;
+  color: #4f4f4f;
 }
 
-.App-link {
-  color: #61dafb;
+.TextBookWrap,
+.GamesWrap,
+.StatisticWrap {
+  margin-top: 100px;
+  width: 100%;
+  background: #fff4f4;
+  border-radius: 15px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 @keyframes App-logo-spin {

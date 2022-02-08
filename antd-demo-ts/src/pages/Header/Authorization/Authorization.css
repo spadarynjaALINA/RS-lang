@@ -1,0 +1,24 @@
+.Authorization {
+  width: 50px;
+  height: 50px;
+  background-image: url('./../../../assets/svg/Group.svg');
+  background-position: 5px 5px;
+  background-repeat: no-repeat;
+  background-size: 40px 40px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  transition: 0.5s;
+}
+.Authorization:hover,
+.Authorization:focus {
+  border: 1px solid #4f4f4f;
+  transition: 0.5s;
+  background-image: url('./../../../assets/svg/Group.svg');
+  background-position: 5px 5px;
+  background-repeat: no-repeat;
+  background-size: 40px 40px;
+}
+.ant-btn-ghost:hover,
+.ant-btn-ghost:focus {
+  color: #4f4f4f;
+}
