@@ -1,0 +1,49 @@
+.text_book__game_wrapper {
+  display: flex;
+  justify-content: center;
+  gap: 22rem;
+  align-items: center;
+}
+.text_book__game-link {
+  text-decoration: none;
+  width: 30%;
+}
+
+.text_book__card-game {
+  background-color: #f3f4f8;
+  border-radius: 0.5rem;
+  margin-bottom: 100px;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column-reverse;
+  padding: 1rem;
+  position: relative;
+  align-items: center;
+  overflow: hidden;
+}
+
+.text_book__card-game img {
+  width: 750px;
+  height: 450px;
+}
+.text_book__card-game-text {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1rem;
+  align-items: start;
+}
+.text_book__card-game-tezis {
+  background-color: #ffc53d;
+  display: inline-block;
+  width: fit-content;
+  font-family: 'Open Sans';
+  padding: 0.2rem;
+  border-radius: 5px;
+  color: #2c2647;
+}
+.text_book__card-game-text h2 {
+  font-weight: 900;
+}
+.text_book__card-game-text p {
+  color: black;
+}
