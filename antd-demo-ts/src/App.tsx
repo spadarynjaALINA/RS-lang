@@ -1,6 +1,8 @@
 import React from 'react';
 
 import './App.css';
+import AppTextBook from './pages/TextBook';
+
 import {
   BrowserRouter as Router,
   
@@ -39,13 +41,16 @@ function App() {
       </div>
        
     </Router>
+
   );
 }
 
 export default App;
 function TextBook() {
   return (
-   <div className='TextBookWrap'> тут будет учебник</div>
+   <div className='TextBookWrap'> //className='App'
+      <AppTextBook></AppTextBook>
+    </div>
   );
 }
 function Games() {
