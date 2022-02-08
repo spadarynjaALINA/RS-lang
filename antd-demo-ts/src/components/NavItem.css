@@ -7,7 +7,7 @@
   font-weight: 700;
   color: #4f4f4f;
 }
-.Nav-btn::after {
+.nav-link::after {
   display: block;
   content: '';
   width: 0%;
@@ -15,6 +15,6 @@
   background-color: rgb(68, 67, 67);
   transition: 0.5s;
 }
-.Nav-btn:hover::after {
+.nav-link:hover::after {
   width: 100%;
 }
