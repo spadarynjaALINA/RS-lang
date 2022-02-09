@@ -18,5 +18,5 @@ ReactDOM.render(
 );
 
 reportWebVitals();
-
-loginUser({ email: 'vikalex11@mail.ru', password: 'secret1111' });
+// createUser({ "email": "alalalsls@mail.ru", "password": "secret2222" }).then(data=>loginUser(data))
+//loginUser({ email: 'alina@mail.ru', password: 'secret2222' });
