@@ -5,7 +5,8 @@ import Authorization from './Authorization/Authorization'
 import { Link } from 'react-router-dom';
 import Context from './../../Context'
 import { Modal } from 'antd';
-
+import Login from './Authorization/Login.tsx/Login'
+import CreateUser from './Authorization/CreatUser.tsx/CreateUser'
 interface IBtnMenu {
   title: string,
   to: string
@@ -20,7 +21,7 @@ function Header() {
    
   const [visible1, setVisible1] = React.useState(false);
   const [confirmLoading1, setConfirmLoading1] = React.useState(false);
-  const [modalText1, setModalText1] = React.useState('Тут будет форма для входа');
+  
   const [visible2, setVisible2] = React.useState(false);
   const [confirmLoading2, setConfirmLoading2] = React.useState(false);
   const [modalText2, setModalText2] = React.useState('Тут будет форма для регистрации');
@@ -39,12 +40,12 @@ function Header() {
     setVisible1(false);
   };
     const handleOk1 = () => {
-    setModalText1('Выполняется вход');
+    
     setConfirmLoading1(true);
     setTimeout(() => {
       setVisible1(false);
       setConfirmLoading1(false);
-       setModalText1('Тут будет форма для входа');
+       
     }, 2000);
   };
 
@@ -86,8 +87,9 @@ function Header() {
         onOk={handleOk1}
         confirmLoading={confirmLoading1}
         onCancel={handleCancel1}
+        footer={[]}
       >
-        <p>{ modalText1}</p>
+        <Login  ></Login>
       </Modal>
 
        <Modal
@@ -97,7 +99,7 @@ function Header() {
         confirmLoading={confirmLoading2}
         onCancel={handleCancel2}
       >
-        <p>{ modalText2}</p>
+        <CreateUser></CreateUser>
       </Modal>
 
        <Modal
