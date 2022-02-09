@@ -2,7 +2,7 @@ import React from 'react';
 
 import './App.css';
 import AppTextBook from './pages/TextBook';
-import GameSprint from './pages/GameSprint/components/main';
+import SprintGame from './pages/GameSprint';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -44,7 +44,7 @@ function TextBook() {
   );
 }
 function Games() {
-  return <div className='GamesWrap'> <GameSprint/></div>;
+  return <div className='GamesWrap'> <SprintGame/></div>;
 }
 function Statistic() {
   return <div className='StatisticWrap'> тут будет статистика</div>;

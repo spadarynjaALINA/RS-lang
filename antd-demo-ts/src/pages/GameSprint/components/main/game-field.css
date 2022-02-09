@@ -1,0 +1,37 @@
+.game-field {
+  width: 1500px;
+  height: 600px;
+  background-color: rgb(98, 96, 226);
+}
+
+.fa-stopwatch {
+  color: white;
+}
+
+.game-word-translate,
+.game-buttons {
+  display: flex;
+  gap: 1rem;
+  flex-direction: row;
+  justify-content: center;
+  padding: 10px;
+}
+
+.game-word,
+.game-translate {
+color: white;
+}
+
+.game-buttons {
+  gap: 0;
+}
+
+.game-left-button {
+  background-color: rgb(71, 155, 71);
+  color: white;
+}
+
+.game-right-button {
+  background-color: rgb(218, 76, 76);
+  color: white;
+}
