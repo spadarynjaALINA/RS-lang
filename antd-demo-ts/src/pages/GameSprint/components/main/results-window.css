@@ -1,0 +1,39 @@
+.modal-window {
+  position: absolute;
+  background-color: rgb(255, 255, 255);
+  border-radius: 1rem;
+  font-size: 16px;
+  padding: 2rem;
+  min-width: 600px;
+}
+
+.game-results {
+  padding-left: 100px;
+  text-align: start;
+  height: 100px;
+  overflow: auto;
+}
+
+.correct-answer {
+  list-style-type: none;
+  color: green;
+  display: block;
+}
+
+.wrong-answer {
+  list-style-type: none;
+  color:  red;
+  display: block;
+}
+
+.fa-volume-up {
+  font-size: 16px;
+}
+
+.fa-volume-up::before {
+  cursor: pointer;
+}
+
+.game-sound-button {
+  display: inline;
+}

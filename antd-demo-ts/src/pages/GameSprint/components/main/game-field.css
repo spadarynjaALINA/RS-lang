@@ -45,3 +45,19 @@ font-size: 60px;
   background-color: rgb(218, 76, 76);
   color: white;
 }
+
+.game-result-translate {
+  color: grey;
+}
+
+.title-count-wrong {
+  padding: 0 0.5rem 0 0.5rem;
+  border-radius: 1rem;
+  background-color: rgb(201, 46, 46);
+}
+
+.title-count-correct {
+  padding: 0 0.5rem 0 0.5rem;
+  border-radius: 1rem;
+  background-color: rgb(45, 122, 25);
+}

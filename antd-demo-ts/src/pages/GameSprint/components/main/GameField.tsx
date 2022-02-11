@@ -1,13 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Component } from 'react';
 import { getWords } from '../../../../handlers';
 import { getRandomNum } from '../../utils/getRandomNum';
-
-import { Button } from 'antd';
+import { Button, Divider } from 'antd';
+import ResultsWindow from './ResultsWindow';
 import './game-field.css';
 
+const right = require('../../../../assets/audio/right.mp3');
+const wrong = require('../../../../assets/audio/wrong.mp3');
+const modalResults = require('../../../../assets/audio/modal_results.mp3');
 interface Word {
   word: string;
   wordTranslate: string;
+  audio: string;
 }
 
 function GameField(props: {group: number, isActive: boolean}) {
@@ -15,7 +19,10 @@ function GameField(props: {group: number, isActive: boolean}) {
   const [words, setWords] = useState([] as Word[]);
   const [randomWord, setRandomWord] = useState(0);
   const [randomTranslate, setRandomTranslate] = useState(0);
-  const [answers, setAnswers] = useState < {word: string, answer: boolean}[]>([]);
+  const [correctAnswers, setCorrectAnswers] = useState<Word[]>([]);
+  const [wrongAnswers, setWrongAnswers] = useState<Word[]>([]);
+  const [showModal, setShowModal] = useState(false);
+  
   useEffect(() => {
     let arr = [];
     for (let i = 1; i <= 30; i++) {
@@ -26,7 +33,6 @@ function GameField(props: {group: number, isActive: boolean}) {
       setWords(data.flat());
     })
   }, []);
-
 
   useEffect(() => {
     let interval: any = null;
@@ -39,7 +45,9 @@ function GameField(props: {group: number, isActive: boolean}) {
     }
     if (seconds <= 0) {
       clearInterval(interval);
-      console.log(answers);
+      setShowModal(true);
+      const audioShowModal = new Audio(modalResults);
+      audioShowModal.play();
     }
     return () => clearInterval(interval);
   }, [props.isActive, seconds]);
@@ -55,12 +63,25 @@ function GameField(props: {group: number, isActive: boolean}) {
   }
 
   function compare(answer: boolean) {
+    const audio = new Audio();
     if ((randomWord === randomTranslate) === answer) {
+      audio.src = right;
+      audio.play();
       console.log('ПРАВИЛЬНЫЙ ОТВЕТ');
-      setAnswers([...answers, { word: words[randomWord]?.word, answer: true }]);
+      setCorrectAnswers([...correctAnswers, {
+        word: words[randomWord]?.word,
+        audio: words[randomWord]?.audio,
+        wordTranslate: words[randomWord]?.wordTranslate,
+      }]);
     } else {
+      audio.src = wrong;
+      audio.play();
       console.log('НЕПРАВИЛЬНЫЙ ОТВЕТ');
-      setAnswers([...answers, { word: words[randomWord]?.word, answer: false }]);
+      setWrongAnswers([...wrongAnswers, {
+        word: words[randomWord]?.word,
+        audio: words[randomWord]?.audio,
+        wordTranslate: words[randomWord]?.wordTranslate,
+      }]);
     }
   }
 
@@ -88,6 +109,12 @@ function GameField(props: {group: number, isActive: boolean}) {
         }
         }>НЕВЕРНО</Button>
       </div>
+      { showModal ? 
+      <ResultsWindow
+          correctAnswers={correctAnswers}
+          wrongAnswers={wrongAnswers}/>
+        : <div></div>
+      }
     </div>
   );
 }
