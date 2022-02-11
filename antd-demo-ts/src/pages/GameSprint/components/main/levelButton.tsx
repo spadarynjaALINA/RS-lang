@@ -12,7 +12,7 @@ export function LevelButton(props: LevelButton) {
   return (
       <Button ghost shape="round" className="level-button"
       onClick={() => {
-        props.onClick1(props.group)
+        props.onClick1(props.group);
         props.onClick2();
       }
         }>{props.text}</Button>
