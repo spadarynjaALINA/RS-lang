@@ -1,5 +1,10 @@
 import React from 'react';
 import './word-card.css';
+import {
+  createUserWord,
+  getUserWord,
+  getOneWord,
+} from '../../../../../services/APIService';
 
 export interface CardComponentProps {
   word: {
@@ -7,7 +12,7 @@ export interface CardComponentProps {
     audioExample: string;
     audioMeaning: string;
     // group: number;
-    id: string;
+    id: any;
     image: string;
     // page: number;
     textExample: string;
@@ -18,6 +23,7 @@ export interface CardComponentProps {
     word: string;
     wordTranslate: string;
   };
+  accessToken: any;
 }
 
 function TextBookWord(props: CardComponentProps) {
@@ -66,8 +72,26 @@ associative picture'
         </div>
       </div>
       <div className='text_book__word_actions'>
-        <button id='add-to-hard'>+ в сложные слова</button>
-        <button id='delete word'>Удалить слово</button>
+        {props.accessToken && (
+          <button
+            id='add-to-hard'
+            onClick={() => {
+              createUserWord(localStorage.getItem('userId'), props.word.id);
+            }}
+          >
+            + в сложные слова
+          </button>
+        )}
+        {props.accessToken && (
+          <button
+            id='delete word'
+            onClick={() => {
+              getUserWord(localStorage.getItem('userId'));
+            }}
+          >
+            Удалить слово
+          </button>
+        )}
       </div>
       <p className='text_book__word-title'>Значение</p>
       <p

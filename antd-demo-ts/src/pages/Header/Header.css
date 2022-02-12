@@ -5,6 +5,14 @@
   width: 50px;
   background-size: contain;
 }
+.logo-area {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 30px;
+  font-weight: 900;
+  font-family: 'Inconsolata', monospace;
+}
 .Header {
   font-size: var(--font3);
   position: fixed;
@@ -18,6 +26,31 @@
   background: rgba(251, 248, 248, 0.8);
   box-shadow: 2px 0 20px 1px rgba(0, 0, 0, 0.4);
 }
+.header {
+  position: absolute;
+  display: flex;
+  top: 6%;
+  width: 100%;
+  height: 13%;
+  z-index: 100;
+  justify-content: space-around;
+  align-items: center;
+  background: #b772f027;
+}
 .link-logo {
   display: block;
+}
+.nav-link,
+.logo-text {
+  font-size: 58px;
+  font-family: 'Inconsolata', monospace;
+  color: #ffc53d;
+  font-weight: 900;
+  text-transform: none;
+}
+.nav-link {
+  background-color: rgba(255, 255, 255, 0.664);
+  border-radius: 25px;
+  height: 15%;
+  padding: 25px;
 }

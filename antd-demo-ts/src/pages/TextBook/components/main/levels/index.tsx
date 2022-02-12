@@ -1,13 +1,15 @@
 import TextBookLevelsCard from './level-card';
+import { getUserWord, getOneWord } from '../../../../../services/APIService';
 
 function TextBookLevels(props: any) {
+  console.log(props);
   let levelA1 = document.getElementsByClassName('active')[0] as HTMLElement;
-  let arrActiveBtn: Array<HTMLElement> = [levelA1];
+  /*let arrActiveBtn: Array<HTMLElement> = [levelA1];
   const onChangeActive = (e: React.MouseEvent) => {
     arrActiveBtn.forEach((el) => {
       el.classList.remove('active');
     });
-  };
+  };*/
   return (
     <div className='text_book__levels'>
       <TextBookLevelsCard
@@ -45,6 +47,7 @@ function TextBookLevels(props: any) {
         color='violet'
         onClick={() => props.onClick(4)}
       />
+
       <TextBookLevelsCard
         active=''
         level='C2'
@@ -52,6 +55,20 @@ function TextBookLevels(props: any) {
         color='aqua'
         onClick={() => props.onClick(5)}
       />
+
+      {props.accessToken && (
+        <TextBookLevelsCard
+          active=''
+          level='D.W'
+          description='Difficult'
+          color='gray'
+          onClick={() => {
+            /*let result = getUserWord(localStorage.getItem('userId'));
+            result.then((value) => value.forEach((value) => getOneWord(value)));*/
+            props.onClick(6);
+          }}
+        />
+      )}
     </div>
   );
 }

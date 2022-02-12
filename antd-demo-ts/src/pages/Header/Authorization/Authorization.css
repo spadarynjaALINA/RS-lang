@@ -2,22 +2,35 @@
   width: 50px;
   height: 50px;
   background-image: url('./../../../assets/svg/Group.svg');
+  border-color: transparent;
   background-position: 5px 5px;
   background-repeat: no-repeat;
   background-size: 40px 40px;
   border: 1px solid transparent;
   border-radius: 3px;
   transition: 0.5s;
+  position: absolute;
 }
-.Authorization:hover,
-.Authorization:focus {
-  border: 1px solid #4f4f4f;
-  transition: 0.5s;
-  background-image: url('./../../../assets/svg/Group.svg');
+.auth {
+  width: 50px;
+  height: 50px;
+  background-image: url('./../../../assets/svg/auth.svg');
+  border-color: transparent;
   background-position: 5px 5px;
   background-repeat: no-repeat;
   background-size: 40px 40px;
+  border: 1px solid transparent;
+  border-radius: 3px;
+  transition: 0.5s;
+  position: absolute;
 }
+.authorization-area {
+  background-color: rgba(255, 255, 255, 0.664);
+  border-radius: 25px;
+  height: 30%;
+  width: 4%;
+}
+
 .ant-btn-ghost:hover,
 .ant-btn-ghost:focus {
   color: #4f4f4f;
@@ -90,4 +103,7 @@
 .sub3:hover {
   color: #262ac1;
   transition: 0.3s;
+}
+.ant-menu {
+  background-color: transparent;
 }
