@@ -26,11 +26,11 @@
   display: block;
 }
 
-.fa-volume-up {
+.sound-icon {
   font-size: 16px;
 }
 
-.fa-volume-up::before {
+.sound-icon::before {
   cursor: pointer;
 }
 
