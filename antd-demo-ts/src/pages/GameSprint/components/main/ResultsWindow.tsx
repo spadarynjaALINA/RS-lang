@@ -10,7 +10,8 @@ interface ResultsProps {
 
 function ResultsWindow(props: {
   correctAnswers: ResultsProps[],
-  wrongAnswers: ResultsProps[]
+  wrongAnswers: ResultsProps[],
+  score: number
 }) {
 
   function playAudio(src: string) {
@@ -26,7 +27,7 @@ function ResultsWindow(props: {
 
   return (
     <div className='modal-window'>
-      <h2>Результаты игры спринт</h2>
+      <h2>Результат игры спринт {props.score} очков</h2>
       <h3>Ошибки <span className='title-count-wrong'> { props.wrongAnswers.length } </span></h3>
       <ul className='game-results'>
         {props.wrongAnswers.map(item => {
@@ -56,8 +57,8 @@ function ResultsWindow(props: {
         })}
       </ul>
       <div>
-      <Button>В учебник</Button>
-      <Button>На главную</Button>
+      <Button href='/Учебник'>В учебник</Button>
+      <Button href='/'>На главную</Button>
       </div>
     </div>
   )

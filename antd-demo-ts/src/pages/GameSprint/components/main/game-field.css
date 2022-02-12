@@ -9,7 +9,11 @@
 
 .fa-stopwatch {
   color: white;
+  transition: 0.3s;
+}
 
+.fa-stopwatch-big {
+  transform: scale(1.5);
 }
 
 .game-seconds {
@@ -60,4 +64,16 @@ font-size: 60px;
   padding: 0 0.5rem 0 0.5rem;
   border-radius: 1rem;
   background-color: rgb(45, 122, 25);
+}
+
+.game-score {
+  color: white;
+}
+
+.game-checkmark {
+  color: rgb(0, 255, 13);
+}
+
+.game-checkmark-grey {
+  color: grey;
 }
