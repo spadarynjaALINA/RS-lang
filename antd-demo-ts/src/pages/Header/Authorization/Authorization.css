@@ -150,3 +150,27 @@
 .ant-modal-header {
   border-radius: 5px 5px 0 0;
 }
+.ant-input {
+  background-color: transparent;
+}
+.ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
+  color: #ee1d7b;
+}
+::selection {
+  color: rgb(12, 12, 12);
+  background: #afabad;
+}
+.modal-exit .ant-modal-footer {
+  padding: 10px 16px;
+}
+
+.exit-btn {
+  background-color: #f670f2;
+  border-color: #ee1d7b;
+}
+.exit-btn:focus,
+.exit-btn:hover,
+.exit-btn:active {
+  background-color: #f670f2;
+  border-color: #f670f2;
+}

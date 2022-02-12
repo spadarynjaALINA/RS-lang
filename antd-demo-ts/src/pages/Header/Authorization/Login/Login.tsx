@@ -9,7 +9,13 @@ interface IValue {
  remember: boolean
 }
 export default function Login() {
-  const login = useLogin()
+   const [form] = Form.useForm();
+  const login = useLogin();
+  React.useEffect(() => {
+    if (login.visibleLogin) {
+      form.setFieldsValue({ user: "antd" });
+    }
+  }, [form, login.visibleLogin]);
   const [confirmLoading1, setConfirmLoading1] = React.useState(false);
   const [validateStatus1, setValidateStatus1] = React.useState(true);
   if (!login.visibleLogin) return null
@@ -44,6 +50,8 @@ export default function Login() {
 
    
   };
+  
+
   if (validateStatus1) {
     return (
       <Modal
@@ -55,6 +63,7 @@ export default function Login() {
         footer={[]}>       
      
         <Form
+          form={form}
           name="normal_login"
           className="login-form"
           initialValues={{ remember: true }}
