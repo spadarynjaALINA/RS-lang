@@ -1,12 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Navigation from './Navigation/Navigation';
 import './Header.css'
 import Authorization from './Authorization/Authorization'
 import { Link } from 'react-router-dom';
 import Context from './../../Context'
 import { Modal } from 'antd';
-import Login from './Authorization/Login.tsx/Login'
+import Login from './Authorization/Login/Login'
 import CreateUser from './Authorization/CreatUser.tsx/CreateUser'
+import { useLogin } from './Authorization/Login/LoginContext'
+import {LoginProvider} from './Authorization/Login/LoginContext'
 interface IBtnMenu {
   title: string,
   to: string
@@ -18,48 +20,28 @@ function Header() {
     { title: 'Мини-игры',to: '/Мини-игры' },
     { title: 'Статистика', to: '/Статистика' }
   ]
-   
-  const [visible1, setVisible1] = React.useState(false);
-  const [confirmLoading1, setConfirmLoading1] = React.useState(false);
   
   const [visible2, setVisible2] = React.useState(false);
-  const [confirmLoading2, setConfirmLoading2] = React.useState(false);
-  const [modalText2, setModalText2] = React.useState('Тут будет форма для регистрации');
+  const [confirmLoading2, setConfirmLoading2] = React.useState(false); 
   const [visible3, setVisible3] = React.useState(false);
   const [confirmLoading3, setConfirmLoading3] = React.useState(false);
   const [modalText3, setModalText3] = React.useState('Тут будет форма для выхода');
- 
   const showModal = (v: number): void => {
-    if (v === 1) { setVisible1(true) };
+   // if (v === 1) { setVisible1(true) };
     if (v === 2) { setVisible2(true) };
-     if(v===3){ setVisible3(true)};
-  
+     if(v===3){ setVisible3(true)};  
   };
-  const handleCancel1 = () => {
-    console.log('Clicked cancel button');
-    setVisible1(false);
-  };
-    const handleOk1 = () => {
-    
-    setConfirmLoading1(true);
-    setTimeout(() => {
-      setVisible1(false);
-      setConfirmLoading1(false);
-       
-    }, 2000);
-  };
-
+ 
    const handleCancel2 = () => {
     console.log('Clicked cancel button');
     setVisible2(false);
   };
-    const handleOk2 = () => {
-    setModalText2('Выполняется регистрация');
+    const handleOk2 = () => {    
     setConfirmLoading2(true);
     setTimeout(() => {
       setVisible2(false);
       setConfirmLoading2(false);
-      setModalText2('Тут будет форма для регистрации')
+      
     }, 2000);
   };
    const handleCancel3 = () => {
@@ -75,23 +57,14 @@ function Header() {
       setModalText3('Тут будет форма для выхода');
     }, 1000);
   };
+  const {toggleLogin} = useLogin()
   return (
-    
-    <Context.Provider value ={{showModal}}> <header className="Header"><div className='logo-rs-lang'><Link className='logo-rs-lang link-logo' to="/"></Link> </div> 
-      
+    <LoginProvider>
+     <Context.Provider value ={{showModal}}>    
+      <header className="Header" ><div className='logo-rs-lang'><Link className='logo-rs-lang link-logo' to="/"></Link> </div>       
       <Navigation menuBtnData={menuBtnData} />    
         <Authorization />
-     <Modal
-        title="Вход"
-        visible={visible1}
-        onOk={handleOk1}
-        confirmLoading={confirmLoading1}
-        onCancel={handleCancel1}
-        footer={[]}
-      >
-        <Login  ></Login>
-      </Modal>
-
+      <Login></Login>
        <Modal
         title="Регистрация"
         visible={visible2}
@@ -110,13 +83,16 @@ function Header() {
         onCancel={handleCancel3}
       >
         <p>{ modalText3}</p>
-      </Modal>
-    </header></Context.Provider>
-   
+        </Modal>
+    </header>
+      </Context.Provider >
+ </LoginProvider>
    
   );
    
 }
 
 export default Header;
+
+
 
