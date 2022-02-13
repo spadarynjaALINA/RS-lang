@@ -33,7 +33,7 @@ function ResultsWindow(props: {
         {props.wrongAnswers.map(item => {
             return <li className='wrong-answer' key={item.word}>
               <div className="game-sound-button">
-                <i className='fas fa-volume-up' onClick={() => {
+                <i className='fas fa-volume-up sound-icon' onClick={() => {
                   playAudio(item.audio);
               }}></i>
               </div>
@@ -47,7 +47,7 @@ function ResultsWindow(props: {
         {props.correctAnswers.map(item => {
             return <li className='correct-answer' key={item.word}>
             <div className="game-sound-button">
-              <i className='fas fa-volume-up' onClick={() => {
+              <i className='fas fa-volume-up sound-icon' onClick={() => {
                 playAudio(item.audio);
             }}></i>
             </div>

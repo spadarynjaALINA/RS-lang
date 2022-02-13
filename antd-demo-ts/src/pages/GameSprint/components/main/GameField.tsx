@@ -26,14 +26,16 @@ function GameField(props: {group: number, isActive: boolean}) {
   const [currentPoints, setCurrentPoints] = useState(10);
   const [countOfCorrectAnswers, setCountOfCorrectAnswers] = useState(0);
   const [totalScore, setTotalScore] = useState(0);
+  const [usedWords, setUsedWords] = useState<number[]>([]);
   
   useEffect(() => {
+    setRandomWord(getRandomNum(0, 599));
+    setRandomTranslate(getRandomNum(0, 599));
     let arr = [];
     for (let i = 1; i <= 30; i++) {
       arr.push(getWords(props.group, i));
     }
     Promise.all(arr).then((data) => {
-      console.log('-----------------');
       setWords(data.flat());
     })
   }, []);
@@ -56,29 +58,31 @@ function GameField(props: {group: number, isActive: boolean}) {
     return () => clearInterval(interval);
   }, [props.isActive, seconds]);
 
-  // const onKeydown = (e: KeyboardEvent) => {
-  //     if (e.code === 'ArrowLeft') {
-  //       compare(true);
-  //       nextQuestion();
-  //       console.log('left');
-  //       return;
-  //     } else if (e.code === 'ArrowRight') {
-  //       compare(false);
-  //       nextQuestion();
-  //       console.log('right');
-  //       return;
-  //     }
-  // }
+  const onKeydown = (e: KeyboardEvent) => {
+    if (e.code === 'ArrowLeft' && showModal === false) {
+      compare(true);
+      nextQuestion();
+      console.log('left');
+    } else if (e.code === 'ArrowRight' && showModal === false) {
+      compare(false);
+      nextQuestion();
+      console.log('right');
+    }
+  }
 
-  // useEffect(() => {
-  //   document.addEventListener('keydown', onKeydown);
-  //   return () => {
-  //     document.removeEventListener('keydown', onKeydown);
-  //   };
-  // }, []);
+  useEffect(() => {
+      window.addEventListener('keydown', onKeydown);
+    return () => {
+      window.removeEventListener('keydown', onKeydown);
+    };
+  });
 
   function nextQuestion() {
-    const random = getRandomNum(0, words.length);
+    let random;
+    do {
+      random = getRandomNum(0, words.length);
+    } while (usedWords.includes(random));
+    
     setRandomWord(random);
     if (Math.random() < .5) {
       setRandomTranslate(random);
@@ -89,6 +93,7 @@ function GameField(props: {group: number, isActive: boolean}) {
   }
 
   function compare(answer: boolean) {
+    setUsedWords([...usedWords, randomWord])
     const audio = new Audio();
     const timer = document.querySelector<HTMLElement>('.fa-stopwatch');
     if ((randomWord === randomTranslate) === answer) {
@@ -104,7 +109,7 @@ function GameField(props: {group: number, isActive: boolean}) {
       setCountOfCorrectAnswers(countOfCorrectAnswers + 1);
       if (countOfCorrectAnswers === 3) {
         setCountOfCorrectAnswers(0);
-        if (currentPoints != 80) {
+        if (currentPoints !== 80) {
           setCurrentPoints(currentPoints * 2);
         }
       }
