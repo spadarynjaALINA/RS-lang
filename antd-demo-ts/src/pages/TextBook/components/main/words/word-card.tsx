@@ -3,7 +3,6 @@ import './word-card.css';
 import {
   createUserWord,
   getUserWord,
-  getOneWord,
 } from '../../../../../services/APIService';
 
 export interface CardComponentProps {

@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import TextBookWord from './word-card';
 import { getWords } from '../../../../../handlers';
 import TextBookWordList from './wordList';
-import { getUserWord, getOneWord } from '../../../../../services/APIService';
+import { getUserWord } from '../../../../../services/APIService';
 
 export interface Word {
   word: string;
@@ -40,6 +40,7 @@ function TextBookWordsContainer(props: StandardComponentProps) {
       <div className='text__book_word-greed'>
         {words.map((word: Word, i) => (
           <TextBookWordList
+            id={i}
             key={i}
             word={word}
             wordId={null}
@@ -49,6 +50,7 @@ function TextBookWordsContainer(props: StandardComponentProps) {
 
         {wordsForId.map((wordId: any, i) => (
           <TextBookWordList
+            id={i}
             key={i}
             word={null}
             wordId={wordId}
@@ -56,7 +58,7 @@ function TextBookWordsContainer(props: StandardComponentProps) {
           />
         ))}
       </div>
-
+      {console.log(card)}
       <div className='text__book_word-details'>
         <TextBookWord word={words[card]} accessToken={props.accessToken} />
       </div>
@@ -65,7 +67,3 @@ function TextBookWordsContainer(props: StandardComponentProps) {
 }
 
 export default TextBookWordsContainer;
-
-/*{[...Array(20)].map((_, i) => (
-          <TextBookWordList key={i} />
-        ))}*/
