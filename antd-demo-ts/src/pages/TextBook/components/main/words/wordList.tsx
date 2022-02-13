@@ -18,7 +18,6 @@ const onClick = (e: React.MouseEvent) => {
 };
 
 function TextBookWordList(props: StandardComponentProps) {
-  console.log(props);
   const [word, setWord] = useState(props.word);
 
   useEffect(() => {
@@ -36,9 +35,11 @@ function TextBookWordList(props: StandardComponentProps) {
   }
 
   return (
-    <div className='text__book_word' onClick={() => props.onClick(props.id)}>
-      <p>{word.word}</p>
-      <p className='text__book_word_translate'>{word.wordTranslate}</p>
+    <div className='text__book_word_wrapper' onClick={onClick}>
+      <div className='text__book_word' onClick={() => props.onClick(props.id)}>
+        <p>{word.word}</p>
+        <p className='text__book_word_translate'>{word.wordTranslate}</p>
+      </div>
     </div>
   );
 }

@@ -213,7 +213,6 @@ i {
 }
 .text__book_word {
   position: relative;
-  width: 22%;
 
   display: flex;
   flex-direction: column;
@@ -224,6 +223,13 @@ i {
   border: none;
   overflow: hidden;
   transition: all 0.3s;
+}
+.text__book_word_wrapper {
+  width: 22%;
+  z-index: 1;
+  background-color: #f3f4f8;
+  width: 22%;
+  padding-bottom: 2%;
 }
 .text__book_word-details {
   color: #2c2647;
@@ -317,7 +323,7 @@ i {
 .text_book__level_card:hover .yellow,
 .text_book__level_card:active .yellow,
 .active {
-  background: rgb(252, 166, 68);
+  background: #ffc53d;
 }
 
 .text_book__level_card:hover .aqua,

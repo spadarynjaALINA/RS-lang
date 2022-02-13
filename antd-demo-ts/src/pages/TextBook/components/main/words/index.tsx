@@ -58,9 +58,17 @@ function TextBookWordsContainer(props: StandardComponentProps) {
           />
         ))}
       </div>
-      {console.log(card)}
       <div className='text__book_word-details'>
-        <TextBookWord word={words[card]} accessToken={props.accessToken} />
+        {props.group !== 6 && (
+          <TextBookWord word={words[card]} accessToken={props.accessToken} />
+        )}
+        {console.log(wordsForId)}
+        {props.group === 6 && (
+          <TextBookWord
+            word={wordsForId[card]}
+            accessToken={props.accessToken}
+          />
+        )}
       </div>
     </div>
   );

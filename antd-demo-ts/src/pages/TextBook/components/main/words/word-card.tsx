@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './word-card.css';
 import {
   createUserWord,
   getUserWord,
 } from '../../../../../services/APIService';
+import { getOneWord } from '../../../../../services/APIService';
 
 export interface CardComponentProps {
   word: {
@@ -26,7 +27,14 @@ export interface CardComponentProps {
 }
 
 function TextBookWord(props: CardComponentProps) {
+  console.log(props);
   if (props === undefined) throw new Error('error');
+  if (props.word) {
+    console.log('yes');
+  } else {
+    console.log('no');
+  }
+
   let audio: HTMLAudioElement;
   audio = new Audio();
   function playAudio() {
@@ -83,7 +91,7 @@ associative picture'
         )}
         {props.accessToken && (
           <button
-            id='delete word'
+            id='delete-word'
             onClick={() => {
               getUserWord(localStorage.getItem('userId'));
             }}
