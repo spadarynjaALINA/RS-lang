@@ -26,14 +26,21 @@ export interface CardComponentProps {
   accessToken: any;
 }
 
-function TextBookWord(props: CardComponentProps) {
-  console.log(props);
+function TextBookWord(props: CardComponentProps | any) {
+  const [word, setWord] = useState(props.word);
+  console.log(props.wordID);
+
+  useEffect(() => {
+    setWord(props.word);
+  }, [props.word]);
+
+  useEffect(() => {
+    if (props.wordID !== undefined) {
+      getOneWord(props.wordID).then(setWord);
+    }
+  }, [props.wordID]);
+
   if (props === undefined) throw new Error('error');
-  if (props.word) {
-    console.log('yes');
-  } else {
-    console.log('no');
-  }
 
   let audio: HTMLAudioElement;
   audio = new Audio();
@@ -42,11 +49,7 @@ function TextBookWord(props: CardComponentProps) {
       audio.pause();
       return;
     }
-    const srcs = [
-      props.word?.audio,
-      props.word?.audioMeaning,
-      props.word?.audioExample,
-    ];
+    const srcs = [word?.audio, word?.audioMeaning, word?.audioExample];
     let current = 0;
     // if(!audio.paused) audio.pause();
     audio.src = `https://rs-lang-app-rss.herokuapp.com/${srcs[current]}`;
@@ -63,17 +66,15 @@ function TextBookWord(props: CardComponentProps) {
   return (
     <div className='text_book__word'>
       <img
-        src={`https://rs-lang-app-rss.herokuapp.com/${props.word?.image}`}
+        src={`https://rs-lang-app-rss.herokuapp.com/${word?.image}`}
         alt='
 associative picture'
         className='text_book__word-image'
       />
-      <p className='text_book__word-word'>{props.word?.word}</p>
-      <p className='text_book__word-translate'>{props.word?.wordTranslate}</p>
+      <p className='text_book__word-word'>{word?.word}</p>
+      <p className='text_book__word-translate'>{word?.wordTranslate}</p>
       <div className='text_book__word-transcription-audio-button'>
-        <p className='text_book__word-transcription'>
-          {props.word?.transcription}
-        </p>
+        <p className='text_book__word-transcription'>{word?.transcription}</p>
         <div className='text_book__word-audio-button' onClick={playAudio}>
           <i className='fas fa-volume-up'></i>
         </div>
@@ -103,18 +104,18 @@ associative picture'
       <p className='text_book__word-title'>Значение</p>
       <p
         className='text_book__word-text-meaning'
-        dangerouslySetInnerHTML={{ __html: props.word?.textMeaning }}
+        dangerouslySetInnerHTML={{ __html: word?.textMeaning }}
       />
       <p className='text_book__word-text-meaning-translate'>
-        {props.word?.textMeaningTranslate}
+        {word?.textMeaningTranslate}
       </p>
       <p className='text_book__word-title'>Пример</p>
       <p
         className='text_book__word-text-example'
-        dangerouslySetInnerHTML={{ __html: props.word?.textExample }}
+        dangerouslySetInnerHTML={{ __html: word?.textExample }}
       />
       <p className='text_book__word-text-example-translate'>
-        {props.word?.textExampleTranslate}
+        {word?.textExampleTranslate}
       </p>
     </div>
   );

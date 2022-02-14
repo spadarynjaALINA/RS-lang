@@ -22,6 +22,10 @@ function TextBookWordsContainer(props: StandardComponentProps) {
   const [wordsForId, setWordsId] = useState([]);
 
   useEffect(() => {
+    setCard(0);
+  }, [props.group]);
+
+  useEffect(() => {
     if (props.group !== 6) {
       getWords(props.group, props.page).then((data) => {
         setWords(data);
@@ -34,6 +38,8 @@ function TextBookWordsContainer(props: StandardComponentProps) {
       });
     }
   }, [props.page, props.group]);
+
+  console.log(wordsForId, card);
 
   return (
     <div className='text__book_word-container'>
@@ -62,10 +68,10 @@ function TextBookWordsContainer(props: StandardComponentProps) {
         {props.group !== 6 && (
           <TextBookWord word={words[card]} accessToken={props.accessToken} />
         )}
-        {console.log(wordsForId)}
         {props.group === 6 && (
           <TextBookWord
-            word={wordsForId[card]}
+            wordID={wordsForId[card]}
+            word={null}
             accessToken={props.accessToken}
           />
         )}
