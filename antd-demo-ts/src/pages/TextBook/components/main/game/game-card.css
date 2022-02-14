@@ -1,18 +1,19 @@
 .text_book__game_wrapper {
   display: flex;
   justify-content: center;
-  gap: 22rem;
+  gap: 10%;
   align-items: center;
 }
 .text_book__game-link {
   text-decoration: none;
-  width: 30%;
 }
 
 .text_book__card-game {
   background-color: #f3f4f8;
+  width: 620px;
+
   border-radius: 0.5rem;
-  margin-bottom: 100px;
+  margin-bottom: 90px;
   display: flex;
   justify-content: space-between;
   flex-direction: column-reverse;
@@ -23,8 +24,8 @@
 }
 
 .text_book__card-game img {
-  width: 750px;
-  height: 450px;
+  height: auto;
+  width: 100%;
 }
 .text_book__card-game-text {
   display: flex;

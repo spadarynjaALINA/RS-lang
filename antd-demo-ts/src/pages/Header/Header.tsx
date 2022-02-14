@@ -12,7 +12,7 @@ import { CreateUserProvider } from './Authorization/CreatUser/CreateUserContext'
 import RegistrationForm from './Authorization/CreatUser/CreateUser';
 import { ExitProvider } from './Authorization/Exit/ExitContext';
 import Exit from './Authorization/Exit/Exit';
-import TextBookHeader from '../TextBook/components/header';
+// import TextBookHeader from '../TextBook/components/header';
 
 interface IBtnMenu {
   title: string;
@@ -23,13 +23,13 @@ interface IBtnMenu {
 function Header(props: any) {
   const menuBtnData: IBtnMenu[] = [
     { title: 'Учебник', to: '/Учебник' },
-    { title: 'Мини-игры', to: '/Мини-игры' },
+    { title: 'Мини-игры', to: '/Мини-игры/' },
     { title: 'Статистика', to: '/Статистика' },
   ];
 
   return (
     <>
-      <TextBookHeader accessToken={props.accessToken} />
+      {/* <TextBookHeader accessToken={props.accessToken} /> */}
       <LoginProvider>
         <CreateUserProvider>
           <ExitProvider>

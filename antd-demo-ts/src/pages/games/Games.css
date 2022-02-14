@@ -1,0 +1,9 @@
+.games-wrap {
+  display: flex;
+  max-width: 90%;
+  margin: 0 auto;
+  gap: 7rem;
+}
+.games-item-wrap {
+  width: 800px;
+}
