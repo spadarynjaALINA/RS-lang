@@ -80,4 +80,13 @@
   font-size: 16px;
   text-transform: uppercase;
   font-weight: 700;
+  cursor: pointer;
+}
+#add-to-hard:hover,
+#delete-word:hover {
+  background-color: #ffc53d;
+}
+#add-to-hard:active,
+#delete-word:active {
+  background-color: #ffc53d;
 }

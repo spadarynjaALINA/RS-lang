@@ -1,8 +1,6 @@
-
-
-const token = localStorage.getItem('token')
-console.log(token)
-  // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxZmNjNWQ1YjZiZDJmMDAxNmZhZmY5MSIsImlhdCI6MTY0NDEzNzY1NiwiZXhwIjoxNjQ0MTUyMDU2fQ.ASgzh_27j-JCSZI8aDr2fSRbA9hrqE7VPjlkc1OM_xA';
+const token = localStorage.getItem('token');
+console.log(token);
+// 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYxZmNjNWQ1YjZiZDJmMDAxNmZhZmY5MSIsImlhdCI6MTY0NDEzNzY1NiwiZXhwIjoxNjQ0MTUyMDU2fQ.ASgzh_27j-JCSZI8aDr2fSRbA9hrqE7VPjlkc1OM_xA';
 
 export const createUser = async (user) => {
   const rawResponse = await fetch(
@@ -17,9 +15,13 @@ export const createUser = async (user) => {
     }
   );
   const content = await rawResponse.json();
-localStorage.setItem('userId', content.id)
+  localStorage.setItem('userId', content.id);
   console.log(content);
 };
+export function updateToken(data) {
+  console.log(data);
+  return data;
+}
 
 export const loginUser = async (user) => {
   const rawResponse = await fetch(
@@ -33,13 +35,21 @@ export const loginUser = async (user) => {
       body: JSON.stringify(user),
     }
   );
- 
+
   const content = await rawResponse.json();
-localStorage.setItem('token', content.token)
+
+  localStorage.setItem('token', content.token);
+
   console.log(content, content.token, 'log in');
+
+  return content.token;
 };
 
-export const createUserWord = async ({ userId, wordId, word }) => {
+let wordValue = {
+  difficulty: 'weak',
+  optional: { testFieldString: 'test', testFieldBoolean: true },
+};
+export const createUserWord = async (userId, wordId, word = wordValue) => {
   const rawResponse = await fetch(
     `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/${wordId}`,
     {
@@ -55,17 +65,51 @@ export const createUserWord = async ({ userId, wordId, word }) => {
   );
   const content = await rawResponse.json();
 
-  console.log(content);
-}
+  console.log(content.wordId, content.id);
+};
 
-createUserWord({
+export const getUserWord = async (userId) => {
+  const rawResponse = await fetch(
+    `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/`,
+    {
+      method: 'GET',
+      withCredentials: true,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+      },
+    }
+  );
+  const content = await rawResponse.json();
+  let arrOfWordsId = [];
+  content.forEach((element) => {
+    arrOfWordsId.push(element.wordId);
+  });
+
+  return arrOfWordsId;
+};
+
+export const getOneWord = async (wordId) => {
+  const rawResponse = await fetch(
+    `https://rs-lang-app-rss.herokuapp.com/words/${wordId}`,
+    {
+      method: 'GET',
+      withCredentials: true,
+      headers: {
+        'Accept': 'application/json',
+      },
+    }
+  );
+  const content = await rawResponse.json();
+
+  console.log(content);
+  return content;
+};
+
+/*getUserWord({
   userId: localStorage.getItem('userId'),
-  wordId: localStorage.getItem('userId'),
-  word: {
-    difficulty: 'weak',
-    optional: { testFieldString: 'test', testFieldBoolean: true },
-  },
-});
+  wordId: '5e9f5ee35eb9e72bc21af4a0',
+});*/
 
 export const getWordsGroup = async (group, page) => {
   const response = await fetch(

@@ -64,7 +64,6 @@
   font-size: 20px;
 }
 .text_book__header {
-  position: absolute;
   /*top: 0; */
   left: 0;
   width: 100%;
@@ -83,7 +82,7 @@
 }
 .text_book__header_wrapper {
   position: relative;
-  height: 25vh;
+  height: 20vh;
 }
 .hidden {
   display: none;
@@ -194,6 +193,7 @@ i {
   position: absolute;
   right: 11%;
   font-size: 25px;
+  display: none;
 }
 .text_book__header_icons * {
   color: white;
@@ -202,7 +202,7 @@ i {
   display: flex;
   margin-top: 1rem;
   justify-content: space-between;
-  width: 65%;
+
   margin: auto;
 }
 .text__book_word-greed {
@@ -213,8 +213,7 @@ i {
 }
 .text__book_word {
   position: relative;
-  width: 22%;
-  height: 17%;
+
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -224,6 +223,13 @@ i {
   border: none;
   overflow: hidden;
   transition: all 0.3s;
+}
+.text__book_word_wrapper {
+  width: 22%;
+  z-index: 1;
+  background-color: #f3f4f8;
+  width: 22%;
+  padding-bottom: 2%;
 }
 .text__book_word-details {
   color: #2c2647;
@@ -267,8 +273,12 @@ i {
   padding: 3px;
   width: 3%;
 }
-.ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-ellipsis,
-.ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-ellipsis {
+.ant-pagination-jump-prev
+  .ant-pagination-item-container
+  .ant-pagination-item-ellipsis,
+.ant-pagination-jump-next
+  .ant-pagination-item-container
+  .ant-pagination-item-ellipsis {
   position: absolute;
   top: 29%;
 }
@@ -313,11 +323,17 @@ i {
 .text_book__level_card:hover .yellow,
 .text_book__level_card:active .yellow,
 .active {
-  background: rgb(252, 166, 68);
+  background: #ffc53d;
 }
 
 .text_book__level_card:hover .aqua,
 .text_book__level_card:active .aqua,
 .text_book__level_card .aqua .active {
   background: rgb(106, 222, 243);
+}
+
+.text_book__level_card:hover .gray,
+.text_book__level_card:active .gray,
+.text_book__level_card .gray .active {
+  background: rgb(191, 208, 211);
 }
