@@ -1,0 +1,48 @@
+.alina-link,
+.vika-link,
+.anton-link {
+  display: block;
+  width: 50px;
+  height: 50px;
+  background-image: url('./../../assets/alina-png.png');
+  background-size: 50px 50px;
+}
+
+.vika-link {
+  background-image: url('./../../assets/vika-png.png');
+}
+.anton-link {
+  background-image: url('./../../assets/anton-png.png');
+}
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  height: 120px;
+  width: 100%;
+  background-image: url('./../../assets/svg/footer-bg.svg');
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  padding: 0 20px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  padding-bottom: 15px;
+}
+.footer-team {
+  width: 180px;
+  justify-content: space-between;
+  display: flex;
+}
+.footer-logo {
+  display: block;
+  width: 150px;
+  height: 60px;
+  background-size: 150px 60px;
+  background-image: url('./../../assets/logo.svg');
+}
+.datetime {
+  font-size: 22px;
+  font-weight: 700;
+  color: #ee1d7b;
+}

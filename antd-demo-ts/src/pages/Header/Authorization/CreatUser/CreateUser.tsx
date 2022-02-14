@@ -160,7 +160,7 @@ if(!create.visibleCreateUser)return null
       
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
-          Register
+         Регистрация
         </Button>
       </Form.Item>
     </Form>

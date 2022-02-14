@@ -1,7 +1,6 @@
 import React from 'react';
 import './Start-page.css'
 
-
 function StartPage() {
  return (
    <div className="App-start">
