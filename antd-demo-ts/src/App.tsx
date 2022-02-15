@@ -1,3 +1,4 @@
+
 import React, { useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Games from './pages/games/Games';
@@ -10,7 +11,18 @@ import Footer from './pages/Footer/Footer';
 import AudioCallGame from './pages/games/audiocall/AudioCallGame/AudioCallGame';
 
 // import TextBookHeader from './pages/TextBook/components/header';
+function TextBook(props: any) {
+  return (
+    <div className="TextBookWrap">
 
+      <AppTextBook accessToken={props.accessToken} />
+    </div>
+  );
+}
+
+function Statistic() {
+  return <div className="StatisticWrap"> тут будет статистика</div>;
+}
 function App() {
   const [accessToken, setAccessToken] = useState(localStorage.getItem('token'));
 
@@ -29,7 +41,6 @@ function App() {
             </Route>
             <Route path="/Мини-игры/Спринт">
               <SprintGame />
-
             </Route>
 
             <Route path="/Мини-игры">
@@ -50,15 +61,4 @@ function App() {
   );
 }
 
-function TextBook(props: any) {
-  return (
-    <div className="TextBookWrap">
-      <AppTextBook accessToken={props.accessToken} />
-    </div>
-  );
-}
-
-function Statistic() {
-  return <div className="StatisticWrap"> тут будет статистика</div>;
-}
 export default App;

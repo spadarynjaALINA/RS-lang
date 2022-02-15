@@ -1,24 +1,101 @@
+// {
+//   "env": {
+//     "browser": true,
+//     "es2021": true
+//   },
+//   "extends": ["plugin:react/recommended", "airbnb"],
+//   "parser": "@typescript-eslint/parser",
+//   "parserOptions": {
+//     "ecmaFeatures": {
+//       "jsx": true
+//     },
+//     "ecmaVersion": "latest",
+//     "sourceType": "module"
+//   },
+//   "plugins": ["react", "@typescript-eslint"],
+//   "rules": {
+//     "react/jsx-filename-extension": [2, { "extensions": [".js", ".jsx", ".ts", ".tsx"] }],
+//     "import/extensions": [
+//       "error",
+//       "ignorePackages",
+//       {
+//         "js": "never",
+//         "jsx": "never",
+//         "ts": "never",
+//         "tsx": "never"
+//       }
+//     ]
+//   },
+//   "settings": {
+//     "import/resolver": {
+//       " node": {
+//         "extensions": [".js", ".jsx", ".ts", ".tsx"]
+//       }
+//     }
+//   }
+// }
 {
-    "env": {
-        "browser": true,
-        "es2021": true
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "airbnb-typescript/base",
+    "eslint:recommended",
+    "plugin:@typescript-eslint/recommended"
+    // "plugin:import/recommended"
+  ],
+
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["./tsconfig.json"],
+    "createDefaultProgram": true,
+    "ecmaVersion": 2020,
+    "sourceType": "module",
+    "allowImportExportEverywhere": false,
+    "ecmaFeatures": {
+      "globalReturn": false
     },
-    "extends": [
-        "plugin:react/recommended",
-        "airbnb"
+    "requireConfigFile": false
+  },
+  "plugins": ["@typescript-eslint"],
+  "rules": {
+    "lines-between-class-members": "off",
+    "class-methods-use-this": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "no-plusplus": "off",
+    "no-console": "warn",
+    "import/no-extraneous-dependencies": ["off", { "devDependencies": ["**/*.test.tsx", "**/*.spec.js"] }],
+    "import/extensions": 0,
+    "max-len": ["warn", { "code": 12000 }],
+    "indent": [
+      "warn",
+      2,
+      {
+        "SwitchCase": 1
+      }
     ],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": "latest",
-        "sourceType": "module"
-    },
-    "plugins": [
-        "react",
-        "@typescript-eslint"
+    "@typescript-eslint/indent": [
+      "warn",
+      2,
+      {
+        "SwitchCase": 1
+      }
     ],
-    "rules": {
+    "import/prefer-default-export": "off",
+    "no-param-reassign": [
+      "error",
+      {
+        "props": false
+      }
+    ]
+  },
+  "ignorePatterns": ["*config.js"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".tsx"]
+      }
     }
+  }
 }

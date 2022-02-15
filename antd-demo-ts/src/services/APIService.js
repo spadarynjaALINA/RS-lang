@@ -12,7 +12,7 @@ export const createUser = async (user) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(user),
-    }
+    },
   );
   const content = await rawResponse.json();
   localStorage.setItem('userId', content.id);
@@ -33,7 +33,7 @@ export const loginUser = async (user) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(user),
-    }
+    },
   );
 
   const content = await rawResponse.json();
@@ -61,7 +61,7 @@ export const createUserWord = async (userId, wordId, word = wordValue) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(word),
-    }
+    },
   );
   const content = await rawResponse.json();
 
@@ -78,7 +78,7 @@ export const getUserWord = async (userId) => {
         'Authorization': `Bearer ${token}`,
         'Accept': 'application/json',
       },
-    }
+    },
   );
   const content = await rawResponse.json();
   let arrOfWordsId = [];
@@ -98,7 +98,7 @@ export const getOneWord = async (wordId) => {
       headers: {
         'Accept': 'application/json',
       },
-    }
+    },
   );
   const content = await rawResponse.json();
 
@@ -117,7 +117,7 @@ export const deleteWord = async (userId, wordId) => {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-    }
+    },
   );
 
   return rawResponse;
@@ -140,7 +140,7 @@ export const getWordsGroup = async (group, page) => {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(),
-    }
+    },
   );
   const content = await response.json();
 
