@@ -5,8 +5,6 @@ import {
   getUserWord,
 } from '../../../../../services/APIService';
 import { getOneWord } from '../../../../../services/APIService';
-import { Word } from '.';
-import { Card } from 'antd';
 
 export interface CardComponentProps {
   word: {
@@ -26,13 +24,7 @@ export interface CardComponentProps {
     wordTranslate: string;
   };
   accessToken: any;
-}
-function addToDifficult(word: any) {
-  console.log(word);
-  //let elem = document.getElementsByClassName('text__book_word_wrapper')[{elem.id}];
-
-  //elem.classList.add('difficult');
-  //console.log(word);
+  onDelete: any;
 }
 
 function TextBookWord(props: CardComponentProps | any) {
@@ -94,7 +86,6 @@ associative picture'
             id='add-to-hard'
             onClick={() => {
               createUserWord(localStorage.getItem('userId'), props.word.id);
-              addToDifficult(props.word);
             }}
           >
             + в сложные слова
@@ -107,7 +98,16 @@ associative picture'
               getUserWord(localStorage.getItem('userId'));
             }}
           >
-            Слово изучено
+            <b>{!props.wordID && 'Слово изучено'}</b>
+            {props.wordID && (
+              <span
+                onClick={() => {
+                  props.onDelete(word.id);
+                }}
+              >
+                Удалить слово
+              </span>
+            )}
           </button>
         )}
       </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import { getOneWord } from '../../../../../services/APIService';
 
 export interface StandardComponentProps {
@@ -17,13 +17,23 @@ const onClick = (e: React.MouseEvent) => {
   target.classList.add('active');
 };
 
-function addToDifficult(e: any) {
+/*function addToDifficult(e: MouseEvent) {
   let target = e.currentTarget;
   let btn = document.getElementById('add-to-hard');
   btn?.addEventListener('click', () => {
-    target.classList.add('difficult');
+    if (!target.classList.contains('learned')) {
+      target.classList.add('difficult');
+    }
   });
-}
+}*/
+
+/*function addToLearned(data: any) {
+  let btn = document.getElementById('delete-word');
+  btn?.addEventListener('click', () => {
+    data.classList.add('learned');
+  });
+}*/
+
 function TextBookWordList(props: StandardComponentProps) {
   const [word, setWord] = useState(props.word);
 
@@ -45,9 +55,10 @@ function TextBookWordList(props: StandardComponentProps) {
     <div className='text__book_word_wrapper' id={props.id} onClick={onClick}>
       <div
         className='text__book_word'
+        id={props.id}
         onClick={(e) => {
           props.onClick(props.id);
-          addToDifficult(e);
+          //addToDifficult(e);
         }}
       >
         <p>{word.word}</p>
