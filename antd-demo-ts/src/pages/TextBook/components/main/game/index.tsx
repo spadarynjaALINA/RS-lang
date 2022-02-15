@@ -6,10 +6,6 @@ import TextBookGameCards from './gameCard';
 import {TextBookGameCards2} from './gameCard2'
 import { Navigate } from 'react-router';
 
-import game1 from './../../../../../img/game1.jpeg';
-import game3 from './../../../../../img/game3.jpeg';
-
-import TextBookGameCards,{TextBookGameCards2} from './gameCard';
 
 
 export function TextBookGameArea() {
