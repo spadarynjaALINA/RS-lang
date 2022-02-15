@@ -90,3 +90,14 @@
 #delete-word:active {
   background-color: #ffc53d;
 }
+.difficult {
+  text-transform: uppercase;
+}
+.difficult::after {
+  content: '\255D';
+  color: #ffc53d;
+  position: absolute;
+  top: 55%;
+  right: -12px;
+  font-size: 70px;
+}

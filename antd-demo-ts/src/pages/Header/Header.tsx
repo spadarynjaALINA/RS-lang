@@ -1,4 +1,5 @@
 import React from 'react';
+import { useEffect } from 'react';
 import Navigation from './Navigation/Navigation';
 import './Header.css';
 import Authorization from './Authorization/Authorization';
@@ -18,7 +19,6 @@ interface IBtnMenu {
   title: string;
   to: string;
 }
-
 
 function Header(props: any) {
   const menuBtnData: IBtnMenu[] = [
@@ -54,4 +54,3 @@ function Header(props: any) {
 }
 
 export default Header;
-

@@ -1,5 +1,4 @@
 import TextBookHeaderSvg from './headerSVG';
-import Authorization from '../../../Header/Authorization/Authorization';
 
 function TextBookHeader(props: any) {
   return (

@@ -5,6 +5,8 @@ import {
   getUserWord,
 } from '../../../../../services/APIService';
 import { getOneWord } from '../../../../../services/APIService';
+import { Word } from '.';
+import { Card } from 'antd';
 
 export interface CardComponentProps {
   word: {
@@ -25,10 +27,16 @@ export interface CardComponentProps {
   };
   accessToken: any;
 }
+function addToDifficult(word: any) {
+  console.log(word);
+  //let elem = document.getElementsByClassName('text__book_word_wrapper')[{elem.id}];
+
+  //elem.classList.add('difficult');
+  //console.log(word);
+}
 
 function TextBookWord(props: CardComponentProps | any) {
   const [word, setWord] = useState(props.word);
-  console.log(props.wordID);
 
   useEffect(() => {
     setWord(props.word);
@@ -63,6 +71,7 @@ function TextBookWord(props: CardComponentProps | any) {
       audio.play();
     };
   }
+
   return (
     <div className='text_book__word'>
       <img
@@ -85,6 +94,7 @@ associative picture'
             id='add-to-hard'
             onClick={() => {
               createUserWord(localStorage.getItem('userId'), props.word.id);
+              addToDifficult(props.word);
             }}
           >
             + в сложные слова
@@ -97,7 +107,7 @@ associative picture'
               getUserWord(localStorage.getItem('userId'));
             }}
           >
-            Удалить слово
+            Слово изучено
           </button>
         )}
       </div>

@@ -39,8 +39,6 @@ function TextBookWordsContainer(props: StandardComponentProps) {
     }
   }, [props.page, props.group]);
 
-  console.log(wordsForId, card);
-
   return (
     <div className='text__book_word-container'>
       <div className='text__book_word-greed'>

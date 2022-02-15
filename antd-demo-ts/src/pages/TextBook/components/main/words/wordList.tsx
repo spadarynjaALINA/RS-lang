@@ -5,7 +5,7 @@ export interface StandardComponentProps {
   word: any | null;
   wordId: string | null;
   onClick: any;
-  id: number;
+  id: any;
 }
 let arrActiveBtn: Array<HTMLElement> = [];
 const onClick = (e: React.MouseEvent) => {
@@ -17,6 +17,13 @@ const onClick = (e: React.MouseEvent) => {
   target.classList.add('active');
 };
 
+function addToDifficult(e: any) {
+  let target = e.currentTarget;
+  let btn = document.getElementById('add-to-hard');
+  btn?.addEventListener('click', () => {
+    target.classList.add('difficult');
+  });
+}
 function TextBookWordList(props: StandardComponentProps) {
   const [word, setWord] = useState(props.word);
 
@@ -35,8 +42,14 @@ function TextBookWordList(props: StandardComponentProps) {
   }
 
   return (
-    <div className='text__book_word_wrapper' onClick={onClick}>
-      <div className='text__book_word' onClick={() => props.onClick(props.id)}>
+    <div className='text__book_word_wrapper' id={props.id} onClick={onClick}>
+      <div
+        className='text__book_word'
+        onClick={(e) => {
+          props.onClick(props.id);
+          addToDifficult(e);
+        }}
+      >
         <p>{word.word}</p>
         <p className='text__book_word_translate'>{word.wordTranslate}</p>
       </div>
