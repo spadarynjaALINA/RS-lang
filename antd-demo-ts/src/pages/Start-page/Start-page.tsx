@@ -1,7 +1,10 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './Start-page.css'
 
 function StartPage() {
+  useEffect(() => {
+    localStorage.setItem('textbook', '');
+  }, [])
  return (
    <div className="App-start">
      <div className="App-start__about">

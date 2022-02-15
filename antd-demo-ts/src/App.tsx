@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import './App.css';
 import AppTextBook from './pages/TextBook';
+import SprintGame from './pages/GameSprint';
 
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
@@ -54,7 +55,7 @@ function TextBook(props: any) {
   );
 }
 function Games() {
-  return <div className='GamesWrap'> тут будут игры</div>;
+  return <div className='GamesWrap'> <SprintGame/></div>;
 }
 function Statistic() {
   return <div className='StatisticWrap'> тут будет статистика</div>;
