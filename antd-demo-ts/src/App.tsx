@@ -29,7 +29,9 @@ function App() {
             </Route>
             <Route path="/Мини-игры/Спринт">
               <SprintGame />
+
             </Route>
+
             <Route path="/Мини-игры">
               <Games />
             </Route>
