@@ -14,6 +14,7 @@ function SprintGame() {
   console.log(group);
   return (
     <div>
+      <div className='GamesWrap'>
       {
         isStartPage ?
           <StartPageGameSprint
@@ -25,7 +26,7 @@ function SprintGame() {
             group={group}
             isActive={ isActive }/>
       }
-    </div>
+    </div></div>
   )
 }
 
