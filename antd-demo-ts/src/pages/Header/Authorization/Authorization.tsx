@@ -1,10 +1,11 @@
-
+import { useEffect } from 'react';
 import './Authorization.css';
 import { Menu } from 'antd';
 import SubMenu from 'antd/lib/menu/SubMenu';
 import { useLogin } from './Login/LoginContext';
 import { useCreateUser } from './CreatUser/CreateUserContext';
 import { useExit } from './Exit/ExitContext';
+
 
 function Authorization(props: any) {
   const { toggleExit } = useExit();
@@ -27,7 +28,6 @@ function Authorization(props: any) {
         </SubMenu>
       </Menu>
     </div>
-
   );
 }
 

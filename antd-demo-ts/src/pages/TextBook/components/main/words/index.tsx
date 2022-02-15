@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import TextBookWord from './word-card';
 import { getWords } from '../../../../../handlers';
 import TextBookWordList from './wordList';
-import { getUserWord } from '../../../../../services/APIService';
+import { getUserWord, deleteWord } from '../../../../../services/APIService';
 
 export interface Word {
   word: string;
@@ -39,7 +39,11 @@ function TextBookWordsContainer(props: StandardComponentProps) {
     }
   }, [props.page, props.group]);
 
-  console.log(wordsForId, card);
+  const onDelete = (wordId: string) => {
+    deleteWord(localStorage.getItem('userId'), wordId).then(() => {
+      setWordsId(wordsForId.filter((word) => word !== wordId));
+    });
+  };
 
   return (
     <div className='text__book_word-container'>
@@ -68,11 +72,12 @@ function TextBookWordsContainer(props: StandardComponentProps) {
         {props.group !== 6 && (
           <TextBookWord word={words[card]} accessToken={props.accessToken} />
         )}
-        {props.group === 6 && (
+        {props.group === 6 && wordsForId.length !== 0 && (
           <TextBookWord
             wordID={wordsForId[card]}
             word={null}
             accessToken={props.accessToken}
+            onDelete={onDelete}
           />
         )}
       </div>

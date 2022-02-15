@@ -1,4 +1,8 @@
+
 import React from "react";
+
+import TextBookHeaderSvg from './headerSVG';
+
 
 // import TextBookHeaderSvg from './headerSVG';
 // import Authorization from '../../../Header/Authorization/Authorization';

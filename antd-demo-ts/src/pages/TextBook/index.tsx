@@ -3,7 +3,7 @@ import TextBookTitle from './components/main/title';
 import TextBookLevels from './components/main/levels';
 import TextBookPagination from './components/main/pagination';
 import TextBookWordsContainer from './components/main/words';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import TextBookGameCards, { TextBookGameArea } from './components/main/game';
 
 function AppTextBook(props: any) {
@@ -14,6 +14,15 @@ function AppTextBook(props: any) {
   const [page, setPage] = useState(1);
   const [group, setGroup] = useState(0);
 
+  useEffect(() => {
+    localStorage.setItem('page', page.toString());
+    localStorage.setItem('group', group.toString());
+  }, [page, group])
+
+  useEffect(() => {
+    localStorage.setItem('textbook', 'true');
+  }, [])
+  
   return (
     <div className='text_book' id='text_book'>
       <TextBookTitle

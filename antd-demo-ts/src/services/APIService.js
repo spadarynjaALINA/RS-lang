@@ -106,6 +106,23 @@ export const getOneWord = async (wordId) => {
   return content;
 };
 
+export const deleteWord = async (userId, wordId) => {
+  console.log(wordId);
+  const rawResponse = await fetch(
+    `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/${wordId}`,
+    {
+      method: 'DELETE',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+    }
+  );
+
+  return rawResponse;
+};
+
 /*getUserWord({
   userId: localStorage.getItem('userId'),
   wordId: '5e9f5ee35eb9e72bc21af4a0',

@@ -24,11 +24,11 @@ export interface CardComponentProps {
     wordTranslate: string;
   };
   accessToken: any;
+  onDelete: any;
 }
 
 function TextBookWord(props: CardComponentProps | any) {
   const [word, setWord] = useState(props.word);
-  console.log(props.wordID);
 
   useEffect(() => {
     setWord(props.word);
@@ -63,6 +63,7 @@ function TextBookWord(props: CardComponentProps | any) {
       audio.play();
     };
   }
+
   return (
     <div className='text_book__word'>
       <img
@@ -97,7 +98,16 @@ associative picture'
               getUserWord(localStorage.getItem('userId'));
             }}
           >
-            Удалить слово
+            <b>{!props.wordID && 'Слово изучено'}</b>
+            {props.wordID && (
+              <span
+                onClick={() => {
+                  props.onDelete(word.id);
+                }}
+              >
+                Удалить слово
+              </span>
+            )}
           </button>
         )}
       </div>

@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { MouseEvent, useEffect, useState } from 'react';
 import { getOneWord } from '../../../../../services/APIService';
 
 export interface StandardComponentProps {
   word: any | null;
   wordId: string | null;
   onClick: any;
-  id: number;
+  id: any;
 }
 let arrActiveBtn: Array<HTMLElement> = [];
 const onClick = (e: React.MouseEvent) => {
@@ -16,6 +16,23 @@ const onClick = (e: React.MouseEvent) => {
   arrActiveBtn.push(target);
   target.classList.add('active');
 };
+
+/*function addToDifficult(e: MouseEvent) {
+  let target = e.currentTarget;
+  let btn = document.getElementById('add-to-hard');
+  btn?.addEventListener('click', () => {
+    if (!target.classList.contains('learned')) {
+      target.classList.add('difficult');
+    }
+  });
+}*/
+
+/*function addToLearned(data: any) {
+  let btn = document.getElementById('delete-word');
+  btn?.addEventListener('click', () => {
+    data.classList.add('learned');
+  });
+}*/
 
 function TextBookWordList(props: StandardComponentProps) {
   const [word, setWord] = useState(props.word);
@@ -35,8 +52,15 @@ function TextBookWordList(props: StandardComponentProps) {
   }
 
   return (
-    <div className='text__book_word_wrapper' onClick={onClick}>
-      <div className='text__book_word' onClick={() => props.onClick(props.id)}>
+    <div className='text__book_word_wrapper' id={props.id} onClick={onClick}>
+      <div
+        className='text__book_word'
+        id={props.id}
+        onClick={(e) => {
+          props.onClick(props.id);
+          //addToDifficult(e);
+        }}
+      >
         <p>{word.word}</p>
         <p className='text__book_word_translate'>{word.wordTranslate}</p>
       </div>
