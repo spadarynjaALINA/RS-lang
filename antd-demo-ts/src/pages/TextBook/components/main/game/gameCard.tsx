@@ -6,6 +6,7 @@ export interface StandardComponentProps {
 }
 export function TextBookGameCards(props: StandardComponentProps) {
   return (
+     <Link to='/Мини-игры/Спринт'>
     <div className='text_book__card-game'>
       <img src={props.game} alt='card'></img>
       <div className='text_book__card-game-text'>
@@ -13,7 +14,7 @@ export function TextBookGameCards(props: StandardComponentProps) {
         <h2>Спринт</h2>
         <p>Как можно быстрее определи, верный перевод слова или нет</p>
       </div>
-    </div>
+    </div></Link>
   );
 }
 // export function TextBookGameCards2(props: StandardComponentProps) {

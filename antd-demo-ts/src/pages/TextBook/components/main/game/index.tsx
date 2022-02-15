@@ -11,10 +11,10 @@ import { Navigate } from 'react-router';
 export function TextBookGameArea() {
   return (
     <div className='text_book__game_wrapper'>
-      <a className='text_book__game-link' href='/Мини-игры'>
-        <TextBookGameCards game={game1} />
-      </a>
-      
+      {/* <a className='text_book__game-link' href='/Мини-игры/Спринт'>  </a> */}
+     <TextBookGameCards game={game1} />
+    
+         
         <TextBookGameCards2 game={game3} />
       
     </div>

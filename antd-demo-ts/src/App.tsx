@@ -36,9 +36,13 @@ function App() {
               <AudioCallGame></AudioCallGame>
             </Route>
              <Route path='/Мини-игры/Спринт'>
+
               <GameSprint/>
+
+   
+
               </Route>
-            <Route path='/Мини-игры/'>
+            <Route path='/Мини-игры'>
               <Games></Games>
               </Route>
               
@@ -66,13 +70,8 @@ function TextBook(props: any) {
     </div>
   );
 }
-// function Games() {
-//   return <div className='GamesWrap'> тут будут игры</div>;
-// }
 
-function GameSprint() {
-  return <div className='GamesWrap'> <SprintGame/></div>;
-}
+
 
 function Statistic() {
   return <div className='StatisticWrap'> тут будет статистика</div>;
