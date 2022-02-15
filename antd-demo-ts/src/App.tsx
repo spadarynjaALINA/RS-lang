@@ -20,44 +20,41 @@ import AudioCallGame from './pages/games/audiocall/AudioCallGame/AudioCallGame';
 
 function App() {
   const [accessToken, setAccessToken] = useState(localStorage.getItem('token'));
-
+let footer = true
   return (
     <Router>
-      <div className='App'>
-        {/*accessToken && <h1>WE ARE AUTH!!!!!!!!!</h1>*/}
-
+      <div className='App'>       
         <Header onLogin={setAccessToken} accessToken={accessToken} />
         <main className='App-main'>
           <Switch>
             <Route path='/Учебник'>
               <TextBook accessToken={accessToken} />
+              {footer=true}
             </Route>
             <Route path='/Мини-игры/Аудиовызов'>
               <AudioCallGame></AudioCallGame>
+              {footer=false}
             </Route>
-             <Route path='/Мини-игры/Спринт'>
-
-              <GameSprint/>
-
-   
-
+            <Route path='/Мини-игры/Спринт'>
+              {footer=false}
+              <SprintGame />
+              {footer=true}
               </Route>
             <Route path='/Мини-игры'>
               <Games></Games>
-              </Route>
-              
+              {footer=true}
+              </Route>              
             <Route path='/Статистика'>
               <Statistic />
+              {footer=true}
             </Route>
             <Route path='/'>
-              <StartPage />
-             
+              <StartPage />  
+              {footer=true}
             </Route>
-
-          </Switch>
-          
+          </Switch>          
         </main>
-        <Footer></Footer>
+       {footer?<Footer></Footer>:<></>} 
       </div>
     </Router>
   );
