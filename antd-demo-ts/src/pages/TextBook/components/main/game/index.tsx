@@ -7,6 +7,7 @@ import {TextBookGameCards2} from './gameCard2'
 import { Navigate } from 'react-router';
 
 
+
 export function TextBookGameArea() {
   return (
     <div className='text_book__game_wrapper'>

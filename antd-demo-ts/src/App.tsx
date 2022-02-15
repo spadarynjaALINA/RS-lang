@@ -36,7 +36,11 @@ function App() {
               <AudioCallGame></AudioCallGame>
             </Route>
              <Route path='/Мини-игры/Спринт'>
-              <SprintGame></SprintGame>
+
+              <GameSprint/>
+
+   
+
               </Route>
             <Route path='/Мини-игры'>
               <Games></Games>
