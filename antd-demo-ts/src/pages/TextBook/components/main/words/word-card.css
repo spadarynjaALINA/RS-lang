@@ -72,7 +72,7 @@
   display: flex;
   align-items: center;
 }
-.text_book__word_actions * {
+.text_book__word_actions button {
   border-radius: 50px;
   border: none;
   background-color: rgba(84, 105, 223, 0.589);
@@ -80,4 +80,36 @@
   font-size: 16px;
   text-transform: uppercase;
   font-weight: 700;
+  cursor: pointer;
+}
+#add-to-hard:hover,
+#delete-word:hover {
+  background-color: #ffc53d;
+}
+#add-to-hard:active,
+#delete-word:active {
+  background-color: #ffc53d;
+}
+.difficult {
+}
+.difficult::after {
+  content: '\255D';
+  color: #ffc53d;
+  position: absolute;
+  top: 55%;
+  right: -12px;
+  font-size: 70px;
+}
+
+.learned {
+  color: rgba(84, 105, 223, 0.589);
+}
+
+.learned::after {
+  content: '\2B51';
+  color: rgba(84, 105, 223, 0.589);
+  position: absolute;
+  top: 59%;
+  right: -1%;
+  font-size: 50px;
 }

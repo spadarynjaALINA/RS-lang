@@ -6,7 +6,7 @@ import TextBookWordsContainer from './components/main/words';
 import { useState, useEffect } from 'react';
 import TextBookGameCards, { TextBookGameArea } from './components/main/game';
 
-function AppTextBook() {
+function AppTextBook(props: any) {
   const mainWrapper = document.getElementById('app-header') as HTMLElement;
   if (mainWrapper !== null && !mainWrapper.classList.contains('hidden')) {
     mainWrapper.classList.add('hidden');
@@ -25,16 +25,19 @@ function AppTextBook() {
   
   return (
     <div className='text_book' id='text_book'>
-      <TextBookHeader />
       <TextBookTitle
         title='Учебник'
         subtitle='Словарь'
         text='Уровни сложности слов'
         nameClass='fas fa-brain'
       />
-      <TextBookLevels onClick={setGroup} />
+      <TextBookLevels onClick={setGroup} accessToken={props.accessToken} />
       <TextBookTitle title='Слова' subtitle='' text='' nameClass='' />
-      <TextBookWordsContainer page={page} group={group} />
+      <TextBookWordsContainer
+        page={page}
+        group={group}
+        accessToken={props.accessToken}
+      />
       <TextBookPagination onClick={setPage} page={page} />
       <TextBookTitle
         title='Игры'

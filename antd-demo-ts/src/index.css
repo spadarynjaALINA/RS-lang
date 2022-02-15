@@ -2,6 +2,8 @@
   --font1: 16px;
   --font2: 18px;
   --font3: 24px;
+  --font4: 32px;
+  --font5: 48px;
 }
 
 * {
@@ -18,4 +20,40 @@ body {
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+@media screen and (max-width: 1500px) {
+  :root {
+    --font1: 14px;
+    --font2: 16px;
+    --font3: 20px;
+    --font4: 28px;
+    --font5: 32px;
+  }
+}
+@media screen and (max-width: 1124px) {
+  :root {
+    --font1: 14px;
+    --font2: 16px;
+    --font3: 20px;
+    --font4: 28px;
+    --font5: 24px;
+  }
+}
+@media screen and (max-width: 900px) {
+  :root {
+    --font1: 14px;
+    --font2: 16px;
+    --font3: 20px;
+    --font4: 28px;
+    --font5: 20px;
+  }
+}
+@media screen and (max-width: 320px) {
+  :root {
+    --font1: 14px;
+    --font2: 16px;
+    --font3: 20px;
+    --font4: 28px;
+    --font5: 16px;
+  }
 }
