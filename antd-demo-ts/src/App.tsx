@@ -8,7 +8,8 @@ import Header from './pages/Header/Header';
 import StartPage from './pages/Start-page/Start-page';
 
 import Footer  from './pages/Footer/Footer';
-import AudioCall from './pages/games/audiocall/Audiocall';
+import AudioCall from './pages/games/audiocall/StartPageAudioCall/StartPageAudioCall';
+import AudioCallGame from './pages/games/audiocall/AudioCallGame/AudioCallGame';
 
 // import TextBookHeader from './pages/TextBook/components/header';
 
@@ -27,7 +28,7 @@ function App() {
               <TextBook accessToken={accessToken} />
             </Route>
             <Route path='/Мини-игры/Аудиовызов'>
-              <AudioCall></AudioCall>
+              <AudioCallGame></AudioCallGame>
               </Route>
             <Route path='/Мини-игры/'>
               <Games></Games>
