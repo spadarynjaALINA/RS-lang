@@ -56,6 +56,7 @@ export const createHardUserWord = async (userId, wordId) => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
+
       body: JSON.stringify({ difficulty: 'hard' }),
     }
   );

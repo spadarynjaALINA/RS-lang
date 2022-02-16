@@ -48,7 +48,7 @@
 }
 
 .text_book__word-title {
-  font-size: 1.5rem;
+  font-size: var(--font3);
   margin: 0;
   font-weight: 900;
 }
@@ -58,8 +58,6 @@
 .text_book__word-text-meaning,
 .text_book__word-text-meaning-translate {
   font-size: 20px;
-  margin: 0;
-  text-align: start;
 }
 
 .text_book__word-text-meaning i {
