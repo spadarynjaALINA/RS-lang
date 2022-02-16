@@ -61,8 +61,24 @@ export const createHardUserWord = async (userId, wordId) => {
     },
   );
   const content = await rawResponse.json();
+};
 
-  console.log(content.wordId, content.id);
+export const createLearnedUserWord = async (userId, wordId) => {
+  const rawResponse = await fetch(
+    `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/${wordId}`,
+    {
+      method: 'POST',
+      withCredentials: true,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+
+      body: JSON.stringify({ difficulty: 'easy' }),
+    },
+  );
+  const content = await rawResponse.json();
 };
 
 export const getUserWord = async (userId) => {

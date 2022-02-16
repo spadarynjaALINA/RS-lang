@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './word-card.css';
 import {
   createHardUserWord,
+  createLearnedUserWord,
   getUserWord,
 } from '../../../../../services/APIService';
 import { getOneWord } from '../../../../../services/APIService';
@@ -25,7 +26,6 @@ export interface CardComponentProps {
   };
   accessToken: any;
   onDelete: any;
-  onAddToDifficult: any;
   color: string;
 }
 
@@ -53,7 +53,7 @@ function TextBookWord(props: CardComponentProps | any) {
     }
     const srcs = [word?.audio, word?.audioMeaning, word?.audioExample];
     let current = 0;
-    // if(!audio.paused) audio.pause();
+    if (!audio.paused) audio.pause();
     audio.src = `https://rs-lang-app-rss.herokuapp.com/${srcs[current]}`;
     audio.play();
     audio.onended = function () {
@@ -65,6 +65,18 @@ function TextBookWord(props: CardComponentProps | any) {
       audio.play();
     };
   }
+
+  const addToDifficult = (wordId: any) => {
+    createHardUserWord(localStorage.getItem('userId'), wordId).then(() => {
+      setWord(Object.assign(word, { difficult: true }));
+    });
+  };
+
+  const addToLearned = (wordId: any) => {
+    createLearnedUserWord(localStorage.getItem('userId'), wordId).then(() => {
+      setWord(Object.assign(word, { learned: true }));
+    });
+  };
 
   return (
     <div className='text_book__word'>
@@ -79,7 +91,7 @@ associative picture'
       <div className='text_book__word-transcription-audio-button'>
         <p className='text_book__word-transcription'>{word?.transcription}</p>
         <div className='text_book__word-audio-button' onClick={playAudio}>
-          <i className='fas fa-volume-up'></i>
+          <i className='fas fa-volume-up ${props.color} '></i>
         </div>
       </div>
       <div className='text_book__word_actions'>
@@ -88,8 +100,7 @@ associative picture'
             id='add-to-hard'
             className={props.color}
             onClick={() => {
-              //createHardUserWord(localStorage.getItem('userId'), props.word.id);
-              props.onAddToDifficult(props.word.id);
+              addToDifficult(props.word.id);
             }}
           >
             + в сложные слова
@@ -106,11 +117,7 @@ associative picture'
             {!props.wordID && (
               <span
                 onClick={() => {
-                  //createHardUserWord(
-                  // localStorage.getItem('userId'),
-                  //props.word.id
-                  //);
-                  props.onAddToDifficult(props.word.id);
+                  addToLearned(props.word.id);
                 }}
               >
                 Слово изучено
@@ -147,11 +154,11 @@ associative picture'
       <p className='text_book__word-title'>Ответы в играх: </p>
       <div className='statistics'>
         <div>
-          <p> "Аудиовызов"</p>
+          <p className={props.color}> "Аудиовызов"</p>
           <b>{countGuess}</b>
         </div>
         <div>
-          <p> "Спринт"</p>
+          <p className={props.color}> "Спринт"</p>
           <b>{countGuess}</b>
         </div>
       </div>

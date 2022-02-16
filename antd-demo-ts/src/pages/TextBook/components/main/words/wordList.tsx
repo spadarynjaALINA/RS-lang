@@ -10,6 +10,7 @@ export interface StandardComponentProps {
   color: string;
 }
 
+/*
 function addToDifficult(e: MouseEvent) {
   const target = e.currentTarget;
   const btn = document.getElementById('add-to-hard');
@@ -27,6 +28,7 @@ function addToLearned(e: MouseEvent) {
     target.classList.add('learned');
   });
 }
+*/
 
 function TextBookWordList(props: StandardComponentProps) {
   const [word, setWord] = useState(props.word);
@@ -46,6 +48,7 @@ function TextBookWordList(props: StandardComponentProps) {
   }
 
   const arrActiveBtn: Array<HTMLElement> = [];
+
   const showActive = (e: React.MouseEvent) => {
     document
       .getElementsByClassName(`active-${props.color}`)[0]
@@ -57,6 +60,7 @@ function TextBookWordList(props: StandardComponentProps) {
     arrActiveBtn.push(target);
     target.classList.add(`active-${props.color}`);
   };
+
   return (
     <div className='text__book_word_wrapper'>
       <div
@@ -69,12 +73,12 @@ function TextBookWordList(props: StandardComponentProps) {
         onClick={(e) => {
           props.onClick(props.id);
           showActive(e);
-          addToDifficult(e);
-          addToLearned(e);
         }}
       >
         <p>{word.word}</p>
         <p className='text__book_word_translate'>{word.wordTranslate}</p>
+        {(props.word?.learned && <span className='learned'></span>) ||
+          (props.word?.difficult && <span className='difficult'></span>)}
       </div>
     </div>
   );

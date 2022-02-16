@@ -5,7 +5,6 @@ import TextBookWordList from './wordList';
 import {
   getUserWord,
   deleteWord,
-  createHardUserWord,
   getHardWord,
 } from '../../../../../services/APIService';
 
@@ -26,7 +25,6 @@ function TextBookWordsContainer(props: StandardComponentProps) {
   const [card, setCard] = useState(0);
 
   const [wordsForId, setWordsId] = useState([]);
-  const [difficultWords, setDifficultWords] = useState([]);
 
   useEffect(() => {
     setCard(0);
@@ -58,12 +56,6 @@ function TextBookWordsContainer(props: StandardComponentProps) {
     });
   };
 
-  const addToDifficult = (wordId: any) => {
-    createHardUserWord(localStorage.getItem('userId'), wordId).then(() => {
-      setDifficultWords(wordId);
-    });
-  };
-
   return (
     <div className='text__book_word-container'>
       <div className='text__book_word-greed'>
@@ -76,6 +68,7 @@ function TextBookWordsContainer(props: StandardComponentProps) {
             onClick={setCard}
             group={props.group}
             color={props.color}
+           
           />
         ))}
 
@@ -96,7 +89,6 @@ function TextBookWordsContainer(props: StandardComponentProps) {
           <TextBookWord
             word={words[card]}
             accessToken={props.accessToken}
-            onAddToDifficult={addToDifficult}
             color={props.color}
           />
         )}
@@ -106,7 +98,6 @@ function TextBookWordsContainer(props: StandardComponentProps) {
             word={null}
             accessToken={props.accessToken}
             onDelete={onDelete}
-            onAddToDifficult={addToDifficult}
             color={props.color}
           />
         )}
