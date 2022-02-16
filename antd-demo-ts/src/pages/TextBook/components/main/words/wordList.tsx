@@ -6,33 +6,27 @@ export interface StandardComponentProps {
   wordId: string | null;
   onClick: any;
   id: any;
+  group: number | boolean;
+  color: string;
 }
-let arrActiveBtn: Array<HTMLElement> = [];
-const onClick = (e: React.MouseEvent) => {
-  arrActiveBtn.forEach((el) => {
-    el.classList.remove('active');
-  });
-  const target = e.currentTarget as HTMLElement;
-  arrActiveBtn.push(target);
-  target.classList.add('active');
-};
 
-/*function addToDifficult(e: MouseEvent) {
-  let target = e.currentTarget;
-  let btn = document.getElementById('add-to-hard');
+function addToDifficult(e: MouseEvent) {
+  const target = e.currentTarget;
+  const btn = document.getElementById('add-to-hard');
   btn?.addEventListener('click', () => {
     if (!target.classList.contains('learned')) {
       target.classList.add('difficult');
     }
   });
-}*/
+}
 
-/*function addToLearned(data: any) {
-  let btn = document.getElementById('delete-word');
+function addToLearned(e: MouseEvent) {
+  const target = e.currentTarget;
+  const btn = document.getElementById('delete-word');
   btn?.addEventListener('click', () => {
-    data.classList.add('learned');
+    target.classList.add('learned');
   });
-}*/
+}
 
 function TextBookWordList(props: StandardComponentProps) {
   const [word, setWord] = useState(props.word);
@@ -51,14 +45,32 @@ function TextBookWordList(props: StandardComponentProps) {
     return null;
   }
 
+  const arrActiveBtn: Array<HTMLElement> = [];
+  const showActive = (e: React.MouseEvent) => {
+    document
+      .getElementsByClassName(`active-${props.color}`)[0]
+      .classList.remove(`active-${props.color}`);
+    arrActiveBtn.forEach((el) => {
+      el.classList.remove('active');
+    });
+    const target = e.currentTarget as HTMLElement;
+    arrActiveBtn.push(target);
+    target.classList.add(`active-${props.color}`);
+  };
   return (
-    <div className='text__book_word_wrapper' id={props.id} onClick={onClick}>
+    <div className='text__book_word_wrapper'>
       <div
-        className='text__book_word'
+        className={
+          props.id !== 0
+            ? 'text__book_word'
+            : `text__book_word active-${props.color}`
+        }
         id={props.id}
         onClick={(e) => {
           props.onClick(props.id);
-          //addToDifficult(e);
+          showActive(e);
+          addToDifficult(e);
+          addToLearned(e);
         }}
       >
         <p>{word.word}</p>

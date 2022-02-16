@@ -73,7 +73,7 @@
 .text_book__word_actions button {
   border-radius: 50px;
   border: none;
-  background-color: rgba(84, 105, 223, 0.589);
+  /*background-color: rgba(84, 105, 223, 0.589);*/
   padding: 3px 9px;
   font-size: 16px;
   text-transform: uppercase;
@@ -91,12 +91,12 @@
 .difficult {
 }
 .difficult::after {
-  content: '\255D';
+  content: ' \214F';
   color: #ffc53d;
   position: absolute;
-  top: 55%;
+  top: -18%;
   right: -12px;
-  font-size: 70px;
+  font-size: 60px;
 }
 
 .learned {
@@ -125,4 +125,25 @@
   cursor: pointer;
   width: 100%;
   margin-top: 10px;
+}
+.green {
+  background-color: rgba(8, 187, 133, 0.904);
+}
+.yellow {
+  background-color: #ffc53d;
+}
+.blue {
+  background-color: rgb(86, 128, 243);
+}
+.pink {
+  background: rgb(243, 106, 129);
+}
+.violet {
+  background: rgb(188, 106, 243);
+}
+.aqua {
+  background: rgb(106, 222, 243);
+}
+.grey {
+  background: rgb(191, 208, 211);
 }

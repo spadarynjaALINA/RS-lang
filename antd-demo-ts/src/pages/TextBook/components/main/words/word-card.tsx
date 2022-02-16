@@ -25,6 +25,8 @@ export interface CardComponentProps {
   };
   accessToken: any;
   onDelete: any;
+  onAddToDifficult: any;
+  color: string;
 }
 
 function TextBookWord(props: CardComponentProps | any) {
@@ -43,8 +45,7 @@ function TextBookWord(props: CardComponentProps | any) {
 
   if (props === undefined) throw new Error('error');
 
-  let audio: HTMLAudioElement;
-  audio = new Audio();
+  const audio: HTMLAudioElement = new Audio();
   function playAudio() {
     if (!audio.paused) {
       audio.pause();
@@ -85,8 +86,10 @@ associative picture'
         {props.accessToken && (
           <button
             id='add-to-hard'
+            className={props.color}
             onClick={() => {
-              createHardUserWord(localStorage.getItem('userId'), props.word.id);
+              //createHardUserWord(localStorage.getItem('userId'), props.word.id);
+              props.onAddToDifficult(props.word.id);
             }}
           >
             + в сложные слова
@@ -95,6 +98,7 @@ associative picture'
         {props.accessToken && (
           <button
             id='delete-word'
+            className={props.color}
             onClick={() => {
               getUserWord(localStorage.getItem('userId'));
             }}
@@ -102,10 +106,11 @@ associative picture'
             {!props.wordID && (
               <span
                 onClick={() => {
-                  createHardUserWord(
-                    localStorage.getItem('userId'),
-                    props.word.id
-                  );
+                  //createHardUserWord(
+                  // localStorage.getItem('userId'),
+                  //props.word.id
+                  //);
+                  props.onAddToDifficult(props.word.id);
                 }}
               >
                 Слово изучено
