@@ -1,10 +1,12 @@
 .game-field {
-  width: 100%;
-  height: 600px;
+  width: 1000px;
+  height: 400px;
+  color: white;
+  position: relative;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  /* background-color: rgb(98, 96, 226); */
+  justify-content: space-around;
+  align-items: center;
 }
 
 .fa-stopwatch {
@@ -16,9 +18,17 @@
   transform: scale(1.5);
 }
 
+.game-timer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+}
+
 .game-seconds {
   color: white;
-  font-size: 50px;
+  font-size: 40px;
+  display: block;
+  white-space: nowrap;
 }
 
 .game-word-translate,
@@ -28,12 +38,16 @@
   flex-direction: row;
   justify-content: center;
   padding: 10px;
+  word-wrap: break-word;
 }
 
 .game-word,
 .game-translate {
-color: white;
-font-size: 60px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  color: white;
+  font-size: 50px;
 }
 
 .game-buttons {
@@ -70,10 +84,23 @@ font-size: 60px;
   color: white;
 }
 
+.game-points-per-word {
+  margin-bottom: 10px;
+}
+
 .game-checkmark {
   color: rgb(0, 255, 13);
 }
 
 .game-checkmark-grey {
   color: grey;
+}
+@media (max-width: 800px) { 
+  .game-field {
+    width: 600px;
+  }
+  .game-word,
+  .game-translate {
+    font-size: 30px;
+  }
 }

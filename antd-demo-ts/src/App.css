@@ -34,8 +34,8 @@
 
 .GamesWrap,
 .StatisticWrap {
-  margin-top: 100px;
-  width: 85%;
+  margin-top: 0px;
+  width: 60%;
   background: #fff4f4;
   border-radius: 15px;
   display: flex;
