@@ -1,20 +1,23 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import StartPageGameSprint from './components/main/StartPageGameSprint';
 import GameField from './components/main/GameField';
 
 function SprintGame() {
-
-  // useEffect(() => {
-  //   localStorage.setItem('textbook', '');
-  // }, [])
-
   const [isStartPage, setIsStartPage] = useState(true);
   const [group, setGroup] = useState(0);
+  const [page, setPage] = useState(0);
   const [isActive, setIsActive] = useState(false);
-  console.log(group);
+  useEffect(() => {
+    if (localStorage.getItem('textbook')) {
+      setPage(+(localStorage.getItem('page') as string));
+      setGroup(+(localStorage.getItem('group') as string));
+    } else {
+      setPage(30);
+    }
+  }, []);
+
   return (
-    <div>
-      <div className='GamesWrap'>
+    <div className='GamesWrap'>
       {
         isStartPage ?
           <StartPageGameSprint
@@ -24,10 +27,11 @@ function SprintGame() {
           />
           : <GameField
             group={group}
-            isActive={ isActive }/>
+            page={page}
+            isActive={isActive} />
       }
-    </div></div>
-  )
+    </div>
+  );
 }
 
 export default SprintGame;
