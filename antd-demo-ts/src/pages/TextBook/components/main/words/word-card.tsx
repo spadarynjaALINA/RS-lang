@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import './word-card.css';
 import {
-  createUserWord,
+  createHardUserWord,
+  createLearnedUserWord,
   getUserWord,
 } from '../../../../../services/APIService';
 import { getOneWord } from '../../../../../services/APIService';
@@ -25,10 +26,12 @@ export interface CardComponentProps {
   };
   accessToken: any;
   onDelete: any;
+  color: string;
 }
 
 function TextBookWord(props: CardComponentProps | any) {
   const [word, setWord] = useState(props.word);
+  const [countGuess, setCountGuess] = useState(0);
 
   useEffect(() => {
     setWord(props.word);
@@ -42,8 +45,7 @@ function TextBookWord(props: CardComponentProps | any) {
 
   if (props === undefined) throw new Error('error');
 
-  let audio: HTMLAudioElement;
-  audio = new Audio();
+  const audio: HTMLAudioElement = new Audio();
   function playAudio() {
     if (!audio.paused) {
       audio.pause();
@@ -51,7 +53,7 @@ function TextBookWord(props: CardComponentProps | any) {
     }
     const srcs = [word?.audio, word?.audioMeaning, word?.audioExample];
     let current = 0;
-    // if(!audio.paused) audio.pause();
+    if (!audio.paused) audio.pause();
     audio.src = `https://rs-lang-app-rss.herokuapp.com/${srcs[current]}`;
     audio.play();
     audio.onended = function () {
@@ -63,6 +65,18 @@ function TextBookWord(props: CardComponentProps | any) {
       audio.play();
     };
   }
+
+  const addToDifficult = (wordId: any) => {
+    createHardUserWord(localStorage.getItem('userId'), wordId).then(() => {
+      setWord(Object.assign(word, { difficult: true }));
+    });
+  };
+
+  const addToLearned = (wordId: any) => {
+    createLearnedUserWord(localStorage.getItem('userId'), wordId).then(() => {
+      setWord(Object.assign(word, { learned: true }));
+    });
+  };
 
   return (
     <div className='text_book__word'>
@@ -77,15 +91,16 @@ associative picture'
       <div className='text_book__word-transcription-audio-button'>
         <p className='text_book__word-transcription'>{word?.transcription}</p>
         <div className='text_book__word-audio-button' onClick={playAudio}>
-          <i className='fas fa-volume-up'></i>
+          <i className='fas fa-volume-up ${props.color} '></i>
         </div>
       </div>
       <div className='text_book__word_actions'>
         {props.accessToken && (
           <button
             id='add-to-hard'
+            className={props.color}
             onClick={() => {
-              createUserWord(localStorage.getItem('userId'), props.word.id);
+              addToDifficult(props.word.id);
             }}
           >
             + в сложные слова
@@ -94,11 +109,20 @@ associative picture'
         {props.accessToken && (
           <button
             id='delete-word'
+            className={props.color}
             onClick={() => {
               getUserWord(localStorage.getItem('userId'));
             }}
           >
-            <b>{!props.wordID && 'Слово изучено'}</b>
+            {!props.wordID && (
+              <span
+                onClick={() => {
+                  addToLearned(props.word.id);
+                }}
+              >
+                Слово изучено
+              </span>
+            )}
             {props.wordID && (
               <span
                 onClick={() => {
@@ -127,6 +151,17 @@ associative picture'
       <p className='text_book__word-text-example-translate'>
         {word?.textExampleTranslate}
       </p>
+      <p className='text_book__word-title'>Ответы в играх: </p>
+      <div className='statistics'>
+        <div>
+          <p className={props.color}> "Аудиовызов"</p>
+          <b>{countGuess}</b>
+        </div>
+        <div>
+          <p className={props.color}> "Спринт"</p>
+          <b>{countGuess}</b>
+        </div>
+      </div>
     </div>
   );
 }

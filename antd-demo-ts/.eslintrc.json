@@ -47,9 +47,7 @@
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
-    "project": [
-      "./tsconfig.json"
-    ],
+    "project": ["./tsconfig.json"],
     "createDefaultProgram": true,
     "ecmaVersion": 2020,
     "sourceType": "module",
@@ -59,31 +57,16 @@
     },
     "requireConfigFile": false
   },
-  "plugins": [
-    "@typescript-eslint"
-  ],
+  "plugins": ["@typescript-eslint"],
   "rules": {
     "lines-between-class-members": "off",
     "class-methods-use-this": "off",
     "@typescript-eslint/no-explicit-any": "off",
     "no-plusplus": "off",
     "no-console": "warn",
-    "import/no-extraneous-dependencies": [
-      "off",
-      {
-        "devDependencies": [
-          "**/*.test.tsx",
-          "**/*.spec.js"
-        ]
-      }
-    ],
+    "import/no-extraneous-dependencies": ["off", { "devDependencies": ["**/*.test.tsx", "**/*.spec.js"] }],
     "import/extensions": 0,
-    "max-len": [
-      "warn",
-      {
-        "code": 12000
-      }
-    ],
+    "max-len": ["warn", { "code": 12000 }],
     "indent": [
       "warn",
       2,
@@ -106,17 +89,13 @@
       }
     ]
   },
-  "ignorePatterns": [
-    "*config.js"
-  ],
+  "ignorePatterns": ["*config.js"],
   "settings": {
     "import/resolver": {
       "node": {
-        "extensions": [
-          ".js",
-          ".tsx"
-        ]
+        "extensions": [".js", ".tsx"]
       }
     }
   }
 }
+

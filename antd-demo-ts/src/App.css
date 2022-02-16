@@ -284,8 +284,12 @@ i {
   padding: 3px;
   width: 3%;
 }
-.ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-ellipsis,
-.ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-ellipsis {
+.ant-pagination-jump-prev
+  .ant-pagination-item-container
+  .ant-pagination-item-ellipsis,
+.ant-pagination-jump-next
+  .ant-pagination-item-container
+  .ant-pagination-item-ellipsis {
   position: absolute;
   top: 29%;
 }
@@ -296,51 +300,14 @@ i {
 
   font-weight: 900;
 }
-.active-word,
-.text__book_word:hover {
-  background: #ffc53d;
-  cursor: pointer;
-}
+
 .text__book_word_translate {
   font-size: 23px;
   font-weight: 400;
 }
-.text_book__level_card:hover .green,
-.text_book__level_card:active .green,
-.text_book__level_card .green .active {
-  background: rgb(34, 202, 90);
-}
-.text_book__level_card:hover .pink,
-.text_book__level_card:active .pink,
-.text_book__level_card .pink .active {
-  background: rgb(243, 106, 129);
-}
-
-.text_book__level_card:hover .violet,
-.text_book__level_card:active .violet,
-.text_book__level_card .violet .active {
-  background: rgb(188, 106, 243);
-}
-.text_book__level_card:hover .blue,
-.text_book__level_card:active .blue,
-.active {
-  background: rgb(106, 115, 243);
-}
-.text_book__level_card:hover .yellow,
-.text_book__level_card:active .yellow,
-.active {
-  background: #ffc53d;
-}
-
-.text_book__level_card:hover .aqua,
-.text_book__level_card:active .aqua,
-.text_book__level_card .aqua .active {
-  background: rgb(106, 222, 243);
-}
 
 .text_book__level_card:hover .gray,
-.text_book__level_card:active .gray,
-.text_book__level_card .gray .active {
+.text_book__level_card:active .gray {
   background: rgb(191, 208, 211);
 }
 
@@ -351,4 +318,28 @@ i {
   .text_book__level_card {
     min-width: 480px;
   }
+}
+
+.active-yellow {
+  background-color: #ffc53d;
+}
+.active-green {
+  background-color: rgba(8, 187, 133, 0.904);
+}
+
+.active-blue {
+  background-color: rgb(86, 128, 243);
+}
+
+.active-pink {
+  background: rgb(243, 106, 129);
+}
+.active-violet {
+  background: rgb(188, 106, 243);
+}
+.active-aqua {
+  background: rgb(106, 222, 243);
+}
+.active-grey {
+  background: rgb(191, 208, 211);
 }

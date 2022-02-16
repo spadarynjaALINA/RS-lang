@@ -14,7 +14,7 @@ function TextBookLevelsCard(props: any) {
       onChange={props.onChange}
     >
       <div className='left-part'>{props.description}</div>
-      <div className={`square-part ${props.color} ${props.active}`}></div>
+      <div className='square-part'></div>
 
       <div className='right-part'>{props.level}</div>
     </button>
