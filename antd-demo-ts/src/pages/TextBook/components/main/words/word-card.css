@@ -57,7 +57,7 @@
 .text_book__word-text-example-translate,
 .text_book__word-text-meaning,
 .text_book__word-text-meaning-translate {
-  font-size: 23px;
+  font-size: 20px;
   margin: 0;
   text-align: start;
 }
@@ -112,4 +112,19 @@
   top: 59%;
   right: -1%;
   font-size: 50px;
+}
+.statistics {
+  display: flex;
+}
+.statistics p {
+  border-radius: 50px;
+  border: none;
+  background-color: rgba(84, 105, 223, 0.349);
+  padding: 8px 70px;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+  width: 100%;
+  margin-top: 10px;
 }

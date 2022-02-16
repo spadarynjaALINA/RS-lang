@@ -6,7 +6,6 @@ import { useLogin } from './Login/LoginContext';
 import { useCreateUser } from './CreatUser/CreateUserContext';
 import { useExit } from './Exit/ExitContext';
 
-
 function Authorization(props: any) {
   const { toggleExit } = useExit();
   const { toggleLogin } = useLogin();

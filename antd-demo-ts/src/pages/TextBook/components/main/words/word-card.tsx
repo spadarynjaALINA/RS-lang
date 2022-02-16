@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './word-card.css';
 import {
-  createUserWord,
+  createHardUserWord,
   getUserWord,
 } from '../../../../../services/APIService';
 import { getOneWord } from '../../../../../services/APIService';
@@ -29,6 +29,7 @@ export interface CardComponentProps {
 
 function TextBookWord(props: CardComponentProps | any) {
   const [word, setWord] = useState(props.word);
+  const [countGuess, setCountGuess] = useState(0);
 
   useEffect(() => {
     setWord(props.word);
@@ -85,7 +86,7 @@ associative picture'
           <button
             id='add-to-hard'
             onClick={() => {
-              createUserWord(localStorage.getItem('userId'), props.word.id);
+              createHardUserWord(localStorage.getItem('userId'), props.word.id);
             }}
           >
             + в сложные слова
@@ -98,7 +99,18 @@ associative picture'
               getUserWord(localStorage.getItem('userId'));
             }}
           >
-            <b>{!props.wordID && 'Слово изучено'}</b>
+            {!props.wordID && (
+              <span
+                onClick={() => {
+                  createHardUserWord(
+                    localStorage.getItem('userId'),
+                    props.word.id
+                  );
+                }}
+              >
+                Слово изучено
+              </span>
+            )}
             {props.wordID && (
               <span
                 onClick={() => {
@@ -127,6 +139,17 @@ associative picture'
       <p className='text_book__word-text-example-translate'>
         {word?.textExampleTranslate}
       </p>
+      <p className='text_book__word-title'>Ответы в играх: </p>
+      <div className='statistics'>
+        <div>
+          <p> "Аудиовызов"</p>
+          <b>{countGuess}</b>
+        </div>
+        <div>
+          <p> "Спринт"</p>
+          <b>{countGuess}</b>
+        </div>
+      </div>
     </div>
   );
 }
