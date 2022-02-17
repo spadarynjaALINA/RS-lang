@@ -1,15 +1,15 @@
-import React, { useEffect } from 'react';
+
+import React from 'react';
 import './Start-page.css';
 
 function StartPage() {
-  useEffect(() => {
-    localStorage.setItem('textbook', '');
-  }, []);
+
   return (
     <div className="App-start">
       <div className="App-start__about">
         <p >
           тут что-то будет написано про приложение
+
         </p>
       </div>
      
@@ -20,6 +20,7 @@ function StartPage() {
         </p>
       </div>
     </div>   
+
     
   );
 }

@@ -12,11 +12,13 @@ function StartPageGameSprint(props: any) {
     if (startPage === true) {
       setStartDisable(false);
     }
-  }, []);
+
+  }, [startPage]);
+
   return (
     <div className='game-container'>
       <div className='game-text-container'>
-        <p className='game-title'>Спринт { startPage.toString() }</p>
+        <p className='game-title'>Спринт</p>
         <p className='game-rules'>Спринт - тренировка на скорость. Попробуй угадать как можно больше слов за 30 секунд.</p>
       </div>
       {!startPage ?
@@ -58,7 +60,7 @@ function StartPageGameSprint(props: any) {
             text='C2'
           />
         </div> : <div className='game-level-selector'>
-          <p className='game-rules'> Игра запуститься со словами с текущей страницы </p>
+          <p className='game-rules'> Игра запуститься со словами с текущей страницы, затем добавяться слова с предыдущих страниц. </p>
         </div>}
       <Button type='primary' shape='round' className='game-start-button'
         disabled={startDisable} onClick={() => {

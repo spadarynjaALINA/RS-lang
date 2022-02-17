@@ -22,7 +22,33 @@ function AppTextBook(props: any) {
   useEffect(() => {
     localStorage.setItem('textbook', 'true');
   }, []);
-  
+
+
+  let color = 'yellow';
+  switch (group) {
+    case 0:
+      color = 'yellow';
+      break;
+    case 1:
+      color = 'green';
+      break;
+    case 2:
+      color = 'blue';
+      break;
+    case 3:
+      color = 'pink';
+      break;
+    case 4:
+      color = 'violet';
+      break;
+    case 5:
+      color = 'aqua';
+
+      break;
+    case 6:
+      color = 'grey';
+  }
+
   return (
     <div className='text_book' id='text_book'>
       <TextBookTitle
@@ -31,12 +57,17 @@ function AppTextBook(props: any) {
         text='Уровни сложности слов'
         nameClass='fas fa-brain'
       />
-      <TextBookLevels onClick={setGroup} accessToken={props.accessToken} />
+      <TextBookLevels
+        onClick={setGroup}
+        accessToken={props.accessToken}
+        color={color}
+      />
       <TextBookTitle title='Слова' subtitle='' text='' nameClass='' />
       <TextBookWordsContainer
         page={page}
         group={group}
         accessToken={props.accessToken}
+        color={color}
       />
       <TextBookPagination onClick={setPage} page={page} />
       <TextBookTitle

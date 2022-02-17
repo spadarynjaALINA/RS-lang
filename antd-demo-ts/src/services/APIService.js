@@ -45,11 +45,7 @@ export const loginUser = async (user) => {
   return content.token;
 };
 
-let wordValue = {
-  difficulty: 'weak',
-  optional: { testFieldString: 'test', testFieldBoolean: true },
-};
-export const createUserWord = async (userId, wordId, word = wordValue) => {
+export const createHardUserWord = async (userId, wordId) => {
   const rawResponse = await fetch(
     `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/${wordId}`,
     {
@@ -60,12 +56,29 @@ export const createUserWord = async (userId, wordId, word = wordValue) => {
         Accept: 'application/json',
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify(word),
+
+      body: JSON.stringify({ difficulty: 'hard' }),
     },
   );
   const content = await rawResponse.json();
+};
 
-  console.log(content.wordId, content.id);
+export const createLearnedUserWord = async (userId, wordId) => {
+  const rawResponse = await fetch(
+    `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/${wordId}`,
+    {
+      method: 'POST',
+      withCredentials: true,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+
+      body: JSON.stringify({ difficulty: 'easy' }),
+    },
+  );
+  const content = await rawResponse.json();
 };
 
 export const getUserWord = async (userId) => {
@@ -88,6 +101,55 @@ export const getUserWord = async (userId) => {
 
   return arrOfWordsId;
 };
+
+export const getLearnedWord = async (userId) => {
+  const filterEasy = {
+    '$or': [{ 'userWord.difficulty': 'easy' }, { 'userWord': null }],
+  };
+  const rawResponse = await fetch(
+    `https://rs-lang-app-rss.herokuapp.com/users/${userId}/aggregatedWords?filter=${JSON.stringify(
+      filterEasy,
+    )}`,
+    {
+      method: 'GET',
+      withCredentials: true,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+      },
+    },
+  );
+  const content = await rawResponse.json();
+  //console.log('easy', content);
+};
+getLearnedWord(localStorage.getItem('userId'));
+
+export const getHardWord = async (userId, page, group) => {
+  const filterHard = {
+    '$and': [
+      { page: { page } },
+      { group: { group } },
+      { wordsPerPage: 20 },
+      { 'userWord.difficulty': 'hard' },
+    ],
+  };
+  const rawResponse = await fetch(
+    `https://rs-lang-app-rss.herokuapp.com/users/${userId}/aggregatedWords?filter=${JSON.stringify(
+      filterHard,
+    )}`,
+    {
+      method: 'GET',
+      withCredentials: true,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+      },
+    },
+  );
+  const content = await rawResponse.json();
+  //console.log('hard', content);
+};
+getLearnedWord(localStorage.getItem('userId'));
 
 export const getOneWord = async (wordId) => {
   const rawResponse = await fetch(

@@ -3,30 +3,36 @@ import StartPageGameSprint from './components/main/StartPageGameSprint';
 import GameField from './components/main/GameField';
 
 function SprintGame() {
-
-  // useEffect(() => {
-  //   localStorage.setItem('textbook', '');
-  // }, [])
-
   const [isStartPage, setIsStartPage] = useState(true);
   const [group, setGroup] = useState(0);
+  const [page, setPage] = useState(0);
   const [isActive, setIsActive] = useState(false);
-  console.log(group);
+  useEffect(() => {
+    if (localStorage.getItem('textbook')) {
+      setPage(+(localStorage.getItem('page') as string));
+      setGroup(+(localStorage.getItem('group') as string));
+    } else {
+      setPage(30);
+    }
+  }, []);
+
   return (
-    <div>
-      <div className='GamesWrap'>
-        {
-          isStartPage ?
-            <StartPageGameSprint
-              onClick1={setIsStartPage}
-              onClick2={setGroup}
-              onClick3={setIsActive}
-            />
-            : <GameField
-              group={group}
-              isActive={ isActive }/>
-        }
-      </div></div>
+
+    <div className='GamesWrap'>
+      {
+        isStartPage ?
+          <StartPageGameSprint
+            onClick1={setIsStartPage}
+            onClick2={setGroup}
+            onClick3={setIsActive}
+          />
+          : <GameField
+            group={group}
+            page={page}
+            isActive={isActive} />
+      }
+    </div>
+
   );
 }
 
