@@ -6,14 +6,17 @@ import { Button } from 'antd';
 import ResultsWindow from './ResultsWindow';
 import './game-field.css';
 import { getCheckmarks } from '../../utils/getCheckmarks';
+import { pushGameResults } from '../../utils/pushGameResults';
+// import { getUserNormalWord } from '../../../../services/APIService';
 const right = require('../../../../assets/audio/right.mp3');
 const wrong = require('../../../../assets/audio/wrong.mp3');
 const modalResults = require('../../../../assets/audio/modal_results.mp3');
 
-interface Word {
+export interface Word {
   word: string;
   wordTranslate: string;
   audio: string;
+  id: string;
 }
 
 function GameField(props: { group: number, page: number, isActive: boolean }) {
@@ -79,6 +82,7 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
       setShowModal(true);
       const audioShowModal = new Audio(modalResults);
       audioShowModal.play();
+      pushGameResults(correctAnswers, wrongAnswers);
     }
     return () => clearInterval(interval);
   }, [props.isActive, seconds]);
@@ -113,6 +117,7 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
         word: words[randomWord]?.word,
         audio: words[randomWord]?.audio,
         wordTranslate: words[randomWord]?.wordTranslate,
+        id: words[randomWord]?.id,
       }]);
       setTotalScore(totalScore + currentPoints);
       setCountOfCorrectAnswers(countOfCorrectAnswers + 1);
@@ -137,6 +142,7 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
         word: words[randomWord]?.word,
         audio: words[randomWord]?.audio,
         wordTranslate: words[randomWord]?.wordTranslate,
+        id: words[randomWord]?.id,
       }]);
       setCountOfCorrectAnswers(0);
       setCurrentPoints(10);
