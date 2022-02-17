@@ -1,10 +1,11 @@
-import { MouseEvent, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { getOneWord } from '../../../../../services/APIService';
+import { CardComponentProps } from './word-card';
 
 export interface StandardComponentProps {
   setActive: any;
   active: any;
-  word: any | null;
+  word: CardComponentProps | null;
   wordId: string | null;
   onClick: any;
   id: any;

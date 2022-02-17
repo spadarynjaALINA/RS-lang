@@ -12,10 +12,8 @@ export interface CardComponentProps {
     audio: string;
     audioExample: string;
     audioMeaning: string;
-    // group: number;
     id: any;
     image: string;
-    // page: number;
     textExample: string;
     textExampleTranslate: string;
     textMeaning: string;
@@ -27,6 +25,9 @@ export interface CardComponentProps {
   accessToken: any;
   onDelete: any;
   color: string;
+  learned: boolean;
+  difficult: boolean;
+  wordTranslate: string;
 }
 
 function TextBookWord(props: CardComponentProps | any) {
@@ -44,7 +45,6 @@ function TextBookWord(props: CardComponentProps | any) {
   }, [props.wordID]);
 
   if (props === undefined) throw new Error('error');
-
 
   const audio: HTMLAudioElement = new Audio();
 

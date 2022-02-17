@@ -22,7 +22,6 @@ function AppTextBook(props: any) {
     localStorage.setItem('textbook', 'true');
   }, []);
 
-
   let color = 'yellow';
   switch (group) {
     case 0:
@@ -68,14 +67,16 @@ function AppTextBook(props: any) {
         accessToken={props.accessToken}
         color={color}
       />
-      <TextBookPagination onClick={setPage} page={page} />
-      <TextBookTitle
-        title='Игры'
-        subtitle=''
-        text='Закрепи новые знания с помощью увлекательных игр'
-        nameClass=''
-      />
-      <TextBookGameArea />
+      {group !== 6 && <TextBookPagination onClick={setPage} page={page} />}
+      {group !== 6 && (
+        <TextBookTitle
+          title='Игры'
+          subtitle=''
+          text='Закрепи новые знания с помощью увлекательных игр'
+          nameClass=''
+        />
+      )}
+      {group !== 6 && <TextBookGameArea />}
     </div>
   );
 }

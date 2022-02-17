@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import TextBookWord from './word-card';
+import TextBookWord, { CardComponentProps } from './word-card';
 import { getWords } from '../../../../../handlers';
 import TextBookWordList from './wordList';
 import {
@@ -8,11 +8,6 @@ import {
   getHardWord,
 } from '../../../../../services/APIService';
 
-export interface Word {
-  word: string;
-  id: string;
-  wordTranslate: string;
-}
 export interface StandardComponentProps {
   page: number;
   group: number;
@@ -40,8 +35,6 @@ function TextBookWordsContainer(props: StandardComponentProps) {
         setWordsId([]);
       });
     } else {
-
-
       getUserWord(localStorage.getItem('userId')).then((word: any) => {
         setWordsId(word);
 
@@ -65,7 +58,7 @@ function TextBookWordsContainer(props: StandardComponentProps) {
   return (
     <div className='text__book_word-container'>
       <div className='text__book_word-greed'>
-        {words.map((word: Word, i) => (
+        {words.map((word: CardComponentProps, i) => (
           <TextBookWordList
             id={i}
             key={i}
