@@ -25,37 +25,47 @@ function Statistic() {
 }
 function App() {
   const [accessToken, setAccessToken] = useState(localStorage.getItem('token'));
-
+  let footer = true;
   return (
     <Router>
+
       <div className="App">
-        {/* accessToken && <h1>WE ARE AUTH!!!!!!!!!</h1> */}
+
         <Header onLogin={setAccessToken} accessToken={accessToken} />
         <main className="App-main">
           <Switch>
             <Route path="/Учебник">
               <TextBook accessToken={accessToken} />
+              {footer = true}
             </Route>
-            <Route path="/Мини-игры/Аудиовызов">
-              <AudioCallGame />
+            <Route path='/Мини-игры/Аудиовызов'>
+              <AudioCallGame></AudioCallGame>
+              {footer = false}
             </Route>
-            <Route path="/Мини-игры/Спринт">
+            <Route path='/Мини-игры/Спринт'>
+              {footer = false}
               <SprintGame />
+              {footer = true}
             </Route>
+            <Route path='/Мини-игры'>
+              <Games></Games>
+              {footer = true}
+            </Route>              
+            <Route path='/Статистика'>
 
-            <Route path="/Мини-игры">
-              <Games />
-            </Route>
-
-            <Route path="/Статистика">
+ 
               <Statistic />
+              {footer = true}
             </Route>
-            <Route path="/">
-              <StartPage />
+
+            <Route path='/'>
+              <StartPage />  
+              {footer = true}
             </Route>
-          </Switch>
+          </Switch>          
         </main>
-        <Footer />
+        {footer ? <Footer></Footer> : <></>} 
+
       </div>
     </Router>
   );
