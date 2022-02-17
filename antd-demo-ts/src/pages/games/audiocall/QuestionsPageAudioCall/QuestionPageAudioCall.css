@@ -4,3 +4,15 @@
 .fa-volume-up {
   cursor: pointer;
 }
+.audiocall-modal {
+  position: absolute;
+  top: 120px;
+}
+#green {
+  border-color: rgb(18, 240, 25);
+  background: 'green';
+}
+#black {
+  border-color: rgb(0, 0, 0);
+  background: 'green';
+}

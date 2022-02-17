@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { Button } from 'antd';
 import React, { useState, useEffect, useMemo } from 'react';
+import { useNavigate } from 'react-router';
 
 import { getWords } from '../../../../handlers';
 import { QuestionButton } from '../QuestionBtn/QuestionBtn';
@@ -13,23 +14,43 @@ interface Word {
   wordTranslate: string;
   audio: string;
 }
+
+
 export function QuestionsPageAudioCall(props: { group: number, isActive: boolean }) {
+ 
   const [words, setWords] = useState([] as Word[]);
-  const [randomWord, setRandomWord] = useState(0);
-  const [randomWord1, setRandomWord1] = useState(1);
-  const [randomWord2, setRandomWord2] = useState(2);
-  const [randomWord3, setRandomWord3] = useState(3);
-  const [randomWord4, setRandomWord4] = useState(4);
   const [showWord, setShowWord] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [totalScore, setTotalScore] = useState(0);
   const [usedWords, setUsedWords] = useState<number[]>([]);
   const [btnWords, setBtnWords] = useState([] as number[]);
   const [getSort, setSort] = useState(true);
+  const [countQuestions, setCountQuestions] = useState(1);
+  const [wronArr, setWronArr] = useState([] as number[]);
+  const [rightArr, setRightArr] = useState([] as number[]);
+
+  if (countQuestions === 11) {
+    setShowModal(true);
+    setCountQuestions(0);
+  }
+  
   const arr0 = [0, 1, 2, 3, 4];
   const arr1 = useMemo(() => { return arr0.sort(() => Math.random() - .5); }, [getSort]);
   const btnArr: number[] = [];
-
+  const stylesRight = {
+    borderColor: 'green',
+    background: 'green',
+  };
+  const stylesWron = {
+    borderColor: 'red', 
+    background: 'red',
+  };
+  const styleQuestion = {
+    borderColor: 'black', 
+    background: 'transparent',
+  };
+  const [answerStyle, setAnswerStyle] = useState();
+  console.log(answerStyle, 'стейт без значения');
   useEffect(() => {         
     const arr = [];    
     for (let i = 1; i <= 30; i++) {
@@ -56,7 +77,7 @@ export function QuestionsPageAudioCall(props: { group: number, isActive: boolean
      
     });    
   }, []); 
-  if (words.length){
+  if (words.length && countQuestions < 11){
     const timer = setTimeout(() => {
       const word = btnWords[0];
       playAudio(word);
@@ -72,7 +93,7 @@ export function QuestionsPageAudioCall(props: { group: number, isActive: boolean
   
   const toggle = () => setShowModal(prev => !prev);
   const audio: HTMLAudioElement = new Audio(); 
-  
+ 
   
   function playAudio(word: number ) {    
     if (!audio.paused) {
@@ -86,63 +107,66 @@ export function QuestionsPageAudioCall(props: { group: number, isActive: boolean
   }
   
   function nextQuestion() {  
+    if (countQuestions === 10) setWords([]);
+    
     let random;
     do {
       random = getRandomNum(0, words.length);
-    } while (usedWords.includes(random));    
-      
-   
+    } while (usedWords.includes(random));  
     btnArr.push(random);
 
     const getRandom1 = () => {     
-      random = getRandomNum(0, words.length);       
-      setRandomWord1(random); 
+      random = getRandomNum(0, words.length);  
       while (usedWords.includes(random) && btnArr.includes(random)) {     
         const a = Math.floor(Math.random() * (words.length - 1));
-        random = a;
-         
+        random = a;         
       }      
-       
-      
       btnArr.push(random);
     };
+
     const getRandom2 = () => {     
-      random = getRandomNum(0, words.length);       
-      setRandomWord1(random); 
+      random = getRandomNum(0, words.length);  
       while (usedWords.includes(random) && btnArr.includes(random)) {     
         const a = Math.floor(Math.random() * (words.length - 1));
-        random = a;
-        
+        random = a;        
       }       
       btnArr.push(random);
     };
+
     const getRandom3 = () => {     
-      random = getRandomNum(0, words.length);       
-      setRandomWord3(random); 
+      random = getRandomNum(0, words.length);      
       while (usedWords.includes(random) && btnArr.includes(random)) {     
         const a = Math.floor(Math.random() * (words.length - 1));
         random = a;
-      }      
-         
+      }           
       btnArr.push(random);
     };
+
     const getRandom4 = () => {     
       random = getRandomNum(0, words.length);       
-      
       while (usedWords.includes(random) && btnArr.includes(random)) {     
         const a = Math.floor(Math.random() * (words.length - 1));
         random = a;
       }                
       btnArr.push(random);
     };
+
     getRandom1();
     getRandom2();
     getRandom3();
     getRandom4();   
     setBtnWords(btnArr);
     console.log(btnArr);
-  
+    
   }
+  const setColorRight = ()=> {
+    [...document.querySelectorAll('.level-button')].forEach((i) => {
+      if (i.innerHTML.slice(8) === `${words[btnWords[0]]?.word}</span>`) { i.id = 'green'; } else {
+        i.id = 'black';
+      }
+      console.log(i.innerHTML.slice(8), `${words[btnWords[0]]?.word}</span>`);
+    });
+  };
   
   return (
     <div  className = 'audioCall-wrap' >
@@ -152,25 +176,56 @@ export function QuestionsPageAudioCall(props: { group: number, isActive: boolean
         {showWord ?  <div>{`${words[btnWords[0]]?.word}`}</div> : <></>}
       </div>
       {words.length ? <div className='question-btn-wrap'>
-        <Button ghost shape="round" className="level-button"
+
+        <Button ghost shape="round" className="level-button answer1"
           onClick={() => {
-            if (arr1[0] === 0) console.log('true');
+            setColorRight();
+            // if (arr1[0] === 0) {  }
+            
             setShowWord(true);
-          }
-      
+          }      
           }>{`1 ${words[btnWords[arr1[0]]]?.word}`}</Button>
-        <QuestionButton text={`2 ${words[btnWords[arr1[1]]]?.word}`} show={toggle}></QuestionButton>
+        
+        <Button style={answerStyle} ghost shape="round" className="level-button answer2"
+          onClick={() => {
+            // if (arr1[1] === 0) { setAnswerStyle(stylesRight); } else {
+            //   setAnswerStyle(stylesWron);
+            // }
+            setColorRight();
+            setShowWord(true);
+          }      
+          }>{`2 ${words[btnWords[arr1[1]]]?.word}`}</Button>
+        
         <QuestionButton text={`3 ${words[btnWords[arr1[2]]]?.word}`} hide={setShowModal}></QuestionButton>
         <QuestionButton text={`4 ${words[btnWords[arr1[3]]]?.word}`} hide={setShowModal}></QuestionButton>
         <QuestionButton text={`5 ${words[btnWords[arr1[4]]]?.word}`} show={setShowModal}></QuestionButton>
       </div> : <></>}
      
-      {showModal ? <div className='audioCall-wrap'>это модальное окно</div> : <div></div>} 
-      <button onClick={() => {
-        setShowWord(false);
-        nextQuestion();
-        setSort(prev=>!prev);
-      }}>Я не знаю правильный ответ</button>
+      {showModal ? <div className='audioCall-wrap audiocall-modal'>Здесь будут результаты
+        <Button href='/Мини-игры/Аудиовызов' onClick={() => {
+          console.log('back');
+        }}>назад</Button> <Button href='/' onClick={() => {
+          console.log('back');
+        }}>главная</Button></div> : <div></div>} {showWord ? 
+        <button onClick={() => {
+          
+          if (countQuestions < 11) {
+            setCountQuestions(prev => prev + 1);
+            setShowWord(false);
+            nextQuestion();
+            setSort(prev => !prev);
+            // setAnswerStyle(styleQuestion);
+          }
+          console.log(countQuestions);
+        }}>Следующий вопрос</button> : <button onClick={() => {
+          if (countQuestions < 11) {
+            setCountQuestions(prev => prev + 1);
+            setShowWord(false);
+            nextQuestion();
+            setSort(prev => !prev);
+            // setAnswerStyle(styleQuestion);
+          }
+        }}>Я не знаю правильный ответ</button>}
     </div>
   );
  
