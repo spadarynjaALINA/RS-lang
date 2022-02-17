@@ -1,4 +1,3 @@
-import React from 'react';
 import TextBookLevelsCard from './level-card';
 
 function TextBookLevels(props: any) {
@@ -9,7 +8,7 @@ function TextBookLevels(props: any) {
         level='A1'
         description='Easy'
         color='yellow'
-        onClick={(e: React.MouseEvent) => {
+        onClick={() => {
           props.onClick(0);
         }}
       />

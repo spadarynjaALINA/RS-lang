@@ -11,36 +11,6 @@ export interface StandardComponentProps {
   group: number | boolean;
   color: string;
 }
-const arrActiveBtn: Array<HTMLElement> = [];
-const onClick = (e: React.MouseEvent) => {
-  arrActiveBtn.forEach((el) => {
-    el.classList.remove('active');
-  });
-  const target = e.currentTarget as HTMLElement;
-  arrActiveBtn.push(target);
-  target.classList.add('active');
-};
-
-
-/*
-function addToDifficult(e: MouseEvent) {
-  const target = e.currentTarget;
-  const btn = document.getElementById('add-to-hard');
-  btn?.addEventListener('click', () => {
-    if (!target.classList.contains('learned')) {
-      target.classList.add('difficult');
-    }
-  });
-}
-
-function addToLearned(e: MouseEvent) {
-  const target = e.currentTarget;
-  const btn = document.getElementById('delete-word');
-  btn?.addEventListener('click', () => {
-    target.classList.add('learned');
-  });
-}
-*/
 
 function TextBookWordList(props: StandardComponentProps) {
   const [word, setWord] = useState(props.word);
