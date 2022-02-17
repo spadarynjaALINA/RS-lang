@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import StartPageGameSprint from './components/main/StartPageGameSprint';
 import GameField from './components/main/GameField';
 
@@ -15,19 +15,19 @@ function SprintGame() {
   return (
     <div>
       <div className='GamesWrap'>
-      {
-        isStartPage ?
-          <StartPageGameSprint
-            onClick1={setIsStartPage}
-            onClick2={setGroup}
-            onClick3={setIsActive}
-          />
-          : <GameField
-            group={group}
-            isActive={ isActive }/>
-      }
-    </div></div>
-  )
+        {
+          isStartPage ?
+            <StartPageGameSprint
+              onClick1={setIsStartPage}
+              onClick2={setGroup}
+              onClick3={setIsActive}
+            />
+            : <GameField
+              group={group}
+              isActive={ isActive }/>
+        }
+      </div></div>
+  );
 }
 
 export default SprintGame;

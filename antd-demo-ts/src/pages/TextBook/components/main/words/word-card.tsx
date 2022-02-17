@@ -42,17 +42,19 @@ function TextBookWord(props: CardComponentProps | any) {
 
   if (props === undefined) throw new Error('error');
 
-  let audio: HTMLAudioElement;
-  audio = new Audio();
+  const  audio: HTMLAudioElement = new Audio();
+ 
   function playAudio() {
     if (!audio.paused) {
       audio.pause();
       return;
     }
     const srcs = [word?.audio, word?.audioMeaning, word?.audioExample];
+    console.log(srcs);
     let current = 0;
     // if(!audio.paused) audio.pause();
     audio.src = `https://rs-lang-app-rss.herokuapp.com/${srcs[current]}`;
+    console.log(audio.src);
     audio.play();
     audio.onended = function () {
       current++;

@@ -15,8 +15,8 @@ function ResultsWindow(props: {
 }) {
 
   function playAudio(src: string) {
-    let audio: HTMLAudioElement;
-    audio = new Audio();
+    const audio: HTMLAudioElement = new Audio();
+    
     if (!audio.paused) {
       return;
     }
@@ -31,37 +31,37 @@ function ResultsWindow(props: {
       <h3>Ошибки <span className='title-count-wrong'> { props.wrongAnswers.length } </span></h3>
       <ul className='game-results'>
         {props.wrongAnswers.map(item => {
-            return <li className='wrong-answer' key={item.word}>
-              <div className="game-sound-button">
-                <i className='fas fa-volume-up sound-icon' onClick={() => {
-                  playAudio(item.audio);
+          return <li className='wrong-answer' key={item.word}>
+            <div className="game-sound-button">
+              <i className='fas fa-volume-up sound-icon' onClick={() => {
+                playAudio(item.audio);
               }}></i>
-              </div>
-              <span >{item.word}</span>
-              <span className='game-result-translate'> - {item.wordTranslate}</span>
-            </li>
+            </div>
+            <span >{item.word}</span>
+            <span className='game-result-translate'> - {item.wordTranslate}</span>
+          </li>;
         })}
       </ul>
       <h3>Правильные ответы <span className='title-count-correct'> { props.correctAnswers.length } </span></h3>
       <ul className='game-results'>
         {props.correctAnswers.map(item => {
-            return <li className='correct-answer' key={item.word}>
+          return <li className='correct-answer' key={item.word}>
             <div className="game-sound-button">
               <i className='fas fa-volume-up sound-icon' onClick={() => {
                 playAudio(item.audio);
-            }}></i>
+              }}></i>
             </div>
             <span >{item.word}</span>
-              <span className='game-result-translate'> - {item.wordTranslate}</span>
-          </li>
+            <span className='game-result-translate'> - {item.wordTranslate}</span>
+          </li>;
         })}
       </ul>
       <div>
-      <Button href='/Учебник'>В учебник</Button>
-      <Button href='/'>На главную</Button>
+        <Button href='/Учебник'>В учебник</Button>
+        <Button href='/'>На главную</Button>
       </div>
     </div>
-  )
+  );
 }
 
 export default ResultsWindow;

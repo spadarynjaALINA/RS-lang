@@ -1,5 +1,5 @@
 import './game-start-page.css';
-import { Button } from 'antd'
+import { Button } from 'antd';
 import { useState, useEffect } from 'react';
 import { LevelButton } from './levelButton';
 
@@ -12,7 +12,7 @@ function StartPageGameSprint(props: any) {
     if (startPage === true) {
       setStartDisable(false);
     }
-  },[]);
+  }, []);
   return (
     <div className='game-container'>
       <div className='game-text-container'>

@@ -1,3 +1,5 @@
+
+/* eslint-disable @typescript-eslint/no-use-before-define */
 import React, { useState, useEffect, Component } from 'react';
 import { getWords } from '../../../../handlers';
 import { getRandomNum } from '../../utils/getRandomNum';
@@ -5,17 +7,19 @@ import { Button } from 'antd';
 import ResultsWindow from './ResultsWindow';
 import './game-field.css';
 import { getCheckmarks } from '../../utils/getCheckmarks';
-
-const right = require('../../../../assets/audio/right.mp3');
-const wrong = require('../../../../assets/audio/wrong.mp3');
-const modalResults = require('../../../../assets/audio/modal_results.mp3');
+const right =  './../../../../assets/audio/right.mp3';
+const wrong = './../../../assets/audio/wrong.mp3';
+const modalResults = '../../../../assets/audio/modal_results.mp3';
+// const right = require('../../../../assets/audio/right.mp3');
+// const wrong = require('../../../../assets/audio/wrong.mp3');
+// const modalResults = require('../../../../assets/audio/modal_results.mp3');
 interface Word {
   word: string;
   wordTranslate: string;
   audio: string;
 }
 
-function GameField(props: {group: number, isActive: boolean}) {
+function GameField(props: { group: number, isActive: boolean }) {
   const [seconds, setSeconds] = useState(60);
   const [words, setWords] = useState([] as Word[]);
   const [randomWord, setRandomWord] = useState(0);
@@ -31,13 +35,13 @@ function GameField(props: {group: number, isActive: boolean}) {
   useEffect(() => {
     setRandomWord(getRandomNum(0, 599));
     setRandomTranslate(getRandomNum(0, 599));
-    let arr = [];
+    const arr = [];
     for (let i = 1; i <= 30; i++) {
       arr.push(getWords(props.group, i));
     }
     Promise.all(arr).then((data) => {
       setWords(data.flat());
-    })
+    });
   }, []);
 
   useEffect(() => {
@@ -60,7 +64,9 @@ function GameField(props: {group: number, isActive: boolean}) {
 
   const onKeydown = (e: KeyboardEvent) => {
     if (e.code === 'ArrowLeft' && showModal === false) {
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       compare(true);
+      // eslint-disable-next-line @typescript-eslint/no-use-before-define
       nextQuestion();
       console.log('left');
     } else if (e.code === 'ArrowRight' && showModal === false) {
@@ -68,10 +74,10 @@ function GameField(props: {group: number, isActive: boolean}) {
       nextQuestion();
       console.log('right');
     }
-  }
+  };
 
   useEffect(() => {
-      window.addEventListener('keydown', onKeydown);
+    window.addEventListener('keydown', onKeydown);
     return () => {
       window.removeEventListener('keydown', onKeydown);
     };
@@ -89,11 +95,11 @@ function GameField(props: {group: number, isActive: boolean}) {
     } else {
       setRandomTranslate(getRandomNum(0, words.length));
     }
-    console.log(randomWord, randomTranslate)
+    console.log(randomWord, randomTranslate);
   }
 
   function compare(answer: boolean) {
-    setUsedWords([...usedWords, randomWord])
+    setUsedWords([...usedWords, randomWord]);
     const audio = new Audio();
     const timer = document.querySelector<HTMLElement>('.fa-stopwatch');
     if ((randomWord === randomTranslate) === answer) {
@@ -119,7 +125,7 @@ function GameField(props: {group: number, isActive: boolean}) {
       setTimeout(() => {
         timer.style.color = 'white';
         timer.classList.remove('fa-stopwatch-big');
-      }, 300)
+      }, 300);
     } else {
       audio.src = wrong;
       audio.play();
@@ -137,7 +143,7 @@ function GameField(props: {group: number, isActive: boolean}) {
       setTimeout(() => {
         timer.style.color = 'white';
         timer.classList.remove('fa-stopwatch-big');
-      }, 300)
+      }, 300);
     }
   }
 
@@ -171,7 +177,7 @@ function GameField(props: {group: number, isActive: boolean}) {
         }>НЕВЕРНО</Button>
       </div>
       { showModal ? 
-      <ResultsWindow
+        <ResultsWindow
           correctAnswers={correctAnswers}
           wrongAnswers={wrongAnswers}
           score = {totalScore}/>

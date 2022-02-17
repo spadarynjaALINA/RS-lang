@@ -7,7 +7,7 @@ export interface StandardComponentProps {
   onClick: any;
   id: any;
 }
-let arrActiveBtn: Array<HTMLElement> = [];
+const arrActiveBtn: Array<HTMLElement> = [];
 const onClick = (e: React.MouseEvent) => {
   arrActiveBtn.forEach((el) => {
     el.classList.remove('active');

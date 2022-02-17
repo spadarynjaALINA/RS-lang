@@ -17,11 +17,11 @@ function AppTextBook(props: any) {
   useEffect(() => {
     localStorage.setItem('page', page.toString());
     localStorage.setItem('group', group.toString());
-  }, [page, group])
+  }, [page, group]);
 
   useEffect(() => {
     localStorage.setItem('textbook', 'true');
-  }, [])
+  }, []);
   
   return (
     <div className='text_book' id='text_book'>

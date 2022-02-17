@@ -3,7 +3,7 @@ import { getUserWord, getOneWord } from '../../../../../services/APIService';
 
 function TextBookLevels(props: any) {
   console.log(props);
-  let levelA1 = document.getElementsByClassName('active')[0] as HTMLElement;
+  const levelA1 = document.getElementsByClassName('active')[0] as HTMLElement;
   /*let arrActiveBtn: Array<HTMLElement> = [levelA1];
   const onChangeActive = (e: React.MouseEvent) => {
     arrActiveBtn.forEach((el) => {

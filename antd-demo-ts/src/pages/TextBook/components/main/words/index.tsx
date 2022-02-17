@@ -32,7 +32,7 @@ function TextBookWordsContainer(props: StandardComponentProps) {
         setWordsId([]);
       });
     } else {
-      getUserWord(localStorage.getItem('userId')).then((words: any) => {
+      getUserWord(localStorage.getItem('userId')).then((wordses: any) => {
         setWordsId(words);
         setWords([]);
       });
