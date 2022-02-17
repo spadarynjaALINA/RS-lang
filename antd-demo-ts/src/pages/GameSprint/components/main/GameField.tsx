@@ -1,11 +1,14 @@
+
 /* eslint @typescript-eslint/no-var-requires: "off" */
 import React, { useState, useEffect } from 'react';
+
 import { getWords } from '../../../../handlers';
 import { getRandomNum } from '../../utils/getRandomNum';
 import { Button } from 'antd';
 import ResultsWindow from './ResultsWindow';
 import './game-field.css';
 import { getCheckmarks } from '../../utils/getCheckmarks';
+
 const right = require('../../../../assets/audio/right.mp3');
 const wrong = require('../../../../assets/audio/wrong.mp3');
 const modalResults = require('../../../../assets/audio/modal_results.mp3');
@@ -16,8 +19,10 @@ interface Word {
   audio: string;
 }
 
+
 function GameField(props: { group: number, page: number, isActive: boolean }) {
   const [seconds, setSeconds] = useState(30);
+
   const [words, setWords] = useState([] as Word[]);
   const [randomWord, setRandomWord] = useState(getRandomNum(0, 4));
   const [randomTranslate, setRandomTranslate] = useState(getRandomNum(0, 4));
@@ -31,6 +36,7 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
   const [isLastWord, setIsLastWord] = useState(false);
   const [page, setPage] = useState(props.page);
   useEffect(() => {
+
     if (localStorage.getItem('textbook')) {
       (getWords(props.group, page))
         .then((data) => {
@@ -46,6 +52,7 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
         setWords(arrData);
       });
     }
+
   }, []);
 
   useEffect(() => {
@@ -83,6 +90,7 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
     return () => clearInterval(interval);
   }, [props.isActive, seconds]);
 
+
   function nextQuestion() {
     if (!isLastWord) {
       let random;
@@ -97,12 +105,15 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
         setRandomTranslate(getRandomNum(0, words.length - 1));
       }
     }
+
+
   }
 
   function compare(answer: boolean) {
     if (usedWords.length === words.length - 1) {
       setIsLastWord(true);
     }
+
     const audio = new Audio();
     const timer = document.querySelector<HTMLElement>('.fa-stopwatch');
     if ((randomWord === randomTranslate) === answer) {

@@ -28,9 +28,7 @@ function App() {
   let footer = true;
   return (
     <Router>
-
       <div className="App">
-
         <Header onLogin={setAccessToken} accessToken={accessToken} />
         <main className="App-main">
           <Switch>

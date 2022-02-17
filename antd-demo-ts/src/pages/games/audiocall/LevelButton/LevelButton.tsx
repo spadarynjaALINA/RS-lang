@@ -3,13 +3,12 @@ import { Button } from 'antd';
 import './LevelButton.css';
 
 interface ILevelButton {
- group: string
- onClick1: any;
+  group: string
+  onClick1: any;
   onClick2:any
   text: string;
 }
 
-// eslint-disable-next-line import/prefer-default-export
 export function LevelButton(props: ILevelButton) {
   return (
     <Button
@@ -17,7 +16,7 @@ export function LevelButton(props: ILevelButton) {
       shape="round"
       className="level-button"
       onClick={() => {
-        console.log('click');
+      
         props.onClick1(props.group);
         props.onClick2();
       }}

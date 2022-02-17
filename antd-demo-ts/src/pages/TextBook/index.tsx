@@ -23,6 +23,7 @@ function AppTextBook(props: any) {
     localStorage.setItem('textbook', 'true');
   }, []);
 
+
   let color = 'yellow';
   switch (group) {
     case 0:

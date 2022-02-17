@@ -1,10 +1,12 @@
 import TextBookLevelsCard from './level-card';
 
 function TextBookLevels(props: any) {
+
   const deleteActive = () => {
     const actives = document.getElementsByClassName('text__book_word') as any;
     [...actives].forEach((element: any) => {
       element.classList.remove(`active-${props.color}`);
+
     });
     const active = document.getElementById('0');
     active?.classList.add(`active-${props.color}`);

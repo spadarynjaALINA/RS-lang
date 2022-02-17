@@ -17,6 +17,7 @@ function SprintGame() {
   }, []);
 
   return (
+
     <div className='GamesWrap'>
       {
         isStartPage ?
@@ -31,6 +32,7 @@ function SprintGame() {
             isActive={isActive} />
       }
     </div>
+
   );
 }
 
