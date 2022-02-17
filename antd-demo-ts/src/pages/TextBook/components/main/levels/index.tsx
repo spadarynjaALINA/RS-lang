@@ -1,14 +1,7 @@
+import React from 'react';
 import TextBookLevelsCard from './level-card';
 
 function TextBookLevels(props: any) {
-  const deleteActive = () => {
-    const actives = document.getElementsByClassName('text__book_word') as any;
-    [...actives].forEach((element: any) => {
-      element.classList.remove(`active-${props.color}`);
-    });
-    const active = document.getElementById('0');
-    active?.classList.add(`active-${props.color}`);
-  };
   return (
     <div className='text_book__levels'>
       <TextBookLevelsCard
@@ -16,10 +9,8 @@ function TextBookLevels(props: any) {
         level='A1'
         description='Easy'
         color='yellow'
-        onClick={() => {
+        onClick={(e: React.MouseEvent) => {
           props.onClick(0);
-          deleteActive();
-          
         }}
       />
       <TextBookLevelsCard
@@ -29,7 +20,6 @@ function TextBookLevels(props: any) {
         color='green'
         onClick={() => {
           props.onClick(1);
-          deleteActive();
         }}
       />
       <TextBookLevelsCard
@@ -39,7 +29,6 @@ function TextBookLevels(props: any) {
         color='blue'
         onClick={() => {
           props.onClick(2);
-          deleteActive();
         }}
       />
       <TextBookLevelsCard
@@ -49,7 +38,6 @@ function TextBookLevels(props: any) {
         color='pink'
         onClick={() => {
           props.onClick(3);
-          deleteActive();
         }}
       />
       <TextBookLevelsCard
@@ -59,7 +47,6 @@ function TextBookLevels(props: any) {
         color='violet'
         onClick={() => {
           props.onClick(4);
-          deleteActive();
         }}
       />
 
@@ -70,7 +57,6 @@ function TextBookLevels(props: any) {
         color='aqua'
         onClick={() => {
           props.onClick(5);
-          deleteActive();
         }}
       />
 
@@ -82,7 +68,6 @@ function TextBookLevels(props: any) {
           color='gray'
           onClick={() => {
             props.onClick(6);
-            deleteActive();
           }}
         />
       )}

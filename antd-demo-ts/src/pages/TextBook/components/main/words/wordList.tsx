@@ -2,6 +2,8 @@ import { MouseEvent, useEffect, useState } from 'react';
 import { getOneWord } from '../../../../../services/APIService';
 
 export interface StandardComponentProps {
+  setActive: any;
+  active: any;
   word: any | null;
   wordId: string | null;
   onClick: any;
@@ -47,35 +49,24 @@ function TextBookWordList(props: StandardComponentProps) {
     return null;
   }
 
-  const arrActiveBtn: Array<HTMLElement> = [];
-
-  const showActive = (e: React.MouseEvent) => {
-    document
-      .getElementsByClassName(`active-${props.color}`)[0]
-      .classList.remove(`active-${props.color}`);
-    arrActiveBtn.forEach((el) => {
-      el.classList.remove('active');
-    });
-    const target = e.currentTarget as HTMLElement;
-    arrActiveBtn.push(target);
-    target.classList.add(`active-${props.color}`);
-  };
-
   return (
-    <div className='text__book_word_wrapper'>
+    <div
+      className='text__book_word_wrapper'
+      onClick={() => {
+        props.setActive(props.id);
+      }}
+    >
       <div
-        className={
-          props.id !== 0
-            ? 'text__book_word'
-            : `text__book_word active-${props.color}`
-        }
+        className={`text__book_word ${
+          props.active ? `active-${props.color}` : ''
+        }`}
         id={props.id}
-        onClick={(e) => {
+        onClick={() => {
           props.onClick(props.id);
-          showActive(e);
         }}
       >
         <p>{word.word}</p>
+
         <p className='text__book_word_translate'>{word.wordTranslate}</p>
         {(props.word?.learned && <span className='learned'></span>) ||
           (props.word?.difficult && <span className='difficult'></span>)}

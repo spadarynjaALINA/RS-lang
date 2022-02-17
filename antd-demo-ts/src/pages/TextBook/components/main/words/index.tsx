@@ -25,12 +25,15 @@ function TextBookWordsContainer(props: StandardComponentProps) {
   const [card, setCard] = useState(0);
 
   const [wordsForId, setWordsId] = useState([]);
+  const [activeId, setActive] = useState(0);
 
   useEffect(() => {
     setCard(0);
+    setActive(0);
   }, [props.group]);
 
   useEffect(() => {
+    setActive(0);
     if (props.group !== 6) {
       getWords(props.group, props.page).then((data) => {
         setWords(data);
@@ -68,7 +71,8 @@ function TextBookWordsContainer(props: StandardComponentProps) {
             onClick={setCard}
             group={props.group}
             color={props.color}
-           
+            setActive={setActive}
+            active={i === activeId}
           />
         ))}
 
@@ -81,6 +85,8 @@ function TextBookWordsContainer(props: StandardComponentProps) {
             onClick={setCard}
             group={props.group}
             color={props.color}
+            setActive={setActive}
+            active={i === activeId}
           />
         ))}
       </div>
