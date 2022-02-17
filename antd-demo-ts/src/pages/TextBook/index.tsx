@@ -59,6 +59,7 @@ function AppTextBook(props: any) {
         onClick={setGroup}
         accessToken={props.accessToken}
         color={color}
+        group={group}
       />
       <TextBookTitle title='Слова' subtitle='' text='' nameClass='' />
       <TextBookWordsContainer
