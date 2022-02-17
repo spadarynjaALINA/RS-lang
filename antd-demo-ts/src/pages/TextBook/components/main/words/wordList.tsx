@@ -11,6 +11,16 @@ export interface StandardComponentProps {
   group: number | boolean;
   color: string;
 }
+const arrActiveBtn: Array<HTMLElement> = [];
+const onClick = (e: React.MouseEvent) => {
+  arrActiveBtn.forEach((el) => {
+    el.classList.remove('active');
+  });
+  const target = e.currentTarget as HTMLElement;
+  arrActiveBtn.push(target);
+  target.classList.add('active');
+};
+
 
 /*
 function addToDifficult(e: MouseEvent) {

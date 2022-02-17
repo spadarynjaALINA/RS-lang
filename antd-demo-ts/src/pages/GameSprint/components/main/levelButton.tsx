@@ -1,20 +1,22 @@
-import React, { useState } from "react";
-import { Button } from 'antd'
 
-interface LevelButton {
+import React from 'react';
+
+import { Button } from 'antd';
+
+interface ILevelButton {
   group: string;
   onClick1: any;
   onClick2: any;
   text: string;
 }
 
-export function LevelButton(props: LevelButton) {
+export function LevelButton(props: ILevelButton) {
   return (
-      <Button ghost shape="round" className="level-button"
+    <Button ghost shape="round" className="level-button"
       onClick={() => {
         props.onClick1(props.group);
         props.onClick2();
       }
-        }>{props.text}</Button>
-  )
+      }>{props.text}</Button>
+  );
 }

@@ -1,3 +1,6 @@
 .audio-wrap {
   height: 300px;
 }
+.fa-volume-up {
+  cursor: pointer;
+}

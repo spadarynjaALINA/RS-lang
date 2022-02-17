@@ -1,4 +1,7 @@
-import React, { useState, useEffect, Component } from 'react';
+
+/* eslint @typescript-eslint/no-var-requires: "off" */
+import React, { useState, useEffect } from 'react';
+
 import { getWords } from '../../../../handlers';
 import { getRandomNum } from '../../utils/getRandomNum';
 import { Button } from 'antd';
@@ -9,17 +12,20 @@ import { getCheckmarks } from '../../utils/getCheckmarks';
 const right = require('../../../../assets/audio/right.mp3');
 const wrong = require('../../../../assets/audio/wrong.mp3');
 const modalResults = require('../../../../assets/audio/modal_results.mp3');
+
 interface Word {
   word: string;
   wordTranslate: string;
   audio: string;
 }
 
-function GameField(props: {group: number, isActive: boolean}) {
-  const [seconds, setSeconds] = useState(60);
+
+function GameField(props: { group: number, page: number, isActive: boolean }) {
+  const [seconds, setSeconds] = useState(30);
+
   const [words, setWords] = useState([] as Word[]);
-  const [randomWord, setRandomWord] = useState(0);
-  const [randomTranslate, setRandomTranslate] = useState(0);
+  const [randomWord, setRandomWord] = useState(getRandomNum(0, 4));
+  const [randomTranslate, setRandomTranslate] = useState(getRandomNum(0, 4));
   const [correctAnswers, setCorrectAnswers] = useState<Word[]>([]);
   const [wrongAnswers, setWrongAnswers] = useState<Word[]>([]);
   const [showModal, setShowModal] = useState(false);
@@ -27,18 +33,44 @@ function GameField(props: {group: number, isActive: boolean}) {
   const [countOfCorrectAnswers, setCountOfCorrectAnswers] = useState(0);
   const [totalScore, setTotalScore] = useState(0);
   const [usedWords, setUsedWords] = useState<number[]>([]);
-  
+  const [isLastWord, setIsLastWord] = useState(false);
+  const [page, setPage] = useState(props.page);
   useEffect(() => {
-    setRandomWord(getRandomNum(0, 599));
-    setRandomTranslate(getRandomNum(0, 599));
-    let arr = [];
-    for (let i = 1; i <= 30; i++) {
-      arr.push(getWords(props.group, i));
+
+    if (localStorage.getItem('textbook')) {
+      (getWords(props.group, page))
+        .then((data) => {
+          setWords(data);
+        });
+    } else {
+      const arr = [];
+      for (let i = page; i >= 0; i--) {
+        arr.push(getWords(props.group, i));
+      }
+      Promise.all(arr).then((data) => {
+        const arrData = data.flat();
+        setWords(arrData);
+      });
     }
-    Promise.all(arr).then((data) => {
-      setWords(data.flat());
-    })
+
   }, []);
+
+  useEffect(() => {
+    setUsedWords([...usedWords, randomWord]);
+  }, [randomWord]);
+
+  useEffect(() => {
+    if (isLastWord && page > 1) {
+      (getWords(props.group, page - 1))
+        .then((data) => {
+          setWords([...words, ...data]);
+        });
+      setPage(page - 1);
+      setIsLastWord(false);
+    } else if (isLastWord && page === 1) {
+      setSeconds(0);
+    }
+  }, [isLastWord]);
 
   useEffect(() => {
     let interval: any = null;
@@ -58,42 +90,30 @@ function GameField(props: {group: number, isActive: boolean}) {
     return () => clearInterval(interval);
   }, [props.isActive, seconds]);
 
-  const onKeydown = (e: KeyboardEvent) => {
-    if (e.code === 'ArrowLeft' && showModal === false) {
-      compare(true);
-      nextQuestion();
-      console.log('left');
-    } else if (e.code === 'ArrowRight' && showModal === false) {
-      compare(false);
-      nextQuestion();
-      console.log('right');
-    }
-  }
-
-  useEffect(() => {
-      window.addEventListener('keydown', onKeydown);
-    return () => {
-      window.removeEventListener('keydown', onKeydown);
-    };
-  });
 
   function nextQuestion() {
-    let random;
-    do {
-      random = getRandomNum(0, words.length);
-    } while (usedWords.includes(random));
+    if (!isLastWord) {
+      let random;
+      do {
+        random = getRandomNum(0, words.length - 1);
+      } while (usedWords.includes(random));
     
-    setRandomWord(random);
-    if (Math.random() < .5) {
-      setRandomTranslate(random);
-    } else {
-      setRandomTranslate(getRandomNum(0, words.length));
+      setRandomWord(random);
+      if (Math.random() < .5) {
+        setRandomTranslate(random);
+      } else {
+        setRandomTranslate(getRandomNum(0, words.length - 1));
+      }
     }
-    console.log(randomWord, randomTranslate)
+
+
   }
 
   function compare(answer: boolean) {
-    setUsedWords([...usedWords, randomWord])
+    if (usedWords.length === words.length - 1) {
+      setIsLastWord(true);
+    }
+
     const audio = new Audio();
     const timer = document.querySelector<HTMLElement>('.fa-stopwatch');
     if ((randomWord === randomTranslate) === answer) {
@@ -119,7 +139,7 @@ function GameField(props: {group: number, isActive: boolean}) {
       setTimeout(() => {
         timer.style.color = 'white';
         timer.classList.remove('fa-stopwatch-big');
-      }, 300)
+      }, 300);
     } else {
       audio.src = wrong;
       audio.play();
@@ -137,9 +157,28 @@ function GameField(props: {group: number, isActive: boolean}) {
       setTimeout(() => {
         timer.style.color = 'white';
         timer.classList.remove('fa-stopwatch-big');
-      }, 300)
+      }, 300);
     }
   }
+
+  const onKeydown = (e: KeyboardEvent) => {
+    setTimeout(() => {
+      if (e.code === 'ArrowLeft' && showModal === false) {
+        compare(true);
+        nextQuestion();
+      } else if (e.code === 'ArrowRight' && showModal === false) {
+        compare(false);
+        nextQuestion();
+      }
+    }, 100);
+  };
+
+  useEffect(() => {
+    window.addEventListener('keyup', onKeydown);
+    return () => {
+      window.removeEventListener('keyup', onKeydown);
+    };
+  });
 
   return (
     <div className='game-field'>
@@ -148,9 +187,9 @@ function GameField(props: {group: number, isActive: boolean}) {
         <span className='game-seconds'>{seconds} s</span>
       </div>
       <div className='game-score'>
-        <p>+ {currentPoints } очков за слово </p>
+        <p className='game-points-per-word'>+ {currentPoints } очков за слово </p>
         {getCheckmarks(countOfCorrectAnswers)}
-        <p>{totalScore } Score </p>
+        <p className='game-points-per-word'>{totalScore } Score </p>
       </div>
 
       <div className='game-word-translate'>
@@ -171,7 +210,7 @@ function GameField(props: {group: number, isActive: boolean}) {
         }>НЕВЕРНО</Button>
       </div>
       { showModal ? 
-      <ResultsWindow
+        <ResultsWindow
           correctAnswers={correctAnswers}
           wrongAnswers={wrongAnswers}
           score = {totalScore}/>
