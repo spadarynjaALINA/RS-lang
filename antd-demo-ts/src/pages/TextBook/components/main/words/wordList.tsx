@@ -57,7 +57,7 @@ function TextBookWordList(props: StandardComponentProps) {
     return null;
   }
 
-  const arrActiveBtn: Array<HTMLElement> = [];
+
 
   const showActive = (e: React.MouseEvent) => {
     document

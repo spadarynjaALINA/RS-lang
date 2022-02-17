@@ -5,6 +5,8 @@ import { LevelButton } from '../LevelButton/LevelButton';
 
 export default function StartPageAudioCall(props: any) {
   const [startDisable, setStartDisable] = useState(true);
+
+  
   return (
     <div className="audioCall-wrap">
       <h2>Аудиовызов</h2>
@@ -52,6 +54,7 @@ export default function StartPageAudioCall(props: any) {
         />
       </div>
       <Button type='primary' className="" disabled={startDisable} onClick={() => {
+        console.log('stsrt');
         props.onClick1(false);
         props.onClick3(true);
       }}>Начать</Button>
