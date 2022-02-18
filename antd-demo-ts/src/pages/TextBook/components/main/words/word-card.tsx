@@ -21,6 +21,7 @@ export interface CardComponentProps {
     transcription: string;
     word: string;
     wordTranslate: string;
+    difficulty: string;
   };
   accessToken: any;
   onDelete: any;
@@ -28,6 +29,7 @@ export interface CardComponentProps {
   learned: boolean;
   difficult: boolean;
   wordTranslate: string;
+  difficulty: string;
 }
 
 function TextBookWord(props: CardComponentProps | any) {
@@ -72,13 +74,29 @@ function TextBookWord(props: CardComponentProps | any) {
 
   const addToDifficult = (wordId: any) => {
     createHardUserWord(localStorage.getItem('userId'), wordId).then(() => {
-      setWord(Object.assign(word, { difficult: true }));
+      setWord(
+        Object.assign(word, {
+          difficulty: 'hard',
+          optional: {
+            countRight: 0,
+            countWrong: 0,
+          },
+        }),
+      );
     });
   };
 
   const addToLearned = (wordId: any) => {
     createLearnedUserWord(localStorage.getItem('userId'), wordId).then(() => {
-      setWord(Object.assign(word, { learned: true }));
+      setWord(
+        Object.assign(word, {
+          difficulty: 'easy',
+          optional: {
+            countRight: 0,
+            countWrong: 0,
+          },
+        }),
+      );
     });
   };
 

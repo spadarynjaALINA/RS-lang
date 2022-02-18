@@ -49,8 +49,12 @@ function TextBookWordList(props: StandardComponentProps) {
         <p>{word.word}</p>
 
         <p className='text__book_word_translate'>{word.wordTranslate}</p>
-        {(props.word?.learned && <span className='learned'></span>) ||
-          (props.word?.difficult && <span className='difficult'></span>)}
+        {(props.word?.difficulty === 'easy' && (
+          <span className='learned'></span>
+        )) ||
+          (props.word?.difficulty === 'hard' && (
+            <span className='difficult'></span>
+          ))}
       </div>
     </div>
   );

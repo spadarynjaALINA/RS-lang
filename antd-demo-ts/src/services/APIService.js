@@ -93,7 +93,9 @@ export const getUserWord = async (userId) => {
       },
     },
   );
+
   const content = await rawResponse.json();
+
   let arrOfWordsId = [];
   content.forEach((element) => {
     arrOfWordsId.push(element.wordId);
@@ -147,7 +149,7 @@ export const getHardWord = async (userId, page, group) => {
     },
   );
   const content = await rawResponse.json();
-  //console.log('hard', content);
+  console.log('hard', content);
 };
 getLearnedWord(localStorage.getItem('userId'));
 
