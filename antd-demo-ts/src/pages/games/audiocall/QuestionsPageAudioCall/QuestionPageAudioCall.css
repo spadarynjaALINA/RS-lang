@@ -8,11 +8,15 @@
   position: absolute;
   top: 120px;
 }
-#green {
+.green {
   border-color: rgb(18, 240, 25);
   background: 'green';
 }
-#black {
+.black {
   border-color: rgb(0, 0, 0);
-  background: 'green';
+  background: 'black';
+}
+.red {
+  border-color: rgb(226, 2, 2);
+  background: 'red';
 }

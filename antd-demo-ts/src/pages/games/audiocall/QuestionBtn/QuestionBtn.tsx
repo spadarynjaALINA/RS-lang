@@ -6,12 +6,14 @@ interface ILevelButton {
   text: string;
   hide?: any
   onClick: any
-  key:string
+  key: string
+  className?: string
+  style?:any
 }
 
 export function QuestionButton(props: ILevelButton) {
   return (
-    <Button ghost shape="round" className="level-button"
+    <Button ghost shape="round" className="level-button" style={props.style}
       onClick={()=>{props.onClick();} }>{props.text}</Button>
   );
 }
