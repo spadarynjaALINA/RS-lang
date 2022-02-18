@@ -2,7 +2,7 @@ export interface StandardComponentProps {
   level: string;
   description: string;
   color: string;
-  active: string;
+  active: boolean;
   onChange: any;
 }
 
@@ -14,7 +14,9 @@ function TextBookLevelsCard(props: any) {
       onChange={props.onChange}
     >
       <div className='left-part'>{props.description}</div>
-      <div className='square-part'></div>
+      <div
+        className={props.active ? `square-part ${props.color}` : 'square-part'}
+      ></div>
 
       <div className='right-part'>{props.level}</div>
     </button>

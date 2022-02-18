@@ -12,7 +12,9 @@ function StartPageGameSprint(props: any) {
     if (startPage === true) {
       setStartDisable(false);
     }
+
   }, [startPage]);
+
   return (
     <div className='game-container'>
       <div className='game-text-container'>

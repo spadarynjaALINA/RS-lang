@@ -12,10 +12,8 @@ export interface CardComponentProps {
     audio: string;
     audioExample: string;
     audioMeaning: string;
-    // group: number;
     id: any;
     image: string;
-    // page: number;
     textExample: string;
     textExampleTranslate: string;
     textMeaning: string;
@@ -27,6 +25,9 @@ export interface CardComponentProps {
   accessToken: any;
   onDelete: any;
   color: string;
+  learned: boolean;
+  difficult: boolean;
+  wordTranslate: string;
 }
 
 function TextBookWord(props: CardComponentProps | any) {
@@ -46,15 +47,18 @@ function TextBookWord(props: CardComponentProps | any) {
   if (props === undefined) throw new Error('error');
 
   const audio: HTMLAudioElement = new Audio();
+
   function playAudio() {
     if (!audio.paused) {
       audio.pause();
       return;
     }
     const srcs = [word?.audio, word?.audioMeaning, word?.audioExample];
+    console.log(srcs);
     let current = 0;
     if (!audio.paused) audio.pause();
     audio.src = `https://rs-lang-app-rss.herokuapp.com/${srcs[current]}`;
+    console.log(audio.src);
     audio.play();
     audio.onended = function () {
       current++;

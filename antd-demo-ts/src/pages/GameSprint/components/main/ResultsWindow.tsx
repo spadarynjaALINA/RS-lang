@@ -15,8 +15,10 @@ function ResultsWindow(props: {
 }) {
 
   function playAudio(src: string) {
+
     // let audio: HTMLAudioElement;
     const audio = new Audio();
+
     if (!audio.paused) {
       return;
     }
