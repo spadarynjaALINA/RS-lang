@@ -5,7 +5,8 @@ interface ILevelButton {
   show?:any
   text: string;
   hide?: any
-  onClick:any
+  onClick: any
+  key:string
 }
 
 export function QuestionButton(props: ILevelButton) {
