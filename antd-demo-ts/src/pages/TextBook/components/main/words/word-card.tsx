@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './word-card.css';
 import {
   createHardUserWord,
@@ -6,6 +6,7 @@ import {
   getUserWord,
 } from '../../../../../services/APIService';
 import { getOneWord } from '../../../../../services/APIService';
+import { getUserNormalWord } from '../../../../../services/APIService';
 
 export interface CardComponentProps {
   word: {
@@ -30,11 +31,13 @@ export interface CardComponentProps {
   difficult: boolean;
   wordTranslate: string;
   difficulty: string;
+  id: string;
 }
 
 function TextBookWord(props: CardComponentProps | any) {
   const [word, setWord] = useState(props.word);
-  const [countGuess, setCountGuess] = useState(0);
+
+  const [answer, setAnswer] = useState<any>([]);
 
   useEffect(() => {
     setWord(props.word);
@@ -45,6 +48,14 @@ function TextBookWord(props: CardComponentProps | any) {
       getOneWord(props.wordID).then(setWord);
     }
   }, [props.wordID]);
+
+  useEffect(() => {
+    if (props.word?.id != undefined) {
+      getUserNormalWord(localStorage.getItem('userId'), props.word?.id).then(
+        setAnswer,
+      );
+    }
+  }, [props.word]);
 
   if (props === undefined) throw new Error('error');
 
@@ -177,11 +188,11 @@ associative picture'
       <div className='statistics'>
         <div>
           <p className={props.color}> "Аудиовызов"</p>
-          <b>{countGuess}</b>
+          <b>{/*answer?.optional?.countRight ||*/ 0}</b>
         </div>
         <div>
           <p className={props.color}> "Спринт"</p>
-          <b>{countGuess}</b>
+          <b>{answer?.optional?.countRight || 0}</b>
         </div>
       </div>
     </div>

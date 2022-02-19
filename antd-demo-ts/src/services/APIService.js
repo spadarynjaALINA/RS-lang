@@ -148,7 +148,6 @@ export const getHardWord = async (userId, page, group) => {
     },
   );
   const content = await rawResponse.json();
-  console.log('hard', content);
 };
 getLearnedWord(localStorage.getItem('userId'));
 
@@ -165,7 +164,7 @@ export const getOneWord = async (wordId) => {
   );
   const content = await rawResponse.json();
 
-  // console.log(content);
+  //console.log(content, 'oneWord');
   return content;
 };
 
@@ -227,8 +226,13 @@ export const getWordsGroup = async (group, page) => {
 
 // };
 
-
-export const createUserNormalWord = async (userId, wordId, countOfRightAnswers, countOfWrongAnswers, difficulty) => {
+export const createUserNormalWord = async (
+  userId,
+  wordId,
+  countOfRightAnswers,
+  countOfWrongAnswers,
+  difficulty,
+) => {
   const rawResponse = await fetch(
     `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/${wordId}`,
     {
@@ -252,7 +256,13 @@ export const createUserNormalWord = async (userId, wordId, countOfRightAnswers, 
   const content = await rawResponse.json();
 };
 
-export const updateUserNormalWord = async (userId, wordId, countOfRightAnswers, countOfWrongAnswers, difficulty) => {
+export const updateUserNormalWord = async (
+  userId,
+  wordId,
+  countOfRightAnswers,
+  countOfWrongAnswers,
+  difficulty,
+) => {
   const rawResponse = await fetch(
     `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/${wordId}`,
     {
@@ -277,17 +287,19 @@ export const updateUserNormalWord = async (userId, wordId, countOfRightAnswers, 
 };
 
 export const getUserNormalWord = async (userId, wordId) => {
-  const rawResponse = await fetch(`https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/${wordId}`, {
-    method: 'GET',
-    withCredentials: true,
-    headers: {
-      'Authorization': `Bearer ${token}`,
-      'Accept': 'application/json',
+  const rawResponse = await fetch(
+    `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/${wordId}`,
+    {
+      method: 'GET',
+      withCredentials: true,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+      },
     },
-  });
+  );
   const content = await rawResponse.json();
 
-  // console.log(content);
   return content;
 };
 

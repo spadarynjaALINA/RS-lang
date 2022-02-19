@@ -239,10 +239,6 @@ i {
 }
 .text__book_word_wrapper {
   width: 22%;
-  z-index: 1;
-
-  width: 22%;
-  height: 16%;
 }
 .text__book_word-details {
   color: #2c2647;

@@ -32,6 +32,7 @@ function TextBookWordsContainer(props: StandardComponentProps) {
     if (props.group !== 6) {
       getWords(props.group, props.page).then((data) => {
         setWords(data);
+
         setWordsId([]);
       });
     } else {
@@ -42,12 +43,6 @@ function TextBookWordsContainer(props: StandardComponentProps) {
       });
     }
   }, [props.page, props.group]);
-
-  useEffect(() => {
-    getHardWord(localStorage.getItem('userId'), props.group, props.page).then(
-      console.log,
-    );
-  });
 
   const onDelete = (wordId: string) => {
     deleteWord(localStorage.getItem('userId'), wordId).then(() => {
