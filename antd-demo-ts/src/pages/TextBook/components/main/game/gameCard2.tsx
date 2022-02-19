@@ -8,7 +8,7 @@ export function TextBookGameCards2(props: StandardComponentProps) {
   return (
    
     <div className="text_book__card-game">
-      {/* <Navigate to='/Мини-игры'/>  */}
+     
       <img src={props.game} alt="card" />
       <div className="text_book__card-game-text">
         <div className="text_book__card-game-tezis">Аудирование</div>

@@ -1,6 +1,8 @@
 .audioCall-wrap {
-  width: 1000px;
-  height: 32vw;
+  max-width: 45%;
+  height: 75vh;
   background: rgb(253, 245, 245);
   border-radius: 15px;
+  margin: 100px auto 0;
+  padding: 50px;
 }

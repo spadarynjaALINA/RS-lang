@@ -22,9 +22,9 @@ interface IBtnMenu {
 
 function Header(props: any) {
   const menuBtnData: IBtnMenu[] = [
-    { title: 'Учебник', to: '/Учебник' },
-    { title: 'Мини-игры', to: '/Мини-игры/' },
-    { title: 'Статистика', to: '/Статистика' },
+    { title: 'Учебник', to: '/textbook' },
+    { title: 'Мини-игры', to: '/games' },
+    { title: 'Статистика', to: '/statistic' },
   ];
 
   return (

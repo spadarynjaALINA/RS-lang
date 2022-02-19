@@ -9,7 +9,8 @@ interface ILevelButton {
   key: string
   className?: string
   style?: any
-  isTrue:boolean
+  isTrue: boolean
+  id:string
 }
 
 export function QuestionButton(props: ILevelButton) {
@@ -24,7 +25,7 @@ export function QuestionButton(props: ILevelButton) {
     background:'none',
   };
   return (
-    <Button ghost shape="round" className="level-button" style={isClick &&  (props.isTrue ? green : red) || black}
+    <Button ghost id={props.id} shape="round" className="level-button" style={isClick &&  (props.isTrue ? green : red) || black}
       onClick={() => {
         setIsClick(true);
         props.onClick();

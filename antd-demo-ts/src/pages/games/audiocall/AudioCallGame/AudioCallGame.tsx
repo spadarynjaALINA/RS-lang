@@ -8,7 +8,7 @@ function AudioCallGame() {
   const [group, setGroup] = useState(0);
   const [isActive, setIsActive] = useState(false);
   return (
-    <div>
+    <div className='game-wrap'>
       {
         isStartPage
           ? (

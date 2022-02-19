@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-use-before-define */
 import { Button } from 'antd';
 import { useState, useEffect, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 import { JsxElement } from 'typescript';
 import { getWords } from '../../../../handlers';
 import { LevelButton } from '../LevelButton/LevelButton';
@@ -11,6 +12,8 @@ interface Word {
   word: string;
   wordTranslate: string;
   audio: string;
+  transcription: string;
+  image:any
 }
 
 export function QuestionsPageAudioCall(props: { group: number, isActive: boolean }) {
@@ -33,7 +36,7 @@ export function QuestionsPageAudioCall(props: { group: number, isActive: boolean
     arr = arr.sort(() => Math.random() - .5).map(item => item + startCount);
     return arr;
   }, [getSort]);  
-  
+ 
 
   useEffect(() => {      
     const func = async () => {
@@ -48,11 +51,11 @@ export function QuestionsPageAudioCall(props: { group: number, isActive: boolean
   }, []); 
  
   function getButtons() {
-    console.log(words[startCount]); 
+     
     return (<div className='question-btn-wrap'>
       {words.length ? orderWords.map((i, index) => {   
         
-        return  (<QuestionButton isTrue={words[orderWords[index]]?.wordTranslate === words[startCount].wordTranslate} key={`question${index}`} text={ `${index + 1} ${words[orderWords[index]]?.wordTranslate}` } onClick={()=>{setShowWord(true);}}></QuestionButton>);
+        return (<QuestionButton id={ `answerBtn${index + 1}`}isTrue={words[orderWords[index]]?.wordTranslate === words[startCount].wordTranslate} key={`question${index}`} text={ `${index + 1} ${words[orderWords[index]]?.wordTranslate}` } onClick={()=>{setShowWord(true);}}></QuestionButton>);
       }) : null}
     </div>);     
   }
@@ -72,29 +75,25 @@ export function QuestionsPageAudioCall(props: { group: number, isActive: boolean
     if (countQuestions !== limitQuestions)  playAudio(startCount);  
   }, [words.length, getSort]);
  
-  // function nextQuestion() {    
-  //   if (countQuestions === 9) setWords([]);   
-  // }
   
   return (
     <div  className = 'audioCall-wrap' >      
       {!showModal && <div className='audio-wrap'>
-        <i className='fas fa-volume-up volume-audiocall' onClick={() => { playAudio(startCount); }}></i>
-        {showWord && <div>
-          
-          {`${words[startCount]?.word}, ${words[startCount]?.wordTranslate}`}</div>}
+        {showWord ? <img className='show-words-image' src={`https://rs-lang-app-rss.herokuapp.com/${words[startCount]?.image}`}></img> : <i className='fas fa-volume-up ' id = 'volumeAudioCall' onClick={() => { playAudio(startCount); }}></i>}
+        {showWord && <div className='answer-wrap'>
+          <p className='show-word'> {`${words[startCount]?.word}  ${words[startCount]?.transcription} `}</p>
+          <p className='show-translate'>{`${words[startCount]?.wordTranslate}` }</p>
+        </div>}
       </div> }
-      {(countQuestions === limitQuestions) ? <div className='audioCall-wrap audiocall-modal'>Здесь будут результаты
-        <Button href='/Мини-игры/Аудиовызов' onClick={() => {
-          console.log('back');
-        }}>назад</Button> <Button href='/' onClick={() => {
-          console.log('back');
-        }}>главная</Button></div> : !!words.length && getButtons() }
+      {(countQuestions === limitQuestions) ? <div className='audioCall-wrap audiocall-modal'>
+        <h2>Результаты</h2><div className='right-wrap'><h4>ошибок<span>{ }</span></h4></div><div className='wrong-wrap'><h4>знаю<span>{ }</span></h4></div>
+        <Link to='/textbook'> <Button>назад</Button></Link>
+        <Link to='/'><Button >главная</Button></Link></div> : !!words.length && getButtons() }
       
     
       {showWord ?
        
-        (!showModal && <button onClick={() => {         
+        (!showModal && <button className='next-btn' onClick={() => {         
           if (countQuestions < limitQuestions) {
             setCountQuestions(prev => prev + 1);
             setShowWord(false);
@@ -103,7 +102,7 @@ export function QuestionsPageAudioCall(props: { group: number, isActive: boolean
             setSort(prev => !prev);
           }
           
-        }}>Следующий вопрос</button>) : (!!words.length && <button onClick={() => {
+        }}>Следующий вопрос</button>) : (!!words.length && <button className='next-btn' onClick={() => {
           if (countQuestions < limitQuestions) {
             setCountQuestions(prev => prev + 1);
             setShowWord(false);

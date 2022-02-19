@@ -34,24 +34,24 @@ function App() {
         <Header onLogin={setAccessToken} accessToken={accessToken} />
         <main className="App-main">
           <Switch>
-            <Route path="/Учебник">
+            <Route path="/textbook">
               <TextBook accessToken={accessToken} />
               
             </Route>
-            <Route path='/Мини-игры/Аудиовызов'>
+            <Route path='/games/audiocall'>
               <AudioCallGame></AudioCallGame>
              
             </Route>
-            <Route path='/Мини-игры/Спринт'>
+            <Route path='/games/sprint'>
              
               <SprintGame />
              
             </Route>
-            <Route path='/Мини-игры'>
+            <Route path='/games'>
               <Games></Games>
              
             </Route>              
-            <Route path='/Статистика'>
+            <Route path='/statistic'>
 
  
               <Statistic />

@@ -13,10 +13,10 @@ export function TextBookGameArea() {
   return (
     <div className='text_book__game_wrapper'>
       {/* <a className='text_book__game-link' href='/Мини-игры/Спринт'>  </a> */}
-      <Link to={'Мини-игры/Спринт'}><TextBookGameCards game={game1} /></Link> 
+      <Link to={'games/sprint'}><TextBookGameCards game={game1} /></Link> 
     
          
-      <Link to={'Мини-игры/Аудиовызов'}><TextBookGameCards2 game={game3} /></Link>
+      <Link to={'games/audiocall'}><TextBookGameCards2 game={game3} /></Link>
       
     </div>
   );
