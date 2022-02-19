@@ -27,57 +27,38 @@ export function QuestionsPageAudioCall(props: { group: number, isActive: boolean
   const [wronArr, setWronArr] = useState([] as number[]);
   const [rightArr, setRightArr] = useState([] as number[]);
   const audio: HTMLAudioElement = new Audio(); 
-  if (countQuestions === limitQuestions) {
-    setShowModal(true);
-    setCountQuestions(0);
-  }
-  const red = {
-    background:'red',
-    
-  };
-
-  const green = {
-    background:'green',
-    
-  };
-  const allWords = useMemo(() => {
-    console.log('ollwords');
-    return words;
-  }, [words.length]); 
-  const orderWords = useMemo(() => {
-    console.log('orderword', words);
-   
+ 
+  const orderWords = useMemo(() => {   
     let arr = [0, 1, 2, 3, 4];
     arr = arr.sort(() => Math.random() - .5).map(item => item + startCount);
     return arr;
   }, [getSort]);  
-  console.log(words, startCount, orderWords, 'рендер страницы');
-  useEffect(() => {         
-    const arr = [];    
-    for (let i = 1; i <= 30; i++) {
-      arr.push(getWords(props.group, i));
-    }
-    Promise.all(arr).then((data) => {
-      setWords(data.flat().sort(() => Math.random() - .5));     
-    });    
+  
+
+  useEffect(() => {      
+    const func = async () => {
+      const arr = [];    
+      for (let i = 1; i <= 30; i++) {
+        arr.push(getWords(props.group, i));
+      }
+      const res = await Promise.all(arr);
+      setWords(res.flat().sort(() => Math.random() - .5));
+    };
+    func();
   }, []); 
  
-  function GetButtons() { 
-    console.log('тут функция гетбаттонс', words, allWords, `${ 1} ${words[orderWords[2]].word}`, orderWords);
+  function getButtons() {
+    console.log(words[startCount]); 
     return (<div className='question-btn-wrap'>
-      {words.length ? orderWords.map((i, index) => (
-        <QuestionButton  key={`question${index}`} text={ `${index + 1} ${allWords[orderWords[i]].word}` } onClick={()=>{setShowWord(true);}}></QuestionButton>
-      )) : ''}
+      {words.length ? orderWords.map((i, index) => {   
+        
+        return  (<QuestionButton isTrue={words[orderWords[index]]?.wordTranslate === words[startCount].wordTranslate} key={`question${index}`} text={ `${index + 1} ${words[orderWords[index]]?.wordTranslate}` } onClick={()=>{setShowWord(true);}}></QuestionButton>);
+      }) : null}
     </div>);     
   }
-  // const getPropForBtns = () => {
-  //   orderWords.map((i, index) => {
-  // {key={`question${index}`} text={ `${index + 1} ${allWords[orderWords[i]].word}` } onClick={()=>{setShowWord(true)}
-  // }
-  //  };
- 
+
   function playAudio(word: number) {  
-    console.log('тут функция аудио');
+    
     if (!audio.paused) {
       audio.pause();
       return;
@@ -88,39 +69,32 @@ export function QuestionsPageAudioCall(props: { group: number, isActive: boolean
     audio.play();
   }
   useEffect(() => {
-    playAudio(startCount);
-  }, [allWords.length, getSort]);
-  console.log(startCount, orderWords[0]);
-  function nextQuestion() {  
-    console.log('тут функция следующий вопрос', countQuestions);
-    if (countQuestions === 9) setWords([]);   
-  }
+    if (countQuestions !== limitQuestions)  playAudio(startCount);  
+  }, [words.length, getSort]);
+ 
+  // function nextQuestion() {    
+  //   if (countQuestions === 9) setWords([]);   
+  // }
   
   return (
     <div  className = 'audioCall-wrap' >      
-      <div className='audio-wrap'>
-        <i className='fas fa-volume-up' onClick={() => { playAudio(startCount); }}></i>
+      {!showModal && <div className='audio-wrap'>
+        <i className='fas fa-volume-up volume-audiocall' onClick={() => { playAudio(startCount); }}></i>
         {showWord && <div>
           
-          {`${words[startCount]?.word}`}</div>}
-      </div>
-      {!!words.length && <div>
-        <QuestionButton text={ `1 ${allWords[orderWords[0]].word}` } onClick ={()=>{
-          playAudio(startCount); setShowWord(true);
-          
-        }} key='1answer' style ={orderWords[0] == startCount ? green : red}></QuestionButton>
-        <QuestionButton text={`2 ${allWords[orderWords[1]].word}`} onClick={() => { playAudio(startCount);setShowWord(true); }} key='2answer'></QuestionButton>
-        <QuestionButton text={`3 ${allWords[orderWords[2]].word}`} onClick={() => { playAudio(startCount);setShowWord(true); }} key='3answer'></QuestionButton>
-        <QuestionButton text={`4 ${allWords[orderWords[3]].word}`} onClick={() => { playAudio(startCount);setShowWord(true); }} key='4answer'></QuestionButton>
-        <QuestionButton text={ `5 ${allWords[orderWords[4]].word}` } onClick ={()=>{playAudio(startCount);setShowWord(true);}} key='5answer'></QuestionButton></div>}
-      {showModal && <div className='audioCall-wrap audiocall-modal'>Здесь будут результаты
+          {`${words[startCount]?.word}, ${words[startCount]?.wordTranslate}`}</div>}
+      </div> }
+      {(countQuestions === limitQuestions) ? <div className='audioCall-wrap audiocall-modal'>Здесь будут результаты
         <Button href='/Мини-игры/Аудиовызов' onClick={() => {
           console.log('back');
         }}>назад</Button> <Button href='/' onClick={() => {
           console.log('back');
-        }}>главная</Button></div>} {showWord ?
+        }}>главная</Button></div> : !!words.length && getButtons() }
+      
+    
+      {showWord ?
        
-        <button onClick={() => {         
+        (!showModal && <button onClick={() => {         
           if (countQuestions < limitQuestions) {
             setCountQuestions(prev => prev + 1);
             setShowWord(false);
@@ -129,15 +103,15 @@ export function QuestionsPageAudioCall(props: { group: number, isActive: boolean
             setSort(prev => !prev);
           }
           
-        }}>Следующий вопрос</button> : <button onClick={() => {
+        }}>Следующий вопрос</button>) : (!!words.length && <button onClick={() => {
           if (countQuestions < limitQuestions) {
             setCountQuestions(prev => prev + 1);
             setShowWord(false);
-            nextQuestion();   
+            // nextQuestion();   
             setStartCount(prev => prev + 5);
             setSort(prev => !prev);            
           }
-        }}>Я не знаю правильный ответ</button>}
+        }}>Я не знаю правильный ответ</button>)}
     </div>
   );
  

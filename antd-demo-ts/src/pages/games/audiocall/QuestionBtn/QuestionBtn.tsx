@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Button } from 'antd';
 
 interface ILevelButton {
@@ -8,12 +8,26 @@ interface ILevelButton {
   onClick: any
   key: string
   className?: string
-  style?:any
+  style?: any
+  isTrue:boolean
 }
 
 export function QuestionButton(props: ILevelButton) {
+  const [isClick, setIsClick] = useState(false);
+  const red = {
+    background: 'red',
+  };
+  const green = {
+    background: 'green',
+  };
+  const black = {
+    background:'none',
+  };
   return (
-    <Button ghost shape="round" className="level-button" style={props.style}
-      onClick={()=>{props.onClick();} }>{props.text}</Button>
+    <Button ghost shape="round" className="level-button" style={isClick &&  (props.isTrue ? green : red) || black}
+      onClick={() => {
+        setIsClick(true);
+        props.onClick();
+      }}>{props.text}</Button>
   );
 }
