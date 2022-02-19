@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './word-card.css';
 import {
   createHardUserWord,
@@ -6,16 +6,15 @@ import {
   getUserWord,
 } from '../../../../../services/APIService';
 import { getOneWord } from '../../../../../services/APIService';
+import { getUserNormalWord } from '../../../../../services/APIService';
 
 export interface CardComponentProps {
   word: {
     audio: string;
     audioExample: string;
     audioMeaning: string;
-    // group: number;
     id: any;
     image: string;
-    // page: number;
     textExample: string;
     textExampleTranslate: string;
     textMeaning: string;
@@ -23,15 +22,22 @@ export interface CardComponentProps {
     transcription: string;
     word: string;
     wordTranslate: string;
+    difficulty: string;
   };
   accessToken: any;
   onDelete: any;
   color: string;
+  learned: boolean;
+  difficult: boolean;
+  wordTranslate: string;
+  difficulty: string;
+  id: string;
 }
 
 function TextBookWord(props: CardComponentProps | any) {
   const [word, setWord] = useState(props.word);
-  const [countGuess, setCountGuess] = useState(0);
+
+  const [answer, setAnswer] = useState<any>([]);
 
   useEffect(() => {
     setWord(props.word);
@@ -43,8 +49,15 @@ function TextBookWord(props: CardComponentProps | any) {
     }
   }, [props.wordID]);
 
-  if (props === undefined) throw new Error('error');
+  useEffect(() => {
+    if (props.word?.id != undefined) {
+      getUserNormalWord(localStorage.getItem('userId'), props.word?.id).then(
+        setAnswer,
+      );
+    }
+  }, [props.word]);
 
+  if (props === undefined) throw new Error('error');
 
   const audio: HTMLAudioElement = new Audio();
 
@@ -72,13 +85,29 @@ function TextBookWord(props: CardComponentProps | any) {
 
   const addToDifficult = (wordId: any) => {
     createHardUserWord(localStorage.getItem('userId'), wordId).then(() => {
-      setWord(Object.assign(word, { difficult: true }));
+      setWord(
+        Object.assign(word, {
+          difficulty: 'hard',
+          optional: {
+            countRight: 0,
+            countWrong: 0,
+          },
+        }),
+      );
     });
   };
 
   const addToLearned = (wordId: any) => {
     createLearnedUserWord(localStorage.getItem('userId'), wordId).then(() => {
-      setWord(Object.assign(word, { learned: true }));
+      setWord(
+        Object.assign(word, {
+          difficulty: 'easy',
+          optional: {
+            countRight: 0,
+            countWrong: 0,
+          },
+        }),
+      );
     });
   };
 
@@ -159,11 +188,11 @@ associative picture'
       <div className='statistics'>
         <div>
           <p className={props.color}> "Аудиовызов"</p>
-          <b>{countGuess}</b>
+          <b>{/*answer?.optional?.countRight ||*/ 0}</b>
         </div>
         <div>
           <p className={props.color}> "Спринт"</p>
-          <b>{countGuess}</b>
+          <b>{answer?.optional?.countRight || 0}</b>
         </div>
       </div>
     </div>

@@ -1,10 +1,9 @@
-// import TextBookHeader from './components/header';
 import TextBookTitle from './components/main/title';
 import TextBookLevels from './components/main/levels';
 import TextBookPagination from './components/main/pagination';
 import TextBookWordsContainer from './components/main/words';
 import { useState, useEffect } from 'react';
-import TextBookGameCards, { TextBookGameArea } from './components/main/game';
+import { TextBookGameArea } from './components/main/game';
 
 function AppTextBook(props: any) {
   const mainWrapper = document.getElementById('app-header') as HTMLElement;
@@ -22,7 +21,6 @@ function AppTextBook(props: any) {
   useEffect(() => {
     localStorage.setItem('textbook', 'true');
   }, []);
-
 
   let color = 'yellow';
   switch (group) {
@@ -61,6 +59,7 @@ function AppTextBook(props: any) {
         onClick={setGroup}
         accessToken={props.accessToken}
         color={color}
+        group={group}
       />
       <TextBookTitle title='Слова' subtitle='' text='' nameClass='' />
       <TextBookWordsContainer
@@ -69,14 +68,16 @@ function AppTextBook(props: any) {
         accessToken={props.accessToken}
         color={color}
       />
-      <TextBookPagination onClick={setPage} page={page} />
-      <TextBookTitle
-        title='Игры'
-        subtitle=''
-        text='Закрепи новые знания с помощью увлекательных игр'
-        nameClass=''
-      />
-      <TextBookGameArea />
+      {group !== 6 && <TextBookPagination onClick={setPage} page={page} />}
+      {group !== 6 && (
+        <TextBookTitle
+          title='Игры'
+          subtitle=''
+          text='Закрепи новые знания с помощью увлекательных игр'
+          nameClass=''
+        />
+      )}
+      {group !== 6 && <TextBookGameArea />}
     </div>
   );
 }

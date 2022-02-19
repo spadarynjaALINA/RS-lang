@@ -1,90 +1,82 @@
+import { useState } from 'react';
 import TextBookLevelsCard from './level-card';
 
 function TextBookLevels(props: any) {
+  const [activeLevelId, setActiveLevel] = useState(0);
 
-  const deleteActive = () => {
-    const actives = document.getElementsByClassName('text__book_word') as any;
-    [...actives].forEach((element: any) => {
-      element.classList.remove(`active-${props.color}`);
-
-    });
-    const active = document.getElementById('0');
-    active?.classList.add(`active-${props.color}`);
-  };
   return (
     <div className='text_book__levels'>
       <TextBookLevelsCard
-        active=''
         level='A1'
         description='Easy'
         color='yellow'
+        active={activeLevelId === 0}
         onClick={() => {
           props.onClick(0);
-          deleteActive();
-          
+          setActiveLevel(0);
         }}
       />
       <TextBookLevelsCard
-        active=''
         level='A2'
         description='Easy'
         color='green'
+        active={activeLevelId === 1}
         onClick={() => {
           props.onClick(1);
-          deleteActive();
+          setActiveLevel(1);
         }}
       />
       <TextBookLevelsCard
-        active=''
         level='B1'
         description='Medium'
         color='blue'
+        active={activeLevelId === 2}
         onClick={() => {
           props.onClick(2);
-          deleteActive();
+          setActiveLevel(2);
         }}
       />
       <TextBookLevelsCard
-        active=''
         level='B2'
         description='Medium'
         color='pink'
+        active={activeLevelId === 3}
         onClick={() => {
           props.onClick(3);
-          deleteActive();
+          setActiveLevel(3);
         }}
       />
       <TextBookLevelsCard
-        active=''
         level='C1'
         description='Hard'
         color='violet'
+        active={activeLevelId === 4}
         onClick={() => {
           props.onClick(4);
-          deleteActive();
+          setActiveLevel(4);
         }}
       />
 
       <TextBookLevelsCard
-        active=''
         level='C2'
         description='Hard'
         color='aqua'
+        active={activeLevelId === 5}
         onClick={() => {
           props.onClick(5);
-          deleteActive();
+          setActiveLevel(5);
         }}
       />
 
       {props.accessToken && (
         <TextBookLevelsCard
-          active=''
           level='D.W'
           description='Difficult'
           color='gray'
+          active={activeLevelId === 6}
           onClick={() => {
             props.onClick(6);
-            deleteActive();
+            setActiveLevel(6);
           }}
         />
       )}

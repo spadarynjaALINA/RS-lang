@@ -1,7 +1,6 @@
 import React from 'react';
 import { Button } from 'antd';
 import './results-window.css';
-import { Link } from 'react-router-dom';
 
 interface ResultsProps {
   word: string;
@@ -60,8 +59,8 @@ function ResultsWindow(props: {
         })}
       </ul>
       <div>
-        <Link to='/textbook'> <Button href='/Учебник'>В учебник</Button></Link>
-        <Link to='/'><Button href='/'>На главную</Button></Link>
+        <Button href='/Учебник'>В учебник</Button>
+        <Button href='/'>На главную</Button>
       </div>
     </div>
   );

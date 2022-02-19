@@ -2,7 +2,7 @@
 
 .App {
   text-align: center;
-  min-height: 100vh;
+  min-height: 200vh;
   padding-top: 80px;
   background-image: url(./assets/bg-2.jpg);
   background-repeat: no-repeat;
@@ -154,7 +154,7 @@ i {
 .text_book__level_card {
   height: 100px;
   min-width: 220px;
-  background-color: #f3f4f8;
+  /*background-color: #f3f4f8;*/
   display: flex;
   border-radius: 0.5rem;
   color: #2c2647;
@@ -172,7 +172,9 @@ i {
   font-family: 'Inconsolata', monospace;
   font-size: var(--font3);
 }
-
+.white {
+  color: white;
+}
 .left-part {
   margin-right: 20px;
 }
@@ -187,9 +189,9 @@ i {
 }
 .right-part {
   z-index: 1;
-  color: #ffc53d;
+  color: #929697;
   font-size: 50px;
-  font-weight: 800;
+  font-weight: 200;
 }
 .text_book__header_icons {
   width: 12%;
