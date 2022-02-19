@@ -25,7 +25,7 @@ function Statistic() {
   return <div className="StatisticWrap"> тут будет статистика</div>;
 }
 function App() {
-  console.log(location.href);
+  
   const [accessToken, setAccessToken] = useState(localStorage.getItem('token'));
   
   return (
@@ -64,7 +64,7 @@ function App() {
             </Route>
           </Switch>          
         </main>
-        {location.href} <Footer></Footer>
+        <Footer></Footer>
 
       </div>
     </Router>

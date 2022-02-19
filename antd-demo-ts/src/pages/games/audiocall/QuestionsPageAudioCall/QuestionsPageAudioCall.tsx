@@ -7,16 +7,18 @@ import { getWords } from '../../../../handlers';
 import { LevelButton } from '../LevelButton/LevelButton';
 import { QuestionButton } from '../QuestionBtn/QuestionBtn';
 import { getRandomNum } from './../Random';
+import ResultsWindow from 'src/pages/GameSprint/components/main/ResultsWindow';
 import './QuestionPageAudioCall.css';
 interface Word {
   word: string;
   wordTranslate: string;
   audio: string;
-  transcription: string;
-  image:any
+  transcription?: string;
+  image?: any
+  id:string
 }
 
-export function QuestionsPageAudioCall(props: { group: number, isActive: boolean }) {
+export function QuestionsPageAudioCall(props: { group: number, page: number, isActive: boolean }) {
  
   const [words, setWords] = useState([] as Word[]);
   const [showWord, setShowWord] = useState(false);
@@ -27,27 +29,42 @@ export function QuestionsPageAudioCall(props: { group: number, isActive: boolean
   const [usedWords, setUsedWords] = useState<number[]>([]);
   const [btnWords, setBtnWords] = useState([] as number[]);
   const [getSort, setSort] = useState(true);  
-  const [wronArr, setWronArr] = useState([] as number[]);
-  const [rightArr, setRightArr] = useState([] as number[]);
+  const [correctAnswers, setCorrectAnswers] = useState<Word[]>([]);
+  const [wrongAnswers, setWrongAnswers] = useState<Word[]>([]);
+  const [page, setPage] = useState(props.page);
+  const [totalScore, setTotalScore] = useState(0);
   const audio: HTMLAudioElement = new Audio(); 
- 
+  const [countOfCorrectAnswers, setCountOfCorrectAnswers] = useState(0);
   const orderWords = useMemo(() => {   
     let arr = [0, 1, 2, 3, 4];
     arr = arr.sort(() => Math.random() - .5).map(item => item + startCount);
     return arr;
   }, [getSort]);  
  
+  useEffect(() => {    
+    
+    if (localStorage.getItem('textbook')) {
+      (getWords(props.group, page))
+        .then((data) => {
+         
+          setWords(data.sort(() => Math.random() - .5));
+          console.log(data, words, 'textbook');
+        });
+    } else {
+      setWords([]);
+      const func = async () => {
+        const arr = [];    
+        for (let i = 0; i <= 30; i++) {
+          arr.push(getWords(props.group, i));
+        }
+        const res = await Promise.all(arr);
+        setWords(res.flat().sort(() => Math.random() - .5));
+        console.log(res, words);
+      };
 
-  useEffect(() => {      
-    const func = async () => {
-      const arr = [];    
-      for (let i = 1; i <= 30; i++) {
-        arr.push(getWords(props.group, i));
-      }
-      const res = await Promise.all(arr);
-      setWords(res.flat().sort(() => Math.random() - .5));
-    };
-    func();
+      func();
+    }
+    
   }, []); 
  
   function getButtons() {
@@ -55,7 +72,26 @@ export function QuestionsPageAudioCall(props: { group: number, isActive: boolean
     return (<div className='question-btn-wrap'>
       {words.length ? orderWords.map((i, index) => {   
         
-        return (<QuestionButton id={ `answerBtn${index + 1}`}isTrue={words[orderWords[index]]?.wordTranslate === words[startCount].wordTranslate} key={`question${index}`} text={ `${index + 1} ${words[orderWords[index]]?.wordTranslate}` } onClick={()=>{setShowWord(true);}}></QuestionButton>);
+        return (<QuestionButton id={`answerBtn${index + 1}`} isTrue={words[orderWords[index]]?.wordTranslate === words[startCount].wordTranslate} key={`question${index}`} text={`${index + 1} ${words[orderWords[index]]?.wordTranslate}`} onClick={() => {
+          if (words[orderWords[index]]?.wordTranslate === words[startCount].wordTranslate) {
+            setCorrectAnswers([...correctAnswers, {
+              word: words[startCount]?.word,
+              audio: words[startCount]?.audio,
+              wordTranslate: words[startCount]?.wordTranslate,
+              id: words[startCount]?.id,
+            }]);
+            setTotalScore(totalScore + 1);
+            setCountOfCorrectAnswers(countOfCorrectAnswers + 1);
+          } else {
+            setWrongAnswers([...wrongAnswers, {
+              word: words[startCount]?.word,
+              audio: words[startCount]?.audio,
+              wordTranslate: words[startCount]?.wordTranslate,
+              id: words[startCount]?.id,
+            }]);
+          }
+          setShowWord(true);
+        }}></QuestionButton>);
       }) : null}
     </div>);     
   }
@@ -85,10 +121,15 @@ export function QuestionsPageAudioCall(props: { group: number, isActive: boolean
           <p className='show-translate'>{`${words[startCount]?.wordTranslate}` }</p>
         </div>}
       </div> }
-      {(countQuestions === limitQuestions) ? <div className='audioCall-wrap audiocall-modal'>
-        <h2>Результаты</h2><div className='right-wrap'><h4>ошибок<span>{ }</span></h4></div><div className='wrong-wrap'><h4>знаю<span>{ }</span></h4></div>
-        <Link to='/textbook'> <Button>назад</Button></Link>
-        <Link to='/'><Button >главная</Button></Link></div> : !!words.length && getButtons() }
+      {(countQuestions === limitQuestions) ? <ResultsWindow
+        correctAnswers={correctAnswers}
+        wrongAnswers={wrongAnswers}
+        score = {totalScore}/>
+        // <div className='audioCall-wrap audiocall-modal'>
+        // <h2>Результаты</h2><div className='right-wrap'><h4>ошибок<span>{ }</span></h4></div><div className='wrong-wrap'><h4>знаю<span>{ }</span></h4></div>
+        // <Link to='/textbook'> <Button>назад</Button></Link>
+        //   <Link to='/'><Button >главная</Button></Link></div>
+        : !!words.length && getButtons()}
       
     
       {showWord ?
@@ -108,7 +149,13 @@ export function QuestionsPageAudioCall(props: { group: number, isActive: boolean
             setShowWord(false);
             // nextQuestion();   
             setStartCount(prev => prev + 5);
-            setSort(prev => !prev);            
+            setSort(prev => !prev);  
+            setWrongAnswers([...wrongAnswers, {
+              word: words[startCount]?.word,
+              audio: words[startCount]?.audio,
+              wordTranslate: words[startCount]?.wordTranslate,
+              id: words[startCount]?.id,
+            }]);
           }
         }}>Я не знаю правильный ответ</button>)}
     </div>

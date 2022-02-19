@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
 
 import './Games.css';
@@ -11,6 +11,9 @@ import AudioCall from './audiocall/StartPageAudioCall/StartPageAudioCall';
 
 export default function Games() {
   const match = useRouteMatch();
+  useEffect(() => {
+    localStorage.setItem('textbook', '');
+  }, []);
   return ( 
     <div className="games-wrap">
       <div className="games-item-wrap"> <Link to={`${match.url}/sprint`}>

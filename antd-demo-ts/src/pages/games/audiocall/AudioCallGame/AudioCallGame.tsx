@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import StartPageAudioCall from '../StartPageAudioCall/StartPageAudioCall';
 import { QuestionsPageAudioCall } from '../QuestionsPageAudioCall/QuestionsPageAudioCall';
@@ -6,7 +6,16 @@ import { QuestionsPageAudioCall } from '../QuestionsPageAudioCall/QuestionsPageA
 function AudioCallGame() {
   const [isStartPage, setIsStartPage] = useState(true);
   const [group, setGroup] = useState(0);
+  const [page, setPage] = useState(0);
   const [isActive, setIsActive] = useState(false);
+  useEffect(() => {
+    if (localStorage.getItem('textbook')) {
+      setPage(+(localStorage.getItem('page') as string));
+      setGroup(+(localStorage.getItem('group') as string));
+    } else {
+      setPage(30);
+    }
+  }, []);
   return (
     <div className='game-wrap'>
       {
@@ -21,6 +30,7 @@ function AudioCallGame() {
           : (
             <QuestionsPageAudioCall
               group={group}
+               page={page}
               isActive={isActive}
             />
           )

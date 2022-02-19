@@ -9,7 +9,7 @@ import { Word } from '../components/main/GameField';
 
 export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[]) {
   getUserWords(localStorage.getItem('userId'))
-  .then((userWords) => {
+    .then((userWords) => {
     // console.log(userWords);
       correctAnswers.forEach(word => {
         if (!userWords.includes(word.id)) {
@@ -35,23 +35,23 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[]) {
             });
         }
       });
-    wrongAnswers.forEach(word => {
-      if (!userWords.includes(word.id)) {
+      wrongAnswers.forEach(word => {
+        if (!userWords.includes(word.id)) {
           createUserNormalWord(localStorage.getItem('userId'), word.id, 0, 1);
-      } else {
+        } else {
           getUserNormalWord(localStorage.getItem('userId'), word.id)
             .then((userWord) => {
-                if (userWord.difficulty === 'easy') {
-                  updateUserNormalWord(localStorage.getItem('userId'), word.id, 0, userWord.optional.countWrong + 1, 'normal');
-                  // console.log('слово убрали из изученных', word.word);
-                }
+              if (userWord.difficulty === 'easy') {
                 updateUserNormalWord(localStorage.getItem('userId'), word.id, 0, userWord.optional.countWrong + 1, 'normal');
-                // console.log('неправильное слово существует',
-                //   userWord.optional.countRight,
-                //   userWord.optional.countWrong + 1,
-                //   word.word);
+                // console.log('слово убрали из изученных', word.word);
+              }
+              updateUserNormalWord(localStorage.getItem('userId'), word.id, 0, userWord.optional.countWrong + 1, 'normal');
+              // console.log('неправильное слово существует',
+              //   userWord.optional.countRight,
+              //   userWord.optional.countWrong + 1,
+              //   word.word);
             });
-      }
+        }
+      });
     });
-  });
 }
