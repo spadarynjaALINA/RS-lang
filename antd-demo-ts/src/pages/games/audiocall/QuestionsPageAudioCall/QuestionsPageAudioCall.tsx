@@ -44,12 +44,29 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
   useEffect(() => {    
     
     if (localStorage.getItem('textbook')) {
-      (getWords(props.group, page))
-        .then((data) => {
+      const func = async () => {
+        const textbookArr: Word[] = [];
+        const res = await(getWords(props.group, page));          
+        const data1 = res.sort(() => Math.random() - .5);
+        console.log(res);
+        for (let i = 0; i < 10; i++) {
+          textbookArr.push(data1[i]);
+          console.log(textbookArr);
+          const data2 = res.sort(() => Math.random() - .5);
+          const a = textbookArr.length;
+          for (let j = 0; j < data2.length; i++) {
+            if (textbookArr.length < (a + 4) && data1[i] !== data2[j]) {
+              textbookArr.push(data2[j]);
+            }
+          }
+                         
+          console.log(textbookArr, a);
+        }
+        setWords(textbookArr);
+        console.log(textbookArr, words, 'textbook');
          
-          setWords(data.sort(() => Math.random() - .5));
-          console.log(data, words, 'textbook');
-        });
+      };
+      func();
     } else {
       setWords([]);
       const func = async () => {
@@ -59,7 +76,6 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
         }
         const res = await Promise.all(arr);
         setWords(res.flat().sort(() => Math.random() - .5));
-        console.log(res, words);
       };
 
       func();
@@ -125,10 +141,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
         correctAnswers={correctAnswers}
         wrongAnswers={wrongAnswers}
         score = {totalScore}/>
-        // <div className='audioCall-wrap audiocall-modal'>
-        // <h2>Результаты</h2><div className='right-wrap'><h4>ошибок<span>{ }</span></h4></div><div className='wrong-wrap'><h4>знаю<span>{ }</span></h4></div>
-        // <Link to='/textbook'> <Button>назад</Button></Link>
-        //   <Link to='/'><Button >главная</Button></Link></div>
+      
         : !!words.length && getButtons()}
       
     
