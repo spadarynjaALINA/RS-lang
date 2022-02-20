@@ -24,10 +24,8 @@ export interface Word {
 }
 
 
-function GameField(props: { group: number, page: number, isActive: boolean, location?:any }) {
-  console.log(props.location);
+function GameField(props: { group: number, page: number, isActive: boolean }) {
   const [seconds, setSeconds] = useState(30);
-
   const [words, setWords] = useState([] as Word[]);
   const [randomWord, setRandomWord] = useState(getRandomNum(0, 4));
   const [randomTranslate, setRandomTranslate] = useState(getRandomNum(0, 4));

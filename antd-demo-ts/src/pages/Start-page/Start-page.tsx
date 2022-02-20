@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Link } from 'react-router-dom';
 import './Start-page.css';
 
 function StartPage() {
@@ -8,16 +9,17 @@ function StartPage() {
     <div className="App-start">
       <div className="App-start__about">
         <p >
-          тут что-то будет написано про приложение
-
+          Запоминайте английские слова легко! Изучайте слова в учебнике и тренеруйтесь в мини-играх. Повторяйте каждый день для улучшения результатов.
         </p>
+        <Link to='/about'>  <button>Подробнее</button></Link>
       </div>
      
       <div className="App-start__team">
      
         <p >
-         тут что-то будет написано про команду
+        Мы - команда начинающих разработчиков в рамках курса Rolling Scopes school JavaScript/Front-end представляем вам приложение для изучения английского языка написанное с помощью библиотеки React.
         </p>
+        <Link to='/team'>  <button>Подробнее</button></Link>
       </div>
     </div>   
 

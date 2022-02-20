@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Button } from 'antd';
+import { getHeapCodeStatistics } from 'v8';
 
 interface ILevelButton {
   show?:any
@@ -9,12 +10,12 @@ interface ILevelButton {
   key: string
   className?: string
   style?: any
-  isTrue: boolean
+  disabled?:boolean
   id:string
 }
 
 export function QuestionButton(props: ILevelButton) {
-  const [isClick, setIsClick] = useState(false);
+ 
   const red = {
     background: 'red',
   };
@@ -25,10 +26,10 @@ export function QuestionButton(props: ILevelButton) {
     background:'none',
   };
   return (
-    <Button ghost id={props.id} shape="round" className="level-button" style={isClick &&  (props.isTrue ? green : red) || black}
+    <Button ghost id={props.id} shape="round" className="level-button" style={props.style}
       onClick={() => {
-        setIsClick(true);
+      
         props.onClick();
-      }}>{props.text}</Button>
+      }  } disabled={props.disabled}>{props.text}</Button>
   );
 }

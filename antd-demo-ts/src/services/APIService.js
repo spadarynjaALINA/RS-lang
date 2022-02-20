@@ -305,7 +305,7 @@ export const getUserNormalWord = async (userId, wordId) => {
 
 export const getUserWords = async (userId) => {
   const rawResponse = await fetch(
-    `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/`,
+    `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words`,
     {
       method: 'GET',
       withCredentials: true,
@@ -317,9 +317,9 @@ export const getUserWords = async (userId) => {
   );
   const content = await rawResponse.json();
   let arrOfWordsId = [];
-  content.forEach((element) => {
-    arrOfWordsId.push(element.wordId);
-  });
+  // content.forEach((element) => {
+  //   arrOfWordsId.push(element.wordId);
+  // });
 
-  return arrOfWordsId;
+  return content;
 };

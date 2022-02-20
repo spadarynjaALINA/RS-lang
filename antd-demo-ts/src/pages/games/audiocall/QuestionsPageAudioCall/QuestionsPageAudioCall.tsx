@@ -2,29 +2,33 @@
 import { Button } from 'antd';
 import { useState, useEffect, useMemo } from 'react';
 import { Link } from 'react-router-dom';
-import { JsxElement } from 'typescript';
+import { JsxElement, setSyntheticLeadingComments } from 'typescript';
 import { getWords } from '../../../../handlers';
 import { LevelButton } from '../LevelButton/LevelButton';
 import { QuestionButton } from '../QuestionBtn/QuestionBtn';
 import { getRandomNum } from './../Random';
 import ResultsWindow from 'src/pages/GameSprint/components/main/ResultsWindow';
 import './QuestionPageAudioCall.css';
+import { getUserWords } from 'src/services/APIService';
 interface Word {
   word: string;
   wordTranslate: string;
   audio: string;
   transcription?: string;
   image?: any
-  id:string
+  id: string
+  difficulty?:string
 }
-
+interface Style {
+  background:'string'
+}
 export function QuestionsPageAudioCall(props: { group: number, page: number, isActive: boolean }) {
  
   const [words, setWords] = useState([] as Word[]);
   const [showWord, setShowWord] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [countQuestions, setCountQuestions] = useState(0);
-  const limitQuestions = 10;
+  const [limitQuestions, setLimitQuestions] = useState(10);
   const [startCount, setStartCount] = useState(0);
   const [usedWords, setUsedWords] = useState<number[]>([]);
   const [btnWords, setBtnWords] = useState([] as number[]);
@@ -34,18 +38,41 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
   const [page, setPage] = useState(props.page);
   const [totalScore, setTotalScore] = useState(0);
   const audio: HTMLAudioElement = new Audio(); 
+  const [visible, setvisible] = useState(false);
+  const [styled, setStyled] = useState([] as any[]);
   const [countOfCorrectAnswers, setCountOfCorrectAnswers] = useState(0);
+  const [disabled, setDisabled] = useState(false);
   const orderWords = useMemo(() => {   
     let arr = [0, 1, 2, 3, 4];
     arr = arr.sort(() => Math.random() - .5).map(item => item + startCount);
     return arr;
   }, [getSort]);  
- 
+  const red = {
+    background: 'red',
+  };
+  const green = {
+    background: 'green',
+  };
+  const black = {
+    background:'none',
+  };
   useEffect(() => {    
     
     if (localStorage.getItem('textbook')) {
       const func = async () => {
-        const res = await(getWords(props.group, page));          
+        const used = await (getUserWords(localStorage.getItem('userId')));
+        const result = await (getWords(props.group, page)); 
+        let res:Word[] = [];
+        used.filter((el: Word)=> el.difficulty !== 'easy' ).forEach((el: Word) => {
+          result.filter((i: Word) => 
+            i.id !== el.id,
+          );
+          res = result;
+          console.log(res,  el);
+        });
+      
+        console.log(used, '<-used', res, '<--filtered arr');
+        if (res.length < 10)setLimitQuestions(res.length);
         res.sort(() => Math.random() - .5);
         const arr1 = res.slice(0, 10);
         const textbookArr = arr1.map((el:Word) => {
@@ -74,34 +101,51 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
     }
     
   }, []); 
+  const arr: any = [];
+  useEffect(() => {
+    setStyled(arr);
+  }, [visible]);
  
   function getButtons() {
-     
+   
     return (<div className='question-btn-wrap'>
-      {words.length ? orderWords.map((i, index) => {   
-        
-        return (<QuestionButton id={`answerBtn${index + 1}`} isTrue={words[orderWords[index]]?.wordTranslate === words[startCount].wordTranslate} key={`question${index}`} text={`${index + 1} ${words[orderWords[index]]?.wordTranslate}`} onClick={() => {
+      {words.length ? orderWords.map((i, index) => {
+        if (words[orderWords[index]]?.wordTranslate === words[startCount].wordTranslate) { arr.push(green); } else {
+          arr.push(black);
+          
+        }
+        console.log(arr);
+        return (<QuestionButton id={`answerBtn${index + 1}`} style={visible ? styled[index] : black} key={`question${index}`} text={`${index + 1} ${words[orderWords[index]]?.wordTranslate}`} disabled={ disabled}onClick={() => {
+          setDisabled(true);
           if (words[orderWords[index]]?.wordTranslate === words[startCount].wordTranslate) {
+            
             setCorrectAnswers([...correctAnswers, {
               word: words[startCount]?.word,
               audio: words[startCount]?.audio,
               wordTranslate: words[startCount]?.wordTranslate,
               id: words[startCount]?.id,
             }]);
+           
             setTotalScore(totalScore + 1);
             setCountOfCorrectAnswers(countOfCorrectAnswers + 1);
           } else {
+            arr[index] = red;
+            setStyled(arr);
+            console.log(styled, arr, '<---styled');
             setWrongAnswers([...wrongAnswers, {
               word: words[startCount]?.word,
               audio: words[startCount]?.audio,
               wordTranslate: words[startCount]?.wordTranslate,
               id: words[startCount]?.id,
             }]);
-          }
+          } 
+          
+          console.log(arr);
+          setvisible(true);
           setShowWord(true);
         }}></QuestionButton>);
       }) : null}
-    </div>);     
+    </div>);   
   }
 
   function playAudio(word: number) {  
@@ -119,7 +163,9 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
     if (countQuestions !== limitQuestions)  playAudio(startCount);  
   }, [words.length, getSort]);
  
-  
+  //  useEffect(() => {
+  //   setUsedWords([...usedWords, words[startCount]]);
+  // }, [words[startCount]]);
   return (
     <div  className = 'audioCall-wrap' >      
       {!showModal && <div className='audio-wrap'>
@@ -132,37 +178,36 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
       {(countQuestions === limitQuestions) ? <ResultsWindow
         correctAnswers={correctAnswers}
         wrongAnswers={wrongAnswers}
-        score = {totalScore}/>
-      
-        : !!words.length && getButtons()}
-      
+        score = {totalScore}/>      
+        : !!words.length && getButtons()}      
     
-      {showWord ?
-       
+      {showWord ?       
         (!showModal && <button className='next-btn' onClick={() => {         
           if (countQuestions < limitQuestions) {
             setCountQuestions(prev => prev + 1);
             setShowWord(false);
-            // nextQuestion();
             setStartCount(prev => prev + 5);
             setSort(prev => !prev);
           }
-          
+          setDisabled(false);
+          setvisible(false);
         }}>Следующий вопрос</button>) : (!!words.length && <button className='next-btn' onClick={() => {
           if (countQuestions < limitQuestions) {
-            setCountQuestions(prev => prev + 1);
-            setShowWord(false);
-            // nextQuestion();   
-            setStartCount(prev => prev + 5);
-            setSort(prev => !prev);  
+            // setCountQuestions(prev => prev + 1);
+            // setShowWord(false);
+            // setStartCount(prev => prev + 5);
+            // setSort(prev => !prev);  
             setWrongAnswers([...wrongAnswers, {
               word: words[startCount]?.word,
               audio: words[startCount]?.audio,
               wordTranslate: words[startCount]?.wordTranslate,
               id: words[startCount]?.id,
             }]);
+            setShowWord(true);
+            setvisible(true);
+            setDisabled(true);
           }
-        }}>Я не знаю правильный ответ</button>)}
+        }}>Не знаю</button>)}
     </div>
   );
  
