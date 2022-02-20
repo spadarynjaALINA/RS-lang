@@ -20,10 +20,12 @@ export interface Word {
   wordTranslate: string;
   audio: string;
   id: string;
+  
 }
 
 
-function GameField(props: { group: number, page: number, isActive: boolean }) {
+function GameField(props: { group: number, page: number, isActive: boolean, location?:any }) {
+  console.log(props.location);
   const [seconds, setSeconds] = useState(30);
 
   const [words, setWords] = useState([] as Word[]);

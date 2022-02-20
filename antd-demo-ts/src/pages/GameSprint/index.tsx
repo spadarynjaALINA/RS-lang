@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import StartPageGameSprint from './components/main/StartPageGameSprint';
 import GameField from './components/main/GameField';
+import { useParams } from 'react-router';
 
 function SprintGame() {
+  console.log(useParams());
   const [isStartPage, setIsStartPage] = useState(true);
   const [group, setGroup] = useState(0);
   const [page, setPage] = useState(0);

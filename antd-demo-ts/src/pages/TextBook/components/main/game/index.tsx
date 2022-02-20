@@ -13,7 +13,7 @@ export function TextBookGameArea() {
   return (
     <div className='text_book__game_wrapper'>
       {/* <a className='text_book__game-link' href='/Мини-игры/Спринт'>  </a> */}
-      <Link to={'games/sprint'}><TextBookGameCards game={game1} /></Link> 
+      <Link to={{ pathname:'games/sprint', state:{ from:'textbook' } }}><TextBookGameCards game={game1} /></Link> 
     
          
       <Link to={'games/audiocall'}><TextBookGameCards2 game={game3} /></Link>

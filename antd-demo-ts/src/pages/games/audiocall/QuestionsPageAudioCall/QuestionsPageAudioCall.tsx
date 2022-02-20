@@ -45,26 +45,18 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
     
     if (localStorage.getItem('textbook')) {
       const func = async () => {
-        const textbookArr: Word[] = [];
         const res = await(getWords(props.group, page));          
-        const data1 = res.sort(() => Math.random() - .5);
-        console.log(res);
-        for (let i = 0; i < 10; i++) {
-          textbookArr.push(data1[i]);
-          console.log(textbookArr);
-          const data2 = res.sort(() => Math.random() - .5);
-          const a = textbookArr.length;
-          for (let j = 0; j < data2.length; i++) {
-            if (textbookArr.length < (a + 4) && data1[i] !== data2[j]) {
-              textbookArr.push(data2[j]);
-            }
-          }
-                         
-          console.log(textbookArr, a);
-        }
-        setWords(textbookArr);
-        console.log(textbookArr, words, 'textbook');
-         
+        res.sort(() => Math.random() - .5);
+        const arr1 = res.slice(0, 10);
+        const textbookArr = arr1.map((el:Word) => {
+          const arr = [el];
+          const arr2 = [...res].sort(() => Math.random() - .5).filter(e => e.id !== el.id);
+          return arr.concat(arr2.slice(0, 4));
+        });
+       
+        const textbookArr1 = textbookArr.flat(1);
+        setWords(textbookArr1);
+        console.log(textbookArr1);
       };
       func();
     } else {
