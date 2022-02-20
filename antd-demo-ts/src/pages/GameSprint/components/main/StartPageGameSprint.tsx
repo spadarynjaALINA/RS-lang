@@ -2,18 +2,39 @@ import './game-start-page.css';
 import { Button } from 'antd';
 import { useState, useEffect } from 'react';
 import { LevelButton } from './levelButton';
+import { getWords } from '../../../../handlers';
+import { getFullUserWords } from '../../../../services/APIService';
+import { Word } from './GameField';
 
 function StartPageGameSprint(props: any) {
   const [startDisable, setStartDisable] = useState(true);
   const [startPage, setStartPage] = useState(false);
+  const [notEnough, setNotEnough] = useState(false);
 
   useEffect(() => {
     setStartPage(Boolean(localStorage.getItem('textbook')));
     if (startPage === true) {
       setStartDisable(false);
     }
-
   }, [startPage]);
+
+  useEffect(() => {
+    if (localStorage.getItem('textbook')) {
+      const page = localStorage.getItem('page');
+      if (!page) throw new Error('');
+      const group = localStorage.getItem('group');
+      if (!group) throw new Error('');
+      (getWords(+(group), +(page)))
+        .then(async (data) => {
+          const easyWords = await getFullUserWords(localStorage.getItem('userId'));
+          const dataFiltered = data.filter((word: Word) => !easyWords.includes(word.id));
+          if (dataFiltered.length < 4) {
+            setNotEnough(true);
+          }
+        });
+    }
+    
+  }, []);
 
   return (
     <div className='game-container'>
@@ -59,11 +80,15 @@ function StartPageGameSprint(props: any) {
             onClick2={setStartDisable}
             text='C2'
           />
-        </div> : <div className='game-level-selector'>
+        </div>
+        : notEnough ? <div className='game-level-selector'>
+          <p className='game-rules'> На этой странице не достаточно слов для игры. </p>
+        </div>
+          : <div className='game-level-selector'>
           <p className='game-rules'> Игра запуститься со словами с текущей страницы, затем добавяться слова с предыдущих страниц. </p>
         </div>}
       <Button type='primary' shape='round' className='game-start-button'
-        disabled={startDisable} onClick={() => {
+        disabled={startDisable || notEnough} onClick={() => {
           props.onClick1(false);
           props.onClick3(true);
         }
