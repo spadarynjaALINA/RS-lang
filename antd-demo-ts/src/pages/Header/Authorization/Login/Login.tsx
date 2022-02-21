@@ -44,9 +44,9 @@ export default function Login() {
     const password = values.password;
     const toCreate = { email, password };
    
-    console.log(toCreate);
+   
     loginUser(toCreate).then(() => {
-      console.log('Received values of form: ', values);
+     
       login.toggleLogin();
     }).catch(() => toErr());
 
@@ -89,6 +89,7 @@ export default function Login() {
               type="password"
               placeholder="Пароль"
               onChange={toSuccess}
+              autoComplete ='on'
             />
           </Form.Item>
           <Form.Item>
