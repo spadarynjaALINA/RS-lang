@@ -9,6 +9,7 @@ export interface StandardComponentProps {
   word: CardComponentProps | null;
   wordId: string | null;
   onClick: any;
+  onChangeDifficulty: any;
   id: any;
   group: number | boolean;
   color: string;
@@ -31,7 +32,11 @@ function TextBookWordList(props: StandardComponentProps) {
   useEffect(() => {
     if (props.word?.id !== undefined) {
       getUserNormalWord(localStorage.getItem('userId'), props.word?.id).then(
-        setAnswer,
+        (data) => {
+          setAnswer(data);
+
+          props.onChangeDifficulty(props.word?.id, data?.difficulty);
+        },
       );
     }
   }, [props.word]);
@@ -40,7 +45,6 @@ function TextBookWordList(props: StandardComponentProps) {
     return null;
   }
 
-  getUserWord(localStorage.getItem('userId'));
   return (
     <div
       className={
@@ -69,8 +73,9 @@ function TextBookWordList(props: StandardComponentProps) {
 
         <p className='text__book_word_translate'>{word.wordTranslate}</p>
 
-        {props.word?.difficulty === 'easy' ||
-          (answer?.difficulty === 'easy' && <span className='learned'></span>)}
+        {word?.difficulty === 'easy' && <span className='learned'></span>}
+        {props.word?.difficulty === 'easy' && <span className='learned'></span>}
+
         {props.word?.difficulty === 'hard' && (
           <span className='difficult'></span>
         )}

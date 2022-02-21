@@ -24,32 +24,39 @@ function StartPageGameSprint(props: any) {
       if (!page) throw new Error('');
       const group = localStorage.getItem('group');
       if (!group) throw new Error('');
-      (getWords(+(group), +(page)))
-        .then(async (data) => {
-          const easyWords = await getFullUserWords(localStorage.getItem('userId'));
-          let dataFiltered: Word[] = data.filter((word: Word) => !easyWords.includes(word.id));
-          while (dataFiltered.length < 10 && +(page as string) > 1) {
-            page = (+(page as string) - 1).toString();
-            const prevPageWords = await getWords(+(group), +(page));
-            const prevFiltered = prevPageWords.filter((word: Word) => !easyWords.includes(word.id));
-            dataFiltered = [...dataFiltered, ...prevFiltered];
-            // console.log('доступные слова', dataFiltered);
-          }
-          if (dataFiltered.length < 10) {
-            setNotEnough(true);
-          }
-        });
+      getWords(+group, +page).then(async (data) => {
+        const easyWords = await getFullUserWords(
+          localStorage.getItem('userId'),
+        );
+        let dataFiltered: Word[] = data.filter(
+          (word: Word) => !easyWords.includes(word.id),
+        );
+        while (dataFiltered.length < 10 && +(page as string) > 1) {
+          page = (+(page as string) - 1).toString();
+          const prevPageWords = await getWords(+group, +page);
+          const prevFiltered = prevPageWords.filter(
+            (word: Word) => !easyWords.includes(word.id),
+          );
+          dataFiltered = [...dataFiltered, ...prevFiltered];
+          // console.log('доступные слова', dataFiltered);
+        }
+        if (dataFiltered.length < 10) {
+          setNotEnough(true);
+        }
+      });
     }
-    
   }, []);
 
   return (
     <div className='game-container'>
       <div className='game-text-container'>
         <p className='game-title'>Спринт</p>
-        <p className='game-rules'>Спринт - тренировка на скорость. Попробуй угадать как можно больше слов за 30 секунд.</p>
+        <p className='game-rules'>
+          Спринт - тренировка на скорость. Попробуй угадать как можно больше
+          слов за 30 секунд.
+        </p>
       </div>
-      {!startPage ?
+      {!startPage ? (
         <div className='game-level-selector'>
           <LevelButton
             group='0'
@@ -88,18 +95,35 @@ function StartPageGameSprint(props: any) {
             text='C2'
           />
         </div>
-        : notEnough ? <div className='game-level-selector'>
-          <p className='game-rules'> На этой странице не достаточно слов для игры. </p>
+      ) : notEnough ? (
+        <div className='game-level-selector'>
+          <p className='game-rules'>
+            {' '}
+            На этой и предыдущих страницах не достаточно слов для игры.{' '}
+          </p>
         </div>
-          : <div className='game-level-selector'>
-          <p className='game-rules'> Игра запуститься со словами с текущей страницы, затем добавяться слова с предыдущих страниц. </p>
-        </div>}
-      <Button type='primary' shape='round' id='startBtn'className='game-start-button'
-        disabled={startDisable || notEnough} onClick={() => {
+      ) : (
+        <div className='game-level-selector'>
+          <p className='game-rules'>
+            {' '}
+            Игра запуститься со словами с текущей страницы, затем добавяться
+            слова с предыдущих страниц.{' '}
+          </p>
+        </div>
+      )}
+      <Button
+        type='primary'
+        shape='round'
+        id='startBtn'
+        className='game-start-button'
+        disabled={startDisable || notEnough}
+        onClick={() => {
           props.onClick1(false);
           props.onClick3(true);
-        }
-        }>Начать</Button>
+        }}
+      >
+        Начать
+      </Button>
     </div>
   );
 }

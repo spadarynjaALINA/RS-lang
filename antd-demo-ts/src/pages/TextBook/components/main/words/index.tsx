@@ -50,8 +50,23 @@ function TextBookWordsContainer(props: StandardComponentProps) {
     });
   };
 
+  const onChangeDifficulty = (wordId: string, level: string) => {
+    const index = words.findIndex((word: any) => word.id == wordId);
+
+    const oldWords: any = [...words];
+
+    oldWords[index].difficulty = level;
+
+    setWords(oldWords);
+  };
+
+  const isDone =
+    words?.filter((word: any) => {
+      return word?.difficulty;
+    })?.length === words.length && props.group !== 6;
+
   return (
-    <div className='text__book_word-container'>
+    <div className={`text__book_word-container ${isDone && 'done'}`}>
       <div className='text__book_word-greed'>
         {words.map((word: CardComponentProps, i) => (
           <TextBookWordList
@@ -63,6 +78,7 @@ function TextBookWordsContainer(props: StandardComponentProps) {
             group={props.group}
             color={props.color}
             setActive={setActive}
+            onChangeDifficulty={onChangeDifficulty}
             active={i === activeId}
           />
         ))}
@@ -77,6 +93,7 @@ function TextBookWordsContainer(props: StandardComponentProps) {
             group={props.group}
             color={props.color}
             setActive={setActive}
+            onChangeDifficulty={null}
             active={i === activeId}
           />
         ))}
@@ -87,6 +104,7 @@ function TextBookWordsContainer(props: StandardComponentProps) {
             word={words[card]}
             accessToken={props.accessToken}
             color={props.color}
+            onChangeDifficulty={onChangeDifficulty}
           />
         )}
         {props.group === 6 && wordsForId.length !== 0 && (
