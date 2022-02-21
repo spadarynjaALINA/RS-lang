@@ -254,6 +254,7 @@ export const createUserNormalWord = async (
     },
   );
   const content = await rawResponse.json();
+  console.log(content);
 };
 
 export const updateUserNormalWord = async (
@@ -317,9 +318,9 @@ export const getUserWords = async (userId) => {
   );
   const content = await rawResponse.json();
   let arrOfWordsId = [];
-  // content.forEach((element) => {
-  //   arrOfWordsId.push(element.wordId);
-  // });
+  content.forEach((element) => {
+    arrOfWordsId.push(element.wordId);
+  });
 
 
   return arrOfWordsId;

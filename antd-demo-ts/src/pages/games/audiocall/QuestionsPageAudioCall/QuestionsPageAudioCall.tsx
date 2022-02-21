@@ -52,7 +52,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
     background: 'red',
   };
   const green = {
-    background: 'green',
+    background: '#88d295',
   };
   const black = {
     background:'none',
@@ -164,35 +164,37 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
     if (countQuestions !== limitQuestions) playAudio(startCount);  
     if (countQuestions === limitQuestions)pushGameResults(correctAnswers, wrongAnswers);
   }, [words.length, getSort]);
-  function changeAnswer(i:number) {
-    setDisabled(true);
-    if (words[orderWords[i]]?.wordTranslate === words[startCount].wordTranslate) {
+
+  function changeAnswer(i: number) {
+    if (!disabled) {
+      setDisabled(true);
+      if (words[orderWords[i]]?.wordTranslate === words[startCount].wordTranslate) {
             
-      setCorrectAnswers([...correctAnswers, {
-        word: words[startCount]?.word,
-        audio: words[startCount]?.audio,
-        wordTranslate: words[startCount]?.wordTranslate,
-        id: words[startCount]?.id,
-      }]);
+        setCorrectAnswers([...correctAnswers, {
+          word: words[startCount]?.word,
+          audio: words[startCount]?.audio,
+          wordTranslate: words[startCount]?.wordTranslate,
+          id: words[startCount]?.id,
+        }]);
            
-      setTotalScore(totalScore + 1);
-      setCountOfCorrectAnswers(countOfCorrectAnswers + 1);
-    } else {
-      arr[0] = red;
-      setStyled(arr);
-      console.log(styled, arr, '<---styled');
-      setWrongAnswers([...wrongAnswers, {
-        word: words[startCount]?.word,
-        audio: words[startCount]?.audio,
-        wordTranslate: words[startCount]?.wordTranslate,
-        id: words[startCount]?.id,
-      }]);
-    } 
+        setTotalScore(totalScore + 1);
+        setCountOfCorrectAnswers(countOfCorrectAnswers + 1);
+      } else {
+        arr[0] = red;
+        setStyled(arr);
+        console.log(styled, arr, '<---styled');
+        setWrongAnswers([...wrongAnswers, {
+          word: words[startCount]?.word,
+          audio: words[startCount]?.audio,
+          wordTranslate: words[startCount]?.wordTranslate,
+          id: words[startCount]?.id,
+        }]);
+      } 
           
-    console.log(arr);
-    setvisible(true);
-    setShowWord(true);
-      
+      console.log(arr);
+      setvisible(true);
+      setShowWord(true);
+    }
   }
   const onKeydown = (e: KeyboardEvent) => {
     setTimeout(() => {
@@ -258,7 +260,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
         : !!words.length && getButtons()}      
     
       {showWord ?       
-        (!showModal && <button className='next-btn' onClick={() => {         
+        (!showModal && <button className='next-btn start-link' onClick={() => {         
           if (countQuestions < limitQuestions) {
             setCountQuestions(prev => prev + 1);
             setShowWord(false);
@@ -267,7 +269,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
           }
           setDisabled(false);
           setvisible(false);
-        }}>Следующий вопрос</button>) : (!!words.length && <button className='next-btn' onClick={() => {
+        }}>Следующий вопрос</button>) : (!!words.length && <button className='next-btn start-link' onClick={() => {
           if (countQuestions < limitQuestions) {
             
             setWrongAnswers([...wrongAnswers, {

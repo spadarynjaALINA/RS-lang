@@ -1,5 +1,5 @@
 .audio-wrap {
-  height: 500px;
+  height: 450px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -42,13 +42,15 @@
 } */
 .show-word,
 .show-translate {
-  margin-bottom: 0;
+  margin: 10px 0 0;
 }
 
 .question-btn-wrap {
   width: 100%;
   display: flex;
   justify-content: space-around;
+  align-items: baseline;
+  margin: 20px auto;
 }
 #answerBtn1,
 #answerBtn2,
@@ -57,12 +59,21 @@
 #answerBtn5 {
   font-size: var(--font3);
   height: 50px;
-  margin: 0 0 40px;
 }
 .show-words-image {
-  width: 60%;
+  width: 50%;
   margin: 0 auto;
 }
 .answer {
   font-weight: 900;
+  font-size: var(--font4);
+}
+.next-btn {
+  border: none;
+  font-size: var(--font4);
+  color: #fffbff;
+  background-color: #3eaeca;
+  cursor: pointer;
+  transition: 0.5s;
+  border-radius: 5px;
 }
