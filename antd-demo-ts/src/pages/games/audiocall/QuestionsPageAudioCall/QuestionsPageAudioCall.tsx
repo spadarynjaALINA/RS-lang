@@ -55,7 +55,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
     background: '#88d295',
   };
   const black = {
-    background:'none',
+    background:'white',
   };
   useEffect(() => {    
     
@@ -84,7 +84,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
        
         const textbookArr1 = textbookArr.flat(1);
         setWords(textbookArr1);
-        console.log(textbookArr1);
+        
       };
       func();
     } else {
@@ -115,7 +115,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
           arr.push(black);
           
         }
-        console.log(arr);
+       
         return (<QuestionButton id={`answerBtn${index + 1}`} style={visible ? styled[index] : black} key={`question${index}`} text={`${index + 1} ${words[orderWords[index]]?.wordTranslate}`} disabled={ disabled}onClick={() => {
           setDisabled(true);
           if (words[orderWords[index]]?.wordTranslate === words[startCount].wordTranslate) {
@@ -132,7 +132,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
           } else {
             arr[index] = red;
             setStyled(arr);
-            console.log(styled, arr, '<---styled');
+           
             setWrongAnswers([...wrongAnswers, {
               word: words[startCount]?.word,
               audio: words[startCount]?.audio,
@@ -141,7 +141,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
             }]);
           } 
           
-          console.log(arr);
+         
           setvisible(true);
           setShowWord(true);
         }}></QuestionButton>);
@@ -182,7 +182,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
       } else {
         arr[0] = red;
         setStyled(arr);
-        console.log(styled, arr, '<---styled');
+      
         setWrongAnswers([...wrongAnswers, {
           word: words[startCount]?.word,
           audio: words[startCount]?.audio,
@@ -191,7 +191,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
         }]);
       } 
           
-      console.log(arr);
+    
       setvisible(true);
       setShowWord(true);
     }

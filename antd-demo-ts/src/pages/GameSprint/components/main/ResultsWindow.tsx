@@ -60,8 +60,8 @@ function ResultsWindow(props: {
         })}
       </ul>
       <div>
-        <Link to='/textbook'> <Button >В учебник</Button></Link>
-        <Link to='/'><Button href='/'>На главную</Button></Link>
+        <Link to='/textbook'> <Button id='to-textbook'>В учебник</Button></Link>
+        <Link to='/'><Button id='to-main'>На главную</Button></Link>
       </div>
     </div>
   );
