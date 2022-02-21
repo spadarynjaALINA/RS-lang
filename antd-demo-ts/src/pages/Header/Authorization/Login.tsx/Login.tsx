@@ -14,9 +14,9 @@ const Login = (props: any) => {
     const password = values.password;
     const toCreate = { email, password };
 
-    console.log(toCreate);
+   
     loginUser(toCreate).then(props.onLogin);
-    console.log('Received values of form: ', values);
+    
   };
 
   return (

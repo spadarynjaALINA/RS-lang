@@ -11,6 +11,7 @@ import Footer from './pages/Footer/Footer';
 import AudioCallGame from './pages/games/audiocall/AudioCallGame/AudioCallGame';
 import { Team } from './pages/Team/Team';
 import { About } from './pages/About/About';
+import { Statistic } from './pages/Statistic/Statistic';
 
 // import TextBookHeader from './pages/TextBook/components/header';
 function TextBook(props: any) {
@@ -23,9 +24,8 @@ function TextBook(props: any) {
   );
 }
 
-function Statistic() {
-  return <div className="StatisticWrap"> тут будет статистика, очень нужно подождать. Спасибо</div>;
-}
+
+
 function App() {
   
   const [accessToken, setAccessToken] = useState(localStorage.getItem('token'));

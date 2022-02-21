@@ -1,0 +1,42 @@
+.statistic-wrap {
+  width: 1300px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  font-family: 'Inconsolata', monospace;
+  color: #4f4f4f;
+}
+.today-word,
+.today-sprint,
+.today-audiocall,
+.alltime-word,
+.alltime-sprint,
+.alltime-audiocall {
+  background-color: #f4f4f4;
+  width: 380px;
+  height: 200px;
+  border-radius: 15px;
+  padding: 20px;
+}
+.today-statistic-wrap,
+.alltime-statistic-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.statistic-title {
+  font-size: var(--font4);
+  font-weight: 700;
+  text-align: left;
+  margin-top: 0;
+}
+.statistic-title-h2 {
+  margin-bottom: 5px;
+  font-weight: 900;
+  font-size: var(--font5);
+}
+.statistic-description {
+  font-size: var(--font2);
+  margin: 10px;
+  text-align: left;
+}
