@@ -9,9 +9,9 @@
 .today-word,
 .today-sprint,
 .today-audiocall,
-.alltime-word,
-.alltime-sprint,
-.alltime-audiocall {
+.alltime-words,
+.alltime-progress,
+.allwords-circle {
   background-color: #f4f4f4;
   width: 380px;
   height: 200px;
@@ -28,10 +28,10 @@
   font-size: var(--font4);
   font-weight: 700;
   text-align: left;
-  margin-top: 0;
+  margin: 0 0 10px;
 }
 .statistic-title-h2 {
-  margin-bottom: 5px;
+  margin-bottom: 0;
   font-weight: 900;
   font-size: var(--font5);
 }
@@ -39,4 +39,14 @@
   font-size: var(--font2);
   margin: 10px;
   text-align: left;
+}
+.allwords-circle {
+  border-radius: 50%;
+  width: 250px;
+  height: 250px;
+}
+.alltime-words,
+.alltime-progress {
+  width: 420px;
+  height: 250px;
 }
