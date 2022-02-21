@@ -1,3 +1,4 @@
+
 import React, { useEffect } from 'react';
 import { Link, Route, Switch, useRouteMatch } from 'react-router-dom';
 
@@ -13,20 +14,35 @@ export default function Games() {
     localStorage.setItem('textbook', '');
   }, []);
   const match = useRouteMatch();
-  return (
-    <div className='games-wrap'>
-      <div className='games-item-wrap'>
-        {' '}
-        <Link to={`${match.url}/Спринт`}>
-          <TextBookGameCards game={game1}></TextBookGameCards>
-        </Link>
-      </div>
-      <div className='games-item-wrap'>
-        {' '}
-        <Link to={`${match.url}/Аудиовызов`}>
-          <TextBookGameCards2 game={game3}></TextBookGameCards2>
-        </Link>
-      </div>
-    </div>
+
+  useEffect(() => {
+    localStorage.setItem('textbook', '');
+  }, []);
+  return ( 
+    <div className="games-wrap">
+      <div className="games-item-wrap"> <Link to={`${match.url}/sprint`}>
+        <TextBookGameCards game={game1}></TextBookGameCards>
+      </Link></div>
+      <div className="games-item-wrap"> <Link to={`${match.url}/audiocall`}>
+        <TextBookGameCards2 game={game3}></TextBookGameCards2>
+      </Link></div>
+    </div>  
+
+  // <!--   return (
+  //     <div className='games-wrap'>
+  //       <div className='games-item-wrap'>
+  //         {' '}
+  //         <Link to={`${match.url}/Спринт`}>
+  //           <TextBookGameCards game={game1}></TextBookGameCards>
+  //         </Link>
+  //       </div>
+  //       <div className='games-item-wrap'>
+  //         {' '}
+  //         <Link to={`${match.url}/Аудиовызов`}>
+  //           <TextBookGameCards2 game={game3}></TextBookGameCards2>
+  //         </Link>
+  //       </div>
+  //     </div> -->
+
   );
 }

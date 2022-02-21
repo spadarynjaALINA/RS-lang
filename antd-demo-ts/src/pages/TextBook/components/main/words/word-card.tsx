@@ -196,11 +196,7 @@ associative picture'
       <p className='text_book__word-title'>Ответы в играх: </p>
       <div className='statistics'>
         <div>
-          <p className={props.color}> "Аудиовызов"</p>
-          <b>{/*answer?.optional?.countRight ||*/ 0}</b>
-        </div>
-        <div>
-          <p className={props.color}> "Спринт"</p>
+          <p className={props.color}>Правильных ответов:</p>
           <b>{answer?.optional?.countRight || 0}</b>
         </div>
       </div>

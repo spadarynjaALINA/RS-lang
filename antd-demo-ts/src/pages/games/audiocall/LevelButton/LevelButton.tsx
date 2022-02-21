@@ -7,11 +7,13 @@ interface ILevelButton {
   onClick1: any;
   onClick2:any
   text: string;
+  
 }
 
 export function LevelButton(props: ILevelButton) {
   return (
     <Button
+      
       ghost
       shape="round"
       className="level-button"

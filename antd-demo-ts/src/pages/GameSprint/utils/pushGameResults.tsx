@@ -9,7 +9,7 @@ import { Word } from '../components/main/GameField';
 export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[]) {
   getUserWords(localStorage.getItem('userId'))
     .then((userWords) => {
-      // console.log(userWords);
+
       correctAnswers.forEach(word => {
         if (!userWords.includes(word.id)) {
           createUserNormalWord(localStorage.getItem('userId'), word.id, 1, 0, 'normal');
@@ -51,5 +51,7 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[]) {
             });
         }
       });
+
     }).catch(err => console.log('Пользователь не выполнил вход'));
+
 }

@@ -1,4 +1,3 @@
-
 /* eslint @typescript-eslint/no-var-requires: "off" */
 import React, { useState, useEffect } from 'react';
 
@@ -20,6 +19,7 @@ export interface Word {
   wordTranslate: string;
   audio: string;
   id: string;
+  
 }
 
 function GameField(props: { group: number, page: number, isActive: boolean }) {
@@ -165,11 +165,11 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
     if (!isDisabled) {
       if (e.code === 'ArrowLeft' && showModal === false) {
         if (usedWords.length === words.length - 1) {
-            asyncCompare(true);
-          } else {
+          asyncCompare(true);
+        } else {
           compare(true);
           nextQuestion();
-          }
+        }
       } else if (e.code === 'ArrowRight' && showModal === false) {
         if (usedWords.length === words.length - 1) {
           asyncCompare(false);
@@ -210,8 +210,8 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
           if (usedWords.length === words.length - 1) {
             asyncCompare(true);
           } else {
-          compare(true);
-          nextQuestion();
+            compare(true);
+            nextQuestion();
           }
         }
         }>ВЕРНО</Button>

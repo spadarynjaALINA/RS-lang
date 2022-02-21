@@ -2,7 +2,7 @@
 
 .App {
   text-align: center;
-  min-height: 200vh;
+  min-height: 100vh;
   padding-top: 80px;
   background-image: url(./assets/bg-2.jpg);
   background-repeat: no-repeat;
@@ -22,7 +22,7 @@
 }
 
 .App-main {
-  margin: 80px auto;
+  margin: 45px auto;
 
   display: flex;
   flex-direction: column;
@@ -32,7 +32,6 @@
   color: #4f4f4f;
 }
 
-.GamesWrap,
 .StatisticWrap {
   margin-top: 0px;
   width: 60%;
@@ -217,7 +216,8 @@ i {
   display: flex;
   flex-wrap: wrap;
   gap: 1.5rem;
-  width: 60%;
+  width: 70%;
+  height: 100%;
 }
 .text__book_word {
   position: relative;
@@ -230,6 +230,28 @@ i {
   border: none;
   overflow: hidden;
   transition: all 0.3s;
+  padding: 16%;
+  font-family: 'Inconsolata', monospace;
+  font-size: 20px;
+  height: 100%;
+  font-weight: 900;
+}
+.text__book_word_group6 {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background-color: #f3f4f8;
+  border-radius: 5px;
+  border: none;
+  overflow: hidden;
+  transition: all 0.3s;
+  font-family: 'Inconsolata', monospace;
+  font-size: 20px;
+  font-weight: 900;
+}
+.text__book_word_wrapper_group6 {
+  width: 12%;
 }
 
 .text__book_word p {
@@ -243,7 +265,7 @@ i {
 .text__book_word-details {
   color: #2c2647;
   background-color: #f3f4f8;
-  width: 38%;
+  width: 33%;
   box-shadow: none;
   border-top-left-radius: 11rem;
 }
@@ -282,21 +304,10 @@ i {
   padding: 3px;
   width: 3%;
 }
-.ant-pagination-jump-prev
-  .ant-pagination-item-container
-  .ant-pagination-item-ellipsis,
-.ant-pagination-jump-next
-  .ant-pagination-item-container
-  .ant-pagination-item-ellipsis {
+.ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-ellipsis,
+.ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-ellipsis {
   position: absolute;
   top: 29%;
-}
-.text__book_word {
-  font-family: 'Inconsolata', monospace;
-  font-size: 20px;
-  height: 100%;
-
-  font-weight: 900;
 }
 
 .text__book_word_translate {
