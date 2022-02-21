@@ -44,42 +44,6 @@ export const loginUser = async (user) => {
   return content.token;
 };
 
-export const createHardUserWord = async (userId, wordId) => {
-  const rawResponse = await fetch(
-    `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/${wordId}`,
-    {
-      method: 'POST',
-      withCredentials: true,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-
-      body: JSON.stringify({ difficulty: 'hard' }),
-    },
-  );
-  const content = await rawResponse.json();
-};
-
-export const createLearnedUserWord = async (userId, wordId) => {
-  const rawResponse = await fetch(
-    `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/${wordId}`,
-    {
-      method: 'POST',
-      withCredentials: true,
-      headers: {
-        Authorization: `Bearer ${token}`,
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-
-      body: JSON.stringify({ difficulty: 'easy' }),
-    },
-  );
-  const content = await rawResponse.json();
-};
-
 export const getUserWord = async (userId) => {
   const rawResponse = await fetch(
     `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/`,
@@ -254,7 +218,6 @@ export const createUserNormalWord = async (
     },
   );
   const content = await rawResponse.json();
-  console.log(content);
 };
 
 export const updateUserNormalWord = async (
@@ -288,25 +251,31 @@ export const updateUserNormalWord = async (
 };
 
 export const getUserNormalWord = async (userId, wordId) => {
-  const rawResponse = await fetch(
-    `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/${wordId}`,
-    {
-      method: 'GET',
-      withCredentials: true,
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/json',
+  try {
+    const rawResponse = await fetch(
+      `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/${wordId}/`,
+      {
+        method: 'GET',
+        withCredentials: true,
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/json',
+        },
       },
-    },
-  );
-  const content = await rawResponse.json();
+    );
+    if (rawResponse.ok) {
+      return await rawResponse.json();
+    }
+  } catch (err) {
+    console.log(err);
+  }
 
-  return content;
+  return null;
 };
 
 export const getUserWords = async (userId) => {
   const rawResponse = await fetch(
-    `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words`,
+    `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/`,
     {
       method: 'GET',
       withCredentials: true,
@@ -321,7 +290,6 @@ export const getUserWords = async (userId) => {
   content.forEach((element) => {
     arrOfWordsId.push(element.wordId);
   });
-
 
   return arrOfWordsId;
 };
@@ -347,5 +315,4 @@ export const getFullUserWords = async (userId) => {
   });
 
   return arrOfWordsId;
-
 };

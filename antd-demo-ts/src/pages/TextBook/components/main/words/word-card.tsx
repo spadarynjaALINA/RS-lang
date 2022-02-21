@@ -1,10 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './word-card.css';
-import {
-  createHardUserWord,
-  createLearnedUserWord,
-  getUserWord,
-} from '../../../../../services/APIService';
+import { getUserWord } from '../../../../../services/APIService';
 import { getOneWord } from '../../../../../services/APIService';
 import {
   getUserNormalWord,
@@ -55,7 +51,7 @@ function TextBookWord(props: CardComponentProps | any) {
   }, [props.wordID]);
 
   useEffect(() => {
-    if (props.word?.id != undefined) {
+    if (props.word?.id !== undefined) {
       getUserNormalWord(localStorage.getItem('userId'), props.word?.id).then(
         setAnswer,
       );
@@ -89,35 +85,49 @@ function TextBookWord(props: CardComponentProps | any) {
   }
 
   const addToUserWords = (wordId: string, difficulty: string) => {
-    getUserWords(localStorage.getItem('userId'))
-      .then(async (userWords) => {
-        if (userWords.includes(wordId)) {
-          const userWord = await getUserNormalWord(localStorage.getItem('userId'), wordId);
-          updateUserNormalWord(localStorage.getItem('userId'), wordId, userWord.optional.countRight, userWord.optional.countWrong, difficulty);
-          setWord(
-            Object.assign(word, {
-              difficulty: difficulty,
-              optional: {
-                countRight: userWord.optional.countRight,
-                countWrong: userWord.optional.countWrong,
-              },
-            }),
-          );
-          console.log(`слово исправлено как ${difficulty}`, userWord);
-        } else {
-          createUserNormalWord(localStorage.getItem('userId'), wordId, 0, 0, difficulty);
-          console.log(`создано новое ${difficulty} слово`);
-          setWord(
-            Object.assign(word, {
-              difficulty: difficulty,
-              optional: {
-                countRight: 0,
-                countWrong: 0,
-              },
-            }),
-          );
-        }
-      });
+    getUserWords(localStorage.getItem('userId')).then(async (userWords) => {
+      if (userWords.includes(wordId)) {
+        const userWord = await getUserNormalWord(
+          localStorage.getItem('userId'),
+          wordId,
+        );
+        updateUserNormalWord(
+          localStorage.getItem('userId'),
+          wordId,
+          userWord.optional.countRight,
+          userWord.optional.countWrong,
+          difficulty,
+        );
+        setWord(
+          Object.assign(word, {
+            difficulty: difficulty,
+            optional: {
+              countRight: userWord.optional.countRight,
+              countWrong: userWord.optional.countWrong,
+            },
+          }),
+        );
+        console.log(`слово исправлено как ${difficulty}`, userWord);
+      } else {
+        createUserNormalWord(
+          localStorage.getItem('userId'),
+          wordId,
+          0,
+          0,
+          difficulty,
+        );
+        console.log(`создано новое ${difficulty} слово`);
+        setWord(
+          Object.assign(word, {
+            difficulty: difficulty,
+            optional: {
+              countRight: 0,
+              countWrong: 0,
+            },
+          }),
+        );
+      }
+    });
   };
 
   return (
@@ -192,12 +202,18 @@ associative picture'
       />
       <p className='text_book__word-text-example-translate'>
         {word?.textExampleTranslate}
-      </p><div className='statistics'> <p className='text_book__word-title'>Ответы в играх:</p><span className={props.color}>Правильных ответов:<b>{answer?.optional?.countRight || 0}</b></span> </div>
-     
+      </p>
+      <div className='statistics'>
+        {' '}
+        <p className='text_book__word-title'>Ответы в играх:</p>
+        <span className={props.color}>
+          Правильных ответов:<b>{answer?.optional?.countRight || 0}</b>
+        </span>{' '}
+      </div>
+
       <div className=''>
         <div>
-          <p ></p>
-          
+          <p></p>
         </div>
       </div>
     </div>

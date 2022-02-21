@@ -38,6 +38,7 @@ function TextBookWordsContainer(props: StandardComponentProps) {
     } else {
       getUserWord(localStorage.getItem('userId')).then((word: any) => {
         setWordsId(word);
+        console.log(word, 'group6');
 
         setWords([]);
       });
