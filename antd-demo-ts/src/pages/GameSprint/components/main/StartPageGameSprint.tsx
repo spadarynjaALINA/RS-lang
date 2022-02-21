@@ -20,15 +20,22 @@ function StartPageGameSprint(props: any) {
 
   useEffect(() => {
     if (localStorage.getItem('textbook')) {
-      const page = localStorage.getItem('page');
+      let page = localStorage.getItem('page');
       if (!page) throw new Error('');
       const group = localStorage.getItem('group');
       if (!group) throw new Error('');
       (getWords(+(group), +(page)))
         .then(async (data) => {
           const easyWords = await getFullUserWords(localStorage.getItem('userId'));
-          const dataFiltered = data.filter((word: Word) => !easyWords.includes(word.id));
-          if (dataFiltered.length < 4) {
+          let dataFiltered: Word[] = data.filter((word: Word) => !easyWords.includes(word.id));
+          while (dataFiltered.length < 10 && +(page as string) > 1) {
+            page = (+(page as string) - 1).toString();
+            const prevPageWords = await getWords(+(group), +(page));
+            const prevFiltered = prevPageWords.filter((word: Word) => !easyWords.includes(word.id));
+            dataFiltered = [...dataFiltered, ...prevFiltered];
+            // console.log('доступные слова', dataFiltered);
+          }
+          if (dataFiltered.length < 10) {
             setNotEnough(true);
           }
         });
