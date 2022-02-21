@@ -2,10 +2,15 @@ import React, { useEffect, useState } from 'react';
 import './StartPageAudioCall.css';
 import { Button } from 'antd';
 import { LevelButton } from '../LevelButton/LevelButton';
+import { getWords } from '../../../../handlers';
+import { getFullUserWords } from '../../../../services/APIService';
+import { Word } from '../../../GameSprint/components/main/GameField';
 
 export default function StartPageAudioCall(props: any) {
   const [startDisable, setStartDisable] = useState(true);
   const [startPage, setStartPage] = useState(false);
+  const [notEnough, setNotEnough] = useState(false);
+  
   useEffect(() => {
     setStartPage(Boolean(localStorage.getItem('textbook')));
     if (startPage === true) {
@@ -13,6 +18,31 @@ export default function StartPageAudioCall(props: any) {
     }
 
   }, [startPage]);
+
+useEffect(() => {
+    if (localStorage.getItem('textbook')) {
+      let page = localStorage.getItem('page');
+      if (!page) throw new Error('');
+      const group = localStorage.getItem('group');
+      if (!group) throw new Error('');
+      (getWords(+(group), +(page)))
+        .then(async (data) => {
+          const easyWords = await getFullUserWords(localStorage.getItem('userId'));
+          let dataFiltered: Word[] = data.filter((word: Word) => !easyWords.includes(word.id));
+          while (dataFiltered.length < 5 && +(page as string) > 1) {
+            page = (+(page as string) - 1).toString();
+            const prevPageWords = await getWords(+(group), +(page));
+            const prevFiltered = prevPageWords.filter((word: Word) => !easyWords.includes(word.id));
+            dataFiltered = [...dataFiltered, ...prevFiltered];
+            // console.log('доступные слова', dataFiltered);
+          }
+          if (dataFiltered.length < 5) {
+            setNotEnough(true);
+          }
+        });
+    }
+    
+  }, []);
 
   console.log(location.href);
   return (
@@ -62,8 +92,10 @@ export default function StartPageAudioCall(props: any) {
          
             text='C2'
           />
-        </div></> : <div className='start-from-textbook'>В игре будут использоваться слова со страницы учебника</div>}
-      <Button type='primary' className="start-link" disabled={startDisable} onClick={() => {
+        </div></>
+        : notEnough ? <div className='start-from-textbook'>На этой и предыдущих страницах недостаточно слов для игры</div>
+        : <div className='start-from-textbook'>В игре будут использоваться слова со страницы учебника</div>}
+      <Button type='primary' className="start-link" disabled={startDisable || notEnough} onClick={() => {
        
         props.onClick1(false);
         props.onClick3(true);
