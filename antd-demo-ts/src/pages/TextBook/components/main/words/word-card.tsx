@@ -6,7 +6,12 @@ import {
   getUserWord,
 } from '../../../../../services/APIService';
 import { getOneWord } from '../../../../../services/APIService';
-import { getUserNormalWord } from '../../../../../services/APIService';
+import {
+  getUserNormalWord,
+  getUserWords,
+  updateUserNormalWord,
+  createUserNormalWord,
+} from '../../../../../services/APIService';
 
 export interface CardComponentProps {
   word: {
@@ -83,32 +88,36 @@ function TextBookWord(props: CardComponentProps | any) {
     };
   }
 
-  const addToDifficult = (wordId: any) => {
-    createHardUserWord(localStorage.getItem('userId'), wordId).then(() => {
-      setWord(
-        Object.assign(word, {
-          difficulty: 'hard',
-          optional: {
-            countRight: 0,
-            countWrong: 0,
-          },
-        }),
-      );
-    });
-  };
-
-  const addToLearned = (wordId: any) => {
-    createLearnedUserWord(localStorage.getItem('userId'), wordId).then(() => {
-      setWord(
-        Object.assign(word, {
-          difficulty: 'easy',
-          optional: {
-            countRight: 0,
-            countWrong: 0,
-          },
-        }),
-      );
-    });
+  const addToUserWords = (wordId: string, difficulty: string) => {
+    getUserWords(localStorage.getItem('userId'))
+      .then(async (userWords) => {
+        if (userWords.includes(wordId)) {
+          const userWord = await getUserNormalWord(localStorage.getItem('userId'), wordId);
+          updateUserNormalWord(localStorage.getItem('userId'), wordId, userWord.optional.countRight, userWord.optional.countWrong, difficulty);
+          setWord(
+            Object.assign(word, {
+              difficulty: difficulty,
+              optional: {
+                countRight: userWord.optional.countRight,
+                countWrong: userWord.optional.countWrong,
+              },
+            }),
+          );
+          console.log(`слово исправлено как ${difficulty}`, userWord);
+        } else {
+          createUserNormalWord(localStorage.getItem('userId'), wordId, 0, 0, difficulty);
+          console.log(`создано новое ${difficulty} слово`);
+          setWord(
+            Object.assign(word, {
+              difficulty: difficulty,
+              optional: {
+                countRight: 0,
+                countWrong: 0,
+              },
+            }),
+          );
+        }
+      });
   };
 
   return (
@@ -133,7 +142,7 @@ associative picture'
             id='add-to-hard'
             className={props.color}
             onClick={() => {
-              addToDifficult(props.word.id);
+              addToUserWords(props.word.id, 'hard');
             }}
           >
             + в сложные слова
@@ -150,7 +159,7 @@ associative picture'
             {!props.wordID && (
               <span
                 onClick={() => {
-                  addToLearned(props.word.id);
+                  addToUserWords(props.word.id, 'easy');
                 }}
               >
                 Слово изучено
