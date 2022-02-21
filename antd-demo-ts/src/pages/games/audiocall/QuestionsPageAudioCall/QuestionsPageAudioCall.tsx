@@ -66,13 +66,13 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
         const result = await (getWords(props.group, page));
         let res: Word[] = result.filter((word: Word) => !used.includes(word.id));
         while (res.length < 5 && pageTemp > 1) { // вот тут мин количество слов для игры
-            pageTemp -= 1;
-            const prevPageWords = await getWords(props.group, pageTemp);
-            const prevFiltered = prevPageWords.filter((word: Word) => !used.includes(word.id));
-            res = [...res, ...prevFiltered];
-          }
+          pageTemp -= 1;
+          const prevPageWords = await getWords(props.group, pageTemp);
+          const prevFiltered = prevPageWords.filter((word: Word) => !used.includes(word.id));
+          res = [...res, ...prevFiltered];
+        }
 
-        console.log(used, '<-used', res, '<--filtered arr');
+      
         if (res.length < 10)setLimitQuestions(res.length);
         res.sort(() => Math.random() - .5);
         const arr1 = res.slice(0, 10);

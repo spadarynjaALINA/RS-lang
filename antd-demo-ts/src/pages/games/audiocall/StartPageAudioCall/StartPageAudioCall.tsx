@@ -12,6 +12,7 @@ export default function StartPageAudioCall(props: any) {
   const [notEnough, setNotEnough] = useState(false);
   
   useEffect(() => {
+    console.log('я тут');
     setStartPage(Boolean(localStorage.getItem('textbook')));
     if (startPage === true) {
       setStartDisable(false);
@@ -19,7 +20,7 @@ export default function StartPageAudioCall(props: any) {
 
   }, [startPage]);
 
-useEffect(() => {
+  useEffect(() => {
     if (localStorage.getItem('textbook')) {
       let page = localStorage.getItem('page');
       if (!page) throw new Error('');
@@ -44,7 +45,7 @@ useEffect(() => {
     
   }, []);
 
-  console.log(location.href);
+  
   return (
     <div className="audioCall-wrap">
       <h2  className="audioCall-wrap-title">Аудиовызов</h2>
@@ -94,7 +95,7 @@ useEffect(() => {
           />
         </div></>
         : notEnough ? <div className='start-from-textbook'>На этой и предыдущих страницах недостаточно слов для игры</div>
-        : <div className='start-from-textbook'>В игре будут использоваться слова со страницы учебника</div>}
+          : <div className='start-from-textbook'>В игре будут использоваться слова со страницы учебника</div>}
       <Button type='primary' className="start-link" disabled={startDisable || notEnough} onClick={() => {
        
         props.onClick1(false);
