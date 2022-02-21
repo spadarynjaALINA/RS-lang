@@ -40,7 +40,6 @@ function TextBookWordList(props: StandardComponentProps) {
     return null;
   }
 
-  getUserWord(localStorage.getItem('userId'));
   return (
     <div
       className={

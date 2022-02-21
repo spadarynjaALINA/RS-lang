@@ -20,22 +20,15 @@ function StartPageGameSprint(props: any) {
 
   useEffect(() => {
     if (localStorage.getItem('textbook')) {
-      let page = localStorage.getItem('page');
+      const page = localStorage.getItem('page');
       if (!page) throw new Error('');
       const group = localStorage.getItem('group');
       if (!group) throw new Error('');
       (getWords(+(group), +(page)))
         .then(async (data) => {
           const easyWords = await getFullUserWords(localStorage.getItem('userId'));
-          let dataFiltered: Word[] = data.filter((word: Word) => !easyWords.includes(word.id));
-          while (dataFiltered.length < 10 && +(page as string) > 1) {
-            page = (+(page as string) - 1).toString();
-            const prevPageWords = await getWords(+(group), +(page));
-            const prevFiltered = prevPageWords.filter((word: Word) => !easyWords.includes(word.id));
-            dataFiltered = [...dataFiltered, ...prevFiltered];
-            // console.log('доступные слова', dataFiltered);
-          }
-          if (dataFiltered.length < 10) {
+          const dataFiltered = data.filter((word: Word) => !easyWords.includes(word.id));
+          if (dataFiltered.length < 4) {
             setNotEnough(true);
           }
         });
@@ -89,7 +82,7 @@ function StartPageGameSprint(props: any) {
           />
         </div>
         : notEnough ? <div className='game-level-selector'>
-          <p className='game-rules'> На этой странице не достаточно слов для игры. </p>
+          <p className='game-rules'> На этой и предыдущих страницах не достаточно слов для игры. </p>
         </div>
           : <div className='game-level-selector'>
           <p className='game-rules'> Игра запуститься со словами с текущей страницы, затем добавяться слова с предыдущих страниц. </p>
