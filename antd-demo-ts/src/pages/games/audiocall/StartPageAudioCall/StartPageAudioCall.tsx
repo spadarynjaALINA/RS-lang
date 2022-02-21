@@ -99,7 +99,7 @@ export default function StartPageAudioCall(props: any) {
         </div></>
         : notEnough ? <div className='start-from-textbook'>На этой и предыдущих страницах недостаточно слов для игры</div>
           : <div className='start-from-textbook'>В игре будут использоваться слова со страницы учебника</div>}
-      <Button type='primary' className="start-link" disabled={startDisable || notEnough} onClick={() => {
+      <Button type='primary' className="start-btn" disabled={startDisable || notEnough} onClick={() => {
 
        
         props.onClick1(false);

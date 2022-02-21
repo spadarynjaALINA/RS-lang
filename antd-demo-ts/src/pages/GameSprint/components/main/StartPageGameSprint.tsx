@@ -94,7 +94,7 @@ function StartPageGameSprint(props: any) {
           : <div className='game-level-selector'>
           <p className='game-rules'> Игра запуститься со словами с текущей страницы, затем добавяться слова с предыдущих страниц. </p>
         </div>}
-      <Button type='primary' shape='round' className='game-start-button'
+      <Button type='primary' shape='round' id='startBtn'className='game-start-button'
         disabled={startDisable || notEnough} onClick={() => {
           props.onClick1(false);
           props.onClick3(true);

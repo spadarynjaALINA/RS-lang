@@ -40,3 +40,22 @@
   color: #e60086;
   font-weight: 900;
 }
+.start-btn {
+  padding: 0 18px;
+  border: none;
+  font-size: var(--font3);
+  color: #fffbff;
+  background-color: #884f84;
+  cursor: pointer;
+  transition: 0.5s;
+  border-radius: 15px;
+  height: 50px;
+  min-width: 120px;
+}
+.start-btn:disabled {
+  background-color: #ac8ba9;
+}
+.start-btn:hover,
+.start-btn:active {
+  background-color: #573555;
+}

@@ -1,16 +1,20 @@
 .game-field {
+  padding: 50px;
   width: 1000px;
-  height: 400px;
-  color: white;
+  height: 500px;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-items: center;
+  background-color: #ddf1f0;
+  position: relative;
+  border-radius: 15px;
+  color: #4f4f4f;
+  font-family: 'Inconsolata', monospace;
 }
 
 .fa-stopwatch {
-  color: white;
   transition: 0.3s;
 }
 
@@ -25,7 +29,6 @@
 }
 
 .game-seconds {
-  color: white;
   font-size: 40px;
   display: block;
   white-space: nowrap;
@@ -46,7 +49,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: nowrap;
-  color: white;
+
   font-size: 50px;
 }
 
@@ -54,20 +57,34 @@
   gap: 0;
 }
 
-.game-left-button {
-  background-color: rgb(71, 155, 71);
-  color: white;
+#game-left-button:hover {
+  background-color: rgb(71, 197, 143);
+  color: #4f4f4f;
 }
-
-.game-right-button {
-  background-color: rgb(218, 76, 76);
-  color: white;
+#game-right-button,
+#game-left-button {
+  color: #949090;
+  font-size: var(--font4);
+  background-color: #fffbff;
+  border: none;
+  margin: 0 20px;
+  height: 50px;
+  border-radius: 15px;
 }
-
+#game-right-button:hover {
+  background-color: rgb(233, 108, 145);
+  color: #4f4f4f;
+}
 .game-result-translate {
   color: grey;
 }
-
+#game-right-button:active,
+#game-left-button:active,
+#game-right-button:focus,
+#game-left-button:focus {
+  border: none;
+  color: #4f4f4f;
+}
 .title-count-wrong {
   padding: 0 0.5rem 0 0.5rem;
   border-radius: 1rem;
@@ -81,7 +98,6 @@
 }
 
 .game-score {
-  color: white;
 }
 
 .game-points-per-word {

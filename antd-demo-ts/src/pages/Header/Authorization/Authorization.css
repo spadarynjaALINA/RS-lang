@@ -1,6 +1,6 @@
 .Authorization {
-  width: 50px;
-  height: 50px;
+  width: 150px;
+  height: 150px;
   background-image: url('./../../../assets/svg/Group.svg');
   border-color: transparent;
   background-position: 5px 5px;
@@ -12,13 +12,13 @@
   position: absolute;
 }
 .auth {
-  width: 50px;
-  height: 50px;
+  width: 70px;
+  height: 70px;
   background-image: url('./../../../assets/svg/auth.svg');
   border-color: transparent;
-  background-position: 5px 5px;
+  /* background-position: 5px 5px; */
   background-repeat: no-repeat;
-  background-size: 40px 40px;
+  background-size: 70px 70px;
   border: 1px solid transparent;
   border-radius: 3px;
   transition: 0.5s;
@@ -27,8 +27,8 @@
 .authorization-area {
   background-color: rgba(255, 255, 255, 0.664);
   border-radius: 25px;
-  height: 30%;
-  width: 4%;
+  width: 75px;
+  height: 75px;
 }
 
 .ant-btn-ghost:hover,
@@ -74,18 +74,22 @@
   box-shadow: 0 0 0 2px #fbf8f8;
 }
 .ant-menu-submenu > .ant-menu {
-  font-size: var(--font2);
-  margin-top: 50px;
+  font-size: var(--font4);
+  color: #4f4f4f;
+  margin-top: 75px;
   margin-right: -55px;
   background: #fbf8f8;
-  width: 300px;
+  width: 500px;
+  line-height: 50px;
+  border-radius: 15px;
+  padding: 30px;
 }
 .sub1,
 .sub2,
 .sub3 {
   background-image: url(./../../../assets/svg/user-received-fill.svg);
   background-repeat: no-repeat;
-  background-position: 8px 8px;
+  background-position: 10px 10px;
   transition: 0.3s;
 }
 .sub2 {
@@ -129,24 +133,52 @@
 .ant-checkbox:hover .ant-checkbox-inner,
 .ant-checkbox-input:focus + .ant-checkbox-inner {
   border-color: #262ac1;
+  font-family: 'Inconsolata', monospace;
+  font-size: var(--font3);
 }
-
+.ant-form label {
+  font-size: var(--font2);
+  font-family: 'Inconsolata', monospace;
+}
 .ant-btn-primary:hover,
 .ant-btn-primary:focus {
+  font-family: 'Inconsolata', monospace;
+  font-size: var(--font3);
   background-color: #568efd;
   border-color: #568efd;
 }
+#normal_login_username,
+#register_email,
+#register_nickname,
+#register_confirm,
+#register_password {
+  font-size: var(--font3);
+  font-family: 'Inconsolata', monospace;
+  background-color: #ffffff;
+}
 
 .ant-btn {
+  font-family: 'Inconsolata', monospace;
+  font-size: var(--font3);
   line-height: 1;
+  height: 50px;
 }
 .ant-form-item-has-error
   :not(.ant-input-affix-wrapper-disabled):not(.ant-input-affix-wrapper-borderless).ant-input-affix-wrapper {
   background-color: transparent;
   border-color: #ee1d7b;
+  font-size: var(--font3);
+  font-family: 'Inconsolata', monospace;
+}
+
+.ant-form-item-control-input {
+  font-family: 'Inconsolata', monospace;
+  font-size: var(--font3);
 }
 .ant-form-item-explain-error {
+  font-size: var(--font2);
   color: #ee1d7b;
+  font-family: 'Inconsolata', monospace;
 }
 .ant-form-item-has-error svg {
   fill: #ee1d7b;
@@ -154,16 +186,32 @@
 .ant-modal-content,
 .ant-modal-header,
 .ant-input-affix-wrapper {
+  font-family: 'Inconsolata', monospace;
+  font-size: var(--font3);
   background-color: #fbf8f8;
+}
+
+.ant-modal-title {
+  font-family: 'Inconsolata', monospace;
+  font-size: var(--font4);
+}
+.ant-modal-content,
+.ant-modal-header {
+  font-family: 'Inconsolata', monospace;
+  width: 700px;
 }
 .ant-input-affix-wrapper,
 .ant-modal-content {
+  font-family: 'Inconsolata', monospace;
+  font-size: var(--font3);
   border-radius: 5px;
 }
+
 .ant-modal-header {
   border-radius: 5px 5px 0 0;
 }
 .ant-input {
+  font-family: 'Inconsolata', monospace;
   background-color: transparent;
 }
 .ant-form-item-label > label.ant-form-item-required:not(.ant-form-item-required-mark-optional)::before {
@@ -174,16 +222,26 @@
   background: #afabad;
 }
 .modal-exit .ant-modal-footer {
+  font-family: 'Inconsolata', monospace;
   padding: 10px 16px;
 }
-
+.ant-modal-body {
+  font-family: 'Inconsolata', monospace;
+  font-size: var(--font3);
+}
 .exit-btn {
+  font-family: 'Inconsolata', monospace;
   background-color: #f670f2;
   border-color: #ee1d7b;
 }
 .exit-btn:focus,
 .exit-btn:hover,
 .exit-btn:active {
+  font-family: 'Inconsolata', monospace;
   background-color: #f670f2;
   border-color: #f670f2;
+}
+.login-form {
+  font-family: 'Inconsolata', monospace;
+  font-size: var(--font3);
 }

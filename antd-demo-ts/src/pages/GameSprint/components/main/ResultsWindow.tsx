@@ -30,7 +30,7 @@ function ResultsWindow(props: {
 
   return (
     <div className='modal-window'>
-      <h2>Результат игры спринт {props.score} очков</h2>
+      <h2>Результат игры  {props.score} очков</h2>
       <h3>Ошибки <span className='title-count-wrong'> {props.wrongAnswers.length} </span></h3>
       <ul className='game-results'>
         {props.wrongAnswers.map(item => {
@@ -62,6 +62,7 @@ function ResultsWindow(props: {
       <div>
         <Link to='/textbook'> <Button id='to-textbook'>В учебник</Button></Link>
         <Link to='/'><Button id='to-main'>На главную</Button></Link>
+        <Link to='/games'><Button id='to-main'>Игры</Button></Link>
       </div>
     </div>
   );
