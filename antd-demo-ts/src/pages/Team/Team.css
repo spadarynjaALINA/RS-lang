@@ -1,0 +1,49 @@
+.about-wrap {
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 1300px;
+  background: #e9f9fd;
+  color: #4f4f4f;
+  border-radius: 15px;
+  height: 600px;
+  font-family: 'Inconsolata', monospace;
+  font-size: var(--font3);
+}
+.about-item {
+  display: flex;
+}
+.team-pic {
+  width: 120px;
+  height: 120px;
+  margin-right: 50px;
+}
+.vika-pic {
+  background-image: url('./../../assets/vika-png.png');
+}
+.anton-pic {
+  background-image: url('./../../assets/anton-png.png');
+}
+.alina-pic {
+  background-image: url('./../../assets/alina-png.png');
+}
+.team-pic {
+  background-repeat: no-repeat;
+  background-size: 120px 120px;
+}
+.about-title {
+  font-size: var(--font5);
+  font-family: 'Inconsolata', monospace;
+  color: #4346f1;
+  font-weight: 900;
+}
+.about-description {
+  width: 80%;
+  text-align: left;
+}
+.discord-link {
+  display: block;
+  text-align: right;
+  color: #7a7a7a;
+}

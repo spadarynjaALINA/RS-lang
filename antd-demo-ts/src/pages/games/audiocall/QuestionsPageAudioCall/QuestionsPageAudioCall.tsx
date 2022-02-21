@@ -10,6 +10,7 @@ import { getRandomNum } from './../Random';
 import ResultsWindow from 'src/pages/GameSprint/components/main/ResultsWindow';
 import './QuestionPageAudioCall.css';
 import { getUserWords } from 'src/services/APIService';
+import { pushGameResults } from 'src/pages/GameSprint/utils/pushGameResults';
 interface Word {
   word: string;
   wordTranslate: string;
@@ -160,19 +161,94 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
     audio.play();
   }
   useEffect(() => {
-    if (countQuestions !== limitQuestions)  playAudio(startCount);  
+    if (countQuestions !== limitQuestions) playAudio(startCount);  
+    if (countQuestions === limitQuestions)pushGameResults(correctAnswers, wrongAnswers);
   }, [words.length, getSort]);
- 
-  //  useEffect(() => {
-  //   setUsedWords([...usedWords, words[startCount]]);
-  // }, [words[startCount]]);
+  function changeAnswer(i:number) {
+    setDisabled(true);
+    if (words[orderWords[i]]?.wordTranslate === words[startCount].wordTranslate) {
+            
+      setCorrectAnswers([...correctAnswers, {
+        word: words[startCount]?.word,
+        audio: words[startCount]?.audio,
+        wordTranslate: words[startCount]?.wordTranslate,
+        id: words[startCount]?.id,
+      }]);
+           
+      setTotalScore(totalScore + 1);
+      setCountOfCorrectAnswers(countOfCorrectAnswers + 1);
+    } else {
+      arr[0] = red;
+      setStyled(arr);
+      console.log(styled, arr, '<---styled');
+      setWrongAnswers([...wrongAnswers, {
+        word: words[startCount]?.word,
+        audio: words[startCount]?.audio,
+        wordTranslate: words[startCount]?.wordTranslate,
+        id: words[startCount]?.id,
+      }]);
+    } 
+          
+    console.log(arr);
+    setvisible(true);
+    setShowWord(true);
+      
+  }
+  const onKeydown = (e: KeyboardEvent) => {
+    setTimeout(() => {
+      if (e.code === 'ArrowRight') {
+        if (countQuestions < limitQuestions) {
+            
+          setWrongAnswers([...wrongAnswers, {
+            word: words[startCount]?.word,
+            audio: words[startCount]?.audio,
+            wordTranslate: words[startCount]?.wordTranslate,
+            id: words[startCount]?.id,
+          }]);
+          setShowWord(true);
+          setvisible(true);
+          setDisabled(true);
+        }
+      } else if (e.code === 'Enter' || e.code === 'Space') {
+        if (showWord) {
+          if (countQuestions < limitQuestions) {
+            setCountQuestions(prev => prev + 1);
+            setShowWord(false);
+            setStartCount(prev => prev + 5);
+            setSort(prev => !prev);
+          }
+          setDisabled(false);
+          setvisible(false);
+        }
+      } else if (e.code === 'Digit1') {
+        changeAnswer(0);
+      } else if (e.code === 'Digit2') {
+        changeAnswer(1);
+      } else if (e.code === 'Digit3') {
+        changeAnswer(2);
+      } else if (e.code === 'Digit4') {
+        changeAnswer(3);
+      } else if (e.code === 'Digit5') {
+        changeAnswer(4);
+      }
+        
+    }, 100);
+  };
+
+  useEffect(() => {
+    window.addEventListener('keyup', onKeydown);
+    return () => {
+      window.removeEventListener('keyup', onKeydown);
+    };
+  });
+
   return (
-    <div  className = 'audioCall-wrap' >      
+    <div  className = 'audioCall-wrap ' >      
       {!showModal && <div className='audio-wrap'>
         {showWord ? <img className='show-words-image' src={`https://rs-lang-app-rss.herokuapp.com/${words[startCount]?.image}`}></img> : <i className='fas fa-volume-up ' id = 'volumeAudioCall' onClick={() => { playAudio(startCount); }}></i>}
         {showWord && <div className='answer-wrap'>
-          <p className='show-word'> {`${words[startCount]?.word}  ${words[startCount]?.transcription} `}</p>
-          <p className='show-translate'>{`${words[startCount]?.wordTranslate}` }</p>
+          <p className='show-word'> <span className='answer'>{`${words[startCount]?.word}`} </span> {`${words[startCount]?.transcription} ${words[startCount]?.wordTranslate}` } </p>
+        
         </div>}
       </div> }
       {(countQuestions === limitQuestions) ? <ResultsWindow
@@ -193,10 +269,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
           setvisible(false);
         }}>Следующий вопрос</button>) : (!!words.length && <button className='next-btn' onClick={() => {
           if (countQuestions < limitQuestions) {
-            // setCountQuestions(prev => prev + 1);
-            // setShowWord(false);
-            // setStartCount(prev => prev + 5);
-            // setSort(prev => !prev);  
+            
             setWrongAnswers([...wrongAnswers, {
               word: words[startCount]?.word,
               audio: words[startCount]?.audio,

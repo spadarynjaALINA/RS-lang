@@ -13,11 +13,11 @@
   width: 620px;
 
   border-radius: 0.5rem;
-  margin-bottom: 90px;
+  margin: 0 auto 90px;
   display: flex;
   justify-content: space-between;
   flex-direction: column-reverse;
-  padding: 1rem;
+  padding: 30px 60px;
   position: relative;
   align-items: center;
   overflow: hidden;
@@ -30,21 +30,37 @@
 .text_book__card-game-text {
   display: flex;
   flex-direction: column;
-  padding-top: 1rem;
+
   align-items: flex-start;
 }
-.text_book__card-game-tezis {
+.text_book__card-game-tezis,
+.text_book__card-game-tezis2 {
   background-color: #ffc53d;
-  display: inline-block;
-  width: fit-content;
+  font-size: var(--font3);
   font-family: 'Open Sans';
   padding: 0.2rem;
   border-radius: 5px;
   color: #2c2647;
+  text-align: right;
+  display: block;
+  min-width: 225px;
+  height: 40px;
+}
+.text_book__card-game-tezis2 {
+  min-width: 150px;
 }
 .text_book__card-game-text h2 {
   font-weight: 900;
+  display: block;
+  width: 100%;
+  text-align: left;
 }
 .text_book__card-game-text p {
   color: black;
+  font-size: var(--font3);
+}
+.text_book__card-game-title {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
 }

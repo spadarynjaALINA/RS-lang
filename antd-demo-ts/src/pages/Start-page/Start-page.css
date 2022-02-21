@@ -7,9 +7,29 @@
 .App-start__team {
   display: flex;
   flex-direction: column;
-  margin: 100px auto 0;
-  background: #fff4f4;
+  margin: 50px auto 0;
+  background: #fffbff;
   border-radius: 10px;
-  width: 1200px;
+  width: 1300px;
   padding: 30px;
+  font-family: 'Inconsolata', monospace;
+  font-size: var(--font3);
+  color: #272ac1;
+}
+.start-link {
+  border: none;
+  font-size: var(--font3);
+  color: #fffbff;
+  background-color: #bd9ee0;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.start-btn-wrap {
+  display: flex;
+  justify-content: flex-end;
+}
+.start-link:hover,
+.start-link:active {
+  color: #4f4f4f;
+  transition: 0.5s;
 }

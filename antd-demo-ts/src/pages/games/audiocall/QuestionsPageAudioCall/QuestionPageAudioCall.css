@@ -1,5 +1,5 @@
 .audio-wrap {
-  height: 775px;
+  height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -44,9 +44,7 @@
 .show-translate {
   margin-bottom: 0;
 }
-.game-wrap {
-  width: 100%;
-}
+
 .question-btn-wrap {
   width: 100%;
   display: flex;
@@ -62,6 +60,9 @@
   margin: 0 0 40px;
 }
 .show-words-image {
-  width: 70%;
+  width: 60%;
   margin: 0 auto;
+}
+.answer {
+  font-weight: 900;
 }

@@ -11,7 +11,8 @@ function StartPage() {
         <p >
           Запоминайте английские слова легко! Изучайте слова в учебнике и тренеруйтесь в мини-играх. Повторяйте каждый день для улучшения результатов.
         </p>
-        <Link to='/about'>  <button>Подробнее</button></Link>
+        <div className='start-btn-wrap'>
+          <Link className='start-btn' to='/about'>  <button className='nav-link start-link'>Подробнее о приложении</button></Link></div>
       </div>
      
       <div className="App-start__team">
@@ -19,7 +20,7 @@ function StartPage() {
         <p >
         Мы - команда начинающих разработчиков в рамках курса Rolling Scopes school JavaScript/Front-end представляем вам приложение для изучения английского языка написанное с помощью библиотеки React.
         </p>
-        <Link to='/team'>  <button>Подробнее</button></Link>
+        <div  className='start-btn-wrap'><Link className='start-btn' to='/team'>  <button className='nav-link start-link' >Подробнее о нас</button></Link></div>
       </div>
     </div>   
 
