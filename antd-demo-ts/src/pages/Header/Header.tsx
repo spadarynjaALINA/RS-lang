@@ -22,9 +22,9 @@ interface IBtnMenu {
 
 function Header(props: any) {
   const menuBtnData: IBtnMenu[] = [
-    { title: 'Учебник', to: '/Учебник' },
-    { title: 'Мини-игры', to: '/Мини-игры/' },
-    { title: 'Статистика', to: '/Статистика' },
+    { title: 'Учебник', to: '/textbook' },
+    { title: 'Мини-игры', to: '/games' },
+    { title: 'Статистика', to: '/statistic' },
   ];
 
   return (
@@ -34,12 +34,12 @@ function Header(props: any) {
         <CreateUserProvider>
           <ExitProvider>
             <header className='header'>
-              <div className='logo-area'>
-                <div className='logo-rs-lang'>
-                  <Link className='logo-rs-lang link-logo' to='/'></Link>{' '}
+              <Link className='logo-rs-lang link-logo' to='/'><div className='logo-area'>
+                <div className=''>
+                  <span className='logo-text'>JungleEng</span>
                 </div>
-                <span className='logo-text'>JungleEng</span>
-              </div>
+                
+              </div></Link>
               <Navigation menuBtnData={menuBtnData} />
               <Authorization accessToken={props.accessToken} />
               <Login></Login>

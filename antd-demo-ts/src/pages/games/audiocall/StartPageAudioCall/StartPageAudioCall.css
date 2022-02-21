@@ -1,6 +1,19 @@
 .audioCall-wrap {
-  width: 1000px;
-  height: 32vw;
-  background: rgb(253, 245, 245);
+  max-width: 60%;
+  font-family: 'Inconsolata', monospace;
+  background: #d2f2ef;
   border-radius: 15px;
+  margin: 0 auto;
+  padding: 30px 50px;
+  font-size: var(--font4);
+}
+.start-from-textbook {
+  color: #e60086;
+  font-weight: 900;
+  margin-bottom: 50px;
+}
+.audioCall-wrap-title {
+  color: #272ac1;
+  font-weight: 900;
+  font-size: var(--font5);
 }

@@ -22,7 +22,7 @@
 }
 
 .App-main {
-  margin: 80px auto;
+  margin: 45px auto;
 
   display: flex;
   flex-direction: column;
@@ -32,7 +32,6 @@
   color: #4f4f4f;
 }
 
-.GamesWrap,
 .StatisticWrap {
   margin-top: 0px;
   width: 60%;
@@ -305,12 +304,8 @@ i {
   padding: 3px;
   width: 3%;
 }
-.ant-pagination-jump-prev
-  .ant-pagination-item-container
-  .ant-pagination-item-ellipsis,
-.ant-pagination-jump-next
-  .ant-pagination-item-container
-  .ant-pagination-item-ellipsis {
+.ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-ellipsis,
+.ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-ellipsis {
   position: absolute;
   top: 29%;
 }

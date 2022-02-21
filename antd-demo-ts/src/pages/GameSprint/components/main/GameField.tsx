@@ -1,4 +1,3 @@
-
 /* eslint @typescript-eslint/no-var-requires: "off" */
 import React, { useState, useEffect } from 'react';
 
@@ -20,6 +19,7 @@ export interface Word {
   wordTranslate: string;
   audio: string;
   id: string;
+  
 }
 
 function GameField(props: { group: number, page: number, isActive: boolean }) {

@@ -1,8 +1,9 @@
 import React from 'react';
 import { Button } from 'antd';
 import './results-window.css';
+import { Link } from 'react-router-dom';
 
-interface ResultsProps {
+export interface ResultsProps {
   word: string;
   audio: string;
   wordTranslate: string;
@@ -11,7 +12,7 @@ interface ResultsProps {
 function ResultsWindow(props: {
   correctAnswers: ResultsProps[],
   wrongAnswers: ResultsProps[],
-  score: number
+  score?: number
 }) {
 
   function playAudio(src: string) {
@@ -59,8 +60,8 @@ function ResultsWindow(props: {
         })}
       </ul>
       <div>
-        <Button href='/Учебник'>В учебник</Button>
-        <Button href='/'>На главную</Button>
+        <Link to='/textbook'> <Button >В учебник</Button></Link>
+        <Link to='/'><Button href='/'>На главную</Button></Link>
       </div>
     </div>
   );

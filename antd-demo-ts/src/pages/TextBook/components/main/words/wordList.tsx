@@ -40,6 +40,7 @@ function TextBookWordList(props: StandardComponentProps) {
     return null;
   }
 
+  console.log(answer.difficulty);
   return (
     <div
       className={
@@ -70,7 +71,6 @@ function TextBookWordList(props: StandardComponentProps) {
 
         {props.word?.difficulty === 'easy' ||
           (answer?.difficulty === 'easy' && <span className='learned'></span>)}
-
         {props.word?.difficulty === 'hard' && (
           <span className='difficult'></span>
         )}

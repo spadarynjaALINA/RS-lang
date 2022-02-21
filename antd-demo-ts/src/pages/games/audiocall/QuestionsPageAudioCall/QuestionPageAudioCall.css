@@ -1,6 +1,68 @@
 .audio-wrap {
-  height: 300px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .fa-volume-up {
   cursor: pointer;
+}
+.audiocall-modal {
+  position: absolute;
+  top: 15%;
+  margin: 50px 0 0 -50px;
+  width: 100%;
+}
+.green {
+  border-color: rgb(18, 240, 25);
+  background: 'green';
+}
+.black {
+  border-color: rgb(0, 0, 0);
+  background: 'black';
+}
+.red {
+  border-color: rgb(226, 2, 2);
+  background: 'red';
+}
+
+#volumeAudioCall {
+  width: 250px;
+  height: 250px;
+  margin: 0 auto;
+}
+#volumeAudioCall::before {
+  font-size: 200px;
+}
+.answer-wrap {
+  margin: 0 auto;
+}
+/* .show-words-image {
+
+} */
+.show-word,
+.show-translate {
+  margin-bottom: 0;
+}
+
+.question-btn-wrap {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+}
+#answerBtn1,
+#answerBtn2,
+#answerBtn3,
+#answerBtn4,
+#answerBtn5 {
+  font-size: var(--font3);
+  height: 50px;
+  margin: 0 0 40px;
+}
+.show-words-image {
+  width: 60%;
+  margin: 0 auto;
+}
+.answer {
+  font-weight: 900;
 }
