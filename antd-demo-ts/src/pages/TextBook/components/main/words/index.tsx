@@ -63,7 +63,7 @@ function TextBookWordsContainer(props: StandardComponentProps) {
   const isDone =
     words?.filter((word: any) => {
       return word?.difficulty;
-    })?.length === words.length;
+    })?.length === words.length && props.group !== 6;
 
   return (
     <div className={`text__book_word-container ${isDone && 'done'}`}>
