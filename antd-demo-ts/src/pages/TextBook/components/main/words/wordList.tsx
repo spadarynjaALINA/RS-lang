@@ -39,7 +39,7 @@ function TextBookWordList(props: StandardComponentProps) {
   if (!word) {
     return null;
   }
-  console.log(answer);
+  // console.log(answer);
 
   return (
     <div
