@@ -9,7 +9,7 @@ import { QuestionButton } from '../QuestionBtn/QuestionBtn';
 import { getRandomNum } from './../Random';
 import ResultsWindow from 'src/pages/GameSprint/components/main/ResultsWindow';
 import './QuestionPageAudioCall.css';
-import { getUserWords } from 'src/services/APIService';
+import { getUserWords, getFullUserWords } from 'src/services/APIService';
 import { pushGameResults } from 'src/pages/GameSprint/utils/pushGameResults';
 interface Word {
   word: string;
@@ -60,18 +60,18 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
   useEffect(() => {    
     
     if (localStorage.getItem('textbook')) {
+      let pageTemp = page;
       const func = async () => {
-        const used = await (getUserWords(localStorage.getItem('userId')));
-        const result = await (getWords(props.group, page)); 
-        let res:Word[] = [];
-        used.filter((el: Word)=> el.difficulty !== 'easy' ).forEach((el: Word) => {
-          result.filter((i: Word) => 
-            i.id !== el.id,
-          );
-          res = result;
-          console.log(res,  el);
-        });
-      
+        const used = await getFullUserWords(localStorage.getItem('userId'));
+        const result = await (getWords(props.group, page));
+        let res: Word[] = result.filter((word: Word) => !used.includes(word.id));
+        while (res.length < 5 && pageTemp > 1) { // вот тут мин количество слов для игры
+            pageTemp -= 1;
+            const prevPageWords = await getWords(props.group, pageTemp);
+            const prevFiltered = prevPageWords.filter((word: Word) => !used.includes(word.id));
+            res = [...res, ...prevFiltered];
+          }
+
         console.log(used, '<-used', res, '<--filtered arr');
         if (res.length < 10)setLimitQuestions(res.length);
         res.sort(() => Math.random() - .5);
@@ -81,7 +81,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
           const arr2 = [...res].sort(() => Math.random() - .5).filter(e => e.id !== el.id);
           return arr.concat(arr2.slice(0, 4));
         });
-       
+
         const textbookArr1 = textbookArr.flat(1);
         setWords(textbookArr1);
         

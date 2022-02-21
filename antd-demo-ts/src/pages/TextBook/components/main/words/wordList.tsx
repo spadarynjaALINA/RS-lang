@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { getOneWord } from '../../../../../services/APIService';
+import { getOneWord, getUserWord } from '../../../../../services/APIService';
 import { CardComponentProps } from './word-card';
 import { getUserNormalWord } from '../../../../../services/APIService';
 
@@ -40,7 +40,7 @@ function TextBookWordList(props: StandardComponentProps) {
     return null;
   }
 
-  console.log(answer.difficulty);
+  getUserWord(localStorage.getItem('userId'));
   return (
     <div
       className={
