@@ -16,7 +16,7 @@ export function Team() {
       <div className='team-item'>
         <div className='anton-pic team-pic'></div>
         <p className='about-description'>
-          Тут текст Антона
+          Игра Спринт, частично карточки слов и логика изученных слов, результаты мини-игр, запросы на сервер.
           <span className='discord-link'>Anton Tananka(alivar391)#9131</span>
         </p>
       </div>
