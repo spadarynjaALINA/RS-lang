@@ -52,7 +52,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
     background: 'red',
   };
   const green = {
-    background: 'green',
+    background: '#88d295',
   };
   const black = {
     background:'none',
@@ -258,7 +258,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
         : !!words.length && getButtons()}      
     
       {showWord ?       
-        (!showModal && <button className='next-btn' onClick={() => {         
+        (!showModal && <button className='next-btn start-link' onClick={() => {         
           if (countQuestions < limitQuestions) {
             setCountQuestions(prev => prev + 1);
             setShowWord(false);
@@ -267,7 +267,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
           }
           setDisabled(false);
           setvisible(false);
-        }}>Следующий вопрос</button>) : (!!words.length && <button className='next-btn' onClick={() => {
+        }}>Следующий вопрос</button>) : (!!words.length && <button className='next-btn start-link' onClick={() => {
           if (countQuestions < limitQuestions) {
             
             setWrongAnswers([...wrongAnswers, {

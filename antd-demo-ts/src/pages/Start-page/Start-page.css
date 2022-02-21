@@ -23,6 +23,7 @@
   background-color: #bd9ee0;
   cursor: pointer;
   transition: 0.5s;
+  border-radius: 5px;
 }
 .start-btn-wrap {
   display: flex;
@@ -32,4 +33,11 @@
 .start-link:active {
   color: #4f4f4f;
   transition: 0.5s;
+}
+@media screen and (max-width: 1440px) {
+  .App-start__about,
+  .App-start__team {
+    margin: 50px 30px 0;
+    width: calc(100% - 60px);
+  }
 }

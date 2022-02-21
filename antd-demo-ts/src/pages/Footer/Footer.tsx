@@ -1,9 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
+import { useLocation, useRouteMatch } from 'react-router-dom';
 import './Footer.css';
 
 export default function Footer() {
+  
+  const { pathname } = useLocation();
+  
   return (
-    (location.href === 'http://localhost:3000/games/audiocall' || location.href === 'http://localhost:3000/games/sprint') ? null : 
+   
+    
+    (pathname.includes('/games/audiocall')
+    || pathname.includes('/games/sprint') ) ? null :
       <footer className="footer">
         <div>
           <a className="footer-logo" href="https://rs.school/js/"> </a>
@@ -15,5 +22,6 @@ export default function Footer() {
           <a className="anton-link" href="https://github.com/alivar391"> </a>
         </div>
       </footer>
+    
   );
 }

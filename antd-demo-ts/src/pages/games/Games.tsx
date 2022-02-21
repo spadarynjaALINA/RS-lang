@@ -28,21 +28,21 @@ export default function Games() {
       </Link></div>
     </div>  
 
-<!--   return (
-    <div className='games-wrap'>
-      <div className='games-item-wrap'>
-        {' '}
-        <Link to={`${match.url}/Спринт`}>
-          <TextBookGameCards game={game1}></TextBookGameCards>
-        </Link>
-      </div>
-      <div className='games-item-wrap'>
-        {' '}
-        <Link to={`${match.url}/Аудиовызов`}>
-          <TextBookGameCards2 game={game3}></TextBookGameCards2>
-        </Link>
-      </div>
-    </div> -->
+  // <!--   return (
+  //     <div className='games-wrap'>
+  //       <div className='games-item-wrap'>
+  //         {' '}
+  //         <Link to={`${match.url}/Спринт`}>
+  //           <TextBookGameCards game={game1}></TextBookGameCards>
+  //         </Link>
+  //       </div>
+  //       <div className='games-item-wrap'>
+  //         {' '}
+  //         <Link to={`${match.url}/Аудиовызов`}>
+  //           <TextBookGameCards2 game={game3}></TextBookGameCards2>
+  //         </Link>
+  //       </div>
+  //     </div> -->
 
   );
 }
