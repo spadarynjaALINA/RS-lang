@@ -251,26 +251,21 @@ export const updateUserNormalWord = async (
 };
 
 export const getUserNormalWord = async (userId, wordId) => {
-  try {
-    const rawResponse = await fetch(
-      `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/${wordId}/`,
-      {
-        method: 'GET',
-        withCredentials: true,
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Accept': 'application/json',
-        },
+  const rawResponse = await fetch(
+    `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/${wordId}/`,
+    {
+      method: 'GET',
+      withCredentials: true,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
       },
-    );
-    if (rawResponse.ok) {
-      return await rawResponse.json();
-    }
-  } catch (err) {
-    console.log(err);
-  }
+    },
+  );
 
-  return null;
+  const content = await rawResponse.json();
+
+  return content;
 };
 
 export const getUserWords = async (userId) => {

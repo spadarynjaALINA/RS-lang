@@ -27,6 +27,7 @@ export interface CardComponentProps {
   };
   accessToken: any;
   onDelete: any;
+  onChangeDifficulty: any;
   color: string;
   learned: boolean;
   difficult: boolean;
@@ -38,7 +39,7 @@ export interface CardComponentProps {
 function TextBookWord(props: CardComponentProps | any) {
   const [word, setWord] = useState(props.word);
 
-  const [answer, setAnswer] = useState<any>([]);
+  const [answer, setAnswer] = useState<any>({});
 
   useEffect(() => {
     setWord(props.word);
@@ -53,7 +54,9 @@ function TextBookWord(props: CardComponentProps | any) {
   useEffect(() => {
     if (props.word?.id !== undefined) {
       getUserNormalWord(localStorage.getItem('userId'), props.word?.id).then(
-        setAnswer,
+        (data) => {
+          setAnswer(data);
+        },
       );
     }
   }, [props.word]);
@@ -153,6 +156,7 @@ associative picture'
             className={props.color}
             onClick={() => {
               addToUserWords(props.word.id, 'hard');
+              props.onChangeDifficulty(props.word.id, 'hard');
             }}
           >
             + в сложные слова
@@ -170,6 +174,7 @@ associative picture'
               <span
                 onClick={() => {
                   addToUserWords(props.word.id, 'easy');
+                  props.onChangeDifficulty(props.word.id, 'easy');
                 }}
               >
                 Слово изучено

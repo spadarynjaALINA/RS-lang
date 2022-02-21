@@ -211,6 +211,13 @@ i {
 
   margin: auto;
 }
+
+.done {
+  background-color: rgba(0, 128, 0, 0.425);
+  border-color: forestgreen;
+  border-width: 12px;
+}
+
 .text__book_word-greed {
   display: flex;
   flex-wrap: wrap;
@@ -303,8 +310,12 @@ i {
   padding: 3px;
   width: 3%;
 }
-.ant-pagination-jump-prev .ant-pagination-item-container .ant-pagination-item-ellipsis,
-.ant-pagination-jump-next .ant-pagination-item-container .ant-pagination-item-ellipsis {
+.ant-pagination-jump-prev
+  .ant-pagination-item-container
+  .ant-pagination-item-ellipsis,
+.ant-pagination-jump-next
+  .ant-pagination-item-container
+  .ant-pagination-item-ellipsis {
   position: absolute;
   top: 29%;
 }
