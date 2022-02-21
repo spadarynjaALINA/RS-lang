@@ -1,2 +1,51 @@
 .about-item {
+  display: flex;
+  flex-direction: column;
+}
+.about-item p,
+.about-item h2 {
+  text-align: left;
+}
+.about-item p {
+  font-size: var(--font2);
+}
+.about-item h2 {
+  font-size: var(--font3);
+  font-weight: 700;
+  margin-bottom: 0;
+}
+.about-wrap {
+  height: 600px;
+  overflow-y: scroll;
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 1300px;
+  background: #f3eee7;
+  color: #4f4f4f;
+  border-radius: 15px 0 0 15px;
+  height: 600px;
+  font-family: 'Inconsolata', monospace;
+  font-size: var(--font3);
+}
+/* ::-webkit-scrollbar-button:vertical:start:decrement {
+  height: 1px;
+  background-color: rgb(5, 5, 5);
+}
+
+::-webkit-scrollbar-button:vertical:end:increment {
+  height: 1px;
+  background-color: rgb(5, 5, 5);
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #000;
+} */
+
+.about-wrap::-webkit-scrollbar {
+  width: 3px;
 }

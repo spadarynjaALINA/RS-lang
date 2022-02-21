@@ -24,7 +24,7 @@ function TextBook(props: any) {
 }
 
 function Statistic() {
-  return <div className="StatisticWrap"> тут будет статистика</div>;
+  return <div className="StatisticWrap"> тут будет статистика, очень нужно подождать. Спасибо</div>;
 }
 function App() {
   
