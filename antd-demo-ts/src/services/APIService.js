@@ -321,5 +321,30 @@ export const getUserWords = async (userId) => {
   //   arrOfWordsId.push(element.wordId);
   // });
 
-  return content;
+
+  return arrOfWordsId;
+};
+
+export const getFullUserWords = async (userId) => {
+  const rawResponse = await fetch(
+    `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/`,
+    {
+      method: 'GET',
+      withCredentials: true,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+      },
+    },
+  );
+  const content = await rawResponse.json();
+  let arrOfWordsId = [];
+  content.forEach((element) => {
+    if (element.difficulty === 'easy') {
+      arrOfWordsId.push(element.wordId);
+    }
+  });
+
+  return arrOfWordsId;
+
 };

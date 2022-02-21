@@ -2,14 +2,13 @@
 import React, { useState, useEffect } from 'react';
 
 import { getWords } from '../../../../handlers';
+import { getFullUserWords } from '../../../../services/APIService';
 import { getRandomNum } from '../../utils/getRandomNum';
 import { Button } from 'antd';
 import ResultsWindow from './ResultsWindow';
 import './game-field.css';
 import { getCheckmarks } from '../../utils/getCheckmarks';
-
 import { pushGameResults } from '../../utils/pushGameResults';
-// import { getUserNormalWord } from '../../../../services/APIService';
 
 const right = require('../../../../assets/audio/right.mp3');
 const wrong = require('../../../../assets/audio/wrong.mp3');
@@ -23,7 +22,6 @@ export interface Word {
   
 }
 
-
 function GameField(props: { group: number, page: number, isActive: boolean }) {
   const [seconds, setSeconds] = useState(30);
   const [words, setWords] = useState([] as Word[]);
@@ -36,14 +34,17 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
   const [countOfCorrectAnswers, setCountOfCorrectAnswers] = useState(0);
   const [totalScore, setTotalScore] = useState(0);
   const [usedWords, setUsedWords] = useState<number[]>([]);
-  const [isLastWord, setIsLastWord] = useState(false);
   const [page, setPage] = useState(props.page);
+  const [isDisabled, setIsDisabled] = useState(true);
   useEffect(() => {
 
     if (localStorage.getItem('textbook')) {
       (getWords(props.group, page))
-        .then((data) => {
-          setWords(data);
+        .then(async (data) => {
+          const easyWords = await getFullUserWords(localStorage.getItem('userId'));
+          const dataFiltered = data.filter((word: Word) => !easyWords.includes(word.id));
+          setWords(dataFiltered);
+          setIsDisabled(false);
         });
     } else {
       const arr = [];
@@ -53,6 +54,7 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
       Promise.all(arr).then((data) => {
         const arrData = data.flat();
         setWords(arrData);
+        setIsDisabled(false);
       });
     }
 
@@ -61,19 +63,6 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
   useEffect(() => {
     setUsedWords([...usedWords, randomWord]);
   }, [randomWord]);
-
-  useEffect(() => {
-    if (isLastWord && page > 1) {
-      (getWords(props.group, page - 1))
-        .then((data) => {
-          setWords([...words, ...data]);
-        });
-      setPage(page - 1);
-      setIsLastWord(false);
-    } else if (isLastWord && page === 1) {
-      setSeconds(0);
-    }
-  }, [isLastWord]);
 
   useEffect(() => {
     let interval: any = null;
@@ -96,34 +85,24 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
 
 
   function nextQuestion() {
-    if (!isLastWord) {
-      let random;
-      do {
-        random = getRandomNum(0, words.length - 1);
-      } while (usedWords.includes(random));
-    
-      setRandomWord(random);
-      if (Math.random() < .5) {
-        setRandomTranslate(random);
-      } else {
-        setRandomTranslate(getRandomNum(0, words.length - 1));
-      }
+    let random;
+    do {
+      random = getRandomNum(0, words.length - 1);
+    } while (usedWords.includes(random));
+    setRandomWord(random);
+    if (Math.random() < .5) {
+      setRandomTranslate(random);
+    } else {
+      setRandomTranslate(getRandomNum(0, words.length - 1));
     }
-
-
   }
 
   function compare(answer: boolean) {
-    if (usedWords.length === words.length - 1) {
-      setIsLastWord(true);
-    }
-
     const audio = new Audio();
     const timer = document.querySelector<HTMLElement>('.fa-stopwatch');
     if ((randomWord === randomTranslate) === answer) {
       audio.src = right;
       audio.play();
-      console.log('ПРАВИЛЬНЫЙ ОТВЕТ');
       setCorrectAnswers([...correctAnswers, {
         word: words[randomWord]?.word,
         audio: words[randomWord]?.audio,
@@ -148,7 +127,6 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
     } else {
       audio.src = wrong;
       audio.play();
-      console.log('НЕПРАВИЛЬНЫЙ ОТВЕТ');
       setWrongAnswers([...wrongAnswers, {
         word: words[randomWord]?.word,
         audio: words[randomWord]?.audio,
@@ -167,16 +145,40 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
     }
   }
 
+  const asyncCompare = async (answer: boolean) => {
+    setIsDisabled(true);
+    if (page > 1) {
+      const data = await getWords(props.group, page - 1);
+      const easyWords = await getFullUserWords(localStorage.getItem('userId'));
+      const dataFiltered = data.filter((word: Word) => !easyWords.includes(word.id));
+      setWords([...words, ...dataFiltered]);
+      setPage(page - 1);
+      compare(answer);
+      nextQuestion();
+    } else if (page === 1) {
+      setSeconds(0);
+    }
+    setIsDisabled(false);
+  };
+
   const onKeydown = (e: KeyboardEvent) => {
-    setTimeout(() => {
+    if (!isDisabled) {
       if (e.code === 'ArrowLeft' && showModal === false) {
-        compare(true);
-        nextQuestion();
+        if (usedWords.length === words.length - 1) {
+            asyncCompare(true);
+          } else {
+          compare(true);
+          nextQuestion();
+          }
       } else if (e.code === 'ArrowRight' && showModal === false) {
-        compare(false);
-        nextQuestion();
+        if (usedWords.length === words.length - 1) {
+          asyncCompare(false);
+        } else {
+          compare(false);
+          nextQuestion();
+        }
       }
-    }, 100);
+    }
   };
 
   useEffect(() => {
@@ -204,14 +206,22 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
         <div className='game-translate'>{ words[randomTranslate]?.wordTranslate }</div>
       </div>
       <div className='game-buttons'>
-        <Button className='game-left-button' onClick={() => {
+        <Button className='game-left-button' disabled={isDisabled} onClick={() => {
+          if (usedWords.length === words.length - 1) {
+            asyncCompare(true);
+          } else {
           compare(true);
           nextQuestion();
+          }
         }
         }>ВЕРНО</Button>
-        <Button className='game-right-button' onClick={() => {
-          compare(false);
-          nextQuestion();
+        <Button className='game-right-button' disabled={isDisabled} onClick={() => {
+          if (usedWords.length === words.length - 1) {
+            asyncCompare(false);
+          } else {
+            compare(false);
+            nextQuestion();
+          }
         }
         }>НЕВЕРНО</Button>
       </div>

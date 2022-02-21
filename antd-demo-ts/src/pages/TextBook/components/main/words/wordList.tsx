@@ -43,15 +43,23 @@ function TextBookWordList(props: StandardComponentProps) {
   console.log(answer.difficulty);
   return (
     <div
-      className='text__book_word_wrapper'
+      className={
+        props.group !== 6
+          ? 'text__book_word_wrapper'
+          : 'text__book_word_wrapper_group6'
+      }
       onClick={() => {
         props.setActive(props.id);
       }}
     >
       <div
-        className={`text__book_word ${
-          props.active ? `active-${props.color}` : ''
-        }`}
+        className={
+          props.group !== 6
+            ? `text__book_word ${props.active ? `active-${props.color}` : ''}`
+            : `text__book_word_group6 ${
+                props.active ? `active-${props.color}` : ''
+              }`
+        }
         id={props.id}
         onClick={() => {
           props.onClick(props.id);
