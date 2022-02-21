@@ -251,7 +251,6 @@ export const updateUserNormalWord = async (
 };
 
 export const getUserNormalWord = async (userId, wordId) => {
-  try {
     const rawResponse = await fetch(
     `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/${wordId}/`,
     {
@@ -263,16 +262,10 @@ export const getUserNormalWord = async (userId, wordId) => {
       },
     },
   );
-    if (rawResponse.status === 404) {
-      return null;
-    }
+
   const content = await rawResponse.json();
 
   return content;
-  } catch (err) {
-    return null;
-  }
-  
 };
 
 export const getUserWords = async (userId) => {
