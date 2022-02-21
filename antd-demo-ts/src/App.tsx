@@ -10,6 +10,7 @@ import StartPage from './pages/Start-page/Start-page';
 import Footer from './pages/Footer/Footer';
 import AudioCallGame from './pages/games/audiocall/AudioCallGame/AudioCallGame';
 import { Team } from './pages/Team/Team';
+import { About } from './pages/About/About';
 
 // import TextBookHeader from './pages/TextBook/components/header';
 function TextBook(props: any) {
@@ -52,21 +53,18 @@ function App() {
               <Games></Games>
              
             </Route>              
-            <Route path='/statistic'>
-
- 
-              <Statistic />
-              
+            <Route path='/statistic'> 
+              <Statistic />            
               
             </Route>
-            <Route path='/team'>
-
- 
+            <Route path='/about'> 
+              <About />            
+              
+            </Route>
+            <Route path='/team'> 
               <Team />
               
-              
             </Route>
-
             <Route path='/'>
               <StartPage />  
               

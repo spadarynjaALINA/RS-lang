@@ -164,35 +164,37 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
     if (countQuestions !== limitQuestions) playAudio(startCount);  
     if (countQuestions === limitQuestions)pushGameResults(correctAnswers, wrongAnswers);
   }, [words.length, getSort]);
-  function changeAnswer(i:number) {
-    setDisabled(true);
-    if (words[orderWords[i]]?.wordTranslate === words[startCount].wordTranslate) {
+
+  function changeAnswer(i: number) {
+    if (!disabled) {
+      setDisabled(true);
+      if (words[orderWords[i]]?.wordTranslate === words[startCount].wordTranslate) {
             
-      setCorrectAnswers([...correctAnswers, {
-        word: words[startCount]?.word,
-        audio: words[startCount]?.audio,
-        wordTranslate: words[startCount]?.wordTranslate,
-        id: words[startCount]?.id,
-      }]);
+        setCorrectAnswers([...correctAnswers, {
+          word: words[startCount]?.word,
+          audio: words[startCount]?.audio,
+          wordTranslate: words[startCount]?.wordTranslate,
+          id: words[startCount]?.id,
+        }]);
            
-      setTotalScore(totalScore + 1);
-      setCountOfCorrectAnswers(countOfCorrectAnswers + 1);
-    } else {
-      arr[0] = red;
-      setStyled(arr);
-      console.log(styled, arr, '<---styled');
-      setWrongAnswers([...wrongAnswers, {
-        word: words[startCount]?.word,
-        audio: words[startCount]?.audio,
-        wordTranslate: words[startCount]?.wordTranslate,
-        id: words[startCount]?.id,
-      }]);
-    } 
+        setTotalScore(totalScore + 1);
+        setCountOfCorrectAnswers(countOfCorrectAnswers + 1);
+      } else {
+        arr[0] = red;
+        setStyled(arr);
+        console.log(styled, arr, '<---styled');
+        setWrongAnswers([...wrongAnswers, {
+          word: words[startCount]?.word,
+          audio: words[startCount]?.audio,
+          wordTranslate: words[startCount]?.wordTranslate,
+          id: words[startCount]?.id,
+        }]);
+      } 
           
-    console.log(arr);
-    setvisible(true);
-    setShowWord(true);
-      
+      console.log(arr);
+      setvisible(true);
+      setShowWord(true);
+    }
   }
   const onKeydown = (e: KeyboardEvent) => {
     setTimeout(() => {

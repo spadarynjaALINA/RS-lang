@@ -52,6 +52,7 @@
   font-size: var(--font3);
   margin: 0;
   font-weight: 900;
+  padding-top: 10px;
 }
 
 .text_book__word-text-example,
@@ -113,21 +114,25 @@
   font-size: 50px;
 }
 .statistics {
+  width: 100%;
   display: flex;
+  justify-content: space-between;
 }
-.statistics p {
+.statistics span {
   border-radius: 50px;
   border: none;
-
-  padding: 8px 70px;
+  padding: 3px 10px;
   font-size: 16px;
   text-transform: uppercase;
   font-weight: 700;
   cursor: pointer;
-  width: 100%;
-  margin-top: 10px;
 }
-.green {
+.statistics b {
+  font-size: var(--font3);
+  font-weight: 900;
+  margin-left: 10px;
+}
+.statistics .green {
   background-color: rgba(8, 187, 133, 0.904);
 }
 .yellow {

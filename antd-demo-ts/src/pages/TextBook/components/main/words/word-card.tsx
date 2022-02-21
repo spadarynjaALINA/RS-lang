@@ -192,12 +192,12 @@ associative picture'
       />
       <p className='text_book__word-text-example-translate'>
         {word?.textExampleTranslate}
-      </p>
-      <p className='text_book__word-title'>Ответы в играх: </p>
-      <div className='statistics'>
+      </p><div className='statistics'> <p className='text_book__word-title'>Ответы в играх:</p><span className={props.color}>Правильных ответов:<b>{answer?.optional?.countRight || 0}</b></span> </div>
+     
+      <div className=''>
         <div>
-          <p className={props.color}>Правильных ответов:</p>
-          <b>{answer?.optional?.countRight || 0}</b>
+          <p ></p>
+          
         </div>
       </div>
     </div>
