@@ -71,13 +71,13 @@
 .title-count-wrong {
   padding: 0 0.5rem 0 0.5rem;
   border-radius: 1rem;
-  background-color: rgb(201, 46, 46);
+  background-color: rgb(243, 135, 176);
 }
 
 .title-count-correct {
   padding: 0 0.5rem 0 0.5rem;
   border-radius: 1rem;
-  background-color: rgb(45, 122, 25);
+  background-color: rgb(175, 226, 163);
 }
 
 .game-score {
@@ -95,7 +95,7 @@
 .game-checkmark-grey {
   color: grey;
 }
-@media (max-width: 800px) { 
+@media (max-width: 800px) {
   .game-field {
     width: 600px;
   }

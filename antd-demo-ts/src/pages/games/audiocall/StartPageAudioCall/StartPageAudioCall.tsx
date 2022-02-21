@@ -52,7 +52,7 @@ export default function StartPageAudioCall(props: any) {
       <p  className="audioCall-wrap-p">С помощью этой игры ты сможешь лучше понимать английскую речь на слух.</p>
      
       {!startPage ? <>
-        <p>Выбери уровень:</p>
+        <p className='start-from-menu'>Выбери уровень:</p>
         <div className="level-wrap">
           <LevelButton
             group='0'
@@ -93,10 +93,14 @@ export default function StartPageAudioCall(props: any) {
          
             text='C2'
           />
+//      </div></> : <div className='start-from-textbook'>В игре будут использоваться слова со страницы учебника</div>}
+  //    <Button type='primary' className="game-btn" disabled={startDisable} onClick={() => { 
+
         </div></>
         : notEnough ? <div className='start-from-textbook'>На этой и предыдущих страницах недостаточно слов для игры</div>
           : <div className='start-from-textbook'>В игре будут использоваться слова со страницы учебника</div>}
       <Button type='primary' className="start-link" disabled={startDisable || notEnough} onClick={() => {
+
        
         props.onClick1(false);
         props.onClick3(true);
