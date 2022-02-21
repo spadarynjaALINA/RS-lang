@@ -206,7 +206,7 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
         <div className='game-translate'>{ words[randomTranslate]?.wordTranslate }</div>
       </div>
       <div className='game-buttons'>
-        <Button className='game-left-button' disabled={isDisabled} onClick={() => {
+        <Button id='game-left-button' disabled={isDisabled} onClick={() => {
           if (usedWords.length === words.length - 1) {
             asyncCompare(true);
           } else {
@@ -215,7 +215,7 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
           }
         }
         }>ВЕРНО</Button>
-        <Button className='game-right-button' disabled={isDisabled} onClick={() => {
+        <Button id='game-right-button' disabled={isDisabled} onClick={() => {
           if (usedWords.length === words.length - 1) {
             asyncCompare(false);
           } else {

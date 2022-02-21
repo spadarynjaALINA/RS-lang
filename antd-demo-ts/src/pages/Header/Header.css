@@ -49,8 +49,13 @@
   font-weight: 900;
   text-transform: none;
 }
-.nav-link {
+.NavItem > .Nav-btn {
+  height: 100%;
+}
+.ant-btn > .nav-link {
+  font-size: var(--font5);
   background-color: rgba(255, 255, 255, 0.664);
   border-radius: 18px;
   padding: 18px;
+  height: 75px;
 }

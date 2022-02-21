@@ -1,4 +1,4 @@
-.about-wrap {
+.team-wrap {
   padding: 30px;
   display: flex;
   flex-direction: column;
@@ -11,7 +11,7 @@
   font-family: 'Inconsolata', monospace;
   font-size: var(--font3);
 }
-.about-item {
+.team-item {
   display: flex;
 }
 .team-pic {
