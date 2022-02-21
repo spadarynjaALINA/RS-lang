@@ -254,6 +254,7 @@ export const createUserNormalWord = async (
     },
   );
   const content = await rawResponse.json();
+  console.log(content);
 };
 
 export const updateUserNormalWord = async (
