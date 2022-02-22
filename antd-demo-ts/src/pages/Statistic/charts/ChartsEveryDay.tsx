@@ -1,27 +1,11 @@
-import { ChartData, ScatterDataPoint } from 'chart.js';
-import React, { useEffect, useState } from 'react';
-import { Line } from 'react-chartjs-2';
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js';
-import { Chart } from 'react-chartjs-2';
+import { Chart as ChartJS, registerables } from 'chart.js';
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-);
+import { useEffect, useState } from 'react';
+import { Bar } from 'react-chartjs-2';
+
+import { Chart } from 'react-chartjs-2';
+ChartJS.register(...registerables);
+
 export function ChartsEveryDay() {
   const [charData, setCharData] = useState({ labels: ['a', 'b', ' c', 'd'],
     datasets: [
@@ -46,7 +30,7 @@ export function ChartsEveryDay() {
   });
   return (
     <div className='alltime-words'>
-      <Line data={charData} />
+      <Bar data={charData} />
     </div>
   );
 }

@@ -41,7 +41,7 @@
   text-align: left;
 }
 .allwords-circle {
-  border-radius: 50%;
+  background-color: transparent;
   width: 250px;
   height: 250px;
 }

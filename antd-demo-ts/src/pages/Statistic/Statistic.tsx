@@ -1,5 +1,6 @@
 import { ChartsAllDay } from './charts/ChartsAllDays';
 import { ChartsEveryDay } from './charts/ChartsEveryDay';
+import { ChartsPie } from './charts/ChartsPie';
 import './Statistic.css';
 
 interface IStatistic {
@@ -42,9 +43,7 @@ export function Statistic({ newWords = 0, percentWords = 0, lernedWords = 0, all
         <div className='alltime-statistic-wrap'>
           <ChartsEveryDay/>
           <ChartsAllDay/>
-          <div className='allwords-circle'><h4 className='statistic-subtitle'>Осталось{allwordsPercent }</h4>
-            
-          </div>
+          <ChartsPie/>
         </div>
       </div>
     </div>
