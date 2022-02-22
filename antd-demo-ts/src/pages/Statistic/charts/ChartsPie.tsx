@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
 import { Chart } from 'react-chartjs-2';
-import { getFullUserWords, getLearnedWord } from 'src/services/APIService';
+import { getFullUserWords, getLearnedWord, getStatistics } from 'src/services/APIService';
 ChartJS.register(...registerables);
 
 export function ChartsPie() {
@@ -13,11 +13,13 @@ export function ChartsPie() {
   if (localStorage.getItem('userId')) {
     useEffect(() => {
       const fn = async () => {
-        const r = await getFullUserWords(localStorage.getItem('userId')).catch(()=>{return null;});
-        if (r) setEasy(r?.length);
+        const r = await getFullUserWords(localStorage.getItem('userId')).then((data)=>setEasy(data.length));
+        const stat = await getStatistics(localStorage.getItem('userId'));
+        console.log(stat);
+        
       };
       fn();
-  
+      console.log(easy);
     }, []);
   }
   

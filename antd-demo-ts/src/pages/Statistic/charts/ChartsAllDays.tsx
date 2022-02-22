@@ -43,7 +43,7 @@ export function ChartsAllDay() {
     
    
   }, []);
-  console.log(charData);
+ 
   return (
     <div className='alltime-progress'>
       <Line data={charData} />
