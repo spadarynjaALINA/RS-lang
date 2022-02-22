@@ -49,7 +49,7 @@ export default function Login() {
      
       login.toggleLogin();
     }).catch(() => toErr());
-
+    location.reload();
    
   };
   
