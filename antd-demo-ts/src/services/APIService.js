@@ -313,3 +313,53 @@ export const getFullUserWords = async (userId) => {
 
   return arrOfWordsId;
 };
+
+export const updateStatistics = async (
+  userId,
+  statArr,
+) => {
+  const rawResponse = await fetch(
+    `https://rs-lang-app-rss.herokuapp.com/users/${userId}/statistics`,
+    {
+      method: 'PUT',
+      withCredentials: true,
+      headers: {
+        Authorization: `Bearer ${token}`,
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+
+      body: JSON.stringify({
+        learnedWords: 0,
+        optional: {
+          longStat: {
+            stat: statArr,
+          },
+        },
+      }),
+    },
+  );
+  const content = await rawResponse.json();
+};
+
+export const getStatistics = async (userId) => {
+  const rawResponse = await fetch(
+    `https://rs-lang-app-rss.herokuapp.com/users/${userId}/statistics/`,
+    {
+      method: 'GET',
+      withCredentials: true,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+      },
+    },
+  );
+  const content = await rawResponse.json();
+  let dailyStat = [];
+  content.optional.longStat.stat.forEach((element) => {
+    dailyStat.push(element);
+  });
+
+  return dailyStat;
+  // return content;
+};
