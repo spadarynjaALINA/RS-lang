@@ -11,23 +11,28 @@ export function ChartsPie() {
 
   const [easy, setEasy] = useState(0);
   useEffect(() => {
-    getFullUserWords(localStorage.getItem('userId')).then(data=>setEasy(data.length));
+    const fn = async () => {
+      const r = await getFullUserWords(localStorage.getItem('userId'));
+      setEasy(r.length);
+    };
+    fn();
   
   }, []);
-
-  const percent = (easy / 3600).toFixed(3);
+  console.log(easy);
+  
  
   const [charData, setCharData] = useState({ labels: ['изучено', ' осталось' ],
     datasets: [
       {
         
-        data: [0, 3600],
+        data: [0, 3600 - easy],
         backgroundColor: ['rgba(24, 49, 116, 0.8)', 'rgba(211, 225,119, 0,3)'],
         borderWidth:0,
       }], 
   });
- 
+  const percent = (easy / 3600).toFixed(3);
   useEffect(() => {
+   
     setCharData({
       labels: ['изучено слов', ' осталось изучить'],
       datasets: [
@@ -39,7 +44,7 @@ export function ChartsPie() {
       ],
    
     });
-  }, []);
+  }, [easy]);
   return (
     <div className='allwords-circle'>
       <span className='inner-data'>{ `${percent}%`}</span>
