@@ -75,6 +75,7 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], ga
     }).then(() => {
       if (gameName === 'sprint') {
         getStatistics(localStorage.getItem('userId')).then((statArray: Stat[]) => {
+          console.log(statArray);
           if (statArray[statArray.length - 1]?.date === dataR) {
             // console.log('дата совпала');
             const statArr = [...statArray.slice(0, statArray.length - 1), {

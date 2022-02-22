@@ -28,6 +28,7 @@ export default function Exit() {
       localStorage.removeItem('token');
       localStorage.removeItem('userId');
       exit.toggleExit();
+      location.reload();
       setConfirmLoading(false);
       setModalText('Ты действительно хочешь выйти?');
     }, 2000);

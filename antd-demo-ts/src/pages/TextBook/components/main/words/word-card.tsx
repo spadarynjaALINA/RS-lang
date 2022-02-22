@@ -57,7 +57,7 @@ function TextBookWord(props: CardComponentProps | any) {
         (data) => {
           setAnswer(data);
         },
-      ).catch(()=>{return null;});
+      );
     }
   }, [props.word]);
 
@@ -130,7 +130,7 @@ function TextBookWord(props: CardComponentProps | any) {
           }),
         );
       }
-    }).catch(()=>{return null;});
+    });
   };
 
   return (
@@ -167,7 +167,7 @@ associative picture'
             id='delete-word'
             className={props.color}
             onClick={() => {
-              if (localStorage.getItem('userId'))  getUserWord(localStorage.getItem('userId'));
+              getUserWord(localStorage.getItem('userId'));
             }}
           >
             {!props.wordID && (

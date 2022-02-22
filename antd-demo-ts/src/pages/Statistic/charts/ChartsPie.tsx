@@ -14,9 +14,7 @@ export function ChartsPie() {
     useEffect(() => {
       const fn = async () => {
         const r = await getFullUserWords(localStorage.getItem('userId')).then((data)=>setEasy(data.length));
-        await getStatistics(localStorage.getItem('userId')).then(data=> console.log(data));
-       
-        
+        await getStatistics(localStorage.getItem('userId')).then(data=> console.log(data));        
       };
       fn();
       console.log(easy);

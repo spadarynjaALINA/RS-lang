@@ -29,9 +29,9 @@ function TextBook(props: any) {
 function App() {
   
   const [accessToken, setAccessToken] = useState(localStorage.getItem('token'));
-  useEffect(() => {
-    setAccessToken(localStorage.getItem('token'));
-  }, [localStorage.getItem('token')]);
+  // useEffect(() => {
+  //   setAccessToken(localStorage.getItem('token'));
+  // }, [localStorage.getItem('token')]);
   
   return (
     <Router>

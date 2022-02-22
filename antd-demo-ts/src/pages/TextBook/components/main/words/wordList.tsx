@@ -18,7 +18,7 @@ export interface StandardComponentProps {
 function TextBookWordList(props: StandardComponentProps) {
   const [word, setWord] = useState(props.word);
   const [answer, setAnswer] = useState<any>([]);
- 
+
   useEffect(() => {
     setWord(props.word);
   }, [props.word]);

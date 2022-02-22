@@ -40,7 +40,7 @@ function TextBookWordsContainer(props: StandardComponentProps) {
         setWordsId(word);
 
         setWords([]);
-      }).catch(()=>{return null;});
+      });
     }
   }, [props.page, props.group]);
 
