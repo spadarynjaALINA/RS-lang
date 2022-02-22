@@ -27,7 +27,7 @@ export function ChartsEveryDay() {
       ],
    
     });
-  });
+  }, []);
   return (
     <div className='alltime-words'>
       <Bar data={charData} />

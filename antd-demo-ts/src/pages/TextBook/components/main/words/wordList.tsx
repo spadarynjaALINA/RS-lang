@@ -18,7 +18,7 @@ export interface StandardComponentProps {
 function TextBookWordList(props: StandardComponentProps) {
   const [word, setWord] = useState(props.word);
   const [answer, setAnswer] = useState<any>([]);
-
+ 
   useEffect(() => {
     setWord(props.word);
   }, [props.word]);
@@ -61,8 +61,8 @@ function TextBookWordList(props: StandardComponentProps) {
           props.group !== 6
             ? `text__book_word ${props.active ? `active-${props.color}` : ''}`
             : `text__book_word_group6 ${
-                props.active ? `active-${props.color}` : ''
-              }`
+              props.active ? `active-${props.color}` : ''
+            }`
         }
         id={props.id}
         onClick={() => {

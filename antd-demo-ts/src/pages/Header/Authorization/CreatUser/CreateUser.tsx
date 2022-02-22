@@ -51,11 +51,13 @@ const RegistrationForm = () => {
   
   if (!create.visibleCreateUser) return null;
   const onFinish = (values: any) => {
+
     const email = values.email;
     const password = values.password;
     const toCreate = { email, password }; 
     createUser(toCreate).then(() => loginUser(toCreate));
     create.toggleCreateUser();
+    location.reload();
   };     
  
   return (
