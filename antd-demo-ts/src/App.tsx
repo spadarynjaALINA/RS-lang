@@ -1,5 +1,5 @@
 
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import Games from './pages/games/Games';
 import AppTextBook from './pages/TextBook';
@@ -13,9 +13,12 @@ import { Team } from './pages/Team/Team';
 import { About } from './pages/About/About';
 import { Statistic } from './pages/Statistic/Statistic';
 
-// import TextBookHeader from './pages/TextBook/components/header';
-function TextBook(props: any) {
 
+function TextBook(props: any) {
+  const [accessToken, setAccessToken] = useState(localStorage.getItem('token'));
+  useEffect(() => {
+    setAccessToken(localStorage.getItem('token'));
+  });
   return (
     <div className="TextBookWrap">
 
@@ -29,6 +32,9 @@ function TextBook(props: any) {
 function App() {
   
   const [accessToken, setAccessToken] = useState(localStorage.getItem('token'));
+  useEffect(() => {
+    setAccessToken(localStorage.getItem('token'));
+  }, [localStorage.getItem('token')]);
   
   return (
     <Router>
@@ -37,7 +43,7 @@ function App() {
         <main className="App-main">
           <Switch>
             <Route path="/textbook">
-              <TextBook accessToken={accessToken} />
+              {accessToken ? <TextBook accessToken={accessToken} /> : <TextBook accessToken={accessToken} />}
               
             </Route>
             <Route path='/games/audiocall'>

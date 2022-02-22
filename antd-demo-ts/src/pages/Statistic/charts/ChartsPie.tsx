@@ -10,15 +10,17 @@ ChartJS.register(...registerables);
 export function ChartsPie() {
 
   const [easy, setEasy] = useState(0);
-  useEffect(() => {
-    const fn = async () => {
-      const r = await getFullUserWords(localStorage.getItem('userId'));
-      setEasy(r.length);
-    };
-    fn();
+  if (localStorage.getItem('userId')) {
+    useEffect(() => {
+      const fn = async () => {
+        const r = await getFullUserWords(localStorage.getItem('userId')).catch(()=>{return null;});
+        if (r) setEasy(r?.length);
+      };
+      fn();
   
-  }, []);
-  console.log(easy);
+    }, []);
+  }
+  
   
  
   const [charData, setCharData] = useState({ labels: ['изучено', ' осталось' ],
