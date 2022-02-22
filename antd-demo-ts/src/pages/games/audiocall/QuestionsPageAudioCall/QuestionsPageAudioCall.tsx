@@ -43,6 +43,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
   const [styled, setStyled] = useState([] as any[]);
   const [countOfCorrectAnswers, setCountOfCorrectAnswers] = useState(0);
   const [disabled, setDisabled] = useState(false);
+  const [max, setMax] = useState([0]);
   const orderWords = useMemo(() => {   
     let arr = [0, 1, 2, 3, 4];
     arr = arr.sort(() => Math.random() - .5).map(item => item + startCount);
@@ -119,7 +120,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
         return (<QuestionButton id={`answerBtn${index + 1}`} style={visible ? styled[index] : black} key={`question${index}`} text={`${index + 1} ${words[orderWords[index]]?.wordTranslate}`} disabled={ disabled}onClick={() => {
           setDisabled(true);
           if (words[orderWords[index]]?.wordTranslate === words[startCount].wordTranslate) {
-            
+            setMax([...max, 1]);
             setCorrectAnswers([...correctAnswers, {
               word: words[startCount]?.word,
               audio: words[startCount]?.audio,
@@ -132,7 +133,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
           } else {
             arr[index] = red;
             setStyled(arr);
-           
+            setMax([...max, 0]);
             setWrongAnswers([...wrongAnswers, {
               word: words[startCount]?.word,
               audio: words[startCount]?.audio,
@@ -162,14 +163,18 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
   }
   useEffect(() => {
     if (countQuestions !== limitQuestions) playAudio(startCount);  
-    if (countQuestions === limitQuestions)pushGameResults(correctAnswers, wrongAnswers);
+    if (countQuestions === limitQuestions) {
+      const maxSeries = (max.join('').split('0').map(i => i.length).sort((a, b) => b - a))[0];
+      console.log(maxSeries);
+      pushGameResults(correctAnswers, wrongAnswers);
+    }
   }, [words.length, getSort]);
 
   function changeAnswer(i: number) {
     if (!disabled) {
       setDisabled(true);
       if (words[orderWords[i]]?.wordTranslate === words[startCount].wordTranslate) {
-            
+        setMax([...max, 1]);
         setCorrectAnswers([...correctAnswers, {
           word: words[startCount]?.word,
           audio: words[startCount]?.audio,
@@ -182,7 +187,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
       } else {
         arr[0] = red;
         setStyled(arr);
-      
+        setMax([...max, 0]);
         setWrongAnswers([...wrongAnswers, {
           word: words[startCount]?.word,
           audio: words[startCount]?.audio,

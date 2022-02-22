@@ -48,15 +48,3 @@ export function ChartsPie() {
   );
 }
 
-// {
-//   "learnedWords": 0,
-//   "optional": {
-//   date: '',
-//    sprintRight: '',
-//    sprintWron: '',
-//     sprintMax:'',
-//    audioCallRight: '',
-//    audioCallWron: '',
-//     audioCallMax:''
-//   }
-// }
