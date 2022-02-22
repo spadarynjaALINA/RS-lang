@@ -42,7 +42,7 @@
   margin: 0 auto;
 }
 #startBtn {
-  padding: 0 18px;
+  padding: 10px 18px;
   border: none;
   font-size: var(--font3);
   color: #fffbff;
@@ -52,6 +52,7 @@
   border-radius: 15px;
   height: 50px;
   min-width: 120px;
+  margin-top: 20px;
 }
 #startBtn:hover {
   background-color: #0a2a36;
