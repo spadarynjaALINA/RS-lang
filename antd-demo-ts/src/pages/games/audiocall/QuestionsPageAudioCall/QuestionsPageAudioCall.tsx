@@ -162,7 +162,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
   }
   useEffect(() => {
     if (countQuestions !== limitQuestions) playAudio(startCount);  
-    if (countQuestions === limitQuestions)pushGameResults(correctAnswers, wrongAnswers);
+    if (countQuestions === limitQuestions)pushGameResults(correctAnswers, wrongAnswers, 'audioCall', 4);
   }, [words.length, getSort]);
 
   function changeAnswer(i: number) {

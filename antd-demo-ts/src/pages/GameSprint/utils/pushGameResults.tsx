@@ -22,8 +22,8 @@ interface Stat {
 export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], gameName: string, maxCount: number) {
   const date = new Date();
   const month = date.getMonth() < 10 ? +`0${date.getMonth() + 1}` : date.getMonth() + 1;
-  const data = `${date.getDate()}.${month}`;
-  let newWords: number = 0;
+  const dataR = `${date.getDate()}.${month}`;
+  let newWords = 0;
 
   getUserWords(localStorage.getItem('userId'))
     .then((userWords) => {
@@ -54,6 +54,7 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], ga
       });
       wrongAnswers.forEach(word => {
         if (!userWords.includes(word.id)) {
+          newWords += 1;
           createUserNormalWord(localStorage.getItem('userId'), word.id, 0, 1);
         } else {
           getUserNormalWord(localStorage.getItem('userId'), word.id)
@@ -71,14 +72,13 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], ga
         }
       });
 
-    }).catch(err => console.log('Пользователь не выполнил вход'));
-  
-  
-  if (gameName === 'sprint') {
+    }).then(() => {
+        if (gameName === 'sprint') {
   getStatistics(localStorage.getItem('userId')).then((statArray: Stat[]) => {
-    if (statArray[statArray.length - 1]?.date === data) {
+    if (statArray[statArray.length - 1]?.date === dataR) {
+      // console.log('дата совпала');
       const statArr = [...statArray.slice(0, statArray.length - 1), {
-        data: data,
+        date: dataR,
         sprintRight: statArray[statArray.length - 1].sprintRight + correctAnswers.length,
         sprintWrong: statArray[statArray.length - 1].sprintWrong + wrongAnswers.length,
         sprintMax: statArray[statArray.length - 1].sprintMax + maxCount,
@@ -86,13 +86,19 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], ga
         audioCallWrong: statArray[statArray.length - 1].audioCallWrong,
         audioCallMax: statArray[statArray.length - 1].audioCallMax,
         newWords: statArray[statArray.length - 1].newWords + newWords,
-      }]
+      }];
       updateStatistics(localStorage.getItem('userId'),
         statArr,
-      )
+      );
+      //   .then(() => {
+      //   getStatistics(localStorage.getItem('userId')).then((statArray3: Stat[]) => {
+      //     console.log(statArray3);
+      //   });
+      // });
     } else {
+      // console.log('дата  НЕ совпала', dataR, statArray[statArray.length - 1]?.date);
       const statArr = [...statArray.slice(0, statArray.length), {
-        data: data,
+        date: dataR,
         sprintRight: correctAnswers.length,
         sprintWrong: wrongAnswers.length,
         sprintMax: maxCount,
@@ -100,17 +106,23 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], ga
         audioCallWrong: 0,
         audioCallMax: 0,
         newWords: newWords,
-      }]
+      }];
       updateStatistics(localStorage.getItem('userId'),
         statArr,
-      )
+      );
+      // .then(() => {
+      //   getStatistics(localStorage.getItem('userId')).then((statArray3: Stat[]) => {
+      //     console.log(statArray3);
+      //   });
+      // });
     }
   });
+    // console.log(newWords, 'новые слова');
   } else if (gameName === 'audioCall') {
     getStatistics(localStorage.getItem('userId')).then((statArray: Stat[]) => {
-    if (statArray[statArray.length - 1]?.date === data) {
+    if (statArray[statArray.length - 1]?.date === dataR) {
       const statArr = [...statArray.slice(0, statArray.length - 1), {
-        data: data,
+        date: dataR,
         sprintRight: statArray[statArray.length - 1].sprintRight,
         sprintWrong: statArray[statArray.length - 1].sprintWrong,
         sprintMax: statArray[statArray.length - 1].sprintMax,
@@ -118,13 +130,13 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], ga
         audioCallWrong: statArray[statArray.length - 1].audioCallWrong + wrongAnswers.length,
         audioCallMax: statArray[statArray.length - 1].audioCallMax + maxCount,
         newWords: statArray[statArray.length - 1].newWords + newWords,
-      }]
+      }];
       updateStatistics(localStorage.getItem('userId'),
         statArr,
-      )
+      );
     } else {
       const statArr = [...statArray.slice(0, statArray.length), {
-        data: data,
+        date: dataR,
         sprintRight: 0,
         sprintWrong: 0,
         sprintMax: 0,
@@ -132,11 +144,16 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], ga
         audioCallWrong: wrongAnswers.length,
         audioCallMax: maxCount,
         newWords: newWords,
-      }]
+      }];
       updateStatistics(localStorage.getItem('userId'),
         statArr,
-      )
+      );
     }
   });
   }
+    })
+    .catch(err => console.log('Пользователь не выполнил вход'));
+  
+  
+
 }
