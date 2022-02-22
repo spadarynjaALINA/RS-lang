@@ -15,10 +15,7 @@ import { Statistic } from './pages/Statistic/Statistic';
 
 
 function TextBook(props: any) {
-  const [accessToken, setAccessToken] = useState(localStorage.getItem('token'));
-  useEffect(() => {
-    setAccessToken(localStorage.getItem('token'));
-  });
+  
   return (
     <div className="TextBookWrap">
 
@@ -43,7 +40,7 @@ function App() {
         <main className="App-main">
           <Switch>
             <Route path="/textbook">
-              {accessToken ? <TextBook accessToken={accessToken} /> : <TextBook accessToken={accessToken} />}
+              <TextBook accessToken={accessToken} />
               
             </Route>
             <Route path='/games/audiocall'>
