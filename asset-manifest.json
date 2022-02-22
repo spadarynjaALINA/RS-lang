@@ -1,0 +1,33 @@
+{
+  "files": {
+    "main.css": "/RS-lang/static/css/main.82d5c057.css",
+    "main.js": "/RS-lang/static/js/main.3908ee42.js",
+    "static/js/787.df03b10f.chunk.js": "/RS-lang/static/js/787.df03b10f.chunk.js",
+    "static/media/bg-2.jpg": "/RS-lang/static/media/bg-2.e9c6617be697016378dc.jpg",
+    "static/media/game3-2.jpeg": "/RS-lang/static/media/game3-2.a4038e4715f28df95c7a.jpeg",
+    "static/media/game1-1.jpeg": "/RS-lang/static/media/game1-1.c7942475e52c73a39a28.jpeg",
+    "static/media/game3-1.jpeg": "/RS-lang/static/media/game3-1.22aab82e6910af8883d6.jpeg",
+    "static/media/alina-png.png": "/RS-lang/static/media/alina-png.f84f5f55fcd74b8e0f45.png",
+    "static/media/anton-png.png": "/RS-lang/static/media/anton-png.05d423d65cdb648af680.png",
+    "static/media/vika-png.png": "/RS-lang/static/media/vika-png.ac94456981418fe90b61.png",
+    "static/media/modal_results.mp3": "/RS-lang/static/media/modal_results.26d124c961be0b5ed1fc.mp3",
+    "static/media/logo-rs-lang.svg": "/RS-lang/static/media/logo-rs-lang.4a9e404f22522abfa138.svg",
+    "static/media/right.mp3": "/RS-lang/static/media/right.e03f226e6a0bcd3d3833.mp3",
+    "static/media/logo.svg": "/RS-lang/static/media/logo.11b761f806d27fc0d3ca.svg",
+    "static/media/wrong.mp3": "/RS-lang/static/media/wrong.70ebb6ed40fd7da1335e.mp3",
+    "static/media/Group.svg": "/RS-lang/static/media/Group.2c31ad8f604dfd16b73e.svg",
+    "static/media/auth.svg": "/RS-lang/static/media/auth.ef81ebccbdf7ff53957b.svg",
+    "index.html": "/RS-lang/index.html",
+    "static/media/footer-bg.svg": "/RS-lang/static/media/footer-bg.3fdb4b9b11093be0067d.svg",
+    "static/media/user-received-fill.svg": "/RS-lang/static/media/user-received-fill.5c21612c7706414625a4.svg",
+    "static/media/user-add-fill.svg": "/RS-lang/static/media/user-add-fill.2a282074559458883fa3.svg",
+    "static/media/user-shared-2-fill.svg": "/RS-lang/static/media/user-shared-2-fill.10e5304903aa755050b5.svg",
+    "main.82d5c057.css.map": "/RS-lang/static/css/main.82d5c057.css.map",
+    "main.3908ee42.js.map": "/RS-lang/static/js/main.3908ee42.js.map",
+    "787.df03b10f.chunk.js.map": "/RS-lang/static/js/787.df03b10f.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.82d5c057.css",
+    "static/js/main.3908ee42.js"
+  ]
+}
