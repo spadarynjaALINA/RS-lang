@@ -3,15 +3,34 @@ import {
   getUserNormalWord,
   getUserWords,
   updateUserNormalWord,
+  getStatistics,
+  updateStatistics,
 } from '../../../services/APIService';
 import { Word } from '../components/main/GameField';
 
-export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[]) {
+interface Stat {
+  date: string;
+  sprintRight: number;
+  sprintWrong: number;
+  sprintMax: number;
+  audioCallRight: number;
+  audioCallWrong: number;
+  audioCallMax: number;
+  newWords: number;
+}
+
+export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], gameName: string, maxCount: number) {
+  const date = new Date();
+  const month = date.getMonth() < 10 ? +`0${date.getMonth() + 1}` : date.getMonth() + 1;
+  const data = `${date.getDate()}.${month}`;
+  let newWords: number = 0;
+
   getUserWords(localStorage.getItem('userId'))
     .then((userWords) => {
 
       correctAnswers.forEach(word => {
         if (!userWords.includes(word.id)) {
+          newWords += 1;
           createUserNormalWord(localStorage.getItem('userId'), word.id, 1, 0, 'normal');
         } else {
           getUserNormalWord(localStorage.getItem('userId'), word.id)
@@ -29,7 +48,7 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[]) {
                 //   userWord.optional.countWrong,
                 //   word.word,
                 //   userWord.difficulty);
-              } 
+              }
             });
         }
       });
@@ -53,5 +72,71 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[]) {
       });
 
     }).catch(err => console.log('Пользователь не выполнил вход'));
-
+  
+  
+  if (gameName === 'sprint') {
+  getStatistics(localStorage.getItem('userId')).then((statArray: Stat[]) => {
+    if (statArray[statArray.length - 1]?.date === data) {
+      const statArr = [...statArray.slice(0, statArray.length - 1), {
+        data: data,
+        sprintRight: statArray[statArray.length - 1].sprintRight + correctAnswers.length,
+        sprintWrong: statArray[statArray.length - 1].sprintWrong + wrongAnswers.length,
+        sprintMax: statArray[statArray.length - 1].sprintMax + maxCount,
+        audioCallRight: statArray[statArray.length - 1].audioCallRight,
+        audioCallWrong: statArray[statArray.length - 1].audioCallWrong,
+        audioCallMax: statArray[statArray.length - 1].audioCallMax,
+        newWords: statArray[statArray.length - 1].newWords + newWords,
+      }]
+      updateStatistics(localStorage.getItem('userId'),
+        statArr,
+      )
+    } else {
+      const statArr = [...statArray.slice(0, statArray.length), {
+        data: data,
+        sprintRight: correctAnswers.length,
+        sprintWrong: wrongAnswers.length,
+        sprintMax: maxCount,
+        audioCallRight: 0,
+        audioCallWrong: 0,
+        audioCallMax: 0,
+        newWords: newWords,
+      }]
+      updateStatistics(localStorage.getItem('userId'),
+        statArr,
+      )
+    }
+  });
+  } else if (gameName === 'audioCall') {
+    getStatistics(localStorage.getItem('userId')).then((statArray: Stat[]) => {
+    if (statArray[statArray.length - 1]?.date === data) {
+      const statArr = [...statArray.slice(0, statArray.length - 1), {
+        data: data,
+        sprintRight: statArray[statArray.length - 1].sprintRight,
+        sprintWrong: statArray[statArray.length - 1].sprintWrong,
+        sprintMax: statArray[statArray.length - 1].sprintMax,
+        audioCallRight: statArray[statArray.length - 1].audioCallRight + correctAnswers.length,
+        audioCallWrong: statArray[statArray.length - 1].audioCallWrong + wrongAnswers.length,
+        audioCallMax: statArray[statArray.length - 1].audioCallMax + maxCount,
+        newWords: statArray[statArray.length - 1].newWords + newWords,
+      }]
+      updateStatistics(localStorage.getItem('userId'),
+        statArr,
+      )
+    } else {
+      const statArr = [...statArray.slice(0, statArray.length), {
+        data: data,
+        sprintRight: 0,
+        sprintWrong: 0,
+        sprintMax: 0,
+        audioCallRight: correctAnswers.length,
+        audioCallWrong: wrongAnswers.length,
+        audioCallMax: maxCount,
+        newWords: newWords,
+      }]
+      updateStatistics(localStorage.getItem('userId'),
+        statArr,
+      )
+    }
+  });
+  }
 }
