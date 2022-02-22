@@ -50,14 +50,15 @@ const RegistrationForm = () => {
   
   
   if (!create.visibleCreateUser) return null;
-  const onFinish = (values: any) => {
+  const onFinish = async (values: any) => {
 
     const email = values.email;
     const password = values.password;
     const toCreate = { email, password }; 
-    createUser(toCreate).then(() => loginUser(toCreate));
+    createUser(toCreate).then(() => loginUser(toCreate)).catch(()=>{ return null;});
     create.toggleCreateUser();
-    location.reload();
+    // location.reload();
+    
   };     
  
   return (

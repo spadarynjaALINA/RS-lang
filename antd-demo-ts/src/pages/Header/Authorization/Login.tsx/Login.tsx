@@ -15,7 +15,7 @@ const Login = (props: any) => {
     const toCreate = { email, password };
 
    
-    loginUser(toCreate).then(props.onLogin);
+    loginUser(toCreate).then(props.onLogin).catch(()=>{return null;});
     
   };
 
