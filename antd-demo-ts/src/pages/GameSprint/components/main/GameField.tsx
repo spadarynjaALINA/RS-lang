@@ -36,6 +36,7 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
   const [usedWords, setUsedWords] = useState<number[]>([]);
   const [page, setPage] = useState(props.page);
   const [isDisabled, setIsDisabled] = useState(true);
+  const [maxSerie, setMaxSerie] = useState<number[]>([]);
   useEffect(() => {
 
     if (localStorage.getItem('textbook')) {
@@ -78,7 +79,8 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
       setShowModal(true);
       const audioShowModal = new Audio(modalResults);
       audioShowModal.play();
-      pushGameResults(correctAnswers, wrongAnswers);
+      const maxCount = (maxSerie.join('').split('0').map(i=>i.length).sort((a, b)=>b - a ))[0];
+      pushGameResults(correctAnswers, wrongAnswers, 'sprint', maxCount);
     }
     return () => clearInterval(interval);
   }, [props.isActive, seconds]);
@@ -124,6 +126,7 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
         timer.style.color = 'white';
         timer.classList.remove('fa-stopwatch-big');
       }, 300);
+      setMaxSerie([...maxSerie, 1]);
     } else {
       audio.src = wrong;
       audio.play();
@@ -142,6 +145,7 @@ function GameField(props: { group: number, page: number, isActive: boolean }) {
         timer.style.color = 'white';
         timer.classList.remove('fa-stopwatch-big');
       }, 300);
+      setMaxSerie([...maxSerie, 0]);
     }
   }
 
