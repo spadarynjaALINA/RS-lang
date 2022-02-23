@@ -167,7 +167,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
       const maxSeries = (max.join('').split('0').map(i => i.length).sort((a, b) => b - a))[0];
 
      
-      pushGameResults(correctAnswers, wrongAnswers, 'audiocall', maxSeries);
+      pushGameResults(correctAnswers, wrongAnswers, 'audioCall', maxSeries);
 
      
     }
