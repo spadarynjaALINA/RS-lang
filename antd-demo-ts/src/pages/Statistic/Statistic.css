@@ -66,3 +66,14 @@
   top: 53%;
   font-size: 24px;
 }
+.statistic-start {
+  background-color: #f4f4f4;
+  font-family: 'Inconsolata', monospace;
+  color: #4f4f4f;
+  width: 1300px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  border-radius: 15px;
+}
