@@ -1,7 +1,7 @@
 {
   "name": "antd-demo-ts",
   "version": "0.1.0",
-  "homepage": "https://spadarynjaalina.github.io/RS-lang",
+ 
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.15.4",
