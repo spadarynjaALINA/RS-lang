@@ -7,7 +7,11 @@ import {
   getUserWords,
   updateUserNormalWord,
   createUserNormalWord,
+  getStatistics,
+  getFullUserWords,
+  updateStatistics,
 } from '../../../../../services/APIService';
+import { Stat } from '../../../../GameSprint/utils/pushGameResults';
 
 export interface CardComponentProps {
   word: {
@@ -40,6 +44,10 @@ function TextBookWord(props: CardComponentProps | any) {
   const [word, setWord] = useState(props.word);
 
   const [answer, setAnswer] = useState<any>({});
+
+  const date = new Date();
+  const month = date.getMonth() < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
+  const dataR = `${date.getDate()}.${month}`;
 
   useEffect(() => {
     setWord(props.word);
@@ -130,7 +138,56 @@ function TextBookWord(props: CardComponentProps | any) {
           }),
         );
       }
-    });
+    })
+      .then(() => {
+        getStatistics(localStorage.getItem('userId')).then(async (statArray: Stat[]) => {
+          const easyWords = await getFullUserWords(localStorage.getItem('userId'));
+          // console.log(statArray);
+          if (statArray[statArray.length - 1]?.date === dataR) {
+            // console.log('дата совпала');
+            const statArr = [...statArray.slice(0, statArray.length - 1), {
+              date: dataR,
+              sprintRight: statArray[statArray.length - 1].sprintRight,
+              sprintWrong: statArray[statArray.length - 1].sprintWrong,
+              sprintMax: statArray[statArray.length - 1].sprintMax,
+              audioCallRight: statArray[statArray.length - 1].audioCallRight,
+              audioCallWrong: statArray[statArray.length - 1].audioCallWrong,
+              audioCallMax: statArray[statArray.length - 1].audioCallMax,
+              newWords: statArray[statArray.length - 1].newWords,
+              easy: easyWords.length,
+            }];
+            updateStatistics(localStorage.getItem('userId'),
+              statArr,
+            );
+            //   .then(() => {
+            //   getStatistics(localStorage.getItem('userId')).then((statArray3: Stat[]) => {
+            //     console.log(statArray3);
+            //   });
+            // });
+          } else {
+            // console.log('дата  НЕ совпала', dataR, statArray[statArray.length - 1]?.date);
+            const statArr = [...statArray.slice(0, statArray.length), {
+              date: dataR,
+              sprintRight: statArray[statArray.length - 1].sprintRight,
+              sprintWrong: statArray[statArray.length - 1].sprintWrong,
+              sprintMax: statArray[statArray.length - 1].sprintMax,
+              audioCallRight: statArray[statArray.length - 1].audioCallRight,
+              audioCallWrong: statArray[statArray.length - 1].audioCallWrong,
+              audioCallMax: statArray[statArray.length - 1].audioCallMax,
+              newWords: statArray[statArray.length - 1].newWords,
+              easy: easyWords.length,
+            }];
+            updateStatistics(localStorage.getItem('userId'),
+              statArr,
+            );
+            // .then(() => {
+            //   getStatistics(localStorage.getItem('userId')).then((statArray3: Stat[]) => {
+            //     console.log(statArray3);
+            //   });
+            // });
+          }
+        });
+      });
   };
 
   return (

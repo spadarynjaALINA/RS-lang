@@ -7,8 +7,9 @@ export function StatisticStart() {
     setAuthorized(localStorage.getItem('userId'));
   });
   return (
-    <div > 
-      {authorized ? <Statistic/> : <div></div> }
+    <div className='statistic-start'> 
+      <h2>Статистика доступна только для зарегистрированных пользователей</h2>
+      <p>Пожалуйста, войдите в аккаунт или зарегистрируйтесь.</p>
     </div>
   );
 }

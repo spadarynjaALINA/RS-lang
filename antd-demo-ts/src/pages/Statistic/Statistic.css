@@ -47,14 +47,15 @@
 .allwords-circle {
   position: relative;
   background-color: transparent;
-  width: 250px;
-  height: 250px;
+  width: 240px;
+  height: 240px;
   padding: 0;
 }
 .alltime-words,
 .alltime-progress {
-  width: 420px;
-  height: 250px;
+  width: 450px;
+  height: 240px;
+  padding: 20px;
 }
 .inner-data {
   position: absolute;
@@ -62,7 +63,18 @@
   width: 250px;
   height: 50px;
   text-align: center;
-  left: 0;
+  left: -1%;
   top: 53%;
   font-size: 24px;
+}
+.statistic-start {
+  background-color: #f4f4f4;
+  font-family: 'Inconsolata', monospace;
+  color: #4f4f4f;
+  width: 1300px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  padding: 50px;
+  border-radius: 15px;
 }

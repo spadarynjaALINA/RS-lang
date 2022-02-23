@@ -12,6 +12,7 @@ import AudioCallGame from './pages/games/audiocall/AudioCallGame/AudioCallGame';
 import { Team } from './pages/Team/Team';
 import { About } from './pages/About/About';
 import { Statistic } from './pages/Statistic/Statistic';
+import { StatisticStart } from './pages/Statistic/StatisticStart';
 
 
 function TextBook(props: any) {
@@ -57,7 +58,7 @@ function App() {
              
             </Route>              
             <Route path='/statistic'> 
-              <Statistic />            
+              {accessToken ? <Statistic /> : <StatisticStart />    }      
               
             </Route>
             <Route path='/about'> 

@@ -13,11 +13,11 @@ export function ChartsPie() {
   if (localStorage.getItem('userId')) {
     useEffect(() => {
       const fn = async () => {
-        const r = await getFullUserWords(localStorage.getItem('userId')).then((data)=>setEasy(data.length));
-        await getStatistics(localStorage.getItem('userId')).then(data=> console.log(data));        
+        await getFullUserWords(localStorage.getItem('userId')).then((data)=>setEasy(data.length));
+               
       };
       fn();
-      console.log(easy);
+      
     }, []);
   }
   
