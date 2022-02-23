@@ -138,9 +138,57 @@ function TextBookWord(props: CardComponentProps | any) {
           }),
         );
       }
-    });
+    })
+      .then(() => {
+        getStatistics(localStorage.getItem('userId')).then(async (statArray: Stat[]) => {
+          const easyWords = await getFullUserWords(localStorage.getItem('userId'));
+          // console.log(statArray);
+          if (statArray[statArray.length - 1]?.date === dataR) {
+            // console.log('дата совпала');
+            const statArr = [...statArray.slice(0, statArray.length - 1), {
+              date: dataR,
+              sprintRight: statArray[statArray.length - 1].sprintRight,
+              sprintWrong: statArray[statArray.length - 1].sprintWrong,
+              sprintMax: statArray[statArray.length - 1].sprintMax,
+              audioCallRight: statArray[statArray.length - 1].audioCallRight,
+              audioCallWrong: statArray[statArray.length - 1].audioCallWrong,
+              audioCallMax: statArray[statArray.length - 1].audioCallMax,
+              newWords: statArray[statArray.length - 1].newWords,
+              easy: easyWords.length,
+            }];
+            updateStatistics(localStorage.getItem('userId'),
+              statArr,
+            );
+            //   .then(() => {
+            //   getStatistics(localStorage.getItem('userId')).then((statArray3: Stat[]) => {
+            //     console.log(statArray3);
+            //   });
+            // });
+          } else {
+            // console.log('дата  НЕ совпала', dataR, statArray[statArray.length - 1]?.date);
+            const statArr = [...statArray.slice(0, statArray.length), {
+              date: dataR,
+              sprintRight: statArray[statArray.length - 1].sprintRight,
+              sprintWrong: statArray[statArray.length - 1].sprintWrong,
+              sprintMax: statArray[statArray.length - 1].sprintMax,
+              audioCallRight: statArray[statArray.length - 1].audioCallRight,
+              audioCallWrong: statArray[statArray.length - 1].audioCallWrong,
+              audioCallMax: statArray[statArray.length - 1].audioCallMax,
+              newWords: statArray[statArray.length - 1].newWords,
+              easy: easyWords.length,
+            }];
+            updateStatistics(localStorage.getItem('userId'),
+              statArr,
+            );
+            // .then(() => {
+            //   getStatistics(localStorage.getItem('userId')).then((statArray3: Stat[]) => {
+            //     console.log(statArray3);
+            //   });
+            // });
+          }
+        });
+      });
   };
-
 
   return (
     <div className='text_book__word'>
