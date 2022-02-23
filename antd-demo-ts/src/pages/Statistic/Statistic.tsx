@@ -76,20 +76,20 @@ export function Statistic() {
         <h3 className='statistic-title'>Сегодня</h3>
         <div className='today-statistic-wrap'>
           <div className='today-word'>
-            <h4 className='statistic-subtitle'>Всего</h4>
+            <h4 className='statistic-subtitle subT1'>Всего</h4>
             <p className='statistic-description'>Новых слов:{SprintRight + SprintWron + audioCallRight + AudioCallWron}</p>
             <p className='statistic-description'>Процент правильных:{`${(SprintRight + SprintWron + audioCallRight + AudioCallWron) === 0 ? 0 : (((SprintRight + audioCallRight) / (SprintRight + SprintWron + audioCallRight + AudioCallWron)) * 100).toFixed(2) }%`}</p>
             <p className='statistic-description'>Изученных:{easy}</p>
        
           </div>
           <div className='today-sprint'>
-            <h4 className='statistic-subtitle'>Спринт</h4>
+            <h4 className='statistic-subtitle subT2'>Спринт</h4>
             <p className='statistic-description'>Новых слов:{SprintRight + SprintWron}</p>
             <p className='statistic-description'>Процент правильных:{`${((SprintRight + SprintWron) === 0 ? 0 : SprintRight / (SprintRight + SprintWron) * 100).toFixed(2)}%`}</p>
             <p  className='statistic-description'>Максимальная серия правильных:{ maxSprint}</p>
           </div>
           <div className='today-audiocall'>
-            <h4 className='statistic-subtitle'>Аудиовызов</h4>
+            <h4 className='statistic-subtitle subT3'>Аудиовызов</h4>
             <p className='statistic-description'>Новых слов:{ audioCallRight + AudioCallWron}</p>
             <p className='statistic-description'>Процент правильных:{`${((audioCallRight + AudioCallWron) === 0 ? 0 : audioCallRight / (audioCallRight + AudioCallWron) * 100).toFixed(2)}%`}</p>
             <p className='statistic-description'>Максимальная серия правильных:{maxAudioCall}</p>

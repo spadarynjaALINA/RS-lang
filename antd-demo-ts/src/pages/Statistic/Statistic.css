@@ -34,6 +34,16 @@
 .statistic-subtitle {
   margin: 0;
 }
+
+.subT1 {
+  color: #b11bd6;
+}
+.subT2 {
+  color: #14a3c7;
+}
+.subT3 {
+  color: #af2020;
+}
 .statistic-title-h2 {
   margin-bottom: 0;
   font-weight: 900;
