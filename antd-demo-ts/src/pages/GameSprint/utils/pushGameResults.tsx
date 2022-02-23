@@ -5,10 +5,11 @@ import {
   updateUserNormalWord,
   getStatistics,
   updateStatistics,
+  getFullUserWords,
 } from '../../../services/APIService';
 import { Word } from '../components/main/GameField';
 
-interface Stat {
+export interface Stat {
   date: string;
   sprintRight: number;
   sprintWrong: number;
@@ -17,11 +18,12 @@ interface Stat {
   audioCallWrong: number;
   audioCallMax: number;
   newWords: number;
+  easy: number;
 }
 
 export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], gameName: string, maxCount: number) {
   const date = new Date();
-  const month = date.getMonth() < 10 ? +`0${date.getMonth() + 1}` : date.getMonth() + 1;
+  const month = date.getMonth() < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
   const dataR = `${date.getDate()}.${month}`;
   let newWords = 0;
 
@@ -74,7 +76,8 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], ga
 
     }).then(() => {
       if (gameName === 'sprint') {
-        getStatistics(localStorage.getItem('userId')).then((statArray: Stat[]) => {
+        getStatistics(localStorage.getItem('userId')).then(async (statArray: Stat[]) => {
+          const easyWords = await getFullUserWords(localStorage.getItem('userId'));
           // console.log(statArray);
           if (statArray[statArray.length - 1]?.date === dataR) {
             // console.log('дата совпала');
@@ -87,6 +90,7 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], ga
               audioCallWrong: statArray[statArray.length - 1].audioCallWrong,
               audioCallMax: statArray[statArray.length - 1].audioCallMax,
               newWords: statArray[statArray.length - 1].newWords + newWords,
+              easy: easyWords.length,
             }];
             updateStatistics(localStorage.getItem('userId'),
               statArr,
@@ -107,6 +111,7 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], ga
               audioCallWrong: 0,
               audioCallMax: 0,
               newWords: newWords,
+              easy: easyWords.length,
             }];
             updateStatistics(localStorage.getItem('userId'),
               statArr,
@@ -120,7 +125,8 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], ga
         });
         // console.log(newWords, 'новые слова');
       } else if (gameName === 'audioCall') {
-        getStatistics(localStorage.getItem('userId')).then((statArray: Stat[]) => {
+        getStatistics(localStorage.getItem('userId')).then(async (statArray: Stat[]) => {
+          const easyWords = await getFullUserWords(localStorage.getItem('userId'));
           // console.log('получили стату');
           if (statArray[statArray.length - 1]?.date === dataR) {
             // console.log('дата ок');
@@ -133,6 +139,7 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], ga
               audioCallWrong: statArray[statArray.length - 1].audioCallWrong + wrongAnswers.length,
               audioCallMax: statArray[statArray.length - 1].audioCallMax + maxCount,
               newWords: statArray[statArray.length - 1].newWords + newWords,
+              easy: easyWords.length,
             }];
             updateStatistics(localStorage.getItem('userId'),
               statArr,
@@ -148,6 +155,7 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], ga
               audioCallWrong: wrongAnswers.length,
               audioCallMax: maxCount,
               newWords: newWords,
+              easy: easyWords.length,
             }];
             updateStatistics(localStorage.getItem('userId'),
               statArr,

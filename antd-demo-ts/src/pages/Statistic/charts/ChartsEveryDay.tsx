@@ -27,7 +27,7 @@ export function ChartsEveryDay() {
     const fn = async () => {
       const a = [] as string[];const b = [] as number[]; let c = [] as string[];
       await getStatistics(localStorage.getItem('userId')).then(res => {
-        res.reverse().forEach((item:any )=> {
+        res.forEach((item:any )=> {
           a.push(item.date);
           b.push(item.newWords);
          
