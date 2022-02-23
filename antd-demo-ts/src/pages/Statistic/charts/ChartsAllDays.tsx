@@ -14,11 +14,11 @@ export function ChartsAllDay() {
       await getStatistics(localStorage.getItem('userId')).then(res => {
         res.forEach((item:any )=> {
           a.push(item.date);
-          b.push(item.newWords);
+          b.push(item.easy ? item.easy : 0);
           setDataArr(a);
           setWordsArr(b);         
         }); 
-        console.log(res);
+      
       });     
     };
     fn();
@@ -29,9 +29,9 @@ export function ChartsAllDay() {
     <div className='alltime-progress'>
       <Line data={{ labels: dataArr,
         datasets: [{
-          label: 'Прогресс изучения новых слов',
+          label: 'Количество изученных слов',
           data: wordsArr,
-          backgroundColor:'rgba(127,49,231, 0.5)',
+          backgroundColor:'rgba(127,49,231, 0.7)',
         }] }} />
     </div>
   );

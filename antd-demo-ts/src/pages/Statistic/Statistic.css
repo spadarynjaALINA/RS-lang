@@ -23,6 +23,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .statistic-title {
   font-size: var(--font4);
@@ -33,6 +34,16 @@
 
 .statistic-subtitle {
   margin: 0;
+}
+
+.subT1 {
+  color: #b11bd6;
+}
+.subT2 {
+  color: #14a3c7;
+}
+.subT3 {
+  color: #af2020;
 }
 .statistic-title-h2 {
   margin-bottom: 0;
@@ -77,4 +88,13 @@
   flex-direction: column;
   padding: 50px;
   border-radius: 15px;
+}
+
+@media screen and (max-width: 1024px) {
+  .statistic-wrap,
+  .today-statistic-wrap,
+  .alltime-statistic-wrap {
+    width: calc(100%- 60px);
+    margin: 0 30px;
+  }
 }
