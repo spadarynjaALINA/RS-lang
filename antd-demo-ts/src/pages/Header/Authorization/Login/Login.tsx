@@ -48,8 +48,8 @@ export default function Login() {
     loginUser(toCreate).then(() => {
      
       login.toggleLogin();
-    }).catch(() => toErr());
-    // location.reload();
+    }).then(()=>{ location.reload();}).catch(() => toErr());
+    
    
   };
   

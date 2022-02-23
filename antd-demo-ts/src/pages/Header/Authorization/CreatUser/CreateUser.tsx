@@ -55,9 +55,9 @@ const RegistrationForm = () => {
     const email = values.email;
     const password = values.password;
     const toCreate = { email, password }; 
-    createUser(toCreate).then(() => loginUser(toCreate)).catch(()=>{ return null;});
+    createUser(toCreate).then(() => loginUser(toCreate)).then(()=>{location.reload();}).catch(()=>{ return null;});
     create.toggleCreateUser();
-    // location.reload();
+    // 
     
   };     
  

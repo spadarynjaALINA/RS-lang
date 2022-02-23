@@ -4,22 +4,21 @@ import { useEffect, useState } from 'react';
 import { Doughnut } from 'react-chartjs-2';
 
 import { Chart } from 'react-chartjs-2';
-import { getFullUserWords, getLearnedWord, getStatistics } from 'src/services/APIService';
+import { getFullUserWords, getLearnedWord, getStatistics, updateStatistics } from 'src/services/APIService';
 ChartJS.register(...registerables);
 
 export function ChartsPie() {
-
+  
   const [easy, setEasy] = useState(0);
   if (localStorage.getItem('userId')) {
     useEffect(() => {
       const fn = async () => {
         const r = await getFullUserWords(localStorage.getItem('userId')).then((data)=>setEasy(data.length));
-        await getStatistics(localStorage.getItem('userId')).then(data=> console.log(data));
-       
+        
         
       };
       fn();
-      console.log(easy);
+      
     }, []);
   }
   

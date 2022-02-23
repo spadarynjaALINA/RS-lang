@@ -27,6 +27,7 @@ export default function Exit() {
     setTimeout(() => {
       localStorage.removeItem('token');
       localStorage.removeItem('userId');
+      location.reload();
       exit.toggleExit();
       setConfirmLoading(false);
       setModalText('Ты действительно хочешь выйти?');

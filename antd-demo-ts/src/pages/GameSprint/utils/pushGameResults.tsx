@@ -20,14 +20,18 @@ interface Stat {
 }
 
 export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], gameName: string, maxCount: number) {
+  
   const date = new Date();
-  const month = date.getMonth() < 10 ? +`0${date.getMonth() + 1}` : date.getMonth() + 1;
+  const month = date.getMonth() < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
   const dataR = `${date.getDate()}.${month}`;
   let newWords = 0;
-
+  // updateStatistics(localStorage.getItem('userId'), [{ date: dataR, sprintRight:0, sprintWrong: 0, sprintMax:0, audioCallRight:0, 
+  //   audioCallWrong:0,
+  //   audioCallMax: 0,
+  //   newWords: 0 }]);
   getUserWords(localStorage.getItem('userId'))
     .then((userWords) => {
-
+      
       correctAnswers.forEach(word => {
         if (!userWords.includes(word.id)) {
           newWords += 1;
@@ -74,6 +78,7 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], ga
 
     }).then(() => {
       if (gameName === 'sprint') {
+        
         getStatistics(localStorage.getItem('userId')).then((statArray: Stat[]) => {
           if (statArray[statArray.length - 1]?.date === dataR) {
             // console.log('дата совпала');
@@ -116,8 +121,10 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], ga
             //   });
             // });
           }
-        });
+        }).catch((e)=> console.log('а не рановато ли для статистики?'));
         // console.log(newWords, 'новые слова');
+
+       
       } else if (gameName === 'audioCall') {
         getStatistics(localStorage.getItem('userId')).then((statArray: Stat[]) => {
           if (statArray[statArray.length - 1]?.date === dataR) {
@@ -152,5 +159,8 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], ga
         });
       }
     })
-    .catch(err => console.log('Пользователь не выполнил вход'));
+    .catch(()=>updateStatistics(localStorage.getItem('userId'), [{ date: dataR, sprintRight:0, sprintWrong: 0, sprintMax:0, audioCallRight:0, 
+      audioCallWrong:0,
+      audioCallMax: 0,
+      newWords: 0 }]));
 }

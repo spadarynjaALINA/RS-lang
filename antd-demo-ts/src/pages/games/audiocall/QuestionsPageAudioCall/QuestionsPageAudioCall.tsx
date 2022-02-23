@@ -169,7 +169,7 @@ export function QuestionsPageAudioCall(props: { group: number, page: number, isA
      
       pushGameResults(correctAnswers, wrongAnswers, 'audiocall', maxSeries);
 
-     
+      console.log(correctAnswers, wrongAnswers, 'audiocall', maxSeries);
     }
 
   }, [words.length, getSort]);

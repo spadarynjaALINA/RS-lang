@@ -314,10 +314,13 @@ export const getFullUserWords = async (userId) => {
   return arrOfWordsId;
 };
 
+
+
 export const updateStatistics = async (
   userId,
   statArr,
 ) => {
+  console.log(statArr);
   const rawResponse = await fetch(
     `https://rs-lang-app-rss.herokuapp.com/users/${userId}/statistics`,
     {
@@ -340,6 +343,7 @@ export const updateStatistics = async (
     },
   );
   const content = await rawResponse.json();
+  console.log(content);
 };
 
 export const getStatistics = async (userId) => {
@@ -354,12 +358,28 @@ export const getStatistics = async (userId) => {
       },
     },
   );
-  const content = await rawResponse.json();
   let dailyStat = [];
-  content.optional.longStat.stat.forEach((element) => {
-    dailyStat.push(element);
+  await rawResponse.json().then(content => {
+    content.optional.longStat.stat.forEach((element) => {
+      dailyStat.push(element);
+      console.log(element);
+    });
   });
+  
+  
 
   return dailyStat;
+  
+  
+  
   // return content;
 };
+const date = new Date();
+const month = date.getMonth() < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
+const dataR = `${date.getDate()}.${month}`;
+  
+getStatistics(localStorage.getItem('userId')).catch(() => updateStatistics(localStorage.getItem('userId'), [{
+  date: dataR, sprintRight: 0, sprintWrong: 0, sprintMax: 0, audioCallRight: 0, 
+  audioCallWrong:0,
+  audioCallMax: 0,
+  newWords: 0 }]));
