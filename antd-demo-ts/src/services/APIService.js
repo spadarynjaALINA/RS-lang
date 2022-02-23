@@ -59,7 +59,9 @@ export const getUserWord = async (userId) => {
 
   let arrOfWordsId = [];
   content.forEach((element) => {
-    arrOfWordsId.push(element.wordId);
+    if (element.difficulty !== 'normal' && element.difficulty === 'hard') {
+      arrOfWordsId.push(element.wordId);
+    }
   });
 
   return arrOfWordsId;
