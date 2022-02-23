@@ -7,7 +7,11 @@ import {
   getUserWords,
   updateUserNormalWord,
   createUserNormalWord,
+  getStatistics,
+  getFullUserWords,
+  updateStatistics,
 } from '../../../../../services/APIService';
+import { Stat } from '../../../../GameSprint/utils/pushGameResults';
 
 export interface CardComponentProps {
   word: {
@@ -40,6 +44,10 @@ function TextBookWord(props: CardComponentProps | any) {
   const [word, setWord] = useState(props.word);
 
   const [answer, setAnswer] = useState<any>({});
+
+  const date = new Date();
+  const month = date.getMonth() < 10 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
+  const dataR = `${date.getDate()}.${month}`;
 
   useEffect(() => {
     setWord(props.word);
@@ -132,6 +140,7 @@ function TextBookWord(props: CardComponentProps | any) {
       }
     });
   };
+
 
   return (
     <div className='text_book__word'>

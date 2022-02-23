@@ -366,17 +366,18 @@ export const getStatistics = async (userId) => {
       audioCallWrong: 0,
       audioCallMax: 0,
       newWords: 0,
+      easy: 0,
     }]);
     rawResponse = await fetch(
-    `https://rs-lang-app-rss.herokuapp.com/users/${userId}/statistics/`,
-    {
-      method: 'GET',
-      withCredentials: true,
-      headers: {
-        'Authorization': `Bearer ${token}`,
-        'Accept': 'application/json',
+      `https://rs-lang-app-rss.herokuapp.com/users/${userId}/statistics/`,
+      {
+        method: 'GET',
+        withCredentials: true,
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Accept': 'application/json',
+        },
       },
-    },
     );
   }
   const content = await rawResponse.json();
