@@ -30,6 +30,7 @@ export function ChartsAllDay() {
         datasets: [{
           label: 'Прогресс изучения новых слов',
           data: wordsArr,
+          backgroundColor:'rgba(127,49,231, 0.5)',
         }] }} />
     </div>
   );
