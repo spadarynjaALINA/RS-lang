@@ -23,6 +23,7 @@
   width: 100%;
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .statistic-title {
   font-size: var(--font4);
@@ -87,4 +88,13 @@
   flex-direction: column;
   padding: 50px;
   border-radius: 15px;
+}
+
+@media screen and (max-width: 1024px) {
+  .statistic-wrap,
+  .today-statistic-wrap,
+  .alltime-statistic-wrap {
+    width: calc(100%- 60px);
+    margin: 0 30px;
+  }
 }
