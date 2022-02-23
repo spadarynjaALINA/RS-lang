@@ -12,7 +12,7 @@ export default function StartPageAudioCall(props: any) {
   const [notEnough, setNotEnough] = useState(false);
   
   useEffect(() => {
-    console.log('я тут');
+    
     setStartPage(Boolean(localStorage.getItem('textbook')));
     if (startPage === true) {
       setStartDisable(false);

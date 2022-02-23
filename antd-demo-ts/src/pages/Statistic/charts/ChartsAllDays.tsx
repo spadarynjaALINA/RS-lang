@@ -12,12 +12,13 @@ export function ChartsAllDay() {
     const fn = async () => {
       const a = [] as string[];const b = [] as number[];
       await getStatistics(localStorage.getItem('userId')).then(res => {
-        res.reverse().forEach((item:any )=> {
+        res.forEach((item:any )=> {
           a.push(item.date);
           b.push(item.newWords);
           setDataArr(a);
           setWordsArr(b);         
-        });      
+        }); 
+        console.log(res);
       });     
     };
     fn();
