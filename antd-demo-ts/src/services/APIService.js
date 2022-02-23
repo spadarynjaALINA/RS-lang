@@ -59,7 +59,9 @@ export const getUserWord = async (userId) => {
 
   let arrOfWordsId = [];
   content.forEach((element) => {
-    arrOfWordsId.push(element.wordId);
+    if (element.difficulty !== 'normal' && element.difficulty === 'hard') {
+      arrOfWordsId.push(element.wordId);
+    }
   });
 
   return arrOfWordsId;
@@ -135,7 +137,7 @@ export const getOneWord = async (wordId) => {
 };
 
 export const deleteWord = async (userId, wordId) => {
-  console.log(wordId);
+  // console.log(wordId);
   const rawResponse = await fetch(
     `https://rs-lang-app-rss.herokuapp.com/users/${userId}/words/${wordId}`,
     {
@@ -343,7 +345,7 @@ export const updateStatistics = async (
 };
 
 export const getStatistics = async (userId) => {
-  const rawResponse = await fetch(
+  let rawResponse = await fetch(
     `https://rs-lang-app-rss.herokuapp.com/users/${userId}/statistics/`,
     {
       method: 'GET',
@@ -354,6 +356,29 @@ export const getStatistics = async (userId) => {
       },
     },
   );
+  if (!rawResponse.ok) {
+    await updateStatistics(localStorage.getItem('userId'), [{
+      date: 0,
+      sprintRight: 0,
+      sprintWrong: 0,
+      sprintMax: 0,
+      audioCallRight: 0,
+      audioCallWrong: 0,
+      audioCallMax: 0,
+      newWords: 0,
+    }]);
+    rawResponse = await fetch(
+    `https://rs-lang-app-rss.herokuapp.com/users/${userId}/statistics/`,
+    {
+      method: 'GET',
+      withCredentials: true,
+      headers: {
+        'Authorization': `Bearer ${token}`,
+        'Accept': 'application/json',
+      },
+    },
+    );
+  }
   const content = await rawResponse.json();
   let dailyStat = [];
   content.optional.longStat.stat.forEach((element) => {

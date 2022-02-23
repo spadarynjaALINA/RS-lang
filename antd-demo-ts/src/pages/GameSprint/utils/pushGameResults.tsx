@@ -75,7 +75,7 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], ga
     }).then(() => {
       if (gameName === 'sprint') {
         getStatistics(localStorage.getItem('userId')).then((statArray: Stat[]) => {
-          console.log(statArray);
+          // console.log(statArray);
           if (statArray[statArray.length - 1]?.date === dataR) {
             // console.log('дата совпала');
             const statArr = [...statArray.slice(0, statArray.length - 1), {
@@ -121,7 +121,9 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], ga
         // console.log(newWords, 'новые слова');
       } else if (gameName === 'audioCall') {
         getStatistics(localStorage.getItem('userId')).then((statArray: Stat[]) => {
+          // console.log('получили стату');
           if (statArray[statArray.length - 1]?.date === dataR) {
+            // console.log('дата ок');
             const statArr = [...statArray.slice(0, statArray.length - 1), {
               date: dataR,
               sprintRight: statArray[statArray.length - 1].sprintRight,
@@ -135,6 +137,7 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], ga
             updateStatistics(localStorage.getItem('userId'),
               statArr,
             );
+            // console.log('обновили стату');
           } else {
             const statArr = [...statArray.slice(0, statArray.length), {
               date: dataR,
@@ -149,6 +152,7 @@ export function pushGameResults(correctAnswers: Word[], wrongAnswers: Word[], ga
             updateStatistics(localStorage.getItem('userId'),
               statArr,
             );
+            // console.log('обновили стату');
           }
         });
       }
