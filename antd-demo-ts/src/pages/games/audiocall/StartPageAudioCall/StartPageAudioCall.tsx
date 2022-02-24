@@ -75,20 +75,20 @@ export default function StartPageAudioCall(props: any) {
           />
           <LevelButton
             group='3'
-            onClick1={props.disabled}
+            onClick1={props.onClick2}
             onClick2={setStartDisable}
             text='B2'
           />
           <LevelButton
             group='4'
-            onClick1={props.disabled}
+            onClick1={props.onClick2}
             onClick2={setStartDisable}
          
             text='C1'
           />
           <LevelButton
             group='5'
-            onClick1={props.disabled}
+            onClick1={props.onClick2}
             onClick2={setStartDisable}
          
             text='C2'

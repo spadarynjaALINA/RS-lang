@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Form, Input, Button, Modal } from 'antd';
 import { loginUser, createUser } from '../../../../services/APIService';
 import { useCreateUser } from './CreateUserContext';
+import { NamePath } from 'antd/lib/form/interface';
+import { ValidateErrorEntity } from 'rc-field-form/lib/interface';
 
 const formItemLayout = {
   labelCol: {
@@ -28,6 +30,8 @@ const tailFormItemLayout = {
 
 
 const RegistrationForm = () => {   
+  const [err, setErr] = useState('validating' as | 'validating' | 'success' | 'error' | 'warning' | undefined);
+  const [msg, setMsg] = useState('');
   const create = useCreateUser();
   const [form] = Form.useForm();
   React.useEffect(() => {
@@ -55,7 +59,8 @@ const RegistrationForm = () => {
     const email = values.email;
     const password = values.password;
     const toCreate = { email, password }; 
-    createUser(toCreate).then(() => loginUser(toCreate)).then(()=> create.toggleCreateUser()).then(()=>location.reload());
+    createUser(toCreate).then(() => loginUser(toCreate)).then(() => create.toggleCreateUser()).then(() => location.reload())
+      .catch(() => {alert('Пользователь уже существует в базе данных');});
    
     
     
@@ -68,7 +73,8 @@ const RegistrationForm = () => {
       onOk={handleOk2}
       confirmLoading={confirmLoading2}
       onCancel={handleCancel2}
-      footer ={[]}
+      footer={[]}
+      
     >      
      
       <Form
@@ -76,12 +82,14 @@ const RegistrationForm = () => {
         form={form}
         name="register"
         onFinish={onFinish}
-     
+       
         scrollToFirstError
       >
         <Form.Item
           name="email"
           label="Электронная почта"
+         
+          
           rules={[
             {
               type: 'email',
@@ -91,9 +99,12 @@ const RegistrationForm = () => {
               required: true,
               message: 'Пожалуйста, введи адрес электронной почты!',
             },
+            {
+              
+            },
           ]}
         >
-          <Input />
+          <Input onClick={() => { setMsg(''); setErr('validating');}}/>
         </Form.Item>
 
         <Form.Item
