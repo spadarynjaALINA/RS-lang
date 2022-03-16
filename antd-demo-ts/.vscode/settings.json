@@ -1,0 +1,7 @@
+{
+  "cSpell.words": ["antd"],
+  "editor.formatOnPaste": true,
+  "editor.formatOnSave": true,
+  "editor.formatOnType": true,
+  "eslint.alwaysShowStatus": true
+}

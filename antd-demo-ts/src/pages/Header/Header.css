@@ -1,0 +1,61 @@
+.logo-rs-lang {
+  background: none;
+  background-image: url(./../../assets/svg/logo-rs-lang.svg);
+
+  background-size: 70px 70px;
+  background-repeat: no-repeat;
+}
+.logo-area {
+  display: flex;
+  align-items: center;
+  color: white;
+  font-size: 30px;
+  font-weight: 900;
+  font-family: 'Inconsolata', monospace;
+  margin-left: 60px;
+}
+.Header {
+  font-size: var(--font3);
+  position: fixed;
+
+  display: flex;
+  justify-content: space-between;
+  padding: 10px 30px;
+  height: 70px;
+  width: 100%;
+  background: rgba(251, 248, 248, 0.8);
+  box-shadow: 2px 0 20px 1px rgba(0, 0, 0, 0.4);
+}
+.header {
+  position: fixed;
+  display: flex;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 95px;
+  z-index: 100;
+  justify-content: space-around;
+  align-items: center;
+  background: #b772f027;
+}
+.link-logo {
+  display: block;
+}
+.nav-link,
+.logo-text {
+  font-size: var(--font5);
+  font-family: 'Inconsolata', monospace;
+  color: #ffc53d;
+  font-weight: 900;
+  text-transform: none;
+}
+.NavItem > .Nav-btn {
+  height: 100%;
+}
+.ant-btn > .nav-link {
+  font-size: var(--font5);
+  background-color: rgba(255, 255, 255, 0.664);
+  border-radius: 18px;
+  padding: 18px;
+  height: 75px;
+}

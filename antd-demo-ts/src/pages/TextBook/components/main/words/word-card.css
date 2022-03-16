@@ -1,0 +1,155 @@
+.text_book__word {
+  font-size: 20px;
+  font-family: 'Inconsolata', monospace;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 2rem;
+  padding-bottom: 0;
+}
+
+.text_book__word-image {
+  display: block;
+  background-size: cover;
+  border-top-left-radius: 11rem;
+}
+
+.text_book__word-word {
+  font-size: 3rem;
+  font-family: 'Inconsolata', monospace;
+  margin: 0;
+  font-weight: 900;
+}
+
+.text_book__word-translate {
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: 600;
+}
+
+.text_book__word-transcription-audio-button {
+  display: flex;
+  flex-direction: row;
+}
+
+.text_book__word-transcription {
+  font-size: 1.2rem;
+  margin-right: 1rem;
+  font-weight: 600;
+}
+
+.text_book__word-audio-button * {
+  font-size: 55px;
+  position: absolute;
+  right: 38%;
+
+  margin-top: -11%;
+  color: rgba(84, 105, 223, 0.589);
+}
+
+.text_book__word-title {
+  font-size: var(--font3);
+  margin: 0;
+  font-weight: 900;
+  padding-top: 10px;
+}
+
+.text_book__word-text-example,
+.text_book__word-text-example-translate,
+.text_book__word-text-meaning,
+.text_book__word-text-meaning-translate {
+  font-size: 20px;
+}
+
+.text_book__word-text-meaning i {
+  font-size: 1rem;
+  color: black;
+}
+.text_book__word_actions {
+  padding: 0;
+  margin-bottom: 2rem;
+  display: flex;
+  align-items: center;
+}
+.text_book__word_actions button {
+  border-radius: 50px;
+  border: none;
+  /*background-color: rgba(84, 105, 223, 0.589);*/
+  padding: 3px 9px;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+}
+#add-to-hard:hover,
+#delete-word:hover {
+  background-color: #ffc53d;
+}
+#add-to-hard:active,
+#delete-word:active {
+  background-color: #ffc53d;
+}
+.difficult {
+}
+.difficult::after {
+  content: ' \214F';
+  color: #ffc53d;
+  position: absolute;
+  top: -18%;
+  right: -12px;
+  font-size: 60px;
+}
+
+.learned {
+  color: rgba(84, 105, 223, 0.589);
+}
+
+.learned::after {
+  content: '\2B51';
+  color: rgba(84, 105, 223, 0.589);
+  position: absolute;
+  top: 59%;
+  right: -1%;
+  font-size: 50px;
+}
+.statistics {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+.statistics span {
+  border-radius: 50px;
+  border: none;
+  padding: 3px 10px;
+  font-size: 16px;
+  text-transform: uppercase;
+  font-weight: 700;
+  cursor: pointer;
+}
+.statistics b {
+  font-size: var(--font3);
+  font-weight: 900;
+  margin-left: 10px;
+}
+.statistics .green {
+  background-color: rgba(8, 187, 133, 0.904);
+}
+.yellow {
+  background-color: #ffc53d;
+}
+.blue {
+  background-color: rgb(86, 128, 243);
+}
+.pink {
+  background: rgb(243, 106, 129);
+}
+.violet {
+  background: rgb(188, 106, 243);
+}
+.aqua {
+  background: rgb(106, 222, 243);
+}
+.grey {
+  background: rgb(191, 208, 211);
+}

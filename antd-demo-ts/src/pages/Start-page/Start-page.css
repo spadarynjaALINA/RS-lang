@@ -1,0 +1,44 @@
+.App-start {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.App-start__about,
+.App-start__team {
+  display: flex;
+  flex-direction: column;
+  margin: 50px auto 0;
+  background: #fffbff;
+  border-radius: 10px;
+  width: 1300px;
+  padding: 30px;
+  font-family: 'Inconsolata', monospace;
+  font-size: var(--font3);
+  color: #272ac1;
+}
+.start-link {
+  border: none;
+  font-size: var(--font3);
+  color: #fffbff;
+  background-color: #bd9ee0;
+  cursor: pointer;
+  transition: 0.5s;
+  border-radius: 5px;
+  padding: 10px 18px;
+}
+.start-btn-wrap {
+  display: flex;
+  justify-content: flex-end;
+}
+.start-link:hover,
+.start-link:active {
+  color: #4f4f4f;
+  transition: 0.5s;
+}
+@media screen and (max-width: 1440px) {
+  .App-start__about,
+  .App-start__team {
+    margin: 50px 30px 0;
+    width: calc(100% - 60px);
+  }
+}

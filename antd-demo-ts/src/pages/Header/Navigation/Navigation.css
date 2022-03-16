@@ -1,0 +1,34 @@
+.nav-list {
+  display: flex;
+  margin: auto 0;
+  list-style: none;
+  height: 100%;
+  padding: 0;
+}
+.Navigation {
+  height: 100%;
+  display: flex;
+  align-items: baseline;
+}
+button[ant-click-animating-without-extra-node]:after {
+  border: 0 none;
+  opacity: 0;
+  /* animation: none 0 ease 0 1 normal; */
+}
+a {
+  color: #4f4f4f;
+}
+a:active {
+  color: #262ac1;
+}
+a:hover {
+  color: #4f4f4f;
+}
+.Nav-btn {
+  height: 100%;
+}
+@media screen and (max-width: 321px) {
+  .nav-list {
+    flex-direction: column;
+  }
+}

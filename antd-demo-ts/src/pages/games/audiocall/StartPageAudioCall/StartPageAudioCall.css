@@ -1,0 +1,61 @@
+.audioCall-wrap {
+  max-width: 60%;
+  position: relative;
+  font-family: 'Inconsolata', monospace;
+  background: #f1e6ff;
+  border-radius: 15px;
+  margin: 0 auto;
+  padding: 30px 50px;
+  font-size: var(--font4);
+}
+.start-from-textbook {
+  color: #e60086;
+  font-weight: 900;
+  margin-bottom: 50px;
+}
+.audioCall-wrap-title {
+  color: #272ac1;
+  font-weight: 900;
+  font-size: var(--font5);
+}
+.game-btn {
+  padding: 10px 18px;
+  border: none;
+  font-size: var(--font4);
+  color: #fffbff;
+  background-color: #573555;
+  cursor: pointer;
+  transition: 0.5s;
+  border-radius: 15px;
+  height: auto;
+}
+.audioCall-wrap-p {
+  margin-bottom: 20px;
+}
+.level-wrap {
+  margin: 20px auto;
+}
+.start-from-menu {
+  margin: 30px auto 0;
+  color: #e60086;
+  font-weight: 900;
+}
+.start-btn {
+  padding: 0 18px;
+  border: none;
+  font-size: var(--font3);
+  color: #fffbff;
+  background-color: #884f84;
+  cursor: pointer;
+  transition: 0.5s;
+  border-radius: 15px;
+  height: 50px;
+  min-width: 120px;
+}
+.start-btn:disabled {
+  background-color: #ac8ba9;
+}
+.start-btn:hover,
+.start-btn:active {
+  background-color: #573555;
+}

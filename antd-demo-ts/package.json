@@ -1,8 +1,10 @@
 {
   "name": "antd-demo-ts",
   "version": "0.1.0",
+ 
   "private": true,
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.15.4",
     "@testing-library/jest-dom": "^5.16.1",
     "@testing-library/react": "^12.1.2",
     "@testing-library/user-event": "^13.5.0",
@@ -10,13 +12,30 @@
     "@types/node": "^16.11.22",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
+    "antd": "^4.18.5",
+    "bcrypt": "^5.0.1",
+    "chart.js": "^3.7.1",
+    "crypto": "^1.0.1",
+    "jsonwebtoken": "^8.5.1",
+    "jws": "^4.0.0",
+    "netlify-cli": "^9.7.0",
     "react": "^17.0.2",
+    "react-chartjs-2": "^4.0.1",
     "react-dom": "^17.0.2",
+    "react-router": "^6.2.1",
+    "react-router-dom": "^5.3.0",
     "react-scripts": "5.0.0",
+    "stream": "^0.0.2",
     "typescript": "^4.5.5",
+    "use-sound": "^4.0.1",
+    "util": "^0.12.4",
+    "uuid": "^8.3.2",
+    "vivid": "^3.0.0-next.2",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
@@ -39,5 +58,22 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-router-dom": "^5.3.3",
+    "@typescript-eslint/eslint-plugin": "^5.12.0",
+    "@typescript-eslint/parser": "^5.12.0",
+    "buffer": "^6.0.3",
+    "eslint": "^8.9.0",
+    "eslint-config-airbnb": "^19.0.4",
+    "eslint-config-airbnb-typescript": "^16.1.0",
+    "eslint-import-resolver-babel-plugin-root-import": "^1.1.1",
+    "eslint-import-resolver-typescript": "^2.5.0",
+    "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-react": "^7.28.0",
+    "eslint-plugin-react-hooks": "^4.3.0",
+    "gh-pages": "^3.2.3",
+    "path-browserify": "^1.0.1"
   }
 }
