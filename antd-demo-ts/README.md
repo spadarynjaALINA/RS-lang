@@ -1,46 +1,22 @@
-# Getting Started with Create React App
+#JungleEng
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Приложение для изучения английского языка JungleEng состоит из двух основных частей: **словарь** и **игры**.
+**Словарь**  - это списки слов разделенных на категории соответствующие уровню английского языка(A1-C2),каждое слово имеет перевод, транскрипцию и примеры употребления.Так же есть звуковые сопровождения перевода и примеров употребления.
+Пользователь может отмечать слова как изученные, которые в списке выделены стилем.
+Для зарегистрированных пользователей есть возможность пользоваться дополнительной категорией: **"сложные слова"**- слова, которые пользователю плохо запоминаются. Если в любой другой категории отметить слово как сложное, оно появляется так же в категории сложных.
 
-## Available Scripts
+Запомнить слова помогают две игры, причем слова для игр можно использовать как исходя из выбранной категории, так и из текущей страницы(или текущей и предыдущей(их)) словаря. 
+Переход к игре из меню позволяет выбрать только категорию, переход к игре из словаря позволяет использовать только слова из текущей страницы , если на текущей странице слов не достаточно, используются слова из предыдущей или предыдущих страниц.Если предыдущих страниц нет или слов на них не достаточно, зайти в игры невозможно.
+**Прогресс изучения слова** виден на карточке, общий прогресс за день и ежедневный отражен на графиках на странице статистики, которая доступна зарегистрированному пользователю.
 
-In the project directory, you can run:
+##Приложение написано с использованием библиотеки "React".
+Сложности вызывало отсутствие опыта работы с данной библиотекой, однако на последних этапах написания приложения уже видны были ошибки в первых этапах и появлялось некоторое желание их иправить.
+##Для некоторых компонентов и их стилей использовалась библиотека "Ant Design":
+- Кнопки
+- Модальные окна авторизации, регистрации, выхода из аккаунта
+- Формы авторизации и регистрации
+Малообразие дизайна компонентов вызвало сложность с исправлением некоторых стилей и анимаций. Плюсом стало уменьшение верстки некоторых элементов.
+##Графики статистики написаны с помощью библиотеки "Chart".
+Сложность вызвал подбор формата данных и использование этой библиотеки совместно с библиотекой "React".
+##Фон приложения и фавикон составлены из svg элементов в приложении "Figma". Самая сложная часть работы, так как "немного не тот оттенок" и "слишком прозрачновато" заставляет сильно нервничать авторов девочек.
 
-### `npm start`
-
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
-
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
