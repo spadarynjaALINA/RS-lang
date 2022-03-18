@@ -1,5 +1,5 @@
 .audio-wrap {
-  height: 450px;
+  min-height: 600px;
   display: flex;
   flex-direction: column;
   justify-content: center;
